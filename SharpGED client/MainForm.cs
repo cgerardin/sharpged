@@ -1,0 +1,60 @@
+﻿using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using System;
+using System.Windows.Forms;
+
+namespace SharpGED_client
+{
+    public partial class MainForm : Form
+    {
+
+        PdfDocument pdf;
+
+        public MainForm()
+        {
+            InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
+            {
+                pdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
+                TextBoxPdfName.Text = pdf.Info.Title;
+                LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
+
+                PdfViewer.Url = new Uri(addPdfDialog.FileName + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+
+            }
+
+        }
+
+        private void ButtonEclaterPdf_Click(object sender, EventArgs e)
+        {
+
+            int i = 0;
+            PdfDocument split;
+            foreach (PdfPage currPage in pdf.Pages)
+            {
+                i++;
+                split = new PdfDocument(addPdfDialog.FileName.Substring(0, addPdfDialog.FileName.Length - 4) + "[" + i.ToString("0000") + "].pdf");
+                ListBoxPages.Items.Add(i);
+                split.AddPage(currPage);
+                split.Close();
+            }
+
+        }
+
+        private void ListBoxPages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int i = (int)ListBoxPages.SelectedItem;
+            PdfViewer.Url = new Uri(addPdfDialog.FileName.Substring(0, addPdfDialog.FileName.Length - 4) + "[" + i.ToString("0000") + "].pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitW");
+
+        }
+    }
+}

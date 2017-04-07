@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED client", "SharpGED client\SharpGED client.csproj", "{FE4423B8-9244-4185-BB85-F841D36837C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED server", "SharpGED server\SharpGED server.csproj", "{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE4423B8-9244-4185-BB85-F841D36837C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4423B8-9244-4185-BB85-F841D36837C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4423B8-9244-4185-BB85-F841D36837C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4423B8-9244-4185-BB85-F841D36837C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
