@@ -29,21 +29,28 @@ namespace SharpGED_server
 
             while (!_shouldStop)
             {
-                if (Handler != null)
+
+                Handler.Receive(bytes);
+                cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
+                bytes = new byte[1024];
+
+                if (!cmd.Equals(""))
                 {
+                    switch (cmd)
+                    {
 
-                    Handler.Receive(bytes);
-                    cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
-                    bytes = new byte[1024];
-
-                    switch (cmd) {
+                        case "ELO":
+                            Console.WriteLine("[" + id + "] Bonjour !");
+                            break;
 
                         case "BYE":
                             RequestStop();
                             break;
 
-                        case "HELLO":
-                            Console.WriteLine("[" + id + "] Bonjour !");
+                        case "STOPSERVER":
+                            Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
+                            Program._stopServer = true;
+                            RequestStop();
                             break;
 
                         default:
@@ -51,14 +58,13 @@ namespace SharpGED_server
                             break;
 
                     }
-
                 }
 
             }
 
             Handler.Shutdown(SocketShutdown.Both);
             Handler.Close();
-            Console.WriteLine("[" + id + "] Terminé.");
+            Console.WriteLine("[" + id + "] Client déconnecté.");
 
         }
 

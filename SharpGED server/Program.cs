@@ -9,6 +9,9 @@ namespace SharpGED_server
 {
     class Program
     {
+
+        public static volatile bool _stopServer = false;
+
         static void Main(string[] args)
         {
 
@@ -23,7 +26,7 @@ namespace SharpGED_server
 
             Console.WriteLine("Prêt...");
 
-            while (true)
+            while (!_stopServer)
             {
 
                 workers.Add(new WorkerThread(++currentWorkerId, listener.Accept()));
@@ -34,17 +37,18 @@ namespace SharpGED_server
 
             foreach (WorkerThread currentWorker in workers)
             {
-                currentWorker.Worker.RequestStop();
-                currentWorker.Thread.Join();
+                if (currentWorker.Worker != null)
+                {
+                    currentWorker.Worker.RequestStop();
+                    currentWorker.Thread.Join();
+                }
+
             }
 
-            Console.WriteLine("Terminé.");
+            Console.WriteLine("Serveur arrêté.");
 
-        }
+            Console.ReadKey(); // Pour le déboguage
 
-        public void GetKey()
-        {
-            Console.WriteLine("GetKey !");
         }
 
     }

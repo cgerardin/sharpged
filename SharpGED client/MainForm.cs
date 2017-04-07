@@ -81,5 +81,12 @@ namespace SharpGED_client
         {
             sock.Send(Encoding.ASCII.GetBytes(TextBoxRemoteCmd.Text));
         }
+
+        private void ButtonStopServer_Click(object sender, EventArgs e)
+        {
+            sock.Send(Encoding.ASCII.GetBytes("STOPSERVER"));
+            ButtonConnect_Click(null, null); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
+            sock.Close();
+        }
     }
 }

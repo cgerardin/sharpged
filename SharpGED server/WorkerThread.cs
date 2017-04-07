@@ -13,11 +13,14 @@ namespace SharpGED_server
         public WorkerThread(long id, Socket handler)
         {
 
-            Worker = new Worker(id);
-            Thread = new Thread(Worker.Run);
-            Thread.Start();
-            while (!Thread.IsAlive) ;
-            Worker.Handler = handler;
+            if (!Program._stopServer)
+            {
+                Worker = new Worker(id);
+                Thread = new Thread(Worker.Run);
+                Thread.Start();
+                while (!Thread.IsAlive) ;
+                Worker.Handler = handler;
+            }
 
         }
 

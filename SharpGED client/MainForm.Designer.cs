@@ -39,6 +39,7 @@
             this.ButtonConnect = new System.Windows.Forms.Button();
             this.ButtonDisconnect = new System.Windows.Forms.Button();
             this.ButtonSend = new System.Windows.Forms.Button();
+            this.ButtonStopServer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -138,11 +139,22 @@
             this.ButtonSend.UseVisualStyleBackColor = true;
             this.ButtonSend.Click += new System.EventHandler(this.ButtonSend_Click);
             // 
+            // ButtonStopServer
+            // 
+            this.ButtonStopServer.Location = new System.Drawing.Point(140, 584);
+            this.ButtonStopServer.Name = "ButtonStopServer";
+            this.ButtonStopServer.Size = new System.Drawing.Size(136, 23);
+            this.ButtonStopServer.TabIndex = 12;
+            this.ButtonStopServer.Text = "Arrêter le serveur";
+            this.ButtonStopServer.UseVisualStyleBackColor = true;
+            this.ButtonStopServer.Click += new System.EventHandler(this.ButtonStopServer_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 944);
+            this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
             this.Controls.Add(this.ButtonDisconnect);
             this.Controls.Add(this.ButtonConnect);
@@ -174,6 +186,7 @@
         private System.Windows.Forms.Button ButtonConnect;
         private System.Windows.Forms.Button ButtonDisconnect;
         private System.Windows.Forms.Button ButtonSend;
+        private System.Windows.Forms.Button ButtonStopServer;
     }
 }
 
