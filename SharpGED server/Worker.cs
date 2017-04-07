@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace SharpGED_server
 {
@@ -10,14 +7,19 @@ namespace SharpGED_server
     {
 
         private volatile bool _shouldStop;
+        private String name;
 
-        public void DoWork()
+        public Worker(String name)
+        {
+            this.name = name;
+        }
+
+        public void Run()
         {
             while (!_shouldStop)
             {
-                Console.WriteLine("worker thread: working...");
+                Thread.Sleep(100);
             }
-            Console.WriteLine("worker thread: terminating gracefully.");
         }
 
         public void RequestStop()
