@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Threading;
+using System.Net;
+using System.Net.Sockets;
 
 namespace SharpGED_server
 {
@@ -7,19 +8,50 @@ namespace SharpGED_server
     {
 
         private volatile bool _shouldStop;
-        private String name;
+        private long id;
+        private Socket handler;
 
-        public Worker(String name)
+        public long Id { get => id; set => id = value; }
+        public Socket Handler { get => handler; set => handler = value; }
+
+        public Worker(long id)
         {
-            this.name = name;
+            Id = id;
         }
 
         public void Run()
         {
+
+            byte[] bytes = new byte[1024];
+            string cmd;
+
+            Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
+
             while (!_shouldStop)
             {
-                Thread.Sleep(100);
+                if (Handler != null)
+                {
+
+                    Handler.Receive(bytes);
+                    cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
+                    bytes = new byte[1024];
+
+                    Console.WriteLine("[" + id + "] Commande reçue : " + cmd);
+                    if (cmd.Equals("BYE"))
+                    {
+                        RequestStop();
+                    }
+
+                }
+
             }
+
+            if (Handler != null)
+            {
+                Handler.Shutdown(SocketShutdown.Both);
+                Handler.Close();
+            }
+            Console.WriteLine("[" + id + "] Terminé.");
         }
 
         public void RequestStop()

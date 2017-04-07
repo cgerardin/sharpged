@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace SharpGED_server
 {
@@ -10,36 +13,31 @@ namespace SharpGED_server
         {
 
             List<WorkerThread> workers = new List<WorkerThread>();
-            char name = 'A';
+            long currentWorkerId = 1;
 
-            Console.WriteLine("Ready...");
+            Console.WriteLine("*** SharpGED server ***");
 
-            bool running = true;
-            while (running)
+            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            listener.Bind(new IPEndPoint(Dns.GetHostEntry(Dns.GetHostName()).AddressList[0], 8080));
+            listener.Listen(10);
+
+            Console.WriteLine("Prêt...");
+
+            while (true)
             {
 
-                switch (Console.ReadKey(true).Key)
-                {
+                Socket h = listener.Accept();
 
-                    case ConsoleKey.N:
-                        
-                        Console.WriteLine("- Creating new worker '" + name + "'.");
-                        workers.Add(new WorkerThread(name.ToString()));
-                        workers.Last().Thread.Start();
-                        while (!workers.Last().Thread.IsAlive) ;
-                        name++;
-                        break;
+                workers.Add(new WorkerThread(currentWorkerId));
+                workers.Last().Thread.Start();
+                while (!workers.Last().Thread.IsAlive);
 
-                    case ConsoleKey.Escape:
-
-                        running = false;
-                        break;
-
-                }
+                workers.Last().Worker.Handler = h;
+                currentWorkerId++;
 
             }
 
-            Console.Write("Terminating all actives workers... ");
+            Console.WriteLine("Clôture de toutes les connexions...");
 
             foreach (WorkerThread currentWorker in workers)
             {
@@ -47,10 +45,15 @@ namespace SharpGED_server
                 currentWorker.Thread.Join();
             }
 
-            Console.WriteLine("Done.");
-
-            Console.ReadKey();
+            Console.WriteLine("Terminé.");
 
         }
+
+        public void GetKey()
+        {
+            Console.WriteLine("GetKey !");
+        }
+
     }
+
 }

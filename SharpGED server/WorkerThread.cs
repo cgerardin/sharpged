@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 
 namespace SharpGED_server
 {
@@ -7,17 +6,17 @@ namespace SharpGED_server
     class WorkerThread
     {
 
-        Worker worker;
-        Thread thread;
+        private Worker worker;
+        private Thread thread;
 
-        public WorkerThread(String name)
+        public WorkerThread(long id)
         {
-            worker = new Worker(name);
+            worker = new Worker(id);
             thread = new Thread(worker.Run);
         }
 
         public Thread Thread { get => thread; set => thread = value; }
-        internal Worker Worker { get => worker; set => worker = value; }
+        public Worker Worker { get => worker; set => worker = value; }
 
     }
 }
