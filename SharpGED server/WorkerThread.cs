@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net.Sockets;
+using System.Threading;
 
 namespace SharpGED_server
 {
@@ -9,10 +10,15 @@ namespace SharpGED_server
         private Worker worker;
         private Thread thread;
 
-        public WorkerThread(long id)
+        public WorkerThread(long id, Socket handler)
         {
-            worker = new Worker(id);
-            thread = new Thread(worker.Run);
+
+            Worker = new Worker(id);
+            Thread = new Thread(Worker.Run);
+            Thread.Start();
+            while (!Thread.IsAlive) ;
+            Worker.Handler = handler;
+
         }
 
         public Thread Thread { get => thread; set => thread = value; }

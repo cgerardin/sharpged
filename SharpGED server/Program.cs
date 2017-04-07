@@ -13,7 +13,7 @@ namespace SharpGED_server
         {
 
             List<WorkerThread> workers = new List<WorkerThread>();
-            long currentWorkerId = 1;
+            long currentWorkerId = 0;
 
             Console.WriteLine("*** SharpGED server ***");
 
@@ -26,14 +26,7 @@ namespace SharpGED_server
             while (true)
             {
 
-                Socket h = listener.Accept();
-
-                workers.Add(new WorkerThread(currentWorkerId));
-                workers.Last().Thread.Start();
-                while (!workers.Last().Thread.IsAlive);
-
-                workers.Last().Worker.Handler = h;
-                currentWorkerId++;
+                workers.Add(new WorkerThread(++currentWorkerId, listener.Accept()));
 
             }
 
