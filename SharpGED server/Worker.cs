@@ -30,34 +30,39 @@ namespace SharpGED_server
             while (!_shouldStop)
             {
 
-                Handler.Receive(bytes);
-                cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
-                bytes = new byte[1024];
-
-                if (!cmd.Equals(""))
+                if (Handler.Available > 0)
                 {
-                    switch (cmd)
+
+                    Handler.Receive(bytes);
+                    cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
+                    bytes = new byte[1024];
+
+                    if (!cmd.Equals(""))
                     {
+                        switch (cmd)
+                        {
 
-                        case "ELO":
-                            Console.WriteLine("[" + id + "] Bonjour !");
-                            break;
+                            case "ELO":
+                                Console.WriteLine("[" + id + "] Bonjour !");
+                                break;
 
-                        case "BYE":
-                            RequestStop();
-                            break;
+                            case "BYE":
+                                RequestStop();
+                                break;
 
-                        case "STOPSERVER":
-                            Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
-                            Program._stopServer = true;
-                            RequestStop();
-                            break;
+                            case "STOPSERVER":
+                                Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
+                                Program._stopServer = true;
+                                RequestStop();
+                                break;
 
-                        default:
-                            Console.WriteLine("[" + id + "] Commande inconnue : " + cmd);
-                            break;
+                            default:
+                                Console.WriteLine("[" + id + "] Commande inconnue : " + cmd);
+                                break;
 
+                        }
                     }
+
                 }
 
             }

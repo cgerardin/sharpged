@@ -19,6 +19,8 @@ namespace SharpGED_server
                 Thread = new Thread(Worker.Run);
                 Thread.Start();
                 while (!Thread.IsAlive) ;
+
+                handler.Blocking = false;
                 Worker.Handler = handler;
             }
 
