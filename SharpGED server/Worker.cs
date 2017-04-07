@@ -36,22 +36,30 @@ namespace SharpGED_server
                     cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
                     bytes = new byte[1024];
 
-                    Console.WriteLine("[" + id + "] Commande reçue : " + cmd);
-                    if (cmd.Equals("BYE"))
-                    {
-                        RequestStop();
+                    switch (cmd) {
+
+                        case "BYE":
+                            RequestStop();
+                            break;
+
+                        case "HELLO":
+                            Console.WriteLine("[" + id + "] Bonjour !");
+                            break;
+
+                        default:
+                            Console.WriteLine("[" + id + "] Commande inconnue : " + cmd);
+                            break;
+
                     }
 
                 }
 
             }
 
-            if (Handler != null)
-            {
-                Handler.Shutdown(SocketShutdown.Both);
-                Handler.Close();
-            }
+            Handler.Shutdown(SocketShutdown.Both);
+            Handler.Close();
             Console.WriteLine("[" + id + "] Terminé.");
+
         }
 
         public void RequestStop()
