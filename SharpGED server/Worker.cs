@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 
 namespace SharpGED_server
 {
@@ -34,7 +37,7 @@ namespace SharpGED_server
                 {
 
                     Handler.Receive(bytes);
-                    cmd = System.Text.Encoding.Default.GetString(bytes).TrimEnd('\0');
+                    cmd = Encoding.Default.GetString(bytes).TrimEnd('\0');
                     bytes = new byte[1024];
 
                     if (!cmd.Equals(""))
@@ -44,6 +47,24 @@ namespace SharpGED_server
 
                             case "ELO":
                                 Console.WriteLine("[" + id + "] Bonjour !");
+                                break;
+
+                            case "GET":
+                                Console.WriteLine("[" + id + "] Envoi fichier...");
+
+                                string uri = ConfigurationManager.AppSettings.Get("BaseFolder").ToString();
+                                uri += "storage\\test.pdf";
+
+                                FileStream inStream = File.OpenRead(uri);
+
+                                Handler.Send(Encoding.ASCII.GetBytes(inStream.Length.ToString()));
+
+                                byte[] fileBytes = new byte[inStream.Length];
+                                inStream.Read(fileBytes, 0, (int)inStream.Length);
+                                inStream.Close();
+
+                                Handler.Send(fileBytes);
+
                                 break;
 
                             case "BYE":

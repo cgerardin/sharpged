@@ -29,7 +29,6 @@ namespace SharpGED_client
                 LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
 
                 PdfViewer.Url = new Uri(addPdfDialog.FileName + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
-
             }
         }
 
@@ -68,5 +67,15 @@ namespace SharpGED_client
             Program.ServerHalt();
         }
 
+        private void ButtonGet_Click(object sender, EventArgs e)
+        {
+            Program.ServerRecive("C:\\TMP\\toto.pdf");
+            
+            pdf = PdfReader.Open("C:\\TMP\\toto.pdf", PdfDocumentOpenMode.Import);
+            TextBoxPdfName.Text = pdf.Info.Title;
+            LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
+
+            PdfViewer.Url = new Uri("C:\\TMP\\toto.pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+        }
     }
 }

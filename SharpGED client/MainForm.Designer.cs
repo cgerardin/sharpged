@@ -39,6 +39,7 @@
             this.ButtonDisconnect = new System.Windows.Forms.Button();
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
+            this.ButtonGet = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -149,11 +150,22 @@
             this.ButtonStopServer.UseVisualStyleBackColor = true;
             this.ButtonStopServer.Click += new System.EventHandler(this.ButtonStopServer_Click);
             // 
+            // ButtonGet
+            // 
+            this.ButtonGet.Location = new System.Drawing.Point(386, 1394);
+            this.ButtonGet.Name = "ButtonGet";
+            this.ButtonGet.Size = new System.Drawing.Size(175, 51);
+            this.ButtonGet.TabIndex = 13;
+            this.ButtonGet.Text = "Recevoir";
+            this.ButtonGet.UseVisualStyleBackColor = true;
+            this.ButtonGet.Click += new System.EventHandler(this.ButtonGet_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2686, 2095);
+            this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
             this.Controls.Add(this.ButtonDisconnect);
@@ -186,6 +198,7 @@
         private System.Windows.Forms.Button ButtonDisconnect;
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
+        private System.Windows.Forms.Button ButtonGet;
     }
 }
 

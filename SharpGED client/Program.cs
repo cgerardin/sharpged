@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -29,6 +30,24 @@ namespace SharpGED_client
         public static void ServerSend(string command)
         {
             serverSocket.Send(Encoding.ASCII.GetBytes(command));
+        }
+
+        public static void ServerRecive(string filename)
+        {
+
+            ServerSend("GET");
+
+            byte[] bytes = new byte[1024];
+            serverSocket.Receive(bytes);
+            int size = int.Parse(Encoding.Default.GetString(bytes).Trim());
+
+            byte[] fileBytes = new byte[size];
+            serverSocket.Receive(fileBytes);
+
+            FileStream outStream = File.OpenWrite(filename);
+            outStream.Write(fileBytes, 0, fileBytes.Length);
+            outStream.Close();
+
         }
 
         public static void ServerDisconnect()
