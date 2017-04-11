@@ -21,7 +21,7 @@ namespace SharpGED_server
             Console.WriteLine("*** SharpGED server ***");
 
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            listener.Bind(new IPEndPoint(Dns.GetHostEntry(Dns.GetHostName()).AddressList[0], 8080));
+            listener.Bind(new IPEndPoint(Dns.GetHostEntry("localhost").AddressList[1], 9090));
             listener.Listen(10);
 
             Console.WriteLine("Prêt...");

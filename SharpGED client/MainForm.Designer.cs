@@ -36,7 +36,6 @@
             this.PdfViewer = new System.Windows.Forms.WebBrowser();
             this.ListBoxPages = new System.Windows.Forms.ListBox();
             this.TextBoxRemoteCmd = new System.Windows.Forms.TextBox();
-            this.ButtonConnect = new System.Windows.Forms.Button();
             this.ButtonDisconnect = new System.Windows.Forms.Button();
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
@@ -48,9 +47,10 @@
             // 
             // BrowseButton
             // 
-            this.BrowseButton.Location = new System.Drawing.Point(29, 28);
+            this.BrowseButton.Location = new System.Drawing.Point(68, 62);
+            this.BrowseButton.Margin = new System.Windows.Forms.Padding(7);
             this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(54, 28);
+            this.BrowseButton.Size = new System.Drawing.Size(126, 62);
             this.BrowseButton.TabIndex = 0;
             this.BrowseButton.Text = "...";
             this.BrowseButton.UseVisualStyleBackColor = true;
@@ -58,16 +58,18 @@
             // 
             // TextBoxPdfName
             // 
-            this.TextBoxPdfName.Location = new System.Drawing.Point(89, 33);
+            this.TextBoxPdfName.Location = new System.Drawing.Point(208, 74);
+            this.TextBoxPdfName.Margin = new System.Windows.Forms.Padding(7);
             this.TextBoxPdfName.Name = "TextBoxPdfName";
-            this.TextBoxPdfName.Size = new System.Drawing.Size(296, 20);
+            this.TextBoxPdfName.Size = new System.Drawing.Size(685, 35);
             this.TextBoxPdfName.TabIndex = 1;
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(310, 73);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(723, 163);
+            this.ButtonEclaterPdf.Margin = new System.Windows.Forms.Padding(7);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
-            this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
+            this.ButtonEclaterPdf.Size = new System.Drawing.Size(175, 51);
             this.ButtonEclaterPdf.TabIndex = 2;
             this.ButtonEclaterPdf.Text = "Eclater";
             this.ButtonEclaterPdf.UseVisualStyleBackColor = true;
@@ -76,9 +78,10 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(391, 36);
+            this.LabelNbPages.Location = new System.Drawing.Point(912, 80);
+            this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
+            this.LabelNbPages.Size = new System.Drawing.Size(115, 29);
             this.LabelNbPages.TabIndex = 3;
             this.LabelNbPages.Text = "(0 pages)";
             // 
@@ -86,44 +89,39 @@
             // 
             this.PdfViewer.AllowWebBrowserDrop = false;
             this.PdfViewer.IsWebBrowserContextMenuEnabled = false;
-            this.PdfViewer.Location = new System.Drawing.Point(483, 28);
-            this.PdfViewer.MinimumSize = new System.Drawing.Size(20, 20);
+            this.PdfViewer.Location = new System.Drawing.Point(1127, 62);
+            this.PdfViewer.Margin = new System.Windows.Forms.Padding(7);
+            this.PdfViewer.MinimumSize = new System.Drawing.Size(47, 45);
             this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(656, 904);
+            this.PdfViewer.Size = new System.Drawing.Size(1531, 2017);
             this.PdfViewer.TabIndex = 5;
             this.PdfViewer.WebBrowserShortcutsEnabled = false;
             // 
             // ListBoxPages
             // 
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(29, 111);
+            this.ListBoxPages.ItemHeight = 29;
+            this.ListBoxPages.Location = new System.Drawing.Point(68, 248);
+            this.ListBoxPages.Margin = new System.Windows.Forms.Padding(7);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(356, 368);
+            this.ListBoxPages.Size = new System.Drawing.Size(825, 816);
             this.ListBoxPages.TabIndex = 6;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
             // TextBoxRemoteCmd
             // 
-            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(39, 555);
+            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(16, 1463);
+            this.TextBoxRemoteCmd.Margin = new System.Windows.Forms.Padding(7);
             this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
-            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(155, 20);
+            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(356, 35);
             this.TextBoxRemoteCmd.TabIndex = 8;
-            // 
-            // ButtonConnect
-            // 
-            this.ButtonConnect.Location = new System.Drawing.Point(39, 526);
-            this.ButtonConnect.Name = "ButtonConnect";
-            this.ButtonConnect.Size = new System.Drawing.Size(75, 23);
-            this.ButtonConnect.TabIndex = 9;
-            this.ButtonConnect.Text = "Connecter";
-            this.ButtonConnect.UseVisualStyleBackColor = true;
-            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(119, 526);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(16, 1520);
+            this.ButtonDisconnect.Margin = new System.Windows.Forms.Padding(7);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
-            this.ButtonDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.ButtonDisconnect.Size = new System.Drawing.Size(175, 51);
             this.ButtonDisconnect.TabIndex = 10;
             this.ButtonDisconnect.Text = "Déconnecter";
             this.ButtonDisconnect.UseVisualStyleBackColor = true;
@@ -131,9 +129,10 @@
             // 
             // ButtonSend
             // 
-            this.ButtonSend.Location = new System.Drawing.Point(201, 555);
+            this.ButtonSend.Location = new System.Drawing.Point(386, 1455);
+            this.ButtonSend.Margin = new System.Windows.Forms.Padding(7);
             this.ButtonSend.Name = "ButtonSend";
-            this.ButtonSend.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSend.Size = new System.Drawing.Size(175, 51);
             this.ButtonSend.TabIndex = 11;
             this.ButtonSend.Text = "Envoyer";
             this.ButtonSend.UseVisualStyleBackColor = true;
@@ -141,9 +140,10 @@
             // 
             // ButtonStopServer
             // 
-            this.ButtonStopServer.Location = new System.Drawing.Point(140, 584);
+            this.ButtonStopServer.Location = new System.Drawing.Point(205, 1520);
+            this.ButtonStopServer.Margin = new System.Windows.Forms.Padding(7);
             this.ButtonStopServer.Name = "ButtonStopServer";
-            this.ButtonStopServer.Size = new System.Drawing.Size(136, 23);
+            this.ButtonStopServer.Size = new System.Drawing.Size(317, 51);
             this.ButtonStopServer.TabIndex = 12;
             this.ButtonStopServer.Text = "Arrêter le serveur";
             this.ButtonStopServer.UseVisualStyleBackColor = true;
@@ -151,13 +151,12 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 944);
+            this.ClientSize = new System.Drawing.Size(2686, 2095);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
             this.Controls.Add(this.ButtonDisconnect);
-            this.Controls.Add(this.ButtonConnect);
             this.Controls.Add(this.TextBoxRemoteCmd);
             this.Controls.Add(this.ListBoxPages);
             this.Controls.Add(this.PdfViewer);
@@ -165,9 +164,10 @@
             this.Controls.Add(this.ButtonEclaterPdf);
             this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.BrowseButton);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,7 +183,6 @@
         private System.Windows.Forms.WebBrowser PdfViewer;
         private System.Windows.Forms.ListBox ListBoxPages;
         private System.Windows.Forms.TextBox TextBoxRemoteCmd;
-        private System.Windows.Forms.Button ButtonConnect;
         private System.Windows.Forms.Button ButtonDisconnect;
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;

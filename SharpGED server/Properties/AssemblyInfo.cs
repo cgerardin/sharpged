@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SharpGED server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("molitor")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SharpGED server")]
-[assembly: AssemblyCopyright("Copyright © molitor 2017")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

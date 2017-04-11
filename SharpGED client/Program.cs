@@ -1,13 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SharpGED_client
 {
     static class Program
     {
+
+        private static Socket serverSocket = null;
+        private static string serverHostname = "";
+        private static int serverPort = 0;
+
+        public static void ServerConnect(string hostname, int port)
+        {
+            serverHostname = hostname;
+            serverPort = port;
+            ServerConnect();
+        }
+
+        public static void ServerConnect()
+        {
+            serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            serverSocket.Connect(new IPEndPoint(Dns.GetHostEntry(serverHostname).AddressList[1], serverPort));
+        }
+
+        public static void ServerSend(string command)
+        {
+            serverSocket.Send(Encoding.ASCII.GetBytes(command));
+        }
+
+        public static void ServerDisconnect()
+        {
+            ServerSend("BYE");
+            serverSocket.Close();
+        }
+
+        public static void ServerHalt()
+        {
+            ServerSend("STOPSERVER");
+            ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
+            serverSocket.Close();
+        }
+
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
@@ -16,7 +52,9 @@ namespace SharpGED_client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            new LoginForm().Show();
+            Application.Run();
         }
+
     }
 }
