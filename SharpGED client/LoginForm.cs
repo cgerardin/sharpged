@@ -19,7 +19,7 @@ namespace SharpGED_client
         {
             Program.ServerConnect(TextBoxServer.Text, int.Parse(TextBoxPort.Text));
             new MainForm().Show();
-            Close();
+            Hide();
         }
 
     }
