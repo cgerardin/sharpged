@@ -26,7 +26,10 @@ namespace SharpGED_server
         {
 
             byte[] bytes = new byte[1024];
+            string order;
             string cmd;
+            string arg;
+            int argpos;
 
             Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
 
@@ -37,11 +40,23 @@ namespace SharpGED_server
                 {
 
                     Handler.Receive(bytes);
-                    cmd = Encoding.Default.GetString(bytes).TrimEnd('\0');
+                    order = Encoding.Default.GetString(bytes).TrimEnd('\0');
                     bytes = new byte[1024];
 
-                    if (!cmd.Equals(""))
+                    if (!order.Equals(""))
                     {
+                        argpos = order.IndexOf(' ');
+                        if (argpos == -1)
+                        {
+                            cmd = order;
+                            arg = "";
+                        }
+                        else
+                        {
+                            cmd = order.Substring(0, argpos);
+                            arg = order.Substring(argpos + 1);
+                        }
+
                         switch (cmd)
                         {
 
@@ -50,10 +65,10 @@ namespace SharpGED_server
                                 break;
 
                             case "GET":
-                                Console.WriteLine("[" + id + "] Envoi fichier...");
+                                Console.WriteLine("[" + id + "] Envoi de '" + arg + "'...");
 
                                 string uri = ConfigurationManager.AppSettings.Get("BaseFolder").ToString();
-                                uri += "storage\\test.pdf";
+                                uri += "storage\\" + arg;
 
                                 FileStream inStream = File.OpenRead(uri);
 
@@ -71,14 +86,14 @@ namespace SharpGED_server
                                 RequestStop();
                                 break;
 
-                            case "STOPSERVER":
+                            case "STOP":
                                 Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
                                 Program._stopServer = true;
                                 RequestStop();
                                 break;
 
                             default:
-                                Console.WriteLine("[" + id + "] Commande inconnue : " + cmd);
+                                Console.WriteLine("[" + id + "] Commande inconnue : " + order);
                                 break;
 
                         }

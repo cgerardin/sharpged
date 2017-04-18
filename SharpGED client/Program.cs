@@ -35,7 +35,7 @@ namespace SharpGED_client
         public static void ServerRecive(string filename)
         {
 
-            ServerSend("GET");
+            ServerSend("GET " + filename);
 
             byte[] bytes = new byte[1024];
             serverSocket.Receive(bytes);
@@ -44,7 +44,7 @@ namespace SharpGED_client
             byte[] fileBytes = new byte[size];
             serverSocket.Receive(fileBytes);
 
-            FileStream outStream = File.OpenWrite(filename);
+            FileStream outStream = File.OpenWrite("C:\\TMP\\" + filename);
             outStream.Write(fileBytes, 0, fileBytes.Length);
             outStream.Close();
 
@@ -58,7 +58,7 @@ namespace SharpGED_client
 
         public static void ServerHalt()
         {
-            ServerSend("STOPSERVER");
+            ServerSend("STOP");
             ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
             serverSocket.Close();
         }

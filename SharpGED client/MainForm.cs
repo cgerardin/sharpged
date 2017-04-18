@@ -39,7 +39,7 @@ namespace SharpGED_client
             foreach (PdfPage currPage in pdf.Pages)
             {
                 i++;
-                split = new PdfDocument(addPdfDialog.FileName.Substring(0, addPdfDialog.FileName.Length - 4) + "[" + i.ToString("0000") + "].pdf");
+                split = new PdfDocument(pdf.FullPath.Substring(0, pdf.FullPath.Length - 4) + "[" + i.ToString("0000") + "].pdf");
                 ListBoxPages.Items.Add(i);
                 split.AddPage(currPage);
                 split.Close();
@@ -49,7 +49,7 @@ namespace SharpGED_client
         private void ListBoxPages_SelectedIndexChanged(object sender, EventArgs e)
         {
             int i = (int)ListBoxPages.SelectedItem;
-            PdfViewer.Url = new Uri(addPdfDialog.FileName.Substring(0, addPdfDialog.FileName.Length - 4) + "[" + i.ToString("0000") + "].pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitW");
+            PdfViewer.Url = new Uri(pdf.FullPath.Substring(0, pdf.FullPath.Length - 4) + "[" + i.ToString("0000") + "].pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitW");
         }
 
         private void ButtonDisconnect_Click(object sender, EventArgs e)
@@ -69,13 +69,13 @@ namespace SharpGED_client
 
         private void ButtonGet_Click(object sender, EventArgs e)
         {
-            Program.ServerRecive("C:\\TMP\\toto.pdf");
+            Program.ServerRecive("test.pdf");
             
-            pdf = PdfReader.Open("C:\\TMP\\toto.pdf", PdfDocumentOpenMode.Import);
+            pdf = PdfReader.Open("C:\\TMP\\test.pdf", PdfDocumentOpenMode.Import);
             TextBoxPdfName.Text = pdf.Info.Title;
             LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
 
-            PdfViewer.Url = new Uri("C:\\TMP\\toto.pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+            PdfViewer.Url = new Uri("C:\\TMP\\test.pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
         }
     }
 }
