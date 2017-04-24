@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
 
@@ -18,8 +19,20 @@ namespace SharpGED_server
 
             Console.WriteLine("*** SharpGED server ***");
 
+            string listenIP_string = ConfigurationManager.AppSettings.Get("ListenIP").ToString();
+            IPAddress listenIP = null;
+            int listenPort = int.Parse(ConfigurationManager.AppSettings.Get("ListenPort").ToString());
+
+            if(listenIP_string.Equals("localhost") || listenIP_string.Equals("127.0.0.1") )
+            {
+                listenIP = IPAddress.Loopback;
+            } else if(!IPAddress.TryParse(listenIP_string, out listenIP))
+            {
+                listenIP = Dns.GetHostAddresses(listenIP_string)[0];
+            }
+
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            listener.Bind(new IPEndPoint(Dns.GetHostEntry("localhost").AddressList[1], 9090));
+            listener.Bind(new IPEndPoint(listenIP, listenPort));
             listener.Listen(10);
 
             Console.WriteLine("Prêt...");
