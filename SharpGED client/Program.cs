@@ -23,8 +23,19 @@ namespace SharpGED_client
 
         public static void ServerConnect()
         {
+            IPAddress serverIP = null;
+
+            if (serverHostname.Equals("localhost") || serverHostname.Equals("127.0.0.1"))
+            {
+                serverIP = IPAddress.Loopback;
+            }
+            else if (!IPAddress.TryParse(serverHostname, out serverIP))
+            {
+                serverIP = Dns.GetHostAddresses(serverHostname)[0];
+            }
+
             serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serverSocket.Connect(new IPEndPoint(IPAddress.Parse(serverHostname), serverPort));
+            serverSocket.Connect(new IPEndPoint(serverIP, serverPort));
         }
 
         public static void ServerSend(string command)
