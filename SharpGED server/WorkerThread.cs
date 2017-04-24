@@ -20,7 +20,7 @@ namespace SharpGED_server
                 Thread.Start();
                 while (!Thread.IsAlive) ;
 
-                handler.Blocking = false;
+                handler.Blocking = true;
                 Worker.Handler = handler;
             }
 

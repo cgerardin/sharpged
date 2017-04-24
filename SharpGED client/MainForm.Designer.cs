@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.TextBoxPdfName = new System.Windows.Forms.TextBox();
@@ -40,6 +41,8 @@
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
             this.ButtonGet = new System.Windows.Forms.Button();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.TimerGui = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -142,7 +145,7 @@
             // ButtonGet
             // 
             this.ButtonGet.Location = new System.Drawing.Point(165, 625);
-            this.ButtonGet.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
             this.ButtonGet.Name = "ButtonGet";
             this.ButtonGet.Size = new System.Drawing.Size(75, 23);
             this.ButtonGet.TabIndex = 13;
@@ -150,11 +153,25 @@
             this.ButtonGet.UseVisualStyleBackColor = true;
             this.ButtonGet.Click += new System.EventHandler(this.ButtonGet_Click);
             // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Location = new System.Drawing.Point(29, 524);
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(435, 23);
+            this.ProgressBar.TabIndex = 14;
+            // 
+            // TimerGui
+            // 
+            this.TimerGui.Enabled = true;
+            this.TimerGui.Interval = 500;
+            this.TimerGui.Tick += new System.EventHandler(this.TimerGui_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 943);
+            this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
@@ -188,6 +205,8 @@
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
         private System.Windows.Forms.Button ButtonGet;
+        private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.Timer TimerGui;
     }
 }
 
