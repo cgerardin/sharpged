@@ -24,7 +24,7 @@ namespace SharpGED_client
         public static void ServerConnect()
         {
             serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serverSocket.Connect(new IPEndPoint(IPAddress.Loopback, serverPort));
+            serverSocket.Connect(new IPEndPoint(IPAddress.Parse(serverHostname), serverPort));
         }
 
         public static void ServerSend(string command)
