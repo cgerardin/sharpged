@@ -107,14 +107,14 @@
             // 
             // TextBoxRemoteCmd
             // 
-            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(7, 656);
+            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(7, 882);
             this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
             this.TextBoxRemoteCmd.Size = new System.Drawing.Size(155, 20);
             this.TextBoxRemoteCmd.TabIndex = 8;
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(7, 681);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(402, 880);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
             this.ButtonDisconnect.Size = new System.Drawing.Size(75, 23);
             this.ButtonDisconnect.TabIndex = 10;
@@ -124,7 +124,7 @@
             // 
             // ButtonSend
             // 
-            this.ButtonSend.Location = new System.Drawing.Point(165, 652);
+            this.ButtonSend.Location = new System.Drawing.Point(165, 880);
             this.ButtonSend.Name = "ButtonSend";
             this.ButtonSend.Size = new System.Drawing.Size(75, 23);
             this.ButtonSend.TabIndex = 11;
@@ -134,7 +134,7 @@
             // 
             // ButtonStopServer
             // 
-            this.ButtonStopServer.Location = new System.Drawing.Point(88, 681);
+            this.ButtonStopServer.Location = new System.Drawing.Point(260, 880);
             this.ButtonStopServer.Name = "ButtonStopServer";
             this.ButtonStopServer.Size = new System.Drawing.Size(136, 23);
             this.ButtonStopServer.TabIndex = 12;
@@ -144,7 +144,7 @@
             // 
             // ButtonGet
             // 
-            this.ButtonGet.Location = new System.Drawing.Point(165, 625);
+            this.ButtonGet.Location = new System.Drawing.Point(166, 853);
             this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
             this.ButtonGet.Name = "ButtonGet";
             this.ButtonGet.Size = new System.Drawing.Size(75, 23);
@@ -155,9 +155,9 @@
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(29, 524);
+            this.ProgressBar.Location = new System.Drawing.Point(7, 909);
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(435, 23);
+            this.ProgressBar.Size = new System.Drawing.Size(470, 23);
             this.ProgressBar.TabIndex = 14;
             // 
             // TimerGui

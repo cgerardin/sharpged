@@ -70,19 +70,19 @@ namespace SharpGED_client
 
         private void ButtonGet_Click(object sender, EventArgs e)
         {
-            Program.ServerRecive("test.pdf");
-            
-            pdf = PdfReader.Open("C:\\TMP\\test.pdf", PdfDocumentOpenMode.Import);
+            Program.ServerRecive(TextBoxRemoteCmd.Text + ".pdf");
+
+            pdf = PdfReader.Open("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf", PdfDocumentOpenMode.Import);
             TextBoxPdfName.Text = pdf.Info.Title;
             LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
 
-            PdfViewer.Url = new Uri("C:\\TMP\\test.pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+            PdfViewer.Url = new Uri("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
         }
 
         private void TimerGui_Tick(object sender, EventArgs e)
         {
             ProgressBar.Value = ProgressBarValue;
-            
+
         }
     }
 }
