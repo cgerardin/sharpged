@@ -65,7 +65,7 @@
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(310, 73);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(310, 485);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
             this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
             this.ButtonEclaterPdf.TabIndex = 2;
@@ -89,7 +89,7 @@
             this.PdfViewer.Location = new System.Drawing.Point(483, 28);
             this.PdfViewer.MinimumSize = new System.Drawing.Size(20, 20);
             this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(656, 904);
+            this.PdfViewer.Size = new System.Drawing.Size(656, 733);
             this.PdfViewer.TabIndex = 5;
             this.PdfViewer.WebBrowserShortcutsEnabled = false;
             // 
@@ -104,16 +104,16 @@
             // 
             // TextBoxRemoteCmd
             // 
-            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(7, 882);
+            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(89, 59);
             this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
             this.TextBoxRemoteCmd.Size = new System.Drawing.Size(155, 20);
             this.TextBoxRemoteCmd.TabIndex = 8;
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(402, 880);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(12, 707);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
-            this.ButtonDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.ButtonDisconnect.Size = new System.Drawing.Size(111, 23);
             this.ButtonDisconnect.TabIndex = 10;
             this.ButtonDisconnect.Text = "Déconnecter";
             this.ButtonDisconnect.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             // 
             // ButtonSend
             // 
-            this.ButtonSend.Location = new System.Drawing.Point(165, 880);
+            this.ButtonSend.Location = new System.Drawing.Point(347, 70);
             this.ButtonSend.Name = "ButtonSend";
             this.ButtonSend.Size = new System.Drawing.Size(75, 23);
             this.ButtonSend.TabIndex = 11;
@@ -131,9 +131,9 @@
             // 
             // ButtonStopServer
             // 
-            this.ButtonStopServer.Location = new System.Drawing.Point(260, 880);
+            this.ButtonStopServer.Location = new System.Drawing.Point(12, 736);
             this.ButtonStopServer.Name = "ButtonStopServer";
-            this.ButtonStopServer.Size = new System.Drawing.Size(136, 23);
+            this.ButtonStopServer.Size = new System.Drawing.Size(111, 23);
             this.ButtonStopServer.TabIndex = 12;
             this.ButtonStopServer.Text = "Arrêter le serveur";
             this.ButtonStopServer.UseVisualStyleBackColor = true;
@@ -141,7 +141,7 @@
             // 
             // ButtonGet
             // 
-            this.ButtonGet.Location = new System.Drawing.Point(166, 853);
+            this.ButtonGet.Location = new System.Drawing.Point(248, 59);
             this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
             this.ButtonGet.Name = "ButtonGet";
             this.ButtonGet.Size = new System.Drawing.Size(75, 23);
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 943);
+            this.ClientSize = new System.Drawing.Size(1151, 773);
             this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);

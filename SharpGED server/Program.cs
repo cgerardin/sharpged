@@ -19,9 +19,9 @@ namespace SharpGED_server
 
             Console.WriteLine("*** SharpGED server ***");
 
-            string listenIP_string = ConfigurationManager.AppSettings.Get("ListenIP").ToString();
+            string listenIP_string = ConfigurationManager.AppSettings.Get("ListenIP");
             IPAddress listenIP = null;
-            int listenPort = int.Parse(ConfigurationManager.AppSettings.Get("ListenPort").ToString());
+            int listenPort = int.Parse(ConfigurationManager.AppSettings.Get("ListenPort"));
 
             if(listenIP_string.Equals("localhost") || listenIP_string.Equals("127.0.0.1") )
             {

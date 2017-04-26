@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Configuration;
+using System.Data.SQLite;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace SharpGED_server
@@ -29,9 +31,9 @@ namespace SharpGED_server
 
             byte[] buffer = new byte[1024];
             string order;
+            int separator;
             string cmd;
-            string arg;
-            int argpos;
+            string[] argv;
 
             Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
 
@@ -48,16 +50,16 @@ namespace SharpGED_server
                     if (!order.Equals(""))
                     {
                         // Sépare la commande et son/ses éventuel(s) argument(s)
-                        argpos = order.IndexOf(' ');
-                        if (argpos == -1)
+                        separator = order.IndexOf(' ');
+                        if (separator == -1)
                         {
                             cmd = order;
-                            arg = "";
+                            argv = new string[0];
                         }
                         else
                         {
-                            cmd = order.Substring(0, argpos);
-                            arg = order.Substring(argpos + 1);
+                            cmd = order.Substring(0, separator);
+                            argv = order.Substring(separator + 1).Split(';');
                         }
 
                         // Traitement en fonction de la commande reçue
@@ -68,29 +70,6 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Bonjour !");
                                 break;
 
-                            case "GET": // Envoie le fichier spécifié en argument
-                                Console.WriteLine("[" + id + "] Envoi de '" + arg + "'...");
-
-                                string uri = ConfigurationManager.AppSettings.Get("BaseFolder").ToString();
-                                uri += "storage\\" + arg;
-                                FileStream inStream = File.OpenRead(uri);
-
-                                // Envoie la taille exacte du fichier
-                                int size = (int)inStream.Length;
-                                Handler.Send(Encoding.ASCII.GetBytes(size.ToString()));
-
-                                // Copie l'intégralité du fichier dans un tableau
-                                byte[] fileBytes = new byte[size];
-                                inStream.Read(fileBytes, 0, size);
-                                inStream.Close();
-
-                                // Envoie le tableau au client
-                                Console.WriteLine("[" + id + "] (" + size + " octets)");
-                                Handler.Send(fileBytes);
-                                Console.WriteLine("[" + id + "] Terminé.");
-
-                                break;
-
                             case "BYE": // Déconnecte le client
                                 RequestStop();
                                 break;
@@ -99,6 +78,41 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
                                 Program._stopServer = true;
                                 RequestStop();
+                                break;
+
+                            case "INIT": // Initialise une nouvelle base de données
+                                Console.WriteLine("[" + id + "] Création de la base de données...");
+                                new DatabaseManager().Initialize();
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "GET": // Envoie le fichier spécifié en argument
+                                Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
+                                FileTransfert.Send(ConfigurationManager.AppSettings.Get("BaseFolder") + "storage\\" + argv[0], Handler);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "PUT": // Insère un fichier dans la base
+                                Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
+                                FileTransfert.Recive(argv[0], Handler);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "LIST": // Liste les fichiers en base (pour le déboguage)
+
+
+                                using (SQLiteConnection db = new DatabaseManager().Connect())
+                                {
+                                    db.Open();
+                                    string sql = "SELECT * FROM files;";
+                                    SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
+
+                                    while (rs.Read())
+                                    {
+                                        Console.WriteLine("[" + id + "] " + rs["filename"] + ";" + rs["originalFilename"]);
+                                    }
+                                }
+
                                 break;
 
                             default:

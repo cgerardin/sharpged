@@ -59,7 +59,7 @@ namespace SharpGED_client
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
-            Program.ServerSend(TextBoxRemoteCmd.Text);
+            Program.ServerSendFile(pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1), pdf.FullPath);
         }
 
         private void ButtonStopServer_Click(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace SharpGED_client
 
         private void ButtonGet_Click(object sender, EventArgs e)
         {
-            Program.ServerRecive(TextBoxRemoteCmd.Text + ".pdf");
+            Program.ServerReciveFile(TextBoxRemoteCmd.Text);
             pdf = PdfReader.Open("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf", PdfDocumentOpenMode.Import);
             TextBoxPdfName.Text = pdf.Info.Title;
             LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
