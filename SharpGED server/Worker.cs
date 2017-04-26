@@ -84,25 +84,9 @@ namespace SharpGED_server
                                 inStream.Read(fileBytes, 0, size);
                                 inStream.Close();
 
-                                Console.WriteLine("[" + id + "] (en " + size / PACKET_SIZE + " paquets de " + PACKET_SIZE + " octets)");
-
-                                // Envoie le tableau par paquets de 1024 octets
-                                byte[] filePacket;
-                                for (int i = 0; i < size; i += PACKET_SIZE)
-                                {
-                                    filePacket = new byte[PACKET_SIZE];
-
-                                    if (i + PACKET_SIZE <= size)
-                                    {
-                                        Buffer.BlockCopy(fileBytes, i, filePacket, 0, PACKET_SIZE);
-                                    }
-                                    else
-                                    {
-                                        Buffer.BlockCopy(fileBytes, i, filePacket, 0, size - i);
-                                    }
-
-                                    Handler.Send(filePacket);
-                                }
+                                // Envoie le tableau au client
+                                Console.WriteLine("[" + id + "] (" + size + " octets)");
+                                Handler.Send(fileBytes);
                                 Console.WriteLine("[" + id + "] Terminé.");
 
                                 break;

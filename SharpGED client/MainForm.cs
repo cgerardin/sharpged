@@ -9,7 +9,6 @@ namespace SharpGED_client
     {
 
         PdfDocument pdf;
-        public static int ProgressBarValue;
 
         public MainForm()
         {
@@ -71,7 +70,6 @@ namespace SharpGED_client
         private void ButtonGet_Click(object sender, EventArgs e)
         {
             Program.ServerRecive(TextBoxRemoteCmd.Text + ".pdf");
-
             pdf = PdfReader.Open("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf", PdfDocumentOpenMode.Import);
             TextBoxPdfName.Text = pdf.Info.Title;
             LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
@@ -79,10 +77,5 @@ namespace SharpGED_client
             PdfViewer.Url = new Uri("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
         }
 
-        private void TimerGui_Tick(object sender, EventArgs e)
-        {
-            ProgressBar.Value = ProgressBarValue;
-
-        }
     }
 }

@@ -58,8 +58,6 @@ namespace SharpGED_server
 
             Console.WriteLine("Serveur arrêté.");
 
-            //Console.ReadKey(); // Pour le déboguage
-
         }
 
     }

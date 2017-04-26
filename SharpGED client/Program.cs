@@ -56,35 +56,14 @@ namespace SharpGED_client
             serverSocket.Receive(buffer);
             int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
 
-            // Récupère le fichier par paquets de 1024 octets et les place dans un tableau
+            // Récupère le fichier le place dans un tableau
             byte[] fileBytes = new byte[size];
-            byte[] filePacket = new byte[PACKET_SIZE];
-            for (int i = 0; i < size; i += PACKET_SIZE)
-            {
-                serverSocket.Receive(filePacket);
-                if (i + PACKET_SIZE <= size)
-                {
-                    Buffer.BlockCopy(filePacket, 0, fileBytes, i, PACKET_SIZE);
-                }
-                else
-                {
-                    Buffer.BlockCopy(filePacket, 0, fileBytes, i, size - i);
-                }
-
-                int total = size / PACKET_SIZE;
-                int remaining = total - i / PACKET_SIZE;
-                int done = total - remaining;
-
-                MainForm.ProgressBarValue = (100 * done / total);
-                Application.DoEvents();
-            }
+            serverSocket.Receive(fileBytes);
 
             // Ecris le tableau dans un fichier temporaire sur le disque
             FileStream outStream = File.OpenWrite("C:\\TMP\\" + filename);
             outStream.Write(fileBytes, 0, size);
             outStream.Close();
-
-            MainForm.ProgressBarValue = 0;
         }
 
         public static void ServerDisconnect()
