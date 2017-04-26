@@ -179,7 +179,7 @@
             this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.BrowseButton);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
