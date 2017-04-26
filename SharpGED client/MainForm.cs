@@ -77,5 +77,9 @@ namespace SharpGED_client
             PdfViewer.Url = new Uri("C:\\TMP\\" + TextBoxRemoteCmd.Text + ".pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
         }
 
+        private void ButtonInitServer_Click(object sender, EventArgs e)
+        {
+            Program.ServerSend("INIT");
+        }
     }
 }

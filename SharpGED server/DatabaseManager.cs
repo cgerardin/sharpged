@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.IO;
 using System.Configuration;
 
@@ -11,23 +6,22 @@ namespace SharpGED_server
 {
     class DatabaseManager
     {
-
+        string baseFolder;
         private string databaseName;
 
         public DatabaseManager()
         {
-            DatabaseName = ConfigurationManager.AppSettings.Get("Database");
+            baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
+            databaseName = ConfigurationManager.AppSettings.Get("Database");
         }
 
         public void Initialize()
         {
-            string baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
-
             Directory.CreateDirectory(baseFolder + "database\\");
             Directory.CreateDirectory(baseFolder + "\\storage");
-            SQLiteConnection.CreateFile(baseFolder + "database\\" + DatabaseName + ".sqlite");
+            SQLiteConnection.CreateFile(baseFolder + "database\\" + databaseName + ".sqlite");
 
-            SQLiteConnection db = new SQLiteConnection("Data Source=" + baseFolder + "database\\" + DatabaseName + ".sqlite" + ";Version=3;");
+            SQLiteConnection db = new SQLiteConnection("Data Source=" + baseFolder + "database\\" + databaseName + ".sqlite" + ";Version=3;");
 
             db.Open();
             string sql = "CREATE TABLE files (" +
@@ -44,11 +38,8 @@ namespace SharpGED_server
 
         public SQLiteConnection Connect()
         {
-            string baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
-            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + DatabaseName + ".sqlite" + ";Version=3;");
+            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + databaseName + ".sqlite" + ";Version=3;");
         }
-
-        public string DatabaseName { get => databaseName; set => databaseName = value; }
 
     }
 

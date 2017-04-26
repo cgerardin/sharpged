@@ -40,6 +40,7 @@
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
             this.ButtonGet = new System.Windows.Forms.Button();
+            this.ButtonInitServer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -65,7 +66,7 @@
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(310, 485);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(391, 456);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
             this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
             this.ButtonEclaterPdf.TabIndex = 2;
@@ -76,7 +77,7 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(391, 36);
+            this.LabelNbPages.Location = new System.Drawing.Point(391, 440);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
             this.LabelNbPages.TabIndex = 3;
@@ -106,12 +107,12 @@
             // 
             this.TextBoxRemoteCmd.Location = new System.Drawing.Point(89, 59);
             this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
-            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(155, 20);
+            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(296, 20);
             this.TextBoxRemoteCmd.TabIndex = 8;
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(12, 707);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(12, 738);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
             this.ButtonDisconnect.Size = new System.Drawing.Size(111, 23);
             this.ButtonDisconnect.TabIndex = 10;
@@ -121,7 +122,7 @@
             // 
             // ButtonSend
             // 
-            this.ButtonSend.Location = new System.Drawing.Point(347, 70);
+            this.ButtonSend.Location = new System.Drawing.Point(391, 30);
             this.ButtonSend.Name = "ButtonSend";
             this.ButtonSend.Size = new System.Drawing.Size(75, 23);
             this.ButtonSend.TabIndex = 11;
@@ -131,7 +132,7 @@
             // 
             // ButtonStopServer
             // 
-            this.ButtonStopServer.Location = new System.Drawing.Point(12, 736);
+            this.ButtonStopServer.Location = new System.Drawing.Point(12, 707);
             this.ButtonStopServer.Name = "ButtonStopServer";
             this.ButtonStopServer.Size = new System.Drawing.Size(111, 23);
             this.ButtonStopServer.TabIndex = 12;
@@ -141,7 +142,7 @@
             // 
             // ButtonGet
             // 
-            this.ButtonGet.Location = new System.Drawing.Point(248, 59);
+            this.ButtonGet.Location = new System.Drawing.Point(391, 59);
             this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
             this.ButtonGet.Name = "ButtonGet";
             this.ButtonGet.Size = new System.Drawing.Size(75, 23);
@@ -150,11 +151,22 @@
             this.ButtonGet.UseVisualStyleBackColor = true;
             this.ButtonGet.Click += new System.EventHandler(this.ButtonGet_Click);
             // 
+            // ButtonInitServer
+            // 
+            this.ButtonInitServer.Location = new System.Drawing.Point(12, 678);
+            this.ButtonInitServer.Name = "ButtonInitServer";
+            this.ButtonInitServer.Size = new System.Drawing.Size(111, 23);
+            this.ButtonInitServer.TabIndex = 14;
+            this.ButtonInitServer.Text = "Initialiser le serveur";
+            this.ButtonInitServer.UseVisualStyleBackColor = true;
+            this.ButtonInitServer.Click += new System.EventHandler(this.ButtonInitServer_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.ButtonInitServer);
             this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
@@ -188,6 +200,7 @@
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
         private System.Windows.Forms.Button ButtonGet;
+        private System.Windows.Forms.Button ButtonInitServer;
     }
 }
 

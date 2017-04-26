@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SQLite;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace SharpGED_server
@@ -36,6 +33,9 @@ namespace SharpGED_server
             string[] argv;
 
             Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
+
+            DatabaseManager database = new DatabaseManager();
+            FileTransfert storage = new FileTransfert();
 
             while (!_shouldStop)
             {
@@ -82,26 +82,26 @@ namespace SharpGED_server
 
                             case "INIT": // Initialise une nouvelle base de données
                                 Console.WriteLine("[" + id + "] Création de la base de données...");
-                                new DatabaseManager().Initialize();
+                                database.Initialize();
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "GET": // Envoie le fichier spécifié en argument
                                 Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
-                                FileTransfert.Send(ConfigurationManager.AppSettings.Get("BaseFolder") + "storage\\" + argv[0], Handler);
+                                storage.Send(argv[0], Handler);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "PUT": // Insère un fichier dans la base
                                 Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
-                                FileTransfert.Recive(argv[0], Handler);
+                                storage.Recive(argv[0], Handler);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "LIST": // Liste les fichiers en base (pour le déboguage)
 
 
-                                using (SQLiteConnection db = new DatabaseManager().Connect())
+                                using (SQLiteConnection db = database.Connect())
                                 {
                                     db.Open();
                                     string sql = "SELECT * FROM files;";
