@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Configuration;
-using System.IO;
+using System.Data.SQLite;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -29,11 +28,14 @@ namespace SharpGED_server
 
             byte[] buffer = new byte[1024];
             string order;
+            int separator;
             string cmd;
-            string arg;
-            int argpos;
+            string[] argv;
 
             Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
+
+            DatabaseManager database = new DatabaseManager();
+            FileTransfert storage = new FileTransfert();
 
             while (!_shouldStop)
             {
@@ -48,16 +50,16 @@ namespace SharpGED_server
                     if (!order.Equals(""))
                     {
                         // Sépare la commande et son/ses éventuel(s) argument(s)
-                        argpos = order.IndexOf(' ');
-                        if (argpos == -1)
+                        separator = order.IndexOf(' ');
+                        if (separator == -1)
                         {
                             cmd = order;
-                            arg = "";
+                            argv = new string[0];
                         }
                         else
                         {
-                            cmd = order.Substring(0, argpos);
-                            arg = order.Substring(argpos + 1);
+                            cmd = order.Substring(0, separator);
+                            argv = order.Substring(separator + 1).Split(';');
                         }
 
                         // Traitement en fonction de la commande reçue
@@ -68,45 +70,6 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Bonjour !");
                                 break;
 
-                            case "GET": // Envoie le fichier spécifié en argument
-                                Console.WriteLine("[" + id + "] Envoi de '" + arg + "'...");
-
-                                string uri = ConfigurationManager.AppSettings.Get("BaseFolder").ToString();
-                                uri += "storage\\" + arg;
-                                FileStream inStream = File.OpenRead(uri);
-
-                                // Envoie la taille exacte du fichier
-                                int size = (int)inStream.Length;
-                                Handler.Send(Encoding.ASCII.GetBytes(size.ToString()));
-
-                                // Copie l'intégralité du fichier dans un tableau
-                                byte[] fileBytes = new byte[size];
-                                inStream.Read(fileBytes, 0, size);
-                                inStream.Close();
-
-                                Console.WriteLine("[" + id + "] (en " + size / PACKET_SIZE + " paquets de " + PACKET_SIZE + " octets)");
-
-                                // Envoie le tableau par paquets de 1024 octets
-                                byte[] filePacket;
-                                for (int i = 0; i < size; i += PACKET_SIZE)
-                                {
-                                    filePacket = new byte[PACKET_SIZE];
-
-                                    if (i + PACKET_SIZE <= size)
-                                    {
-                                        Buffer.BlockCopy(fileBytes, i, filePacket, 0, PACKET_SIZE);
-                                    }
-                                    else
-                                    {
-                                        Buffer.BlockCopy(fileBytes, i, filePacket, 0, size - i);
-                                    }
-
-                                    Handler.Send(filePacket);
-                                }
-                                Console.WriteLine("[" + id + "] Terminé.");
-
-                                break;
-
                             case "BYE": // Déconnecte le client
                                 RequestStop();
                                 break;
@@ -115,6 +78,41 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Requête d'arrêt du serveur");
                                 Program._stopServer = true;
                                 RequestStop();
+                                break;
+
+                            case "INIT": // Initialise une nouvelle base de données
+                                Console.WriteLine("[" + id + "] Création de la base de données...");
+                                database.Initialize();
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "GET": // Envoie le fichier spécifié en argument
+                                Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
+                                storage.Send(argv[0], Handler);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "PUT": // Insère un fichier dans la base
+                                Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
+                                storage.Recive(argv[0], Handler);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "LIST": // Liste les fichiers en base (pour le déboguage)
+
+
+                                using (SQLiteConnection db = database.Connect())
+                                {
+                                    db.Open();
+                                    string sql = "SELECT * FROM files;";
+                                    SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
+
+                                    while (rs.Read())
+                                    {
+                                        Console.WriteLine("[" + id + "] " + rs["filename"] + ";" + rs["originalFilename"]);
+                                    }
+                                }
+
                                 break;
 
                             default:

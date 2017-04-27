@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.TextBoxPdfName = new System.Windows.Forms.TextBox();
@@ -41,8 +40,7 @@
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
             this.ButtonGet = new System.Windows.Forms.Button();
-            this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.TimerGui = new System.Windows.Forms.Timer(this.components);
+            this.ButtonInitServer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -68,7 +66,7 @@
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(310, 73);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(391, 456);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
             this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
             this.ButtonEclaterPdf.TabIndex = 2;
@@ -79,7 +77,7 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(391, 36);
+            this.LabelNbPages.Location = new System.Drawing.Point(391, 440);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
             this.LabelNbPages.TabIndex = 3;
@@ -92,7 +90,7 @@
             this.PdfViewer.Location = new System.Drawing.Point(483, 28);
             this.PdfViewer.MinimumSize = new System.Drawing.Size(20, 20);
             this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(656, 904);
+            this.PdfViewer.Size = new System.Drawing.Size(656, 733);
             this.PdfViewer.TabIndex = 5;
             this.PdfViewer.WebBrowserShortcutsEnabled = false;
             // 
@@ -107,16 +105,16 @@
             // 
             // TextBoxRemoteCmd
             // 
-            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(7, 882);
+            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(89, 59);
             this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
-            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(155, 20);
+            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(296, 20);
             this.TextBoxRemoteCmd.TabIndex = 8;
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(402, 880);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(12, 738);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
-            this.ButtonDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.ButtonDisconnect.Size = new System.Drawing.Size(111, 23);
             this.ButtonDisconnect.TabIndex = 10;
             this.ButtonDisconnect.Text = "Déconnecter";
             this.ButtonDisconnect.UseVisualStyleBackColor = true;
@@ -124,7 +122,7 @@
             // 
             // ButtonSend
             // 
-            this.ButtonSend.Location = new System.Drawing.Point(165, 880);
+            this.ButtonSend.Location = new System.Drawing.Point(391, 30);
             this.ButtonSend.Name = "ButtonSend";
             this.ButtonSend.Size = new System.Drawing.Size(75, 23);
             this.ButtonSend.TabIndex = 11;
@@ -134,9 +132,9 @@
             // 
             // ButtonStopServer
             // 
-            this.ButtonStopServer.Location = new System.Drawing.Point(260, 880);
+            this.ButtonStopServer.Location = new System.Drawing.Point(12, 707);
             this.ButtonStopServer.Name = "ButtonStopServer";
-            this.ButtonStopServer.Size = new System.Drawing.Size(136, 23);
+            this.ButtonStopServer.Size = new System.Drawing.Size(111, 23);
             this.ButtonStopServer.TabIndex = 12;
             this.ButtonStopServer.Text = "Arrêter le serveur";
             this.ButtonStopServer.UseVisualStyleBackColor = true;
@@ -144,7 +142,7 @@
             // 
             // ButtonGet
             // 
-            this.ButtonGet.Location = new System.Drawing.Point(166, 853);
+            this.ButtonGet.Location = new System.Drawing.Point(391, 59);
             this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
             this.ButtonGet.Name = "ButtonGet";
             this.ButtonGet.Size = new System.Drawing.Size(75, 23);
@@ -153,25 +151,22 @@
             this.ButtonGet.UseVisualStyleBackColor = true;
             this.ButtonGet.Click += new System.EventHandler(this.ButtonGet_Click);
             // 
-            // ProgressBar
+            // ButtonInitServer
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(7, 909);
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(470, 23);
-            this.ProgressBar.TabIndex = 14;
-            // 
-            // TimerGui
-            // 
-            this.TimerGui.Enabled = true;
-            this.TimerGui.Interval = 500;
-            this.TimerGui.Tick += new System.EventHandler(this.TimerGui_Tick);
+            this.ButtonInitServer.Location = new System.Drawing.Point(12, 678);
+            this.ButtonInitServer.Name = "ButtonInitServer";
+            this.ButtonInitServer.Size = new System.Drawing.Size(111, 23);
+            this.ButtonInitServer.TabIndex = 14;
+            this.ButtonInitServer.Text = "Initialiser le serveur";
+            this.ButtonInitServer.UseVisualStyleBackColor = true;
+            this.ButtonInitServer.Click += new System.EventHandler(this.ButtonInitServer_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 943);
-            this.Controls.Add(this.ProgressBar);
+            this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.ButtonInitServer);
             this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
@@ -184,7 +179,7 @@
             this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.BrowseButton);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -205,8 +200,7 @@
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
         private System.Windows.Forms.Button ButtonGet;
-        private System.Windows.Forms.ProgressBar ProgressBar;
-        private System.Windows.Forms.Timer TimerGui;
+        private System.Windows.Forms.Button ButtonInitServer;
     }
 }
 

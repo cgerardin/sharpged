@@ -46,47 +46,6 @@ namespace SharpGED_client
             serverSocket.Send(Encoding.ASCII.GetBytes(command));
         }
 
-        public static void ServerRecive(string filename)
-        {
-            // Demande le fichier passé en argument
-            ServerSend("GET " + filename);
-
-            // Récupère sa taille exacte
-            byte[] buffer = new byte[8];
-            serverSocket.Receive(buffer);
-            int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
-
-            // Récupère le fichier par paquets de 1024 octets et les place dans un tableau
-            byte[] fileBytes = new byte[size];
-            byte[] filePacket = new byte[PACKET_SIZE];
-            for (int i = 0; i < size; i += PACKET_SIZE)
-            {
-                serverSocket.Receive(filePacket);
-                if (i + PACKET_SIZE <= size)
-                {
-                    Buffer.BlockCopy(filePacket, 0, fileBytes, i, PACKET_SIZE);
-                }
-                else
-                {
-                    Buffer.BlockCopy(filePacket, 0, fileBytes, i, size - i);
-                }
-
-                int total = size / PACKET_SIZE;
-                int remaining = total - i / PACKET_SIZE;
-                int done = total - remaining;
-
-                MainForm.ProgressBarValue = (100 * done / total);
-                Application.DoEvents();
-            }
-
-            // Ecris le tableau dans un fichier temporaire sur le disque
-            FileStream outStream = File.OpenWrite("C:\\TMP\\" + filename);
-            outStream.Write(fileBytes, 0, size);
-            outStream.Close();
-
-            MainForm.ProgressBarValue = 0;
-        }
-
         public static void ServerDisconnect()
         {
             ServerSend("BYE");
@@ -98,6 +57,43 @@ namespace SharpGED_client
             ServerSend("STOP");
             ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
             serverSocket.Close();
+        }
+
+        public static void ServerSendFile(string filename, string uri)
+        {
+            // Annonce l'envoi d'un fichier avec son nom d'origine
+            ServerSend("PUT " + filename);
+
+            // Place son contenu dans un tableau et envoie sa taille exacte
+            FileStream inStream = File.OpenRead(uri);
+            int size = (int)inStream.Length;
+            ServerSend(size.ToString());
+
+            // Envoie le contenu du tableau
+            byte[] fileBytes = new byte[size];
+            inStream.Read(fileBytes, 0, size);
+            inStream.Close();
+            serverSocket.Send(fileBytes);
+        }
+
+        public static void ServerReciveFile(string filehash)
+        {
+            // Demande le fichier passé en argument
+            ServerSend("GET " + filehash);
+
+            // Récupère sa taille exacte
+            byte[] buffer = new byte[8];
+            serverSocket.Receive(buffer);
+            int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
+
+            // Récupère le fichier le place dans un tableau
+            byte[] fileBytes = new byte[size];
+            serverSocket.Receive(fileBytes);
+
+            // Ecris le tableau dans un fichier temporaire sur le disque
+            FileStream outStream = File.OpenWrite("C:\\TMP\\" + filehash + ".pdf");
+            outStream.Write(fileBytes, 0, size);
+            outStream.Close();
         }
 
         /// <summary>
