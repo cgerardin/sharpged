@@ -1,6 +1,7 @@
 ﻿using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
 using System.IO;
@@ -10,46 +11,78 @@ using System.Text;
 
 namespace SharpGED_server
 {
-    class FileTransfert
+    class StorageManager
     {
 
-        public string baseFolder;
+        private string baseFolder;
+        private Socket client;
+        private DatabaseManager database;
 
-        public FileTransfert()
+        public string BaseFolder { get => baseFolder; set => baseFolder = value; }
+
+        public StorageManager(Socket handler)
         {
             baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
+            database = new DatabaseManager();
+            client = handler;
         }
 
-        public void Send(string filename, Socket handler)
+        public void List()
+        {
+            using (SQLiteConnection db = database.Connect())
+            {
+                db.Open();
+                string sql = "SELECT * FROM files;";
+                SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
+
+                List<string> filesList = new List<string>();
+                while (rs.Read())
+                {
+                    filesList.Add(rs["filename"].ToString());
+                }
+
+                client.Send(Encoding.ASCII.GetBytes(filesList.Count.ToString()));
+
+                foreach (string filename in filesList)
+                {
+                    client.Send(Encoding.ASCII.GetBytes(filename));
+                }
+
+            }
+        }
+
+        public void Send(string filename)
         {
             FileStream inStream = File.OpenRead(baseFolder + "storage\\" + filename);
 
             // Envoie la taille exacte du fichier
             int size = (int)inStream.Length;
-            handler.Send(Encoding.ASCII.GetBytes(size.ToString()));
+            client.Send(Encoding.ASCII.GetBytes(size.ToString()));
 
             // Envoie le contenu du fichier
             byte[] fileBytes = new byte[size];
             inStream.Read(fileBytes, 0, size);
             inStream.Close();
-            handler.Send(fileBytes);
+            client.Send(fileBytes);
         }
 
-        public void Recive(string originalFilename, Socket handler)
+        public void Recive(string originalFilename)
         {
             string filename;
             int size;
             string title;
             int pages;
 
+            client.Send(Encoding.ASCII.GetBytes("READY")); // Cet échange semble nécessaire pour synchro la réception de la taille ?
+
             // Récupère sa taille exacte
             byte[] buffer = new byte[8];
-            handler.Receive(buffer);
+            client.Receive(buffer);
             size = int.Parse(Encoding.Default.GetString(buffer).Trim());
 
             // Récupère le fichier et le place dans un tableau
             byte[] fileBytes = new byte[size];
-            handler.Receive(fileBytes);
+            client.Receive(fileBytes);
 
             // Génère un nom de fichier unique avec le SHA-256 du fichier en hexadécimal
             using (SHA256 sha256 = SHA256.Create())

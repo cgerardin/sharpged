@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -12,7 +13,7 @@ namespace SharpGED_client
 
         public const int PACKET_SIZE = 1024;
 
-        private static Socket serverSocket = null;
+        private static Socket server = null;
         private static string serverHostname = "";
         private static int serverPort = 0;
 
@@ -36,33 +37,57 @@ namespace SharpGED_client
                 serverIP = Dns.GetHostAddresses(serverHostname)[0];
             }
 
-            serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serverSocket.Blocking = true;
-            serverSocket.Connect(new IPEndPoint(serverIP, serverPort));
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            server.Blocking = true;
+            server.Connect(new IPEndPoint(serverIP, serverPort));
         }
 
         public static void ServerSend(string command)
         {
-            serverSocket.Send(Encoding.ASCII.GetBytes(command));
+            server.Send(Encoding.ASCII.GetBytes(command));
         }
 
         public static void ServerDisconnect()
         {
             ServerSend("BYE");
-            serverSocket.Close();
+            server.Close();
         }
 
         public static void ServerHalt()
         {
             ServerSend("STOP");
             ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
-            serverSocket.Close();
+            server.Close();
+        }
+
+        public static List<string> ServerListFiles()
+        {
+            ServerSend("LIST");
+
+            // Récupère le nombre d'éléments
+            byte[] buffer = new byte[8];
+            server.Receive(buffer);
+            int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
+
+            List<string> filesList = new List<string>();
+            for (int i = 0; i < size; i++)
+            {
+                buffer = new byte[64];
+                server.Receive(buffer);
+
+                filesList.Add(Encoding.Default.GetString(buffer));
+            }
+
+            return filesList;
         }
 
         public static void ServerSendFile(string filename, string uri)
         {
             // Annonce l'envoi d'un fichier avec son nom d'origine
             ServerSend("PUT " + filename);
+
+            byte[] buffer = new byte[1024];
+            server.Receive(buffer);
 
             // Place son contenu dans un tableau et envoie sa taille exacte
             FileStream inStream = File.OpenRead(uri);
@@ -73,7 +98,7 @@ namespace SharpGED_client
             byte[] fileBytes = new byte[size];
             inStream.Read(fileBytes, 0, size);
             inStream.Close();
-            serverSocket.Send(fileBytes);
+            server.Send(fileBytes);
         }
 
         public static void ServerReciveFile(string filehash)
@@ -83,12 +108,12 @@ namespace SharpGED_client
 
             // Récupère sa taille exacte
             byte[] buffer = new byte[8];
-            serverSocket.Receive(buffer);
+            server.Receive(buffer);
             int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
 
             // Récupère le fichier le place dans un tableau
             byte[] fileBytes = new byte[size];
-            serverSocket.Receive(fileBytes);
+            server.Receive(fileBytes);
 
             // Ecris le tableau dans un fichier temporaire sur le disque
             FileStream outStream = File.OpenWrite("C:\\TMP\\" + filehash + ".pdf");

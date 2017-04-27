@@ -35,12 +35,11 @@
             this.LabelNbPages = new System.Windows.Forms.Label();
             this.PdfViewer = new System.Windows.Forms.WebBrowser();
             this.ListBoxPages = new System.Windows.Forms.ListBox();
-            this.TextBoxRemoteCmd = new System.Windows.Forms.TextBox();
             this.ButtonDisconnect = new System.Windows.Forms.Button();
             this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
-            this.ButtonGet = new System.Windows.Forms.Button();
             this.ButtonInitServer = new System.Windows.Forms.Button();
+            this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -66,7 +65,7 @@
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(391, 456);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(391, 119);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
             this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
             this.ButtonEclaterPdf.TabIndex = 2;
@@ -77,7 +76,7 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(391, 440);
+            this.LabelNbPages.Location = new System.Drawing.Point(391, 103);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
             this.LabelNbPages.TabIndex = 3;
@@ -97,18 +96,11 @@
             // ListBoxPages
             // 
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(29, 111);
+            this.ListBoxPages.Location = new System.Drawing.Point(29, 99);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(356, 368);
+            this.ListBoxPages.Size = new System.Drawing.Size(356, 43);
             this.ListBoxPages.TabIndex = 6;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
-            // 
-            // TextBoxRemoteCmd
-            // 
-            this.TextBoxRemoteCmd.Location = new System.Drawing.Point(89, 59);
-            this.TextBoxRemoteCmd.Name = "TextBoxRemoteCmd";
-            this.TextBoxRemoteCmd.Size = new System.Drawing.Size(296, 20);
-            this.TextBoxRemoteCmd.TabIndex = 8;
             // 
             // ButtonDisconnect
             // 
@@ -140,17 +132,6 @@
             this.ButtonStopServer.UseVisualStyleBackColor = true;
             this.ButtonStopServer.Click += new System.EventHandler(this.ButtonStopServer_Click);
             // 
-            // ButtonGet
-            // 
-            this.ButtonGet.Location = new System.Drawing.Point(391, 59);
-            this.ButtonGet.Margin = new System.Windows.Forms.Padding(1);
-            this.ButtonGet.Name = "ButtonGet";
-            this.ButtonGet.Size = new System.Drawing.Size(75, 23);
-            this.ButtonGet.TabIndex = 13;
-            this.ButtonGet.Text = "Recevoir";
-            this.ButtonGet.UseVisualStyleBackColor = true;
-            this.ButtonGet.Click += new System.EventHandler(this.ButtonGet_Click);
-            // 
             // ButtonInitServer
             // 
             this.ButtonInitServer.Location = new System.Drawing.Point(12, 678);
@@ -161,17 +142,25 @@
             this.ButtonInitServer.UseVisualStyleBackColor = true;
             this.ButtonInitServer.Click += new System.EventHandler(this.ButtonInitServer_Click);
             // 
+            // ListBoxFiles
+            // 
+            this.ListBoxFiles.FormattingEnabled = true;
+            this.ListBoxFiles.Location = new System.Drawing.Point(30, 163);
+            this.ListBoxFiles.Name = "ListBoxFiles";
+            this.ListBoxFiles.Size = new System.Drawing.Size(354, 264);
+            this.ListBoxFiles.TabIndex = 15;
+            this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.ListBoxFiles);
             this.Controls.Add(this.ButtonInitServer);
-            this.Controls.Add(this.ButtonGet);
             this.Controls.Add(this.ButtonStopServer);
             this.Controls.Add(this.ButtonSend);
             this.Controls.Add(this.ButtonDisconnect);
-            this.Controls.Add(this.TextBoxRemoteCmd);
             this.Controls.Add(this.ListBoxPages);
             this.Controls.Add(this.PdfViewer);
             this.Controls.Add(this.LabelNbPages);
@@ -181,6 +170,7 @@
             this.Name = "MainForm";
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,12 +185,11 @@
         private System.Windows.Forms.Label LabelNbPages;
         private System.Windows.Forms.WebBrowser PdfViewer;
         private System.Windows.Forms.ListBox ListBoxPages;
-        private System.Windows.Forms.TextBox TextBoxRemoteCmd;
         private System.Windows.Forms.Button ButtonDisconnect;
         private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
-        private System.Windows.Forms.Button ButtonGet;
         private System.Windows.Forms.Button ButtonInitServer;
+        private System.Windows.Forms.ListBox ListBoxFiles;
     }
 }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SQLite;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -32,18 +31,18 @@ namespace SharpGED_server
             string cmd;
             string[] argv;
 
-            Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)Handler.RemoteEndPoint).Address + " connecté");
+            Console.WriteLine("[" + id + "] Client " + ((IPEndPoint)handler.RemoteEndPoint).Address + " connecté");
 
             DatabaseManager database = new DatabaseManager();
-            FileTransfert storage = new FileTransfert();
+            StorageManager storage = new StorageManager(handler);
 
             while (!_shouldStop)
             {
 
-                if (Handler.Available > 0)
+                if (handler.Available > 0)
                 {
                     // Récupère l'ordre envoyé par le client, et vide le buffer
-                    Handler.Receive(buffer);
+                    handler.Receive(buffer);
                     order = Encoding.Default.GetString(buffer).TrimEnd('\0');
                     buffer = new byte[1024];
 
@@ -88,31 +87,19 @@ namespace SharpGED_server
 
                             case "GET": // Envoie le fichier spécifié en argument
                                 Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
-                                storage.Send(argv[0], Handler);
+                                storage.Send(argv[0]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "PUT": // Insère un fichier dans la base
                                 Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
-                                storage.Recive(argv[0], Handler);
+                                storage.Recive(argv[0]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
-                            case "LIST": // Liste les fichiers en base (pour le déboguage)
-
-
-                                using (SQLiteConnection db = database.Connect())
-                                {
-                                    db.Open();
-                                    string sql = "SELECT * FROM files;";
-                                    SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
-
-                                    while (rs.Read())
-                                    {
-                                        Console.WriteLine("[" + id + "] " + rs["filename"] + ";" + rs["originalFilename"]);
-                                    }
-                                }
-
+                            case "LIST": // Envoie la liste les fichiers
+                                Console.WriteLine("[" + id + "] Envoi de la liste des fichiers");
+                                storage.List();
                                 break;
 
                             default:
@@ -126,8 +113,8 @@ namespace SharpGED_server
 
             }
 
-            Handler.Shutdown(SocketShutdown.Both);
-            Handler.Close();
+            handler.Shutdown(SocketShutdown.Both);
+            handler.Close();
             Console.WriteLine("[" + id + "] Client déconnecté.");
 
         }
