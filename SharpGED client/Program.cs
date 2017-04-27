@@ -81,10 +81,10 @@ namespace SharpGED_client
             return filesList;
         }
 
-        public static void ServerSendFile(string filename, string uri)
+        public static void ServerSendFile(string filename, string title, string uri)
         {
             // Annonce l'envoi d'un fichier avec son nom d'origine
-            ServerSend("PUT " + filename);
+            ServerSend("PUT " + filename + ";" + title);
 
             byte[] buffer = new byte[1024];
             server.Receive(buffer);

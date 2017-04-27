@@ -36,6 +36,14 @@ namespace SharpGED_server
             DatabaseManager database = new DatabaseManager();
             StorageManager storage = new StorageManager(handler);
 
+            if(!database.isInitialized())
+            {
+                Console.WriteLine("[" + id + "] Aucune base de données configurée !");
+                Console.WriteLine("[" + id + "] Création de la base de données...");
+                database.Initialize();
+                Console.WriteLine("[" + id + "] Terminé.");
+            }
+
             while (!_shouldStop)
             {
 
@@ -93,7 +101,7 @@ namespace SharpGED_server
 
                             case "PUT": // Insère un fichier dans la base
                                 Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
-                                storage.Recive(argv[0]);
+                                storage.Recive(argv[0], argv[1]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 

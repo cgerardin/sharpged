@@ -31,11 +31,12 @@ namespace SharpGED_server
         {
             using (SQLiteConnection db = database.Connect())
             {
+                List<string> filesList = new List<string>();
+
                 db.Open();
                 string sql = "SELECT * FROM files;";
-                SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
 
-                List<string> filesList = new List<string>();
+                SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
                 while (rs.Read())
                 {
                     filesList.Add(rs["filename"].ToString());
@@ -47,7 +48,6 @@ namespace SharpGED_server
                 {
                     client.Send(Encoding.ASCII.GetBytes(filename));
                 }
-
             }
         }
 
@@ -66,11 +66,10 @@ namespace SharpGED_server
             client.Send(fileBytes);
         }
 
-        public void Recive(string originalFilename)
+        public void Recive(string originalname, string title)
         {
             string filename;
             int size;
-            string title;
             int pages;
 
             client.Send(Encoding.ASCII.GetBytes("READY")); // Cet échange semble nécessaire pour synchro la réception de la taille ?
@@ -95,17 +94,19 @@ namespace SharpGED_server
             outStream.Write(fileBytes, 0, size);
             outStream.Close();
 
-            // Récupère les métadonnées du PDF
-            PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + filename);
-            title = pdf.Info.Title;
+            // Récupère et met à jour les métadonnées du PDF
+            PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + filename, PdfDocumentOpenMode.Modify);
+            pdf.Info.Title = title;
             pages = pdf.PageCount;
+            pdf.Save(baseFolder + "storage\\" + filename);
+            pdf.Close();
 
             // Insère le tout dans la base
             using (SQLiteConnection db = new DatabaseManager().Connect())
             {
                 db.Open();
-                string sql = "INSERT INTO files (filename, originalFilename, size, title, pages) " +
-                "VALUES ('" + filename + "', '" + originalFilename + "', " + size + ", '" + title + "', " + pages + ");";
+                string sql = "INSERT INTO files (filename, originalname, size, title, pages) " +
+                "VALUES ('" + filename + "', '" + originalname + "', " + size + ", '" + title + "', " + pages + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }

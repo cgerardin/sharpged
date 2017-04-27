@@ -30,16 +30,15 @@
         {
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.BrowseButton = new System.Windows.Forms.Button();
-            this.TextBoxPdfName = new System.Windows.Forms.TextBox();
             this.ButtonEclaterPdf = new System.Windows.Forms.Button();
             this.LabelNbPages = new System.Windows.Forms.Label();
             this.PdfViewer = new System.Windows.Forms.WebBrowser();
             this.ListBoxPages = new System.Windows.Forms.ListBox();
             this.ButtonDisconnect = new System.Windows.Forms.Button();
-            this.ButtonSend = new System.Windows.Forms.Button();
             this.ButtonStopServer = new System.Windows.Forms.Button();
             this.ButtonInitServer = new System.Windows.Forms.Button();
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
+            this.TextBoxPdfName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -48,7 +47,7 @@
             // 
             // BrowseButton
             // 
-            this.BrowseButton.Location = new System.Drawing.Point(29, 28);
+            this.BrowseButton.Location = new System.Drawing.Point(12, 12);
             this.BrowseButton.Name = "BrowseButton";
             this.BrowseButton.Size = new System.Drawing.Size(54, 28);
             this.BrowseButton.TabIndex = 0;
@@ -56,16 +55,9 @@
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
-            // TextBoxPdfName
-            // 
-            this.TextBoxPdfName.Location = new System.Drawing.Point(89, 33);
-            this.TextBoxPdfName.Name = "TextBoxPdfName";
-            this.TextBoxPdfName.Size = new System.Drawing.Size(296, 20);
-            this.TextBoxPdfName.TabIndex = 1;
-            // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(391, 119);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(402, 539);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
             this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
             this.ButtonEclaterPdf.TabIndex = 2;
@@ -76,7 +68,7 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(391, 103);
+            this.LabelNbPages.Location = new System.Drawing.Point(69, 544);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
             this.LabelNbPages.TabIndex = 3;
@@ -96,9 +88,9 @@
             // ListBoxPages
             // 
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(29, 99);
+            this.ListBoxPages.Location = new System.Drawing.Point(72, 412);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(356, 43);
+            this.ListBoxPages.Size = new System.Drawing.Size(407, 121);
             this.ListBoxPages.TabIndex = 6;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
@@ -111,16 +103,6 @@
             this.ButtonDisconnect.Text = "Déconnecter";
             this.ButtonDisconnect.UseVisualStyleBackColor = true;
             this.ButtonDisconnect.Click += new System.EventHandler(this.ButtonDisconnect_Click);
-            // 
-            // ButtonSend
-            // 
-            this.ButtonSend.Location = new System.Drawing.Point(391, 30);
-            this.ButtonSend.Name = "ButtonSend";
-            this.ButtonSend.Size = new System.Drawing.Size(75, 23);
-            this.ButtonSend.TabIndex = 11;
-            this.ButtonSend.Text = "Envoyer";
-            this.ButtonSend.UseVisualStyleBackColor = true;
-            this.ButtonSend.Click += new System.EventHandler(this.ButtonSend_Click);
             // 
             // ButtonStopServer
             // 
@@ -145,27 +127,33 @@
             // ListBoxFiles
             // 
             this.ListBoxFiles.FormattingEnabled = true;
-            this.ListBoxFiles.Location = new System.Drawing.Point(30, 163);
+            this.ListBoxFiles.Location = new System.Drawing.Point(72, 12);
             this.ListBoxFiles.Name = "ListBoxFiles";
-            this.ListBoxFiles.Size = new System.Drawing.Size(354, 264);
+            this.ListBoxFiles.Size = new System.Drawing.Size(405, 394);
             this.ListBoxFiles.TabIndex = 15;
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
+            // 
+            // TextBoxPdfName
+            // 
+            this.TextBoxPdfName.Location = new System.Drawing.Point(483, 6);
+            this.TextBoxPdfName.Name = "TextBoxPdfName";
+            this.TextBoxPdfName.Size = new System.Drawing.Size(656, 20);
+            this.TextBoxPdfName.TabIndex = 16;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.ListBoxFiles);
             this.Controls.Add(this.ButtonInitServer);
             this.Controls.Add(this.ButtonStopServer);
-            this.Controls.Add(this.ButtonSend);
             this.Controls.Add(this.ButtonDisconnect);
             this.Controls.Add(this.ListBoxPages);
             this.Controls.Add(this.PdfViewer);
             this.Controls.Add(this.LabelNbPages);
             this.Controls.Add(this.ButtonEclaterPdf);
-            this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.BrowseButton);
             this.Name = "MainForm";
             this.Text = "SharpGED";
@@ -180,16 +168,15 @@
 
         private System.Windows.Forms.OpenFileDialog addPdfDialog;
         private System.Windows.Forms.Button BrowseButton;
-        private System.Windows.Forms.TextBox TextBoxPdfName;
         private System.Windows.Forms.Button ButtonEclaterPdf;
         private System.Windows.Forms.Label LabelNbPages;
         private System.Windows.Forms.WebBrowser PdfViewer;
         private System.Windows.Forms.ListBox ListBoxPages;
         private System.Windows.Forms.Button ButtonDisconnect;
-        private System.Windows.Forms.Button ButtonSend;
         private System.Windows.Forms.Button ButtonStopServer;
         private System.Windows.Forms.Button ButtonInitServer;
         private System.Windows.Forms.ListBox ListBoxFiles;
+        private System.Windows.Forms.TextBox TextBoxPdfName;
     }
 }
 

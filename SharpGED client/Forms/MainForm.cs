@@ -22,22 +22,18 @@ namespace SharpGED_client
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            foreach(string filename in Program.ServerListFiles())
-            {
-                ListBoxFiles.Items.Add(filename);
-            }
+            RefreshFilesList();
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
+            Form addFile = new AddFileForm();
+            addFile.Show();
+            while (addFile.Visible)
             {
-                pdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
-                TextBoxPdfName.Text = pdf.Info.Title;
-                LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
-
-                PdfViewer.Url = new Uri(addPdfDialog.FileName + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+                Application.DoEvents();
             }
+            RefreshFilesList();
         }
 
         private void ButtonEclaterPdf_Click(object sender, EventArgs e)
@@ -65,17 +61,6 @@ namespace SharpGED_client
             Program.ServerDisconnect();
         }
 
-        private void ButtonSend_Click(object sender, EventArgs e)
-        {
-            Program.ServerSendFile(pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1), pdf.FullPath);
-
-            ListBoxFiles.Items.Clear();
-            foreach (string filename in Program.ServerListFiles())
-            {
-                ListBoxFiles.Items.Add(filename);
-            }
-        }
-
         private void ButtonStopServer_Click(object sender, EventArgs e)
         {
             Program.ServerHalt();
@@ -95,5 +80,15 @@ namespace SharpGED_client
 
             PdfViewer.Url = new Uri("C:\\TMP\\" + ListBoxFiles.SelectedItem.ToString() + ".pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
         }
+
+        private void RefreshFilesList()
+        {
+            ListBoxFiles.Items.Clear();
+            foreach (string filename in Program.ServerListFiles())
+            {
+                ListBoxFiles.Items.Add(filename);
+            }
+        }
+
     }
 }
