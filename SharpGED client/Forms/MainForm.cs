@@ -92,25 +92,5 @@ namespace SharpGED_client
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GedFile test = new GedFile();
-
-            // Place son contenu dans un tableau et envoie sa taille exacte
-            FileStream inStream = File.OpenRead(pdf.FullPath);
-            int size = (int)inStream.Length;
-            byte[] fileBytes = new byte[inStream.Length];
-            inStream.Read(fileBytes, 0, size);
-            inStream.Close();
-
-            test.size = 3;
-            test.title = "bozo";
-            test.hash = "HFKHHFDJFBKDHKF";
-            test.bytes = fileBytes;
-
-            Program.ServerSendFile(test);
-
-        }
-
     }
 }
