@@ -34,26 +34,6 @@ namespace SharpGED_client
             RefreshFilesList();
         }
 
-        /*private void ButtonEclaterPdf_Click(object sender, EventArgs e)
-        {
-            int i = 0;
-            PdfDocument split;
-            foreach (PdfPage currPage in pdf.Pages)
-            {
-                i++;
-                split = new PdfDocument(pdf.FullPath.Substring(0, pdf.FullPath.Length - 4) + "[" + i.ToString("0000") + "].pdf");
-                ListBoxPages.Items.Add(i);
-                split.AddPage(currPage);
-                split.Close();
-            }
-        }
-
-        private void ListBoxPages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int i = (int)ListBoxPages.SelectedItem;
-            PdfViewer.Url = new Uri(pdf.FullPath.Substring(0, pdf.FullPath.Length - 4) + "[" + i.ToString("0000") + "].pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitW");
-        }*/
-
         private void ButtonDisconnect_Click(object sender, EventArgs e)
         {
             Program.ServerDisconnect();
