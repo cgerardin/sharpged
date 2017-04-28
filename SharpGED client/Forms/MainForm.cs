@@ -1,6 +1,4 @@
-﻿using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
-using SharpGED_lib;
+﻿using SharpGED_lib;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -9,8 +7,6 @@ namespace SharpGED_client
 {
     public partial class MainForm : Form
     {
-
-        PdfDocument pdf;
 
         public MainForm()
         {
@@ -38,7 +34,7 @@ namespace SharpGED_client
             RefreshFilesList();
         }
 
-        private void ButtonEclaterPdf_Click(object sender, EventArgs e)
+        /*private void ButtonEclaterPdf_Click(object sender, EventArgs e)
         {
             int i = 0;
             PdfDocument split;
@@ -56,7 +52,7 @@ namespace SharpGED_client
         {
             int i = (int)ListBoxPages.SelectedItem;
             PdfViewer.Url = new Uri(pdf.FullPath.Substring(0, pdf.FullPath.Length - 4) + "[" + i.ToString("0000") + "].pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitW");
-        }
+        }*/
 
         private void ButtonDisconnect_Click(object sender, EventArgs e)
         {
@@ -75,12 +71,27 @@ namespace SharpGED_client
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Program.ServerReciveFile(ListBoxFiles.SelectedItem.ToString());
-            pdf = PdfReader.Open("C:\\TMP\\" + ListBoxFiles.SelectedItem.ToString() + ".pdf", PdfDocumentOpenMode.Import);
-            TextBoxPdfName.Text = pdf.Info.Title;
-            LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
+            GedFile file = Program.ServerReciveFile(ListBoxFiles.SelectedItem.ToString());
 
-            PdfViewer.Url = new Uri("C:\\TMP\\" + ListBoxFiles.SelectedItem.ToString() + ".pdf" + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+            // Ecris le fichier dans un fichier temporaire sur le disque
+            string localFilename = Path.GetTempFileName() + ".pdf";
+            FileStream outStream = File.OpenWrite(localFilename);
+            outStream.Write(file.bytes, 0, file.size);
+            outStream.Close();
+
+            // Affiche le PDF
+            TextBoxPdfName.Text = file.title;
+            LabelNbPages.Text = "(" + file.pages + " pages)";
+            PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+
+            // Mémorise le fichier temporaire
+            /*foreach (string tmpFile in Program.tempFiles)
+            {
+                File.Delete(tmpFile);
+            }
+            Program.tempFiles.Clear();*/
+            Program.tempFiles.Add(localFilename);
+
         }
 
         private void RefreshFilesList()

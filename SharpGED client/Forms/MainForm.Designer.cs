@@ -64,7 +64,6 @@
             this.ButtonEclaterPdf.TabIndex = 2;
             this.ButtonEclaterPdf.Text = "Eclater";
             this.ButtonEclaterPdf.UseVisualStyleBackColor = true;
-            this.ButtonEclaterPdf.Click += new System.EventHandler(this.ButtonEclaterPdf_Click);
             // 
             // LabelNbPages
             // 
@@ -93,7 +92,6 @@
             this.ListBoxPages.Name = "ListBoxPages";
             this.ListBoxPages.Size = new System.Drawing.Size(407, 121);
             this.ListBoxPages.TabIndex = 6;
-            this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
             // ButtonDisconnect
             // 

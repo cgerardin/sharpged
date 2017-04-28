@@ -14,10 +14,12 @@ namespace SharpGED_client
 
         public const int PACKET_SIZE = 1024;
 
+        public static List<string> tempFiles;
+
         private static Socket server = null;
         private static string serverHostname = "";
         private static int serverPort = 0;
-
+        
         public static void ServerConnect(string hostname, int port)
         {
             serverHostname = hostname;
@@ -93,7 +95,7 @@ namespace SharpGED_client
             server.Send(objectBytes);
         }
 
-        public static void ServerReciveFile(string filehash)
+        public static GedFile ServerReciveFile(string filehash)
         {
             // Demande le fichier passé en argument
             ServerSend("GET " + filehash);
@@ -122,10 +124,7 @@ namespace SharpGED_client
             }
             GedFile file = GedFile.Load(new MemoryStream(objectBytes));
 
-            // Ecris le fichier dans un fichier temporaire sur le disque
-            FileStream outStream = File.OpenWrite("C:\\TMP\\" + file.hash + ".pdf");
-            outStream.Write(file.bytes, 0, file.size);
-            outStream.Close();
+            return file;
         }
 
         /// <summary>
@@ -134,6 +133,8 @@ namespace SharpGED_client
         [STAThread]
         static void Main()
         {
+            tempFiles = new List<string>();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             new LoginForm().Show();
