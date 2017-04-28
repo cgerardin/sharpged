@@ -26,7 +26,7 @@ namespace SharpGED_server
                     SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
                 }
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
                 return false;
             }
@@ -45,7 +45,7 @@ namespace SharpGED_server
                 db.Open();
                 string sql = "CREATE TABLE files (" +
                     "idFile INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "filename TEXT NOT NULL, " +
+                    "hash TEXT NOT NULL, " +
                     "originalname TEXT NOT NULL, " +
                     "size INTEGER NOT NULL, " +
                     "title TEXT, pages INTEGER" +

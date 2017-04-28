@@ -101,7 +101,7 @@ namespace SharpGED_server
 
                             case "PUT": // Insère un fichier dans la base
                                 Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
-                                storage.Recive(argv[0], argv[1]);
+                                storage.Recive();
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 

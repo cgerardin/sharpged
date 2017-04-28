@@ -1,6 +1,8 @@
 ﻿using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
+using SharpGED_lib;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SharpGED_client
@@ -88,6 +90,26 @@ namespace SharpGED_client
             {
                 ListBoxFiles.Items.Add(filename);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GedFile test = new GedFile();
+
+            // Place son contenu dans un tableau et envoie sa taille exacte
+            FileStream inStream = File.OpenRead(pdf.FullPath);
+            int size = (int)inStream.Length;
+            byte[] fileBytes = new byte[inStream.Length];
+            inStream.Read(fileBytes, 0, size);
+            inStream.Close();
+
+            test.size = 3;
+            test.title = "bozo";
+            test.hash = "HFKHHFDJFBKDHKF";
+            test.bytes = fileBytes;
+
+            Program.ServerSendFile(test);
+
         }
 
     }

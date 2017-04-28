@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpGED_lib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -81,24 +82,15 @@ namespace SharpGED_client
             return filesList;
         }
 
-        public static void ServerSendFile(string filename, string title, string uri)
+        public static void ServerSendFile(GedFile file)
         {
-            // Annonce l'envoi d'un fichier avec son nom d'origine
-            ServerSend("PUT " + filename + ";" + title);
+            // Annonce l'envoi d'un fichier
+            ServerSend("PUT " + file.originalname);
 
-            byte[] buffer = new byte[1024];
-            server.Receive(buffer);
-
-            // Place son contenu dans un tableau et envoie sa taille exacte
-            FileStream inStream = File.OpenRead(uri);
-            int size = (int)inStream.Length;
-            ServerSend(size.ToString());
-
-            // Envoie le contenu du tableau
-            byte[] fileBytes = new byte[size];
-            inStream.Read(fileBytes, 0, size);
-            inStream.Close();
-            server.Send(fileBytes);
+            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
+            byte[] objectBytes = file.Save();
+            ServerSend(objectBytes.Length.ToString());
+            server.Send(objectBytes);
         }
 
         public static void ServerReciveFile(string filehash)
@@ -106,18 +98,33 @@ namespace SharpGED_client
             // Demande le fichier passé en argument
             ServerSend("GET " + filehash);
 
-            // Récupère sa taille exacte
+            // Récupère sa taille
             byte[] buffer = new byte[8];
             server.Receive(buffer);
-            int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
+            int objectSize = int.Parse(Encoding.Default.GetString(buffer).Trim());
 
-            // Récupère le fichier le place dans un tableau
-            byte[] fileBytes = new byte[size];
-            server.Receive(fileBytes);
+            // Récupère l'objet et le dé-sérialise
+            byte[] objectBytes = new byte[objectSize];
+            int bytesReceived;
+            int bytesTotal = 0;
+            int bytesLeft = objectSize;
 
-            // Ecris le tableau dans un fichier temporaire sur le disque
-            FileStream outStream = File.OpenWrite("C:\\TMP\\" + filehash + ".pdf");
-            outStream.Write(fileBytes, 0, size);
+            while (bytesTotal < objectSize)
+            {
+                bytesReceived = server.Receive(objectBytes, bytesTotal, bytesLeft, SocketFlags.None);
+                if (bytesReceived == 0)
+                {
+                    objectBytes = null;
+                    break;
+                }
+                bytesTotal += bytesReceived;
+                bytesLeft -= bytesReceived;
+            }
+            GedFile file = GedFile.Load(new MemoryStream(objectBytes));
+
+            // Ecris le fichier dans un fichier temporaire sur le disque
+            FileStream outStream = File.OpenWrite("C:\\TMP\\" + file.hash + ".pdf");
+            outStream.Write(file.bytes, 0, file.size);
             outStream.Close();
         }
 
