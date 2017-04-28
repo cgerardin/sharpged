@@ -54,7 +54,7 @@
             // TextBoxServer
             // 
             this.TextBoxServer.Location = new System.Drawing.Point(83, 99);
-            this.TextBoxServer.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TextBoxServer.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxServer.Name = "TextBoxServer";
             this.TextBoxServer.Size = new System.Drawing.Size(165, 20);
             this.TextBoxServer.TabIndex = 12;
@@ -63,7 +63,7 @@
             // TextBoxUser
             // 
             this.TextBoxUser.Location = new System.Drawing.Point(83, 139);
-            this.TextBoxUser.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TextBoxUser.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxUser.Name = "TextBoxUser";
             this.TextBoxUser.Size = new System.Drawing.Size(195, 20);
             this.TextBoxUser.TabIndex = 13;
@@ -72,7 +72,7 @@
             // TextBoxPassword
             // 
             this.TextBoxPassword.Location = new System.Drawing.Point(83, 163);
-            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.PasswordChar = '●';
             this.TextBoxPassword.Size = new System.Drawing.Size(195, 20);
@@ -111,7 +111,7 @@
             // TextBoxPort
             // 
             this.TextBoxPort.Location = new System.Drawing.Point(248, 99);
-            this.TextBoxPort.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TextBoxPort.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxPort.Name = "TextBoxPort";
             this.TextBoxPort.Size = new System.Drawing.Size(29, 20);
             this.TextBoxPort.TabIndex = 19;
@@ -121,7 +121,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(2, -1);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(281, 92);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -144,7 +144,8 @@
             this.Controls.Add(this.TextBoxServer);
             this.Controls.Add(this.ButtonConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";

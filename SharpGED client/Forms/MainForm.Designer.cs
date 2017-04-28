@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.ButtonEclaterPdf = new System.Windows.Forms.Button();
@@ -167,6 +168,7 @@
             this.Controls.Add(this.LabelNbPages);
             this.Controls.Add(this.ButtonEclaterPdf);
             this.Controls.Add(this.BrowseButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);

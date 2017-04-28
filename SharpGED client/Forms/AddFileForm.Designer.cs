@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddFileForm));
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.TextBoxPdfName = new System.Windows.Forms.TextBox();
             this.ButtonAddPdf = new System.Windows.Forms.Button();
@@ -85,11 +86,12 @@
             this.Controls.Add(this.ButtonAddPdf);
             this.Controls.Add(this.TextBoxPdfName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddFileForm";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insérer un fichier";
             this.Load += new System.EventHandler(this.AddFileForm_Load);
             this.ResumeLayout(false);
