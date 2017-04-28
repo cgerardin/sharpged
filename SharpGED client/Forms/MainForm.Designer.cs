@@ -36,8 +36,8 @@
             this.ButtonStopServer = new System.Windows.Forms.Button();
             this.ButtonInitServer = new System.Windows.Forms.Button();
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
-            this.TextBoxPdfName = new System.Windows.Forms.TextBox();
             this.LabelNbPages = new System.Windows.Forms.Label();
+            this.LabelPdfName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -67,7 +67,7 @@
             // 
             // ButtonDisconnect
             // 
-            this.ButtonDisconnect.Location = new System.Drawing.Point(12, 738);
+            this.ButtonDisconnect.Location = new System.Drawing.Point(72, 738);
             this.ButtonDisconnect.Name = "ButtonDisconnect";
             this.ButtonDisconnect.Size = new System.Drawing.Size(111, 23);
             this.ButtonDisconnect.TabIndex = 10;
@@ -104,30 +104,31 @@
             this.ListBoxFiles.TabIndex = 15;
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
             // 
-            // TextBoxPdfName
-            // 
-            this.TextBoxPdfName.Enabled = false;
-            this.TextBoxPdfName.Location = new System.Drawing.Point(483, 6);
-            this.TextBoxPdfName.Name = "TextBoxPdfName";
-            this.TextBoxPdfName.Size = new System.Drawing.Size(537, 20);
-            this.TextBoxPdfName.TabIndex = 16;
-            // 
             // LabelNbPages
             // 
-            this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(1088, 9);
+            this.LabelNbPages.Location = new System.Drawing.Point(1063, 9);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
+            this.LabelNbPages.Size = new System.Drawing.Size(76, 16);
             this.LabelNbPages.TabIndex = 17;
             this.LabelNbPages.Text = "(0 pages)";
+            this.LabelNbPages.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // LabelPdfName
+            // 
+            this.LabelPdfName.AutoSize = true;
+            this.LabelPdfName.Location = new System.Drawing.Point(483, 8);
+            this.LabelPdfName.Name = "LabelPdfName";
+            this.LabelPdfName.Size = new System.Drawing.Size(13, 13);
+            this.LabelPdfName.TabIndex = 18;
+            this.LabelPdfName.Text = "  ";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.LabelPdfName);
             this.Controls.Add(this.LabelNbPages);
-            this.Controls.Add(this.TextBoxPdfName);
             this.Controls.Add(this.ListBoxFiles);
             this.Controls.Add(this.ButtonInitServer);
             this.Controls.Add(this.ButtonStopServer);
@@ -153,8 +154,8 @@
         private System.Windows.Forms.Button ButtonStopServer;
         private System.Windows.Forms.Button ButtonInitServer;
         private System.Windows.Forms.ListBox ListBoxFiles;
-        private System.Windows.Forms.TextBox TextBoxPdfName;
         private System.Windows.Forms.Label LabelNbPages;
+        private System.Windows.Forms.Label LabelPdfName;
     }
 }
 

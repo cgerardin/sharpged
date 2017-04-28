@@ -56,12 +56,13 @@
             this.TextBoxServer.Location = new System.Drawing.Point(83, 99);
             this.TextBoxServer.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxServer.Name = "TextBoxServer";
-            this.TextBoxServer.Size = new System.Drawing.Size(165, 20);
+            this.TextBoxServer.Size = new System.Drawing.Size(157, 20);
             this.TextBoxServer.TabIndex = 12;
             this.TextBoxServer.Text = "localhost";
             // 
             // TextBoxUser
             // 
+            this.TextBoxUser.Enabled = false;
             this.TextBoxUser.Location = new System.Drawing.Point(83, 139);
             this.TextBoxUser.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxUser.Name = "TextBoxUser";
@@ -71,6 +72,7 @@
             // 
             // TextBoxPassword
             // 
+            this.TextBoxPassword.Enabled = false;
             this.TextBoxPassword.Location = new System.Drawing.Point(83, 163);
             this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxPassword.Name = "TextBoxPassword";
@@ -110,12 +112,13 @@
             // 
             // TextBoxPort
             // 
-            this.TextBoxPort.Location = new System.Drawing.Point(248, 99);
+            this.TextBoxPort.Location = new System.Drawing.Point(243, 99);
             this.TextBoxPort.Margin = new System.Windows.Forms.Padding(1);
             this.TextBoxPort.Name = "TextBoxPort";
-            this.TextBoxPort.Size = new System.Drawing.Size(29, 20);
+            this.TextBoxPort.Size = new System.Drawing.Size(34, 20);
             this.TextBoxPort.TabIndex = 19;
             this.TextBoxPort.Text = "9090";
+            this.TextBoxPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pictureBox1
             // 

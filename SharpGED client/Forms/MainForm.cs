@@ -60,7 +60,7 @@ namespace SharpGED_client
             outStream.Close();
 
             // Affiche le PDF
-            TextBoxPdfName.Text = file.title;
+            LabelPdfName.Text = file.title;
             LabelNbPages.Text = "(" + file.pages + " pages)";
             PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
 
