@@ -19,7 +19,7 @@ namespace SharpGED_client
         private static Socket server = null;
         private static string serverHostname = "";
         private static int serverPort = 0;
-        
+
         public static void ServerConnect(string hostname, int port)
         {
             serverHostname = hostname;
@@ -63,28 +63,38 @@ namespace SharpGED_client
             server.Close();
         }
 
-        public static List<string> ServerListFiles()
+        public static GedList<GedFile> ServerListFiles()
         {
             ServerSend("LIST");
 
-            // Récupère le nombre d'éléments
+            // Récupère la taille de l'objet liste
             byte[] buffer = new byte[8];
             server.Receive(buffer);
-            int size = int.Parse(Encoding.Default.GetString(buffer).Trim());
+            int objectSize = int.Parse(Encoding.Default.GetString(buffer).Trim());
 
-            List<string> filesList = new List<string>();
-            for (int i = 0; i < size; i++)
+            // Récupère l'objet et le dé-sérialise
+            byte[] objectBytes = new byte[objectSize];
+            int bytesReceived;
+            int bytesTotal = 0;
+            int bytesLeft = objectSize;
+
+            while (bytesTotal < objectSize)
             {
-                buffer = new byte[64];
-                server.Receive(buffer);
-
-                filesList.Add(Encoding.Default.GetString(buffer));
+                bytesReceived = server.Receive(objectBytes, bytesTotal, bytesLeft, SocketFlags.None);
+                if (bytesReceived == 0)
+                {
+                    objectBytes = null;
+                    break;
+                }
+                bytesTotal += bytesReceived;
+                bytesLeft -= bytesReceived;
             }
+            GedList<GedFile> filesList = GedList<GedFile>.Load(new MemoryStream(objectBytes));
 
             return filesList;
         }
 
-        public static void ServerSendFile(GedFile file)
+        public static void ServerSendFile(RemoteGedFile file)
         {
             // Annonce l'envoi d'un fichier
             ServerSend("PUT " + file.originalname);
@@ -95,10 +105,10 @@ namespace SharpGED_client
             server.Send(objectBytes);
         }
 
-        public static GedFile ServerReciveFile(string filehash)
+        public static RemoteGedFile ServerReciveFile(GedFile gedFile)
         {
             // Demande le fichier passé en argument
-            ServerSend("GET " + filehash);
+            ServerSend("GET " + gedFile.hash);
 
             // Récupère sa taille
             byte[] buffer = new byte[8];
@@ -122,7 +132,7 @@ namespace SharpGED_client
                 bytesTotal += bytesReceived;
                 bytesLeft -= bytesReceived;
             }
-            GedFile file = GedFile.Load(new MemoryStream(objectBytes));
+            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(objectBytes));
 
             return file;
         }

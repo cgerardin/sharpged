@@ -44,7 +44,7 @@ namespace SharpGED_client
             }
 
             // Crée un GedFile et l'envoie au serveur
-            GedFile file = new GedFile();
+            RemoteGedFile file = new RemoteGedFile();
             file.size = size;
             file.title = TextBoxPdfName.Text;
             file.originalname = pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1);

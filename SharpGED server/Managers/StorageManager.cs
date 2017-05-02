@@ -30,9 +30,13 @@ namespace SharpGED_server
 
         public void List()
         {
+            // Crée une GedList
+            GedList<GedFile> filesList = new GedList<GedFile>();
+
             using (SQLiteConnection db = database.Connect())
             {
-                List<string> filesList = new List<string>();
+                // Remplis la liste avec des GedFile
+                GedFile currentGedFile;
 
                 db.Open();
                 string sql = "SELECT * FROM files;";
@@ -40,16 +44,18 @@ namespace SharpGED_server
                 SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
                 while (rs.Read())
                 {
-                    filesList.Add(rs["hash"].ToString());
+                    currentGedFile = new GedFile();
+                    currentGedFile.hash = rs["hash"].ToString();
+                    currentGedFile.title = rs["title"].ToString();
+                    filesList.Add(currentGedFile);
                 }
 
-                client.Send(Encoding.ASCII.GetBytes(filesList.Count.ToString()));
-
-                foreach (string filename in filesList)
-                {
-                    client.Send(Encoding.ASCII.GetBytes(filename));
-                }
             }
+
+            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
+            byte[] objectBytes = filesList.Save();
+            client.Send(Encoding.ASCII.GetBytes(objectBytes.Length.ToString()));
+            client.Send(objectBytes);
         }
 
         public void Send(string hash)
@@ -65,7 +71,7 @@ namespace SharpGED_server
             }
 
             // Crée un GedFile
-            GedFile file = new GedFile();
+            RemoteGedFile file = new RemoteGedFile();
 
             using (SQLiteConnection db = database.Connect())
             {
@@ -79,7 +85,7 @@ namespace SharpGED_server
                     file.originalname = rs["originalname"].ToString();
                     file.size = size;
                     file.title = rs["title"].ToString();
-                    file.pages =(int) (long)rs["pages"];
+                    file.pages = (int)(long)rs["pages"];
                     file.bytes = fileBytes;
                 }
             }
@@ -115,7 +121,7 @@ namespace SharpGED_server
                 bytesLeft -= bytesReceived;
             }
 
-            GedFile file = GedFile.Load(new MemoryStream(objectBytes));
+            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(objectBytes));
 
             // Génère un nom de fichier unique avec le SHA-256 du nom de fichier original en hexadécimal
             string hash;

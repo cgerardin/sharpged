@@ -97,11 +97,13 @@
             // 
             // ListBoxFiles
             // 
+            this.ListBoxFiles.DisplayMember = "title";
             this.ListBoxFiles.FormattingEnabled = true;
             this.ListBoxFiles.Location = new System.Drawing.Point(72, 12);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.Size = new System.Drawing.Size(405, 719);
             this.ListBoxFiles.TabIndex = 15;
+            this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
             // 
             // LabelNbPages

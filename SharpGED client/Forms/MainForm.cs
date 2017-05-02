@@ -51,7 +51,7 @@ namespace SharpGED_client
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GedFile file = Program.ServerReciveFile(ListBoxFiles.SelectedItem.ToString());
+            RemoteGedFile file = Program.ServerReciveFile((GedFile)ListBoxFiles.SelectedItem);
 
             // Ecris le fichier dans un fichier temporaire sur le disque
             string localFilename = Path.GetTempFileName() + ".pdf";
@@ -77,9 +77,9 @@ namespace SharpGED_client
         private void RefreshFilesList()
         {
             ListBoxFiles.Items.Clear();
-            foreach (string filename in Program.ServerListFiles())
+            foreach (GedFile currentGedFile in Program.ServerListFiles())
             {
-                ListBoxFiles.Items.Add(filename);
+                ListBoxFiles.Items.Add(currentGedFile);
             }
         }
 
