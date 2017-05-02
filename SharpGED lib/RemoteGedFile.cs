@@ -19,6 +19,10 @@ namespace SharpGED_lib
                 formatter.Serialize(stream, this);
                 stream.Flush();
             }
+            catch (SerializationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
             finally
             {
                 if (stream != null) stream.Close();

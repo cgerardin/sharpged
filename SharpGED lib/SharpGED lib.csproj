@@ -69,6 +69,7 @@
     <Compile Include="GedList.cs" />
     <Compile Include="RemoteGedFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransfertManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\packages.config" />

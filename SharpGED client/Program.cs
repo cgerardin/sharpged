@@ -65,33 +65,11 @@ namespace SharpGED_client
 
         public static GedList<GedFile> ServerListFiles()
         {
+            // Demande la liste des fichiers
             ServerSend("LIST");
 
-            // Récupère la taille de l'objet liste
-            byte[] buffer = new byte[8];
-            server.Receive(buffer);
-            int objectSize = int.Parse(Encoding.Default.GetString(buffer).Trim());
-
             // Récupère l'objet et le dé-sérialise
-            byte[] objectBytes = new byte[objectSize];
-            int bytesReceived;
-            int bytesTotal = 0;
-            int bytesLeft = objectSize;
-
-            while (bytesTotal < objectSize)
-            {
-                bytesReceived = server.Receive(objectBytes, bytesTotal, bytesLeft, SocketFlags.None);
-                if (bytesReceived == 0)
-                {
-                    objectBytes = null;
-                    break;
-                }
-                bytesTotal += bytesReceived;
-                bytesLeft -= bytesReceived;
-            }
-            GedList<GedFile> filesList = GedList<GedFile>.Load(new MemoryStream(objectBytes));
-
-            return filesList;
+            return GedList<GedFile>.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
         public static void ServerSendFile(RemoteGedFile file)
@@ -99,10 +77,8 @@ namespace SharpGED_client
             // Annonce l'envoi d'un fichier
             ServerSend("PUT " + file.originalname);
 
-            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
-            byte[] objectBytes = file.Save();
-            ServerSend(objectBytes.Length.ToString());
-            server.Send(objectBytes);
+            // Sérialise et envoie l'objet
+            TransfertManager.Send(file.Save(), server);
         }
 
         public static RemoteGedFile ServerReciveFile(GedFile gedFile)
@@ -110,31 +86,8 @@ namespace SharpGED_client
             // Demande le fichier passé en argument
             ServerSend("GET " + gedFile.hash);
 
-            // Récupère sa taille
-            byte[] buffer = new byte[8];
-            server.Receive(buffer);
-            int objectSize = int.Parse(Encoding.Default.GetString(buffer).Trim());
-
             // Récupère l'objet et le dé-sérialise
-            byte[] objectBytes = new byte[objectSize];
-            int bytesReceived;
-            int bytesTotal = 0;
-            int bytesLeft = objectSize;
-
-            while (bytesTotal < objectSize)
-            {
-                bytesReceived = server.Receive(objectBytes, bytesTotal, bytesLeft, SocketFlags.None);
-                if (bytesReceived == 0)
-                {
-                    objectBytes = null;
-                    break;
-                }
-                bytesTotal += bytesReceived;
-                bytesLeft -= bytesReceived;
-            }
-            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(objectBytes));
-
-            return file;
+            return RemoteGedFile.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
         /// <summary>

@@ -49,13 +49,11 @@ namespace SharpGED_server
                     currentGedFile.title = rs["title"].ToString();
                     filesList.Add(currentGedFile);
                 }
-
             }
 
             // Sérialise l'objet et envoie sa taille puis l'objet lui-même
-            byte[] objectBytes = filesList.Save();
-            client.Send(Encoding.ASCII.GetBytes(objectBytes.Length.ToString()));
-            client.Send(objectBytes);
+            TransfertManager.Send(filesList.Save(), client);
+
         }
 
         public void Send(string hash)
@@ -90,44 +88,22 @@ namespace SharpGED_server
                 }
             }
 
-            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
-            byte[] objectBytes = file.Save();
-            client.Send(Encoding.ASCII.GetBytes(objectBytes.Length.ToString()));
-            client.Send(objectBytes);
+            // Sérialise et envoie l'objet
+            byte[] data = file.Save();
+            TransfertManager.Send(data, client);
         }
 
         public void Recive()
         {
-            // Récupère la taille de l'objet
-            byte[] buffer = new byte[8];
-            client.Receive(buffer);
-            int objectSize = int.Parse(Encoding.Default.GetString(buffer).Trim());
-
             // Récupère l'objet et le dé-sérialise
-            byte[] objectBytes = new byte[objectSize];
-            int bytesReceived;
-            int bytesTotal = 0;
-            int bytesLeft = objectSize;
+            byte[] data = TransfertManager.Recive(client);
+            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(data));
 
-            while (bytesTotal < objectSize)
-            {
-                bytesReceived = client.Receive(objectBytes, bytesTotal, bytesLeft, SocketFlags.None);
-                if (bytesReceived == 0)
-                {
-                    objectBytes = null;
-                    break;
-                }
-                bytesTotal += bytesReceived;
-                bytesLeft -= bytesReceived;
-            }
-
-            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(objectBytes));
-
-            // Génère un nom de fichier unique avec le SHA-256 du nom de fichier original en hexadécimal
+            // Génère un nom de fichier unique comprenant du nom de fichier original, avec son SHA-256 en hexadécimal
             string hash;
             using (SHA256 sha256 = SHA256.Create())
             {
-                hash = BitConverter.ToString(sha256.ComputeHash(Encoding.ASCII.GetBytes(file.originalname))).Replace("-", "");
+                hash = BitConverter.ToString(sha256.ComputeHash(Encoding.ASCII.GetBytes(file.originalname + DateTime.Now))).Replace("-", "");
             }
 
             // Ecris le fichier PDF sur le disque
@@ -144,8 +120,8 @@ namespace SharpGED_server
             using (SQLiteConnection db = new DatabaseManager().Connect())
             {
                 db.Open();
-                string sql = "INSERT INTO files (hash, originalname, size, title, pages) " +
-                "VALUES ('" + hash + "', '" + file.originalname + "', " + file.size + ", '" + file.title + "', " + pdf.PageCount + ");";
+                string sql = "begin transaction; INSERT INTO files (hash, originalname, size, title, pages) " +
+                "VALUES ('" + hash + "', '" + file.originalname + "', " + file.size + ", '" + file.title + "', " + pdf.PageCount + "); commit transaction;";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }

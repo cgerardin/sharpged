@@ -31,6 +31,7 @@ namespace SharpGED_client
             {
                 Application.DoEvents();
             }
+
             RefreshFilesList();
         }
 
