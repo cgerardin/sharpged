@@ -22,8 +22,7 @@ namespace SharpGED_server
                 using (SQLiteConnection db = Connect())
                 {
                     db.Open();
-                    string sql = "SELECT * FROM sqlite_master;";
-                    SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
+                    using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM sqlite_master;", db).ExecuteReader()) { }
                 }
             }
             catch (SQLiteException)
@@ -43,12 +42,13 @@ namespace SharpGED_server
             using (SQLiteConnection db = Connect())
             {
                 db.Open();
-                string sql = "CREATE TABLE files (" +
+                string sql = "CREATE TABLE files ( " +
                     "idFile INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "hash TEXT NOT NULL, " +
                     "originalname TEXT NOT NULL, " +
                     "size INTEGER NOT NULL, " +
-                    "title TEXT, pages INTEGER" +
+                    "title TEXT, " +
+                    "pages INTEGER " +
                     ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();

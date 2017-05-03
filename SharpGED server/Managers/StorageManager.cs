@@ -35,19 +35,19 @@ namespace SharpGED_server
 
             using (SQLiteConnection db = database.Connect())
             {
-                // Remplis la liste avec des GedFile
-                GedFile currentGedFile;
-
                 db.Open();
-                string sql = "SELECT * FROM files;";
 
-                SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
-                while (rs.Read())
+                // Remplis la liste avec des GedFile
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files;", db).ExecuteReader())
                 {
-                    currentGedFile = new GedFile();
-                    currentGedFile.hash = rs["hash"].ToString();
-                    currentGedFile.title = rs["title"].ToString();
-                    filesList.Add(currentGedFile);
+                    GedFile currentGedFile;
+                    while (rs.Read())
+                    {
+                        currentGedFile = new GedFile();
+                        currentGedFile.hash = rs["hash"].ToString();
+                        currentGedFile.title = rs["title"].ToString();
+                        filesList.Add(currentGedFile);
+                    }
                 }
             }
 
@@ -74,17 +74,19 @@ namespace SharpGED_server
             using (SQLiteConnection db = database.Connect())
             {
                 db.Open();
-                string sql = "SELECT * FROM files WHERE hash='" + hash + "';";
 
-                SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader();
-                if (rs.Read())
+                string sql = "SELECT * FROM files WHERE hash='" + hash + "';";
+                using (SQLiteDataReader rs = new SQLiteCommand(sql, db).ExecuteReader())
                 {
-                    file.hash = hash;
-                    file.originalname = rs["originalname"].ToString();
-                    file.size = size;
-                    file.title = rs["title"].ToString();
-                    file.pages = (int)(long)rs["pages"];
-                    file.bytes = fileBytes;
+                    if (rs.Read())
+                    {
+                        file.hash = hash;
+                        file.originalname = rs["originalname"].ToString();
+                        file.size = size;
+                        file.title = rs["title"].ToString();
+                        file.pages = (int)(long)rs["pages"];
+                        file.bytes = fileBytes;
+                    }
                 }
             }
 
@@ -96,8 +98,7 @@ namespace SharpGED_server
         public void Recive()
         {
             // Récupère l'objet et le dé-sérialise
-            byte[] data = TransfertManager.Recive(client);
-            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(data));
+            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(TransfertManager.Recive(client)));
 
             // Génère un nom de fichier unique comprenant du nom de fichier original, avec son SHA-256 en hexadécimal
             string hash;
@@ -120,14 +121,14 @@ namespace SharpGED_server
             using (SQLiteConnection db = new DatabaseManager().Connect())
             {
                 db.Open();
-                string sql = "begin transaction; INSERT INTO files (hash, originalname, size, title, pages) " +
-                "VALUES ('" + hash + "', '" + file.originalname + "', " + file.size + ", '" + file.title + "', " + pdf.PageCount + "); commit transaction;";
+
+                string sql = "INSERT INTO files (hash, originalname, size, title, pages) " +
+                "VALUES ('" + hash + "', '" + file.originalname + "', " + file.size + ", '" + file.title + "', " + pdf.PageCount + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
 
             pdf.Close();
-
         }
 
     }
