@@ -82,10 +82,10 @@
             this.ToolButtonDeleteFile,
             this.ToolButtonEditFile,
             this.toolStripSeparator1,
-            this.ToolButtonDisconnect,
-            this.toolStripSeparator2,
             this.ToolButtonStopServer,
-            this.ToolButtonInitDatabase});
+            this.ToolButtonInitDatabase,
+            this.toolStripSeparator2,
+            this.ToolButtonDisconnect});
             this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
