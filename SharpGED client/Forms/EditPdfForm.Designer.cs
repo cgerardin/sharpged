@@ -36,26 +36,30 @@
             // ListBoxPages
             // 
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(12, 12);
+            this.ListBoxPages.ItemHeight = 37;
+            this.ListBoxPages.Location = new System.Drawing.Point(30, 34);
+            this.ListBoxPages.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(407, 277);
+            this.ListBoxPages.Size = new System.Drawing.Size(1011, 781);
             this.ListBoxPages.TabIndex = 9;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(9, 300);
+            this.LabelNbPages.Location = new System.Drawing.Point(22, 854);
+            this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
+            this.LabelNbPages.Size = new System.Drawing.Size(128, 37);
             this.LabelNbPages.TabIndex = 8;
             this.LabelNbPages.Text = "(0 pages)";
             // 
             // ButtonEclaterPdf
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(342, 295);
+            this.ButtonEclaterPdf.Location = new System.Drawing.Point(855, 840);
+            this.ButtonEclaterPdf.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
-            this.ButtonEclaterPdf.Size = new System.Drawing.Size(75, 23);
+            this.ButtonEclaterPdf.Size = new System.Drawing.Size(187, 65);
             this.ButtonEclaterPdf.TabIndex = 7;
             this.ButtonEclaterPdf.Text = "Eclater";
             this.ButtonEclaterPdf.UseVisualStyleBackColor = true;
@@ -63,12 +67,14 @@
             // 
             // EditPdfForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 341);
+            this.ClientSize = new System.Drawing.Size(2047, 971);
             this.Controls.Add(this.ListBoxPages);
             this.Controls.Add(this.LabelNbPages);
             this.Controls.Add(this.ButtonEclaterPdf);
+            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.Name = "EditPdfForm";
             this.Text = "Editeur de PDF";
             this.ResumeLayout(false);

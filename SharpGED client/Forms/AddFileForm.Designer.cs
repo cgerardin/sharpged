@@ -42,18 +42,18 @@
             // 
             // TextBoxPdfName
             // 
-            this.TextBoxPdfName.Location = new System.Drawing.Point(110, 20);
-            this.TextBoxPdfName.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.TextBoxPdfName.Location = new System.Drawing.Point(118, 26);
+            this.TextBoxPdfName.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.TextBoxPdfName.Name = "TextBoxPdfName";
-            this.TextBoxPdfName.Size = new System.Drawing.Size(685, 35);
+            this.TextBoxPdfName.Size = new System.Drawing.Size(734, 44);
             this.TextBoxPdfName.TabIndex = 3;
             // 
             // ButtonAddPdf
             // 
-            this.ButtonAddPdf.Location = new System.Drawing.Point(623, 201);
-            this.ButtonAddPdf.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.ButtonAddPdf.Location = new System.Drawing.Point(667, 256);
+            this.ButtonAddPdf.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.ButtonAddPdf.Name = "ButtonAddPdf";
-            this.ButtonAddPdf.Size = new System.Drawing.Size(175, 51);
+            this.ButtonAddPdf.Size = new System.Drawing.Size(187, 65);
             this.ButtonAddPdf.TabIndex = 4;
             this.ButtonAddPdf.Text = "Insérer";
             this.ButtonAddPdf.UseVisualStyleBackColor = true;
@@ -62,36 +62,37 @@
             // LabelNbPages
             // 
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(28, 212);
+            this.LabelNbPages.Location = new System.Drawing.Point(30, 270);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(115, 29);
+            this.LabelNbPages.Size = new System.Drawing.Size(128, 37);
             this.LabelNbPages.TabIndex = 5;
             this.LabelNbPages.Text = "(0 pages)";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 27);
+            this.label1.Location = new System.Drawing.Point(32, 34);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 29);
+            this.label1.Size = new System.Drawing.Size(74, 37);
             this.label1.TabIndex = 6;
             this.label1.Text = "Titre";
             // 
             // AddFileForm
             // 
             this.AcceptButton = this.ButtonAddPdf;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 268);
+            this.ClientSize = new System.Drawing.Size(877, 342);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LabelNbPages);
             this.Controls.Add(this.ButtonAddPdf);
             this.Controls.Add(this.TextBoxPdfName);
+            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddFileForm";

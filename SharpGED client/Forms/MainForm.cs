@@ -89,11 +89,7 @@ namespace SharpGED_client
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
             Form addFile = new AddFileForm();
-            addFile.Show();
-            while (addFile.Visible)
-            {
-                Application.DoEvents();
-            }
+            addFile.ShowDialog();
 
             RefreshFilesList();
         }

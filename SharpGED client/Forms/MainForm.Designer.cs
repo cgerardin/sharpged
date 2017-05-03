@@ -29,6 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nœud3");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nœud5");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nœud6");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
@@ -45,11 +57,18 @@
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.PdfViewer = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
+            this.ChildSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TreeViewCategories = new System.Windows.Forms.TreeView();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
             this.MainSplitContainer.Panel2.SuspendLayout();
             this.MainSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChildSplitContainer)).BeginInit();
+            this.ChildSplitContainer.Panel1.SuspendLayout();
+            this.ChildSplitContainer.Panel2.SuspendLayout();
+            this.ChildSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -59,21 +78,22 @@
             // LabelPdfName
             // 
             this.LabelPdfName.AutoSize = true;
-            this.LabelPdfName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPdfName.Location = new System.Drawing.Point(7, 5);
+            this.LabelPdfName.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelPdfName.Location = new System.Drawing.Point(7, 15);
             this.LabelPdfName.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelPdfName.Name = "LabelPdfName";
-            this.LabelPdfName.Size = new System.Drawing.Size(22, 29);
+            this.LabelPdfName.Size = new System.Drawing.Size(26, 37);
             this.LabelPdfName.TabIndex = 18;
             this.LabelPdfName.Text = "-";
             // 
             // LabelNbPages
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelNbPages.Location = new System.Drawing.Point(1549, 5);
+            this.LabelNbPages.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelNbPages.Location = new System.Drawing.Point(1659, 15);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(177, 36);
+            this.LabelNbPages.Size = new System.Drawing.Size(190, 46);
             this.LabelNbPages.TabIndex = 17;
             this.LabelNbPages.Text = "(0 pages)";
             this.LabelNbPages.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -81,6 +101,7 @@
             // MainToolbar
             // 
             this.MainToolbar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MainToolbar.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -96,7 +117,7 @@
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
             this.MainToolbar.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.MainToolbar.Size = new System.Drawing.Size(38, 1724);
+            this.MainToolbar.Size = new System.Drawing.Size(38, 2095);
             this.MainToolbar.TabIndex = 20;
             this.MainToolbar.Text = "toolStrip1";
             // 
@@ -176,23 +197,22 @@
             this.MainSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainSplitContainer.Location = new System.Drawing.Point(76, 4);
-            this.MainSplitContainer.Margin = new System.Windows.Forms.Padding(7);
+            this.MainSplitContainer.Location = new System.Drawing.Point(81, 5);
+            this.MainSplitContainer.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.MainSplitContainer.Name = "MainSplitContainer";
             // 
             // MainSplitContainer.Panel1
             // 
-            this.MainSplitContainer.Panel1.Controls.Add(this.label1);
-            this.MainSplitContainer.Panel1.Controls.Add(this.ListBoxFiles);
+            this.MainSplitContainer.Panel1.Controls.Add(this.ChildSplitContainer);
             // 
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.PdfViewer);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelNbPages);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelPdfName);
-            this.MainSplitContainer.Size = new System.Drawing.Size(2612, 1720);
-            this.MainSplitContainer.SplitterDistance = 870;
-            this.MainSplitContainer.SplitterWidth = 9;
+            this.MainSplitContainer.Size = new System.Drawing.Size(2799, 2194);
+            this.MainSplitContainer.SplitterDistance = 933;
+            this.MainSplitContainer.SplitterWidth = 10;
             this.MainSplitContainer.TabIndex = 21;
             // 
             // ListBoxFiles
@@ -202,12 +222,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListBoxFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBoxFiles.DisplayMember = "title";
+            this.ListBoxFiles.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ListBoxFiles.FormattingEnabled = true;
-            this.ListBoxFiles.ItemHeight = 29;
-            this.ListBoxFiles.Location = new System.Drawing.Point(0, 41);
+            this.ListBoxFiles.ItemHeight = 37;
+            this.ListBoxFiles.Location = new System.Drawing.Point(0, 74);
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
-            this.ListBoxFiles.Size = new System.Drawing.Size(870, 1682);
+            this.ListBoxFiles.Size = new System.Drawing.Size(623, 2035);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -219,34 +240,98 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PdfViewer.IsWebBrowserContextMenuEnabled = false;
-            this.PdfViewer.Location = new System.Drawing.Point(0, 41);
+            this.PdfViewer.Location = new System.Drawing.Point(0, 69);
             this.PdfViewer.Margin = new System.Windows.Forms.Padding(0);
-            this.PdfViewer.MinimumSize = new System.Drawing.Size(47, 45);
+            this.PdfViewer.MinimumSize = new System.Drawing.Size(50, 57);
             this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(1733, 1679);
+            this.PdfViewer.Size = new System.Drawing.Size(1856, 2020);
             this.PdfViewer.TabIndex = 6;
             this.PdfViewer.WebBrowserShortcutsEnabled = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 5);
+            this.label1.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(-5, 20);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 29);
+            this.label1.Size = new System.Drawing.Size(158, 37);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Liste des fichiers";
+            this.label1.Text = "Documents";
+            // 
+            // ChildSplitContainer
+            // 
+            this.ChildSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChildSplitContainer.Location = new System.Drawing.Point(0, -5);
+            this.ChildSplitContainer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ChildSplitContainer.Name = "ChildSplitContainer";
+            // 
+            // ChildSplitContainer.Panel1
+            // 
+            this.ChildSplitContainer.Panel1.Controls.Add(this.TreeViewCategories);
+            this.ChildSplitContainer.Panel1.Controls.Add(this.label2);
+            // 
+            // ChildSplitContainer.Panel2
+            // 
+            this.ChildSplitContainer.Panel2.Controls.Add(this.ListBoxFiles);
+            this.ChildSplitContainer.Panel2.Controls.Add(this.label1);
+            this.ChildSplitContainer.Size = new System.Drawing.Size(940, 2200);
+            this.ChildSplitContainer.SplitterDistance = 313;
+            this.ChildSplitContainer.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(-5, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 37);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Catégories";
+            // 
+            // TreeViewCategories
+            // 
+            this.TreeViewCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TreeViewCategories.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TreeViewCategories.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TreeViewCategories.Location = new System.Drawing.Point(0, 74);
+            this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
+            this.TreeViewCategories.Name = "TreeViewCategories";
+            treeNode1.Name = "Nœud1";
+            treeNode1.Text = "Nœud1";
+            treeNode2.Name = "Nœud2";
+            treeNode2.Text = "Nœud2";
+            treeNode3.Name = "Nœud3";
+            treeNode3.Text = "Nœud3";
+            treeNode4.Name = "Nœud0";
+            treeNode4.Text = "Nœud0";
+            treeNode5.Name = "Nœud5";
+            treeNode5.Text = "Nœud5";
+            treeNode6.Name = "Nœud6";
+            treeNode6.Text = "Nœud6";
+            treeNode7.Name = "Nœud4";
+            treeNode7.Text = "Nœud4";
+            this.TreeViewCategories.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4,
+            treeNode7});
+            this.TreeViewCategories.Size = new System.Drawing.Size(317, 2020);
+            this.TreeViewCategories.TabIndex = 21;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2686, 1724);
+            this.ClientSize = new System.Drawing.Size(2878, 2095);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.MainToolbar);
+            this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(7);
+            this.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.Name = "MainForm";
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
@@ -254,11 +339,16 @@
             this.MainToolbar.ResumeLayout(false);
             this.MainToolbar.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
-            this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);
             this.MainSplitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
             this.MainSplitContainer.ResumeLayout(false);
+            this.ChildSplitContainer.Panel1.ResumeLayout(false);
+            this.ChildSplitContainer.Panel1.PerformLayout();
+            this.ChildSplitContainer.Panel2.ResumeLayout(false);
+            this.ChildSplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChildSplitContainer)).EndInit();
+            this.ChildSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,6 +372,9 @@
         private System.Windows.Forms.ListBox ListBoxFiles;
         private System.Windows.Forms.WebBrowser PdfViewer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.SplitContainer ChildSplitContainer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TreeView TreeViewCategories;
     }
 }
 
