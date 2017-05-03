@@ -1,4 +1,5 @@
-﻿using SharpGED_lib;
+﻿using Microsoft.Win32;
+using SharpGED_lib;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -22,6 +23,10 @@ namespace SharpGED_client
         {
             RefreshFilesList();
             MainSplitContainer_SplitterMoved(null, null);
+
+            MainToolbar.AutoSize = false;
+            MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
+            MainToolbar.AutoSize = true;
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)

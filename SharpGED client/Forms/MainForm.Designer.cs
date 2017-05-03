@@ -37,10 +37,10 @@
             this.ToolButtonDeleteFile = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonEditFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolButtonDisconnect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolButtonStopServer = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonInitDatabase = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolButtonDisconnect = new System.Windows.Forms.ToolStripButton();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.PdfViewer = new System.Windows.Forms.WebBrowser();
@@ -58,17 +58,19 @@
             // LabelPdfName
             // 
             this.LabelPdfName.AutoSize = true;
-            this.LabelPdfName.Location = new System.Drawing.Point(451, 746);
+            this.LabelPdfName.Location = new System.Drawing.Point(1052, 1664);
+            this.LabelPdfName.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelPdfName.Name = "LabelPdfName";
-            this.LabelPdfName.Size = new System.Drawing.Size(13, 13);
+            this.LabelPdfName.Size = new System.Drawing.Size(25, 29);
             this.LabelPdfName.TabIndex = 18;
             this.LabelPdfName.Text = "  ";
             // 
             // LabelNbPages
             // 
-            this.LabelNbPages.Location = new System.Drawing.Point(1074, 746);
+            this.LabelNbPages.Location = new System.Drawing.Point(2506, 1664);
+            this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(76, 16);
+            this.LabelNbPages.Size = new System.Drawing.Size(177, 36);
             this.LabelNbPages.TabIndex = 17;
             this.LabelNbPages.Text = "(0 pages)";
             this.LabelNbPages.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -76,6 +78,7 @@
             // MainToolbar
             // 
             this.MainToolbar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolButtonNewFile,
@@ -89,7 +92,8 @@
             this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
-            this.MainToolbar.Size = new System.Drawing.Size(37, 773);
+            this.MainToolbar.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.MainToolbar.Size = new System.Drawing.Size(38, 1724);
             this.MainToolbar.TabIndex = 20;
             this.MainToolbar.Text = "toolStrip1";
             // 
@@ -99,7 +103,7 @@
             this.ToolButtonNewFile.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonNewFile.Image")));
             this.ToolButtonNewFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonNewFile.Name = "ToolButtonNewFile";
-            this.ToolButtonNewFile.Size = new System.Drawing.Size(34, 36);
+            this.ToolButtonNewFile.Size = new System.Drawing.Size(33, 36);
             this.ToolButtonNewFile.Text = "Ajouter un fichier";
             this.ToolButtonNewFile.Click += new System.EventHandler(this.ToolButtonNewFile_Click);
             // 
@@ -109,7 +113,7 @@
             this.ToolButtonDeleteFile.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonDeleteFile.Image")));
             this.ToolButtonDeleteFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonDeleteFile.Name = "ToolButtonDeleteFile";
-            this.ToolButtonDeleteFile.Size = new System.Drawing.Size(34, 36);
+            this.ToolButtonDeleteFile.Size = new System.Drawing.Size(67, 36);
             this.ToolButtonDeleteFile.Text = "Supprimer le fichier sélectionné";
             this.ToolButtonDeleteFile.ToolTipText = "Supprimer le fichier sélectionné";
             this.ToolButtonDeleteFile.Click += new System.EventHandler(this.ToolButtonDeleteFile_Click);
@@ -120,28 +124,13 @@
             this.ToolButtonEditFile.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonEditFile.Image")));
             this.ToolButtonEditFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonEditFile.Name = "ToolButtonEditFile";
-            this.ToolButtonEditFile.Size = new System.Drawing.Size(34, 36);
+            this.ToolButtonEditFile.Size = new System.Drawing.Size(67, 36);
             this.ToolButtonEditFile.Text = "Editer le fichier sélectionné";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(34, 6);
-            // 
-            // ToolButtonDisconnect
-            // 
-            this.ToolButtonDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonDisconnect.Image")));
-            this.ToolButtonDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonDisconnect.Name = "ToolButtonDisconnect";
-            this.ToolButtonDisconnect.Size = new System.Drawing.Size(34, 36);
-            this.ToolButtonDisconnect.Text = "Se déconnecter du serveur";
-            this.ToolButtonDisconnect.Click += new System.EventHandler(this.ToolButtonDisconnect_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(34, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(67, 6);
             // 
             // ToolButtonStopServer
             // 
@@ -149,7 +138,7 @@
             this.ToolButtonStopServer.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonStopServer.Image")));
             this.ToolButtonStopServer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonStopServer.Name = "ToolButtonStopServer";
-            this.ToolButtonStopServer.Size = new System.Drawing.Size(34, 36);
+            this.ToolButtonStopServer.Size = new System.Drawing.Size(67, 36);
             this.ToolButtonStopServer.Text = "Arrêter le serveur";
             this.ToolButtonStopServer.Click += new System.EventHandler(this.ToolButtonStopServer_Click);
             // 
@@ -159,14 +148,30 @@
             this.ToolButtonInitDatabase.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonInitDatabase.Image")));
             this.ToolButtonInitDatabase.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonInitDatabase.Name = "ToolButtonInitDatabase";
-            this.ToolButtonInitDatabase.Size = new System.Drawing.Size(34, 36);
+            this.ToolButtonInitDatabase.Size = new System.Drawing.Size(67, 36);
             this.ToolButtonInitDatabase.Text = "Initialiser la base de données";
             this.ToolButtonInitDatabase.ToolTipText = "Initialiser la base de données";
             this.ToolButtonInitDatabase.Click += new System.EventHandler(this.ToolButtonInitDatabase_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(67, 6);
+            // 
+            // ToolButtonDisconnect
+            // 
+            this.ToolButtonDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonDisconnect.Image")));
+            this.ToolButtonDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonDisconnect.Name = "ToolButtonDisconnect";
+            this.ToolButtonDisconnect.Size = new System.Drawing.Size(67, 36);
+            this.ToolButtonDisconnect.Text = "Se déconnecter du serveur";
+            this.ToolButtonDisconnect.Click += new System.EventHandler(this.ToolButtonDisconnect_Click);
+            // 
             // MainSplitContainer
             // 
-            this.MainSplitContainer.Location = new System.Drawing.Point(37, 2);
+            this.MainSplitContainer.Location = new System.Drawing.Point(76, 4);
+            this.MainSplitContainer.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MainSplitContainer.Name = "MainSplitContainer";
             // 
             // MainSplitContainer.Panel1
@@ -176,8 +181,9 @@
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.PdfViewer);
-            this.MainSplitContainer.Size = new System.Drawing.Size(1113, 741);
-            this.MainSplitContainer.SplitterDistance = 371;
+            this.MainSplitContainer.Size = new System.Drawing.Size(2607, 1653);
+            this.MainSplitContainer.SplitterDistance = 869;
+            this.MainSplitContainer.SplitterWidth = 9;
             this.MainSplitContainer.TabIndex = 21;
             this.MainSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.MainSplitContainer_SplitterMoved);
             // 
@@ -186,10 +192,11 @@
             this.ListBoxFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListBoxFiles.DisplayMember = "title";
             this.ListBoxFiles.FormattingEnabled = true;
+            this.ListBoxFiles.ItemHeight = 29;
             this.ListBoxFiles.Location = new System.Drawing.Point(0, 0);
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
-            this.ListBoxFiles.Size = new System.Drawing.Size(365, 728);
+            this.ListBoxFiles.Size = new System.Drawing.Size(852, 1624);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -200,22 +207,23 @@
             this.PdfViewer.IsWebBrowserContextMenuEnabled = false;
             this.PdfViewer.Location = new System.Drawing.Point(0, 0);
             this.PdfViewer.Margin = new System.Windows.Forms.Padding(0);
-            this.PdfViewer.MinimumSize = new System.Drawing.Size(20, 20);
+            this.PdfViewer.MinimumSize = new System.Drawing.Size(47, 45);
             this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(736, 732);
+            this.PdfViewer.Size = new System.Drawing.Size(1717, 1633);
             this.PdfViewer.TabIndex = 6;
             this.PdfViewer.WebBrowserShortcutsEnabled = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.ClientSize = new System.Drawing.Size(2686, 1724);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.MainToolbar);
             this.Controls.Add(this.LabelPdfName);
             this.Controls.Add(this.LabelNbPages);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.Name = "MainForm";
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
