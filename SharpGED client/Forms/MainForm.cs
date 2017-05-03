@@ -9,6 +9,8 @@ namespace SharpGED_client
     public partial class MainForm : Form
     {
 
+        private string lastClickedHash = "";
+
         public MainForm()
         {
             InitializeComponent();
@@ -74,6 +76,7 @@ namespace SharpGED_client
 
         private void RefreshFilesList()
         {
+            lastClickedHash = "";
             ListBoxFiles.SelectedItem = null;
             ListBoxFiles.Items.Clear();
             foreach (GedFile currentGedFile in Program.ServerListFiles())
@@ -135,7 +138,18 @@ namespace SharpGED_client
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                RemoteGedFile file = Program.ServerReciveFile((GedFile)ListBoxFiles.SelectedItem);
+                GedFile selectedFile = (GedFile)ListBoxFiles.SelectedItem;
+
+                if (selectedFile.hash.Equals(lastClickedHash))
+                {
+                    return;
+                }
+                else
+                {
+                    lastClickedHash = selectedFile.hash;
+                }
+
+                RemoteGedFile file = Program.ServerReciveFile(selectedFile);
 
                 // Ecris le fichier dans un fichier temporaire sur le disque
                 string localFilename = Path.GetTempFileName() + ".pdf";
