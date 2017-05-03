@@ -15,6 +15,7 @@ namespace SharpGED_client
         public const int PACKET_SIZE = 1024;
 
         public static List<string> tempFiles;
+        public static Form loginForm;
 
         private static Socket server = null;
         private static string serverHostname = "";
@@ -100,7 +101,8 @@ namespace SharpGED_client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new LoginForm().Show();
+            loginForm = new LoginForm();
+            loginForm.Show();
             Application.Run();
         }
 

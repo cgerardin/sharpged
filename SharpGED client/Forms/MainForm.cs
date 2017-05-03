@@ -16,7 +16,8 @@ namespace SharpGED_client
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            Program.ServerDisconnect();
+            Program.loginForm.Show();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -119,7 +120,7 @@ namespace SharpGED_client
 
         private void ToolButtonDisconnect_Click(object sender, EventArgs e)
         {
-            Program.ServerDisconnect();
+            Close();
         }
 
         private void MainSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
