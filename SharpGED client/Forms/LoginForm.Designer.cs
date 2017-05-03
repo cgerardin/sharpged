@@ -43,12 +43,11 @@
             // 
             // ButtonConnect
             // 
-            this.ButtonConnect.Image = ((System.Drawing.Image)(resources.GetObject("ButtonConnect.Image")));
             this.ButtonConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ButtonConnect.Location = new System.Drawing.Point(364, 435);
-            this.ButtonConnect.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.ButtonConnect.Location = new System.Drawing.Point(420, 436);
+            this.ButtonConnect.Margin = new System.Windows.Forms.Padding(7);
             this.ButtonConnect.Name = "ButtonConnect";
-            this.ButtonConnect.Size = new System.Drawing.Size(296, 89);
+            this.ButtonConnect.Size = new System.Drawing.Size(240, 68);
             this.ButtonConnect.TabIndex = 11;
             this.ButtonConnect.Text = "Connexion";
             this.ButtonConnect.UseVisualStyleBackColor = true;
@@ -57,7 +56,7 @@
             // TextBoxServer
             // 
             this.TextBoxServer.Location = new System.Drawing.Point(194, 221);
-            this.TextBoxServer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TextBoxServer.Margin = new System.Windows.Forms.Padding(2);
             this.TextBoxServer.Name = "TextBoxServer";
             this.TextBoxServer.Size = new System.Drawing.Size(361, 35);
             this.TextBoxServer.TabIndex = 12;
@@ -67,7 +66,7 @@
             // 
             this.TextBoxUser.Enabled = false;
             this.TextBoxUser.Location = new System.Drawing.Point(194, 303);
-            this.TextBoxUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TextBoxUser.Margin = new System.Windows.Forms.Padding(2);
             this.TextBoxUser.Name = "TextBoxUser";
             this.TextBoxUser.Size = new System.Drawing.Size(450, 35);
             this.TextBoxUser.TabIndex = 13;
@@ -77,7 +76,7 @@
             // 
             this.TextBoxPassword.Enabled = false;
             this.TextBoxPassword.Location = new System.Drawing.Point(194, 357);
-            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(2);
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.PasswordChar = '●';
             this.TextBoxPassword.Size = new System.Drawing.Size(450, 35);
@@ -116,7 +115,7 @@
             // TextBoxPort
             // 
             this.TextBoxPort.Location = new System.Drawing.Point(567, 221);
-            this.TextBoxPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TextBoxPort.Margin = new System.Windows.Forms.Padding(2);
             this.TextBoxPort.Name = "TextBoxPort";
             this.TextBoxPort.Size = new System.Drawing.Size(74, 35);
             this.TextBoxPort.TabIndex = 19;
@@ -127,7 +126,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(5, -2);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(656, 205);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -139,7 +138,7 @@
             this.AcceptButton = this.ButtonConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 533);
+            this.ClientSize = new System.Drawing.Size(667, 514);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TextBoxPort);
             this.Controls.Add(this.label3);
@@ -151,7 +150,7 @@
             this.Controls.Add(this.ButtonConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
