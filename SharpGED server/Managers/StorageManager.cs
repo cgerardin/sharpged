@@ -38,7 +38,7 @@ namespace SharpGED_server
                 db.Open();
 
                 // Remplis la liste avec des GedFile
-                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files;", db).ExecuteReader())
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files ORDER BY title ASC;", db).ExecuteReader())
                 {
                     GedFile currentGedFile;
                     while (rs.Read())
