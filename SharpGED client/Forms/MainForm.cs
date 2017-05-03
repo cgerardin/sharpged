@@ -149,6 +149,7 @@ namespace SharpGED_client
                 // Affiche le PDF
                 LabelPdfName.Text = file.title;
                 LabelNbPages.Text = "(" + file.pages + " pages)";
+                OriginalNameLabel.Text = file.originalname;
                 PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
 
                 // Mémorise le fichier temporaire
@@ -162,10 +163,16 @@ namespace SharpGED_client
             else
             {
                 PdfViewer.Url = new Uri("about:blank");
-                LabelPdfName.Text = "";
+                LabelPdfName.Text = "-";
                 LabelNbPages.Text = "(0 pages)";
+                OriginalNameLabel.Text = "-";
             }
         }
 
+        private void ChildSplitContainer_Resize(object sender, EventArgs e)
+        {
+            PropertiesGroupBox.Top = ListBoxFiles.Top + ListBoxFiles.Height + 10;
+            PropertiesGroupBox.Height = Height - ListBoxFiles.Top - ListBoxFiles.Height - 110;
+        }
     }
 }
