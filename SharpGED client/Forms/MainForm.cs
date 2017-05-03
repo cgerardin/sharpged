@@ -25,11 +25,12 @@ namespace SharpGED_client
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshFilesList();
-            MainSplitContainer_SplitterMoved(null, null);
 
             MainToolbar.AutoSize = false;
             MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
             MainToolbar.AutoSize = true;
+
+            WindowState = FormWindowState.Maximized;
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -126,14 +127,6 @@ namespace SharpGED_client
             Close();
         }
 
-        private void MainSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            ListBoxFiles.Width = MainSplitContainer.Panel1.Width;
-            ListBoxFiles.Height = MainSplitContainer.Panel1.Height;
-            PdfViewer.Width = MainSplitContainer.Panel2.Width;
-            PdfViewer.Height = MainSplitContainer.Panel1.Height;
-        }
-
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ListBoxFiles.SelectedItem != null)
@@ -177,5 +170,6 @@ namespace SharpGED_client
                 LabelNbPages.Text = "(0 pages)";
             }
         }
+
     }
 }
