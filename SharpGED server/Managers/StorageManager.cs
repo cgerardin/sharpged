@@ -131,5 +131,17 @@ namespace SharpGED_server
             pdf.Close();
         }
 
+        public void Delete(string hash)
+        {
+            // Supprime les métadonnées en base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+                new SQLiteCommand("DELETE FROM files WHERE hash = '" + hash + "';", db).ExecuteNonQuery();
+            }
+
+            // Supprime le fichier du disque
+            File.Delete(baseFolder + "storage\\" + hash);
+        }
     }
 }

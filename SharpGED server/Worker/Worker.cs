@@ -36,7 +36,7 @@ namespace SharpGED_server
             DatabaseManager database = new DatabaseManager();
             StorageManager storage = new StorageManager(handler);
 
-            if(!database.isInitialized())
+            if (!database.isInitialized())
             {
                 Console.WriteLine("[" + id + "] Aucune base de données configurée !");
                 Console.WriteLine("[" + id + "] Création de la base de données...");
@@ -72,11 +72,6 @@ namespace SharpGED_server
                         // Traitement en fonction de la commande reçue
                         switch (cmd)
                         {
-
-                            case "ELO": // Dis bonjour (pour le déboguage)
-                                Console.WriteLine("[" + id + "] Bonjour !");
-                                break;
-
                             case "BYE": // Déconnecte le client
                                 RequestStop();
                                 break;
@@ -110,10 +105,15 @@ namespace SharpGED_server
                                 storage.List();
                                 break;
 
+                            case "DEL": // Supprime un fichier de la base
+                                Console.WriteLine("[" + id + "] Suppression du fichier '" + argv[0] + "'...");
+                                storage.Delete(argv[0]);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
                             default:
                                 Console.WriteLine("[" + id + "] Commande inconnue : " + order);
                                 break;
-
                         }
                     }
 

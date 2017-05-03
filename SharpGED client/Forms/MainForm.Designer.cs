@@ -38,6 +38,7 @@
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.LabelNbPages = new System.Windows.Forms.Label();
             this.LabelPdfName = new System.Windows.Forms.Label();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -48,9 +49,9 @@
             // 
             this.BrowseButton.Location = new System.Drawing.Point(12, 12);
             this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(54, 28);
+            this.BrowseButton.Size = new System.Drawing.Size(54, 23);
             this.BrowseButton.TabIndex = 0;
-            this.BrowseButton.Text = "...";
+            this.BrowseButton.Text = "Ajouter";
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
@@ -124,11 +125,22 @@
             this.LabelPdfName.TabIndex = 18;
             this.LabelPdfName.Text = "  ";
             // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(12, 41);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(54, 23);
+            this.DeleteButton.TabIndex = 19;
+            this.DeleteButton.Text = "Suppr.";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 773);
+            this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.LabelPdfName);
             this.Controls.Add(this.LabelNbPages);
             this.Controls.Add(this.ListBoxFiles);
@@ -158,6 +170,7 @@
         private System.Windows.Forms.ListBox ListBoxFiles;
         private System.Windows.Forms.Label LabelNbPages;
         private System.Windows.Forms.Label LabelPdfName;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
 
