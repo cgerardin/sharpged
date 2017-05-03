@@ -21,6 +21,7 @@ namespace SharpGED_client
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshFilesList();
+            MainSplitContainer_SplitterMoved(null, null);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
@@ -48,6 +49,80 @@ namespace SharpGED_client
                 RefreshFilesList();
             }
 
+        }
+
+        private void ButtonDisconnect_Click(object sender, EventArgs e)
+        {
+            Program.ServerDisconnect();
+        }
+
+        private void ButtonStopServer_Click(object sender, EventArgs e)
+        {
+            Program.ServerHalt();
+        }
+
+        private void ButtonInitServer_Click(object sender, EventArgs e)
+        {
+            Program.ServerSend("INIT");
+        }
+
+        private void RefreshFilesList()
+        {
+            ListBoxFiles.SelectedItem = null;
+            ListBoxFiles.Items.Clear();
+            foreach (GedFile currentGedFile in Program.ServerListFiles())
+            {
+                ListBoxFiles.Items.Add(currentGedFile);
+            }
+        }
+
+        private void ToolButtonNewFile_Click(object sender, EventArgs e)
+        {
+            Form addFile = new AddFileForm();
+            addFile.Show();
+            while (addFile.Visible)
+            {
+                Application.DoEvents();
+            }
+
+            RefreshFilesList();
+        }
+
+        private void ToolButtonDeleteFile_Click(object sender, EventArgs e)
+        {
+            if (ListBoxFiles.SelectedItem != null)
+            {
+                PdfViewer.Url = new Uri("about:blank");
+                LabelPdfName.Text = "";
+                LabelNbPages.Text = "(0 pages)";
+
+                Program.ServerSend("DEL " + ((GedFile)ListBoxFiles.SelectedItem).hash);
+
+                RefreshFilesList();
+            }
+        }
+
+        private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
+        {
+            Program.ServerSend("INIT");
+        }
+
+        private void ToolButtonStopServer_Click(object sender, EventArgs e)
+        {
+            Program.ServerHalt();
+        }
+
+        private void ToolButtonDisconnect_Click(object sender, EventArgs e)
+        {
+            Program.ServerDisconnect();
+        }
+
+        private void MainSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            ListBoxFiles.Width = MainSplitContainer.Panel1.Width;
+            ListBoxFiles.Height = MainSplitContainer.Panel1.Height;
+            PdfViewer.Width = MainSplitContainer.Panel2.Width;
+            PdfViewer.Height = MainSplitContainer.Panel1.Height;
         }
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
@@ -81,33 +156,6 @@ namespace SharpGED_client
                 LabelPdfName.Text = "";
                 LabelNbPages.Text = "(0 pages)";
             }
-
         }
-
-        private void ButtonDisconnect_Click(object sender, EventArgs e)
-        {
-            Program.ServerDisconnect();
-        }
-
-        private void ButtonStopServer_Click(object sender, EventArgs e)
-        {
-            Program.ServerHalt();
-        }
-
-        private void ButtonInitServer_Click(object sender, EventArgs e)
-        {
-            Program.ServerSend("INIT");
-        }
-
-        private void RefreshFilesList()
-        {
-            ListBoxFiles.SelectedItem = null;
-            ListBoxFiles.Items.Clear();
-            foreach (GedFile currentGedFile in Program.ServerListFiles())
-            {
-                ListBoxFiles.Items.Add(currentGedFile);
-            }
-        }
-
     }
 }
