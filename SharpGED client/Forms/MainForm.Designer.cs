@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nœud1");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nœud2");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nœud3");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Nœud5");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Nœud6");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Nœud3");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
+            treeNode22,
+            treeNode23,
+            treeNode24});
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Nœud5");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Nœud6");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
+            treeNode26,
+            treeNode27});
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
@@ -49,9 +49,12 @@
             this.ToolButtonDeleteFile = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonEditFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolButtonPrint = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonScan = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolButtonStopServer = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonInitDatabase = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolButtonDisconnect = new System.Windows.Forms.ToolStripButton();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.ChildSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -61,11 +64,8 @@
             this.OriginalNameLabel = new System.Windows.Forms.Label();
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PdfViewer = new System.Windows.Forms.WebBrowser();
-            this.ToolButtonPrint = new System.Windows.Forms.ToolStripButton();
-            this.ToolButtonScan = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.AdobeReader = new AxAcroPDFLib.AxAcroPDF();
+            this.PdfViewer2 = new PdfiumViewer.PdfRenderer();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -98,7 +98,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelNbPages.Location = new System.Drawing.Point(1647, 15);
+            this.LabelNbPages.Location = new System.Drawing.Point(1623, 15);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(190, 46);
@@ -167,6 +167,30 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(33, 6);
             // 
+            // ToolButtonPrint
+            // 
+            this.ToolButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonPrint.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonPrint.Image")));
+            this.ToolButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonPrint.Name = "ToolButtonPrint";
+            this.ToolButtonPrint.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonPrint.Text = "Imprimer le document";
+            this.ToolButtonPrint.Click += new System.EventHandler(this.ToolButtonPrint_Click);
+            // 
+            // ToolButtonScan
+            // 
+            this.ToolButtonScan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonScan.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonScan.Image")));
+            this.ToolButtonScan.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonScan.Name = "ToolButtonScan";
+            this.ToolButtonScan.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonScan.Text = "Numériser un document";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(33, 6);
+            // 
             // ToolButtonStopServer
             // 
             this.ToolButtonStopServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -188,10 +212,10 @@
             this.ToolButtonInitDatabase.ToolTipText = "Initialiser la base de données";
             this.ToolButtonInitDatabase.Click += new System.EventHandler(this.ToolButtonInitDatabase_Click);
             // 
-            // toolStripSeparator2
+            // toolStripSeparator3
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(33, 6);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(33, 6);
             // 
             // ToolButtonDisconnect
             // 
@@ -218,8 +242,8 @@
             // 
             // MainSplitContainer.Panel2
             // 
+            this.MainSplitContainer.Panel2.Controls.Add(this.PdfViewer2);
             this.MainSplitContainer.Panel2.Controls.Add(this.AdobeReader);
-            this.MainSplitContainer.Panel2.Controls.Add(this.PdfViewer);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelNbPages);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelPdfName);
             this.MainSplitContainer.Size = new System.Drawing.Size(2799, 2090);
@@ -261,23 +285,23 @@
             this.TreeViewCategories.Location = new System.Drawing.Point(0, 74);
             this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
             this.TreeViewCategories.Name = "TreeViewCategories";
-            treeNode15.Name = "Nœud1";
-            treeNode15.Text = "Nœud1";
-            treeNode16.Name = "Nœud2";
-            treeNode16.Text = "Nœud2";
-            treeNode17.Name = "Nœud3";
-            treeNode17.Text = "Nœud3";
-            treeNode18.Name = "Nœud0";
-            treeNode18.Text = "Nœud0";
-            treeNode19.Name = "Nœud5";
-            treeNode19.Text = "Nœud5";
-            treeNode20.Name = "Nœud6";
-            treeNode20.Text = "Nœud6";
-            treeNode21.Name = "Nœud4";
-            treeNode21.Text = "Nœud4";
+            treeNode22.Name = "Nœud1";
+            treeNode22.Text = "Nœud1";
+            treeNode23.Name = "Nœud2";
+            treeNode23.Text = "Nœud2";
+            treeNode24.Name = "Nœud3";
+            treeNode24.Text = "Nœud3";
+            treeNode25.Name = "Nœud0";
+            treeNode25.Text = "Nœud0";
+            treeNode26.Name = "Nœud5";
+            treeNode26.Text = "Nœud5";
+            treeNode27.Name = "Nœud6";
+            treeNode27.Text = "Nœud6";
+            treeNode28.Name = "Nœud4";
+            treeNode28.Text = "Nœud4";
             this.TreeViewCategories.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode21});
+            treeNode25,
+            treeNode28});
             this.TreeViewCategories.Size = new System.Drawing.Size(317, 2021);
             this.TreeViewCategories.TabIndex = 21;
             // 
@@ -349,54 +373,32 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Documents";
             // 
-            // PdfViewer
-            // 
-            this.PdfViewer.AllowWebBrowserDrop = false;
-            this.PdfViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PdfViewer.IsWebBrowserContextMenuEnabled = false;
-            this.PdfViewer.Location = new System.Drawing.Point(0, 69);
-            this.PdfViewer.Margin = new System.Windows.Forms.Padding(0);
-            this.PdfViewer.MinimumSize = new System.Drawing.Size(50, 57);
-            this.PdfViewer.Name = "PdfViewer";
-            this.PdfViewer.Size = new System.Drawing.Size(1844, 2021);
-            this.PdfViewer.TabIndex = 6;
-            this.PdfViewer.WebBrowserShortcutsEnabled = false;
-            // 
-            // ToolButtonPrint
-            // 
-            this.ToolButtonPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonPrint.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonPrint.Image")));
-            this.ToolButtonPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonPrint.Name = "ToolButtonPrint";
-            this.ToolButtonPrint.Size = new System.Drawing.Size(33, 36);
-            this.ToolButtonPrint.Text = "Imprimer le document";
-            this.ToolButtonPrint.Click += new System.EventHandler(this.ToolButtonPrint_Click);
-            // 
-            // ToolButtonScan
-            // 
-            this.ToolButtonScan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonScan.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonScan.Image")));
-            this.ToolButtonScan.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonScan.Name = "ToolButtonScan";
-            this.ToolButtonScan.Size = new System.Drawing.Size(33, 36);
-            this.ToolButtonScan.Text = "Numériser un document";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(33, 6);
-            // 
             // AdobeReader
             // 
+            this.AdobeReader.CausesValidation = false;
             this.AdobeReader.Enabled = true;
-            this.AdobeReader.Location = new System.Drawing.Point(342, 28);
+            this.AdobeReader.Location = new System.Drawing.Point(394, 15);
             this.AdobeReader.Name = "AdobeReader";
             this.AdobeReader.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("AdobeReader.OcxState")));
-            this.AdobeReader.Size = new System.Drawing.Size(90, 89);
+            this.AdobeReader.Size = new System.Drawing.Size(228, 67);
             this.AdobeReader.TabIndex = 19;
+            this.AdobeReader.TabStop = false;
             this.AdobeReader.Visible = false;
+            // 
+            // PdfViewer2
+            // 
+            this.PdfViewer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PdfViewer2.Location = new System.Drawing.Point(0, 69);
+            this.PdfViewer2.Margin = new System.Windows.Forms.Padding(0);
+            this.PdfViewer2.Name = "PdfViewer2";
+            this.PdfViewer2.Page = 0;
+            this.PdfViewer2.Rotation = PdfiumViewer.PdfRotation.Rotate0;
+            this.PdfViewer2.Size = new System.Drawing.Size(1820, 2021);
+            this.PdfViewer2.TabIndex = 20;
+            this.PdfViewer2.Text = "pdfRenderer1";
+            this.PdfViewer2.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitBest;
             // 
             // MainForm
             // 
@@ -407,11 +409,13 @@
             this.Controls.Add(this.MainToolbar);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
             this.Name = "MainForm";
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.MainToolbar.ResumeLayout(false);
             this.MainToolbar.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
@@ -449,7 +453,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.SplitContainer MainSplitContainer;
         private System.Windows.Forms.ListBox ListBoxFiles;
-        private System.Windows.Forms.WebBrowser PdfViewer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer ChildSplitContainer;
         private System.Windows.Forms.Label label2;
@@ -460,6 +463,7 @@
         private System.Windows.Forms.ToolStripButton ToolButtonScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private AxAcroPDFLib.AxAcroPDF AdobeReader;
+        private PdfiumViewer.PdfRenderer PdfViewer2;
     }
 }
 

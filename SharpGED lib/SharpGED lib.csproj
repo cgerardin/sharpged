@@ -72,7 +72,7 @@
     <Compile Include="TransfertManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

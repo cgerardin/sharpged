@@ -1,7 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using PdfiumViewer;
+using SharpGED_client.Forms;
 using SharpGED_lib;
 using System;
-using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -62,7 +62,7 @@ namespace SharpGED_client
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                PdfViewer.Url = new Uri("about:blank");
+                //PdfViewer.Url = new Uri("about:blank");
                 LabelPdfName.Text = "";
                 LabelNbPages.Text = "(0 pages)";
 
@@ -115,7 +115,8 @@ namespace SharpGED_client
                 LabelPdfName.Text = file.title;
                 LabelNbPages.Text = "(" + file.pages + " pages)";
                 OriginalNameLabel.Text = file.originalname;
-                PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+                //PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
+                PdfViewer2.Load(PdfDocument.Load(localFilename));
                 AdobeReader.LoadFile(localFilename);
                 currentDocumentUri = localFilename; // Mémorise le chemin local vers le fichier
 
@@ -129,7 +130,7 @@ namespace SharpGED_client
             }
             else
             {
-                PdfViewer.Url = new Uri("about:blank");
+                //PdfViewer.Url = new Uri("about:blank");
                 LabelPdfName.Text = "-";
                 LabelNbPages.Text = "(0 pages)";
                 OriginalNameLabel.Text = "-";
@@ -145,6 +146,29 @@ namespace SharpGED_client
         private void ToolButtonPrint_Click(object sender, EventArgs e)
         {
             AdobeReader.printWithDialog();
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            /*switch (e.KeyCode)
+            {
+                case Keys.F2:
+                    if (ListBoxFiles.SelectedItem != null)
+                        new RenameForm().ShowDialog();
+                    break;
+            }*/
+        }
+
+        private void PdfViewer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            //MainForm_KeyDown(sender, new KeyEventArgs(e.KeyCode));
+            switch (e.KeyCode)
+            {
+                case Keys.F2:
+                    if (ListBoxFiles.SelectedItem != null)
+                        new RenameForm().ShowDialog();
+                    break;
+            }
         }
     }
 }
