@@ -20,6 +20,12 @@ namespace SharpGED_client
         private static Socket server = null;
         private static string serverHostname = "";
         private static int serverPort = 0;
+        private static bool connectionUp = false;
+
+        public static bool IsConnectionUp()
+        {
+            return connectionUp;
+        }
 
         public static void ServerConnect(string hostname, int port)
         {
@@ -43,7 +49,16 @@ namespace SharpGED_client
 
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             server.Blocking = true;
-            server.Connect(new IPEndPoint(serverIP, serverPort));
+            try
+            {
+                server.Connect(new IPEndPoint(serverIP, serverPort));
+                connectionUp = true;
+            }
+            catch (SocketException ex)
+            {
+                connectionUp = false;
+                throw ex;
+            }
         }
 
         public static void ServerSend(string command)
@@ -55,6 +70,7 @@ namespace SharpGED_client
         {
             ServerSend("BYE");
             server.Close();
+            connectionUp = false;
         }
 
         public static void ServerHalt()
@@ -62,6 +78,7 @@ namespace SharpGED_client
             ServerSend("STOP");
             ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
             server.Close();
+            connectionUp = false;
         }
 
         public static GedList<GedFile> ServerListFiles()

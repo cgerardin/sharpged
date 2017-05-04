@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Sockets;
 using System.Windows.Forms;
 
 namespace SharpGED_client
@@ -17,7 +18,16 @@ namespace SharpGED_client
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
-            Program.ServerConnect(TextBoxServer.Text, int.Parse(TextBoxPort.Text));
+            try
+            {
+                Program.ServerConnect(TextBoxServer.Text, int.Parse(TextBoxPort.Text));
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            
             new MainForm().Show();
             Hide();
         }
