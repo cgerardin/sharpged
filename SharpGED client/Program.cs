@@ -81,13 +81,13 @@ namespace SharpGED_client
             connectionUp = false;
         }
 
-        public static GedList<GedFile> ServerListFiles()
+        public static GedList<GedFolder> ServerListFolders()
         {
             // Demande la liste des fichiers
             ServerSend("LIST");
 
             // Récupère l'objet et le dé-sérialise
-            return GedList<GedFile>.Load(new MemoryStream(TransfertManager.Recive(server)));
+            return GedList<GedFolder>.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
         public static void ServerSendFile(RemoteGedFile file)

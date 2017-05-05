@@ -60,13 +60,26 @@ namespace SharpGED_client
 
         private void RefreshFilesList()
         {
-            lastClickedHash = "";
-            ListBoxFiles.SelectedItem = null;
-            ListBoxFiles.Items.Clear();
-            foreach (GedFile currentGedFile in Program.ServerListFiles())
+            TreeViewCategories.Nodes.Clear();
+            foreach (GedFolder currentGedFolder in Program.ServerListFolders())
             {
-                ListBoxFiles.Items.Add(currentGedFile);
+                TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
+        }
+
+        private TreeNode BuildNode(GedFolder folder)
+        {
+            TreeNode node = new TreeNode(folder.title);
+            node.Tag = folder;
+
+            foreach (GedFolder subFolder in folder.folders)
+            {
+                TreeNode subNode = BuildNode(subFolder);
+                subNode.Tag = subFolder;
+                node.Nodes.Add(subNode);
+            }
+
+            return node;
         }
 
         private void EmptyViewer()
@@ -84,7 +97,14 @@ namespace SharpGED_client
 
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
-            Form addFile = new AddFileForm();
+            if(TreeViewCategories.SelectedNode == null)
+            {
+                MessageBox.Show("Merci de sélectionner le dossier où le fichier sera déposé.");
+                return;
+            }
+
+            AddFileForm addFile = new AddFileForm();
+            addFile.folder = (GedFolder)TreeViewCategories.SelectedNode.Tag;
             addFile.ShowDialog();
 
             RefreshFilesList();
@@ -114,6 +134,17 @@ namespace SharpGED_client
         private void ToolButtonDisconnect_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TreeViewCategories_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            lastClickedHash = "";
+            ListBoxFiles.SelectedItem = null;
+            ListBoxFiles.Items.Clear();
+            foreach (GedFile currentGedFile in ((GedFolder)TreeViewCategories.SelectedNode.Tag).files)
+            {
+                ListBoxFiles.Items.Add(currentGedFile);
+            }
         }
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)

@@ -102,7 +102,7 @@ namespace SharpGED_server
 
                             case "LIST": // Envoie la liste les fichiers
                                 Console.WriteLine("[" + id + "] Envoi de la liste des fichiers");
-                                storage.List();
+                                storage.ListFolders();
                                 break;
 
                             case "DEL": // Supprime un fichier de la base

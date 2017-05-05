@@ -45,6 +45,7 @@ namespace SharpGED_server
                 db.Open();
                 sql = "CREATE TABLE files ( " +
                     "idFile INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idFolder INTEGER NOT NULL REFERENCES 'folders'('idFolder'), " +
                     "hash TEXT NOT NULL, " +
                     "originalname TEXT NOT NULL, " +
                     "size INTEGER NOT NULL, " +
@@ -55,23 +56,11 @@ namespace SharpGED_server
 
                 sql = "CREATE TABLE folders ( " +
                     "idFolder INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idParentFolder INTEGER REFERENCES 'folders'('idFolder'), " +
                     "title TEXT NOT NULL " +
                     ");";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
 
-                sql = "CREATE TABLE folders_folders ( " +
-                    "idFolder_Folder INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idMasterFolder INTEGER NOT NULL, " +
-                    "idSlaveFolder INTEGER NOT NULL " +
-                    ");";
-                new SQLiteCommand(sql, db).ExecuteNonQuery();
-
-                sql = "CREATE TABLE folders_files ( " +
-                    "idFolder_File INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idFolder INTEGER NOT NULL, " +
-                    "idFile INTEGER NOT NULL " +
-                    ");";
-                new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
         }
 

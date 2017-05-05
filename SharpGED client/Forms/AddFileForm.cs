@@ -10,7 +10,8 @@ namespace SharpGED_client
     public partial class AddFileForm : Form
     {
 
-        PdfDocument pdf;
+        private PdfDocument pdf;
+        public GedFolder folder { get; set; }
 
         public AddFileForm()
         {
@@ -45,6 +46,7 @@ namespace SharpGED_client
 
             // Crée un GedFile et l'envoie au serveur
             RemoteGedFile file = new RemoteGedFile();
+            file.folderId = folder.id;
             file.size = size;
             file.title = TextBoxPdfName.Text;
             file.originalname = pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1);

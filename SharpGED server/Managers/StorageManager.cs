@@ -27,9 +27,50 @@ namespace SharpGED_server
             client = handler;
         }
 
-        public void List()
+        public void ListFolders()
         {
-            // Crée une GedList
+            // Crée une GedList des dossiers
+            GedList<GedFolder> foldersList = new GedList<GedFolder>();
+
+            using (SQLiteConnection db = database.Connect())
+            {
+                db.Open();
+
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM folders ORDER BY title ASC;", db).ExecuteReader())
+                {
+                    GedFolder currentFolder;
+                    while (rs.Read())
+                    {
+                        currentFolder = new GedFolder();
+                        currentFolder.id = (long)rs["idFolder"];
+                        currentFolder.title = rs["title"].ToString();
+                        currentFolder.files = ListFiles(currentFolder.id);
+
+                        if (rs["idParentFolder"].ToString().Equals(""))
+                        {
+                            currentFolder.idParent = null;
+                            foldersList.Add(currentFolder);
+                        }
+                        else
+                        {
+                            currentFolder.idParent = rs["idParentFolder"];
+                            foreach (GedFolder existingFolder in foldersList)
+                            {
+                                GedFolder.AddChild(existingFolder, currentFolder);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
+            TransfertManager.Send(foldersList.Save(), client);
+        }
+
+        public GedList<GedFile> ListFiles(long folderId)
+        {
+            // Crée une GedList des fichiers contenus dans le dossier spécifié
             GedList<GedFile> filesList = new GedList<GedFile>();
 
             using (SQLiteConnection db = database.Connect())
@@ -37,7 +78,7 @@ namespace SharpGED_server
                 db.Open();
 
                 // Remplis la liste avec des GedFile
-                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files ORDER BY title ASC;", db).ExecuteReader())
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files WHERE idFolder= " + folderId + " ORDER BY title ASC;", db).ExecuteReader())
                 {
                     GedFile currentGedFile;
                     while (rs.Read())
@@ -50,9 +91,7 @@ namespace SharpGED_server
                 }
             }
 
-            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
-            TransfertManager.Send(filesList.Save(), client);
-
+            return filesList;
         }
 
         public void Send(string hash)
@@ -122,8 +161,8 @@ namespace SharpGED_server
             {
                 db.Open();
 
-                string sql = "INSERT INTO files (hash, originalname, size, title, pages) " +
-                "VALUES ('" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
+                string sql = "INSERT INTO files (idFolder, hash, originalname, size, title, pages) " +
+                "VALUES (" + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
