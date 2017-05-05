@@ -105,13 +105,13 @@ namespace SharpGED_client
             ServerSend("GET " + gedFile.hash);
 
             // Récupère l'objet et le dé-sérialise
-            return RemoteGedFile.Load(new MemoryStream(TransfertManager.Recive(server)));
+            return (RemoteGedFile)GedItem.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
         public static void ServerRenameFile(GedFile gedFile, string title)
         {
             // Renomme le fichier passé en argument
-            ServerSend("REN " + gedFile.hash + ";" + title);
+            Program.ServerSend("REN " + gedFile.hash + ";" + title);
         }
 
         /// <summary>

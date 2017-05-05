@@ -39,10 +39,11 @@ namespace SharpGED_server
             Directory.CreateDirectory(baseFolder + "\\storage");
             SQLiteConnection.CreateFile(baseFolder + "database\\" + databaseName + ".sqlite");
 
+            string sql;
             using (SQLiteConnection db = Connect())
             {
                 db.Open();
-                string sql = "CREATE TABLE files ( " +
+                sql = "CREATE TABLE files ( " +
                     "idFile INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "hash TEXT NOT NULL, " +
                     "originalname TEXT NOT NULL, " +
@@ -50,7 +51,26 @@ namespace SharpGED_server
                     "title TEXT, " +
                     "pages INTEGER " +
                     ");";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
 
+                sql = "CREATE TABLE folders ( " +
+                    "idFolder INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "title TEXT NOT NULL " +
+                    ");";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+
+                sql = "CREATE TABLE folders_folders ( " +
+                    "idFolder_Folder INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idMasterFolder INTEGER NOT NULL, " +
+                    "idSlaveFolder INTEGER NOT NULL " +
+                    ");";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+
+                sql = "CREATE TABLE folders_files ( " +
+                    "idFolder_File INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idFolder INTEGER NOT NULL, " +
+                    "idFile INTEGER NOT NULL " +
+                    ");";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
         }

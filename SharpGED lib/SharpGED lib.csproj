@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GedItem.cs" />
+    <Compile Include="GedFolder.cs" />
     <Compile Include="GedFile.cs" />
     <Compile Include="GedList.cs" />
     <Compile Include="RemoteGedFile.cs" />

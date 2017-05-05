@@ -97,7 +97,7 @@ namespace SharpGED_server
         public void Recive()
         {
             // Récupère l'objet et le dé-sérialise
-            RemoteGedFile file = RemoteGedFile.Load(new MemoryStream(TransfertManager.Recive(client)));
+            RemoteGedFile file = (RemoteGedFile)GedItem.Load(new MemoryStream(TransfertManager.Recive(client)));
 
             // Génère un nom de fichier unique comprenant du nom de fichier original, avec son SHA-256 en hexadécimal
             string hash;

@@ -27,7 +27,11 @@ namespace SharpGED_client
             }
 
             // Purge les fichiers temporaires
-            currentDocument.Dispose();
+            if (currentDocument != null)
+            {
+                currentDocument.Dispose();
+            }
+
             foreach (string tmpFile in Program.tempFiles)
             {
                 try

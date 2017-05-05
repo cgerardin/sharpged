@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -7,10 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace SharpGED_lib
 {
     [Serializable]
-    public class GedList<T> : List<T> where T : GedItem
+    public class GedItem
     {
-
-        public byte[] bytes { get; set; }
 
         public byte[] Save()
         {
@@ -21,6 +18,10 @@ namespace SharpGED_lib
                 formatter.Serialize(stream, this);
                 stream.Flush();
             }
+            catch (SerializationException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
             finally
             {
                 if (stream != null) stream.Close();
@@ -28,17 +29,17 @@ namespace SharpGED_lib
             return stream.ToArray();
         }
 
-        public static GedList<T> Load(MemoryStream stream)
+        public static GedItem Load(MemoryStream stream)
         {
             BinaryFormatter formatter = new BinaryFormatter();
             try
             {
-                return (GedList<T>)formatter.Deserialize(stream);
+                return (GedItem)formatter.Deserialize(stream);
             }
             catch (SerializationException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-                return default(GedList<T>);
+                return default(GedItem);
             }
             finally
             {

@@ -3,7 +3,7 @@
 namespace SharpGED_lib
 {
     [Serializable]
-    public class GedFile
+    public class GedFile : GedItem
     {
 
         public string hash { get; set; }
