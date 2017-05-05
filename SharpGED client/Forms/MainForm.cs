@@ -11,7 +11,7 @@ namespace SharpGED_client
     {
 
         private string lastClickedHash = "";
-        private string currentDocumentUri = "";
+        private PdfDocument currentDocument;
 
         public MainForm()
         {
@@ -20,16 +20,34 @@ namespace SharpGED_client
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // Déconnecte du serveur
             if (Program.IsConnectionUp())
             {
                 Program.ServerDisconnect();
             }
+
+            // Purge les fichiers temporaires
+            currentDocument.Dispose();
+            foreach (string tmpFile in Program.tempFiles)
+            {
+                try
+                {
+                    File.Delete(tmpFile);
+                }
+                catch (IOException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+            }
+
+            // Réaffiche la fenêtre de connexion
             Program.loginForm.Show();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshFilesList();
+            EmptyViewer();
 
             MainToolbar.AutoSize = false;
             MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
@@ -39,7 +57,6 @@ namespace SharpGED_client
         private void RefreshFilesList()
         {
             lastClickedHash = "";
-            currentDocumentUri = "";
             ListBoxFiles.SelectedItem = null;
             ListBoxFiles.Items.Clear();
             foreach (GedFile currentGedFile in Program.ServerListFiles())
@@ -53,8 +70,12 @@ namespace SharpGED_client
             LabelPdfName.Text = "-";
             LabelNbPages.Text = "(0 pages)";
             OriginalNameLabel.Text = "-";
-            PdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
             PdfViewer.Visible = false;
+            if (currentDocument != null)
+            {
+                currentDocument.Dispose();
+            }
+            PdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
         }
 
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
@@ -110,26 +131,25 @@ namespace SharpGED_client
 
                 // Ecris le fichier dans un fichier temporaire sur le disque
                 string localFilename = Path.GetTempFileName() + ".pdf";
-                FileStream outStream = File.OpenWrite(localFilename);
+                FileStream outStream = new FileStream(localFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1024, FileOptions.None);
                 outStream.Write(file.bytes, 0, file.size);
                 outStream.Close();
 
-                // Affiche le PDF
+                // Charge et affiche le PDF
                 LabelPdfName.Text = file.title;
                 LabelNbPages.Text = "(" + file.pages + " pages)";
                 OriginalNameLabel.Text = file.originalname;
-                PdfViewer.Load(PdfDocument.Load(localFilename));
+
+                PdfViewer.Visible = false;
+                if (currentDocument != null)
+                {
+                    currentDocument.Dispose();
+                }
+                currentDocument = PdfDocument.Load(localFilename);
+                PdfViewer.Load(currentDocument);
                 PdfViewer.Visible = true;
 
-                // Mémorise le chemin local vers le fichier
-                currentDocumentUri = localFilename;
-
                 // Mémorise le fichier temporaire
-                /*foreach (string tmpFile in Program.tempFiles)
-                {
-                    File.Delete(tmpFile);
-                }
-                Program.tempFiles.Clear();*/
                 Program.tempFiles.Add(localFilename);
             }
             else
