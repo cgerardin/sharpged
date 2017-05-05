@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nœud1");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nœud2");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nœud3");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Nœud5");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Nœud6");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Nœud3");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
+            treeNode22,
+            treeNode23,
+            treeNode24});
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Nœud5");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Nœud6");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
+            treeNode26,
+            treeNode27});
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
@@ -283,23 +283,23 @@
             this.TreeViewCategories.Location = new System.Drawing.Point(0, 31);
             this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
             this.TreeViewCategories.Name = "TreeViewCategories";
-            treeNode15.Name = "Nœud1";
-            treeNode15.Text = "Nœud1";
-            treeNode16.Name = "Nœud2";
-            treeNode16.Text = "Nœud2";
-            treeNode17.Name = "Nœud3";
-            treeNode17.Text = "Nœud3";
-            treeNode18.Name = "Nœud0";
-            treeNode18.Text = "Nœud0";
-            treeNode19.Name = "Nœud5";
-            treeNode19.Text = "Nœud5";
-            treeNode20.Name = "Nœud6";
-            treeNode20.Text = "Nœud6";
-            treeNode21.Name = "Nœud4";
-            treeNode21.Text = "Nœud4";
+            treeNode22.Name = "Nœud1";
+            treeNode22.Text = "Nœud1";
+            treeNode23.Name = "Nœud2";
+            treeNode23.Text = "Nœud2";
+            treeNode24.Name = "Nœud3";
+            treeNode24.Text = "Nœud3";
+            treeNode25.Name = "Nœud0";
+            treeNode25.Text = "Nœud0";
+            treeNode26.Name = "Nœud5";
+            treeNode26.Text = "Nœud5";
+            treeNode27.Name = "Nœud6";
+            treeNode27.Text = "Nœud6";
+            treeNode28.Name = "Nœud4";
+            treeNode28.Text = "Nœud4";
             this.TreeViewCategories.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode21});
+            treeNode25,
+            treeNode28});
             this.TreeViewCategories.Size = new System.Drawing.Size(115, 630);
             this.TreeViewCategories.TabIndex = 21;
             // 
@@ -383,6 +383,7 @@
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
             this.PdfViewer.Size = new System.Drawing.Size(663, 630);
             this.PdfViewer.TabIndex = 20;
+            this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
             // MainForm

@@ -48,6 +48,15 @@ namespace SharpGED_client
             }
         }
 
+        private void EmptyViewer()
+        {
+            LabelPdfName.Text = "-";
+            LabelNbPages.Text = "(0 pages)";
+            OriginalNameLabel.Text = "-";
+            PdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
+            PdfViewer.Visible = false;
+        }
+
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
             Form addFile = new AddFileForm();
@@ -60,11 +69,8 @@ namespace SharpGED_client
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                LabelPdfName.Text = "";
-                LabelNbPages.Text = "(0 pages)";
-
+                EmptyViewer();
                 Program.ServerSend("DEL " + ((GedFile)ListBoxFiles.SelectedItem).hash);
-
                 RefreshFilesList();
             }
         }
@@ -113,7 +119,10 @@ namespace SharpGED_client
                 LabelNbPages.Text = "(" + file.pages + " pages)";
                 OriginalNameLabel.Text = file.originalname;
                 PdfViewer.Load(PdfDocument.Load(localFilename));
-                currentDocumentUri = localFilename; // Mémorise le chemin local vers le fichier
+                PdfViewer.Visible = true;
+
+                // Mémorise le chemin local vers le fichier
+                currentDocumentUri = localFilename;
 
                 // Mémorise le fichier temporaire
                 /*foreach (string tmpFile in Program.tempFiles)
@@ -125,9 +134,7 @@ namespace SharpGED_client
             }
             else
             {
-                LabelPdfName.Text = "-";
-                LabelNbPages.Text = "(0 pages)";
-                OriginalNameLabel.Text = "-";
+                EmptyViewer();
             }
         }
 
