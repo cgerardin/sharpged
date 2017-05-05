@@ -34,8 +34,6 @@ namespace SharpGED_client
             MainToolbar.AutoSize = false;
             MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
             MainToolbar.AutoSize = true;
-
-            WindowState = FormWindowState.Maximized;
         }
 
         private void RefreshFilesList()
@@ -62,7 +60,6 @@ namespace SharpGED_client
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                //PdfViewer.Url = new Uri("about:blank");
                 LabelPdfName.Text = "";
                 LabelNbPages.Text = "(0 pages)";
 
@@ -115,9 +112,7 @@ namespace SharpGED_client
                 LabelPdfName.Text = file.title;
                 LabelNbPages.Text = "(" + file.pages + " pages)";
                 OriginalNameLabel.Text = file.originalname;
-                //PdfViewer.Url = new Uri(localFilename + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH");
-                PdfViewer2.Load(PdfDocument.Load(localFilename));
-                AdobeReader.LoadFile(localFilename);
+                PdfViewer.Load(PdfDocument.Load(localFilename));
                 currentDocumentUri = localFilename; // Mémorise le chemin local vers le fichier
 
                 // Mémorise le fichier temporaire
@@ -130,7 +125,6 @@ namespace SharpGED_client
             }
             else
             {
-                //PdfViewer.Url = new Uri("about:blank");
                 LabelPdfName.Text = "-";
                 LabelNbPages.Text = "(0 pages)";
                 OriginalNameLabel.Text = "-";
@@ -145,30 +139,25 @@ namespace SharpGED_client
 
         private void ToolButtonPrint_Click(object sender, EventArgs e)
         {
-            AdobeReader.printWithDialog();
+            //AdobeReader.LoadFile(localFilename);
+            //AdobeReader.printWithDialog();
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
-            /*switch (e.KeyCode)
-            {
-                case Keys.F2:
-                    if (ListBoxFiles.SelectedItem != null)
-                        new RenameForm().ShowDialog();
-                    break;
-            }*/
-        }
-
-        private void PdfViewer_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //MainForm_KeyDown(sender, new KeyEventArgs(e.KeyCode));
             switch (e.KeyCode)
             {
                 case Keys.F2:
                     if (ListBoxFiles.SelectedItem != null)
-                        new RenameForm().ShowDialog();
+                    {
+                        RenameForm rename = new RenameForm();
+                        rename.file = (GedFile)ListBoxFiles.SelectedItem;
+                        rename.ShowDialog();
+                        RefreshFilesList();
+                    }
                     break;
             }
         }
+
     }
 }

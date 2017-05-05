@@ -108,6 +108,12 @@ namespace SharpGED_client
             return RemoteGedFile.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
+        public static void ServerRenameFile(GedFile gedFile, string title)
+        {
+            // Renomme le fichier passé en argument
+            ServerSend("REN " + gedFile.hash + ";" + title);
+        }
+
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>

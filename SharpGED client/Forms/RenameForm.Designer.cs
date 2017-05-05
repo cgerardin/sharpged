@@ -36,26 +36,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 9);
+            this.label1.Location = new System.Drawing.Point(16, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 37);
+            this.label1.Size = new System.Drawing.Size(35, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Titre";
             // 
             // TextBoxPdfName
             // 
-            this.TextBoxPdfName.Location = new System.Drawing.Point(104, 6);
+            this.TextBoxPdfName.Location = new System.Drawing.Point(65, 12);
             this.TextBoxPdfName.Margin = new System.Windows.Forms.Padding(7, 11, 7, 11);
             this.TextBoxPdfName.Name = "TextBoxPdfName";
-            this.TextBoxPdfName.Size = new System.Drawing.Size(786, 44);
+            this.TextBoxPdfName.Size = new System.Drawing.Size(313, 24);
             this.TextBoxPdfName.TabIndex = 7;
             // 
             // ButtonRename
             // 
-            this.ButtonRename.Location = new System.Drawing.Point(900, 6);
+            this.ButtonRename.Location = new System.Drawing.Point(388, 6);
             this.ButtonRename.Name = "ButtonRename";
-            this.ButtonRename.Size = new System.Drawing.Size(175, 44);
+            this.ButtonRename.Size = new System.Drawing.Size(99, 32);
             this.ButtonRename.TabIndex = 9;
             this.ButtonRename.Text = "Renommer";
             this.ButtonRename.UseVisualStyleBackColor = true;
@@ -64,21 +64,22 @@
             // RenameForm
             // 
             this.AcceptButton = this.ButtonRename;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 37F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 56);
+            this.ClientSize = new System.Drawing.Size(492, 47);
             this.ControlBox = false;
             this.Controls.Add(this.ButtonRename);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TextBoxPdfName);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "RenameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Renommer le document";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.RenameForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RenameForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();

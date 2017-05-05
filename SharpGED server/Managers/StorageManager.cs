@@ -116,6 +116,7 @@ namespace SharpGED_server
             PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
             pdf.Info.Title = file.title;
             pdf.Save(baseFolder + "storage\\" + hash);
+            pdf.Close();
 
             // Insère le tout dans la base
             using (SQLiteConnection db = new DatabaseManager().Connect())
@@ -127,8 +128,6 @@ namespace SharpGED_server
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
-
-            pdf.Close();
         }
 
         public void Delete(string hash)
@@ -142,6 +141,22 @@ namespace SharpGED_server
 
             // Supprime le fichier du disque
             File.Delete(baseFolder + "storage\\" + hash);
+        }
+
+        public void Rename(string hash, string title)
+        {
+            // Met à jour les métadonnées en base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+                new SQLiteCommand("UPDATE files SET title='" + title + "' WHERE hash = '" + hash + "';", db).ExecuteNonQuery();
+            }
+
+            // Met à jour les métadonnées du PDF
+            PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
+            pdf.Info.Title = title;
+            pdf.Save(baseFolder + "storage\\" + hash);
+            pdf.Close();
         }
     }
 }

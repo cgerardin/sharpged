@@ -111,6 +111,11 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
+                            case "REN": // Renomme un fichier de la base
+                                Console.WriteLine("[" + id + "] Renommage du fichier '" + argv[0] + "'");
+                                storage.Rename(argv[0], argv[1]);
+                                break;
+
                             default:
                                 Console.WriteLine("[" + id + "] Commande inconnue : " + order);
                                 break;
