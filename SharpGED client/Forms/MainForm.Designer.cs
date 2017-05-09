@@ -322,6 +322,7 @@
             treeNode4,
             treeNode7});
             this.TreeViewCategories.SelectedImageIndex = 0;
+            this.TreeViewCategories.ShowRootLines = false;
             this.TreeViewCategories.Size = new System.Drawing.Size(186, 638);
             this.TreeViewCategories.TabIndex = 21;
             this.TreeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewCategories_AfterSelect);

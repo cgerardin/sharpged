@@ -66,6 +66,7 @@ namespace SharpGED_client
                 TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
             TreeViewCategories.Sort();
+            TreeViewCategories.ExpandAll();
 
             // Sélectionne le noeud racine
             if (TreeViewCategories.Nodes.Count > 0)
