@@ -17,9 +17,10 @@ namespace SharpGED_client
         public static List<string> tempFiles;
         public static Form loginForm;
 
+        public static string serverHostname = "";
+        public static int serverPort = 0;
+
         private static Socket server = null;
-        private static string serverHostname = "";
-        private static int serverPort = 0;
         private static bool connectionUp = false;
 
         public static bool IsConnectionUp()

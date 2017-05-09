@@ -22,7 +22,7 @@ namespace SharpGED_server
                 using (SQLiteConnection db = Connect())
                 {
                     db.Open();
-                    using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM sqlite_master;", db).ExecuteReader()) { }
+                    using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files;", db).ExecuteReader()) { }
                 }
             }
             catch (SQLiteException)
@@ -35,11 +35,28 @@ namespace SharpGED_server
 
         public void Initialize()
         {
+            string sql;
+
             Directory.CreateDirectory(baseFolder + "database\\");
             Directory.CreateDirectory(baseFolder + "\\storage");
-            SQLiteConnection.CreateFile(baseFolder + "database\\" + databaseName + ".sqlite");
 
-            string sql;
+            // Crée la base si elle n'existe pas, la vide sinon
+            string databaseFullPath = baseFolder + "database\\" + databaseName + ".sqlite";
+            if (!File.Exists(databaseFullPath))
+            {
+                SQLiteConnection.CreateFile(databaseFullPath);
+            }
+            else
+            {
+                using (SQLiteConnection db = Connect())
+                {
+                    db.Open();
+
+                    sql = "DROP TABLE 'files'; DROP TABLE 'folders';";
+                    new SQLiteCommand(sql, db).ExecuteNonQuery();
+                }
+            }
+
             using (SQLiteConnection db = Connect())
             {
                 db.Open();
@@ -61,6 +78,8 @@ namespace SharpGED_server
                     ");";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
 
+                sql = "INSERT INTO folders (title) VALUES ('" + databaseName + "');";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
         }
 

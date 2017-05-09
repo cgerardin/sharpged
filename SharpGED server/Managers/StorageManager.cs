@@ -36,7 +36,8 @@ namespace SharpGED_server
             {
                 db.Open();
 
-                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM folders ORDER BY title ASC;", db).ExecuteReader())
+                // Très important de sélectionner par ordre d'ID, sinon certains parents pourraient être ajoutés après leur enfant
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM folders ORDER BY idFolder ASC;", db).ExecuteReader())
                 {
                     GedFolder currentFolder;
                     while (rs.Read())

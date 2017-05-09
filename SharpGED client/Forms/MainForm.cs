@@ -67,6 +67,12 @@ namespace SharpGED_client
             }
             EmptyViewer();
             ListBoxFiles.Items.Clear();
+
+            // Sélectionne le noeud racine
+            if (TreeViewCategories.Nodes.Count > 0)
+            {
+                TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+            }
         }
 
         private TreeNode BuildNode(GedFolder folder)
@@ -79,6 +85,20 @@ namespace SharpGED_client
                 TreeNode subNode = BuildNode(subFolder);
                 subNode.Tag = subFolder;
                 node.Nodes.Add(subNode);
+            }
+
+            // Image spéciale pour le(s) noeud(s) racine
+            if (folder.idParent == null)
+            {
+                node.SelectedImageIndex = 1;
+                node.ImageIndex = 1;
+                // Ajoute le nom du serveur
+                node.Text = node.Text + "@" + Program.serverHostname + ":" + Program.serverPort;
+            }
+            else
+            {
+                node.SelectedImageIndex = 0;
+                node.ImageIndex = 0;
             }
 
             return node;
@@ -157,6 +177,7 @@ namespace SharpGED_client
         private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
         {
             Program.ServerSend("INIT");
+            RefreshFilesList();
         }
 
         private void ToolButtonStopServer_Click(object sender, EventArgs e)
