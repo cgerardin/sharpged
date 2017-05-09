@@ -80,18 +80,25 @@ namespace SharpGED_client
             // Re-sélectionne le dernier noeud actif
             if (TreeViewCategories.Nodes.Count > 0)
             {
-                if(!lastClickedNode.Equals(""))
+                if (!lastClickedNode.Equals(""))
                 {
-                    TreeViewCategories.SelectedNode = TreeViewCategories.Nodes.Find(lastClickedNode, true)[0];
+                    TreeNode[] searchResult = TreeViewCategories.Nodes.Find(lastClickedNode, true);
+                    if (searchResult.Length > 0)
+                    {
+                        TreeViewCategories.SelectedNode = TreeViewCategories.Nodes.Find(lastClickedNode, true)[0];
+                    } else
+                    {
+                        TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+                    }
                 }
                 else
                 {
                     TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
                 }
-                
+
             }
 
-            
+
         }
 
         private TreeNode BuildNode(GedFolder folder)
@@ -111,24 +118,26 @@ namespace SharpGED_client
             if (folder.idParent == null)
             {
                 node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Bold);
-                node.SelectedImageIndex = 1;
-                node.ImageIndex = 1;
+                node.SelectedImageIndex = 0;
+                node.ImageIndex = 0;
                 // Ajoute le nom du serveur
                 node.Text = node.Text + "@" + Program.serverHostname;
                 node.EnsureVisible();
             }
             else
             {
+                node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Regular);
                 if (folder.files.Count == 0)
                 {
-                    node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Italic);
+                    node.SelectedImageIndex = 2;
+                    node.ImageIndex = 2;
                 }
                 else
                 {
-                    node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Regular);
+                    node.SelectedImageIndex = 1;
+                    node.ImageIndex = 1;
                 }
-                node.SelectedImageIndex = 0;
-                node.ImageIndex = 0;
+
             }
 
             return node;

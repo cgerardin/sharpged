@@ -354,7 +354,7 @@
             this.TreeViewCategories.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TreeViewCategories.FullRowSelect = true;
             this.TreeViewCategories.HideSelection = false;
-            this.TreeViewCategories.ImageIndex = 0;
+            this.TreeViewCategories.ImageIndex = 1;
             this.TreeViewCategories.ImageList = this.TreeViewImageList;
             this.TreeViewCategories.Location = new System.Drawing.Point(0, 27);
             this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
@@ -372,8 +372,9 @@
             // 
             this.TreeViewImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("TreeViewImageList.ImageStream")));
             this.TreeViewImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.TreeViewImageList.Images.SetKeyName(0, "Folder_Small.png");
-            this.TreeViewImageList.Images.SetKeyName(1, "Database_Small.png");
+            this.TreeViewImageList.Images.SetKeyName(0, "Database_Small.png");
+            this.TreeViewImageList.Images.SetKeyName(1, "Folder_Small.png");
+            this.TreeViewImageList.Images.SetKeyName(2, "Folder_Empty_Small.png");
             // 
             // label2
             // 
