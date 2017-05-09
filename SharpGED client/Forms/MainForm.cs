@@ -65,14 +65,16 @@ namespace SharpGED_client
             {
                 TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
-            EmptyViewer();
-            ListBoxFiles.Items.Clear();
+            TreeViewCategories.Sort();
 
             // Sélectionne le noeud racine
             if (TreeViewCategories.Nodes.Count > 0)
             {
                 TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
             }
+
+            EmptyViewer();
+            ListBoxFiles.Items.Clear();
         }
 
         private TreeNode BuildNode(GedFolder folder)
