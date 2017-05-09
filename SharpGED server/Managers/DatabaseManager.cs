@@ -37,6 +37,11 @@ namespace SharpGED_server
         {
             string sql;
 
+            // Crée l'arborescence en la vidant de ses fichiers si elle existe déjà
+            if(Directory.Exists(baseFolder + "\\storage"))
+            {
+                Directory.Delete(baseFolder + "\\storage", true);
+            }
             Directory.CreateDirectory(baseFolder + "database\\");
             Directory.CreateDirectory(baseFolder + "\\storage");
 
