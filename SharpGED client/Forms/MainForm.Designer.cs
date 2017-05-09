@@ -85,7 +85,7 @@
             // 
             this.LabelPdfName.AutoSize = true;
             this.LabelPdfName.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPdfName.Location = new System.Drawing.Point(6, 12);
+            this.LabelPdfName.Location = new System.Drawing.Point(-3, 12);
             this.LabelPdfName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelPdfName.Name = "LabelPdfName";
             this.LabelPdfName.Size = new System.Drawing.Size(12, 17);
@@ -96,7 +96,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(474, 12);
+            this.LabelNbPages.Location = new System.Drawing.Point(523, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -396,9 +396,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
-            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 458);
+            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 537);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(244, 204);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(232, 125);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -427,7 +427,7 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(247, 507);
+            this.ListBoxFiles.Size = new System.Drawing.Size(242, 507);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -454,7 +454,7 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(525, 638);
+            this.PdfViewer.Size = new System.Drawing.Size(580, 638);
             this.PdfViewer.TabIndex = 20;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
