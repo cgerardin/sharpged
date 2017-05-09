@@ -264,8 +264,18 @@ namespace SharpGED_client
 
         private void ToolButtonPrint_Click(object sender, EventArgs e)
         {
-            //AdobeReader.LoadFile(localFilename);
-            //AdobeReader.printWithDialog();
+            printPdf = PdfViewer.Document.CreatePrintDocument();
+            printDialog.Document = printPdf;
+
+            if (printDialog.ShowDialog() == DialogResult.OK)
+            {
+                printPdf.PrinterSettings = printDialog.PrinterSettings;
+                printPdf.Print();
+            } else
+            {
+                printPdf = null;
+            }
+            
         }
 
         private void ToolButtonRefresh_Click(object sender, EventArgs e)

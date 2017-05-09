@@ -63,6 +63,8 @@
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
+            this.printPdf = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -456,6 +458,11 @@
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
+            // printDialog
+            // 
+            this.printDialog.AllowSomePages = true;
+            this.printDialog.UseEXDialog = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +532,8 @@
         private System.Windows.Forms.ToolStripButton ToolButtonRefresh;
         private System.Windows.Forms.ToolStripButton ToolButtonSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Drawing.Printing.PrintDocument printPdf;
+        private System.Windows.Forms.PrintDialog printDialog;
     }
 }
 
