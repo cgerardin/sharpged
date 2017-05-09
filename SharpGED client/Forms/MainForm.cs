@@ -2,6 +2,7 @@
 using SharpGED_client.Forms;
 using SharpGED_lib;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -11,6 +12,7 @@ namespace SharpGED_client
     {
 
         private string lastClickedHash = "";
+        private string lastClickedNode = "";
         private PdfDocument currentDocument;
 
         public MainForm()
@@ -53,9 +55,13 @@ namespace SharpGED_client
             RefreshFilesList();
             EmptyViewer();
 
+            // HiDPI trick
             MainToolbar.AutoSize = false;
             MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
             MainToolbar.AutoSize = true;
+
+            // Contournement bug de Windows
+            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
         }
 
         private void RefreshFilesList()
@@ -71,17 +77,28 @@ namespace SharpGED_client
             TreeViewCategories.Sort();
             TreeViewCategories.ExpandAll();
 
-            // Sélectionne le noeud racine
+            // Re-sélectionne le dernier noeud actif
             if (TreeViewCategories.Nodes.Count > 0)
             {
-                TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+                if(!lastClickedNode.Equals(""))
+                {
+                    TreeViewCategories.SelectedNode = TreeViewCategories.Nodes.Find(lastClickedNode, true)[0];
+                }
+                else
+                {
+                    TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+                }
+                
             }
+
+            
         }
 
         private TreeNode BuildNode(GedFolder folder)
         {
             TreeNode node = new TreeNode(folder.title);
             node.Tag = folder;
+            node.Name = folder.id.ToString();
 
             foreach (GedFolder subFolder in folder.folders)
             {
@@ -93,13 +110,23 @@ namespace SharpGED_client
             // Image spéciale pour le(s) noeud(s) racine
             if (folder.idParent == null)
             {
+                node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Bold);
                 node.SelectedImageIndex = 1;
                 node.ImageIndex = 1;
                 // Ajoute le nom du serveur
-                node.Text = node.Text + "@" + Program.serverHostname + ":" + Program.serverPort;
+                node.Text = node.Text + "@" + Program.serverHostname;
+                node.EnsureVisible();
             }
             else
             {
+                if (folder.files.Count == 0)
+                {
+                    node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Italic);
+                }
+                else
+                {
+                    node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Regular);
+                }
                 node.SelectedImageIndex = 0;
                 node.ImageIndex = 0;
             }
@@ -199,6 +226,7 @@ namespace SharpGED_client
             if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
             {
                 Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                lastClickedNode = "";
                 RefreshFilesList();
             }
         }
@@ -234,6 +262,7 @@ namespace SharpGED_client
         private void ToolButtonRefresh_Click(object sender, EventArgs e)
         {
             RefreshFilesList();
+            lastClickedNode = "";
         }
 
         private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
@@ -268,6 +297,7 @@ namespace SharpGED_client
             {
                 ListBoxFiles.Items.Add(currentGedFile);
             }
+            lastClickedNode = TreeViewCategories.SelectedNode.Name;
         }
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
