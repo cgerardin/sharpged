@@ -60,7 +60,10 @@ namespace SharpGED_client
 
         private void RefreshFilesList()
         {
+            EmptyViewer();
+            ListBoxFiles.Items.Clear();
             TreeViewCategories.Nodes.Clear();
+
             foreach (GedFolder currentGedFolder in Program.ServerListFolders())
             {
                 TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
@@ -73,9 +76,6 @@ namespace SharpGED_client
             {
                 TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
             }
-
-            EmptyViewer();
-            ListBoxFiles.Items.Clear();
         }
 
         private TreeNode BuildNode(GedFolder folder)
@@ -247,6 +247,12 @@ namespace SharpGED_client
         private void ToolButtonDisconnect_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TreeViewCategories_Click(object sender, EventArgs e)
+        {
+            // Nécessaire pour rafraichir _AfterSelect si on reclique sur le même élément
+            TreeViewCategories.SelectedNode = null;
         }
 
         private void TreeViewCategories_AfterSelect(object sender, TreeViewEventArgs e)
