@@ -140,7 +140,29 @@ namespace SharpGED_client
             if (ListBoxFiles.SelectedItem != null)
             {
                 EmptyViewer();
-                Program.ServerSend("DEL " + ((GedFile)ListBoxFiles.SelectedItem).hash);
+                Program.ServerDeleteFile((GedFile)ListBoxFiles.SelectedItem);
+                RefreshFilesList();
+            }
+        }
+
+        private void ToolButtonRenameFile_Click(object sender, EventArgs e)
+        {
+            if (ListBoxFiles.SelectedItem != null)
+            {
+                InputForm input = new InputForm();
+                input.title = "Entrez le nom souhaité pour le document";
+                input.label = "Nom";
+                input.value = ((GedFile)ListBoxFiles.SelectedItem).title;
+                input.ShowDialog();
+
+                while (input.Visible)
+                {
+                    Application.DoEvents();
+                }
+
+                Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), input.value);
+                input.Close();
+
                 RefreshFilesList();
             }
         }
@@ -167,14 +189,47 @@ namespace SharpGED_client
                 folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
             }
 
-            Program.ServerCreateFolders(folder);
+            Program.ServerCreateFolder(folder);
             RefreshFilesList();
+        }
+
+        private void ToolButtonFolderDelete_Click(object sender, EventArgs e)
+        {
+            Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+            RefreshFilesList();
+        }
+
+        private void ToolButtonFolderRename_Click(object sender, EventArgs e)
+        {
+            if (TreeViewCategories.SelectedNode != null)
+            {
+                InputForm input = new InputForm();
+                input.title = "Entrez le nom souhaité pour le dossier";
+                input.label = "Nom";
+                input.value = ((GedFolder)TreeViewCategories.SelectedNode.Tag).title;
+                input.ShowDialog();
+
+                while (input.Visible)
+                {
+                    Application.DoEvents();
+                }
+
+                Program.ServerRenameFolder((GedFolder)TreeViewCategories.SelectedNode.Tag, input.value);
+                input.Close();
+
+                RefreshFilesList();
+            }
         }
 
         private void ToolButtonPrint_Click(object sender, EventArgs e)
         {
             //AdobeReader.LoadFile(localFilename);
             //AdobeReader.printWithDialog();
+        }
+
+        private void ToolButtonRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshFilesList();
         }
 
         private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
@@ -257,29 +312,38 @@ namespace SharpGED_client
             PropertiesGroupBox.Height = Height - ListBoxFiles.Top - ListBoxFiles.Height - 110;
         }
 
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        private void ListBoxFiles_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.F2:
-                    if (ListBoxFiles.SelectedItem != null)
-                    {
-                        InputForm input = new InputForm();
-                        input.title = "Entrez le nom souhaité pour le document";
-                        input.label = "Titre";
-                        input.value = ((GedFile)ListBoxFiles.SelectedItem).title;
-                        input.ShowDialog();
+                    ToolButtonRenameFile_Click(null, null);
+                    break;
 
-                        while (input.Visible)
-                        {
-                            Application.DoEvents();
-                        }
+                case Keys.F5:
+                    ToolButtonRefresh_Click(null, null);
+                    break;
 
-                        Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), input.value);
-                        input.Close();
+                case Keys.Delete:
+                    ToolButtonDeleteFile_Click(null, null);
+                    break;
+            }
+        }
 
-                        RefreshFilesList();
-                    }
+        private void TreeViewCategories_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F2:
+                    ToolButtonFolderRename_Click(null, null);
+                    break;
+
+                case Keys.F5:
+                    ToolButtonRefresh_Click(null, null);
+                    break;
+
+                case Keys.Delete:
+                    ToolButtonFolderDelete_Click(null, null);
                     break;
             }
         }

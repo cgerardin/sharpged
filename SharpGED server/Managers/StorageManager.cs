@@ -69,29 +69,6 @@ namespace SharpGED_server
             TransfertManager.Send(foldersList.Save(), client);
         }
 
-        public void CreateFolders()
-        {
-            // Récupère l'objet et le dé-sérialise
-            GedFolder folder = (GedFolder)GedItem.Load(new MemoryStream(TransfertManager.Recive(client)));
-
-            // Crée un nouveau dossiers dans la base
-            using (SQLiteConnection db = new DatabaseManager().Connect())
-            {
-                db.Open();
-
-                Object idParent = folder.idParent;
-                if (idParent == null)
-                {
-                    idParent = "NULL";
-                }
-
-                string sql = "INSERT INTO folders (idParentFolder, title) " +
-                "VALUES (" + idParent + ", '" + folder.title.Replace("'", "''") + "');";
-
-                new SQLiteCommand(sql, db).ExecuteNonQuery();
-            }
-        }
-
         public GedList<GedFile> ListFiles(long folderId)
         {
             // Crée une GedList des fichiers contenus dans le dossier spécifié
@@ -118,7 +95,7 @@ namespace SharpGED_server
             return filesList;
         }
 
-        public void Send(string hash)
+        public void SendFile(string hash)
         {
             // Lit le fichier PDF et place son contenu dans un tableau
             byte[] fileBytes;
@@ -157,7 +134,7 @@ namespace SharpGED_server
             TransfertManager.Send(data, client);
         }
 
-        public void Recive()
+        public void ReciveFile()
         {
             // Récupère l'objet et le dé-sérialise
             RemoteGedFile file = (RemoteGedFile)GedItem.Load(new MemoryStream(TransfertManager.Recive(client)));
@@ -192,7 +169,7 @@ namespace SharpGED_server
             }
         }
 
-        public void Delete(string hash)
+        public void DeleteFile(string hash)
         {
             // Supprime les métadonnées en base
             using (SQLiteConnection db = new DatabaseManager().Connect())
@@ -205,7 +182,7 @@ namespace SharpGED_server
             File.Delete(baseFolder + "storage\\" + hash);
         }
 
-        public void Rename(string hash, string title)
+        public void RenameFile(string hash, string title)
         {
             // Met à jour les métadonnées en base
             using (SQLiteConnection db = new DatabaseManager().Connect())
@@ -219,6 +196,52 @@ namespace SharpGED_server
             pdf.Info.Title = title;
             pdf.Save(baseFolder + "storage\\" + hash);
             pdf.Close();
+        }
+
+        public void CreateFolder()
+        {
+            // Récupère l'objet et le dé-sérialise
+            GedFolder folder = (GedFolder)GedItem.Load(new MemoryStream(TransfertManager.Recive(client)));
+
+            // Crée un nouveau dossiers dans la base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                Object idParent = folder.idParent;
+                if (idParent == null)
+                {
+                    idParent = "NULL";
+                }
+
+                string sql = "INSERT INTO folders (idParentFolder, title) " +
+                "VALUES (" + idParent + ", '" + folder.title.Replace("'", "''") + "');";
+
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteFolder(long id)
+        {
+            // Rattache tous ses documents à la racine et supprime le dossiers spécifié de la base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                new SQLiteCommand("UPDATE files SET idFolder=1 WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
+                new SQLiteCommand("DELETE FROM folders WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
+            }
+        }
+
+        public void RenameFolder(long id, string title)
+        {
+            // Renomme le dossier dans la base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                new SQLiteCommand("UPDATE folders SET title='" + title.Replace("'", "''") + "' WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
+            }
         }
     }
 }

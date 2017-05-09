@@ -91,19 +91,10 @@ namespace SharpGED_client
             return GedList<GedFolder>.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
-        public static void ServerCreateFolders(GedFolder folder)
-        {
-            // Demande la création d'un dossier
-            ServerSend("ADDFOLD");
-
-            // Sérialise et envoie l'objet
-            TransfertManager.Send(folder.Save(), server);
-        }
-
         public static void ServerSendFile(RemoteGedFile file)
         {
             // Annonce l'envoi d'un fichier
-            ServerSend("PUT " + file.originalname);
+            ServerSend("PUTFILE " + file.originalname);
 
             // Sérialise et envoie l'objet
             TransfertManager.Send(file.Save(), server);
@@ -112,16 +103,42 @@ namespace SharpGED_client
         public static RemoteGedFile ServerReciveFile(GedFile gedFile)
         {
             // Demande le fichier passé en argument
-            ServerSend("GET " + gedFile.hash);
+            ServerSend("GETFILE " + gedFile.hash);
 
             // Récupère l'objet et le dé-sérialise
             return (RemoteGedFile)GedItem.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
-        public static void ServerRenameFile(GedFile gedFile, string title)
+        public static void ServerDeleteFile(GedFile file)
+        {
+            ServerSend("DELFILE " + file.hash);
+        }
+
+        public static void ServerRenameFile(GedFile file, string title)
         {
             // Renomme le fichier passé en argument
-            Program.ServerSend("REN " + gedFile.hash + ";" + title);
+            ServerSend("RENFILE " + file.hash + ";" + title);
+        }
+
+        public static void ServerCreateFolder(GedFolder folder)
+        {
+            // Demande la création d'un dossier
+            ServerSend("ADDFOLD " + folder.title);
+
+            // Sérialise et envoie l'objet
+            TransfertManager.Send(folder.Save(), server);
+        }
+
+        public static void ServerDeleteFolder(GedFolder folder)
+        {
+            // Demande la suppression d'un dossier
+            ServerSend("DELFOLD " + folder.id);
+        }
+
+        public static void ServerRenameFolder(GedFolder folder, string title)
+        {
+            // Demande le renommage d'un dossier
+            ServerSend("RENFOLD " + folder.id + ";" + title);
         }
 
         /// <summary>

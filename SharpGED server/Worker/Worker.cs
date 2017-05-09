@@ -88,37 +88,47 @@ namespace SharpGED_server
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
-                            case "GET": // Envoie le fichier spécifié en argument
-                                Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
-                                storage.Send(argv[0]);
-                                Console.WriteLine("[" + id + "] Terminé.");
-                                break;
-
-                            case "PUT": // Insère un fichier dans la base
-                                Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
-                                storage.Recive();
-                                Console.WriteLine("[" + id + "] Terminé.");
-                                break;
-
-                            case "LIST": // Envoie la liste les fichiers
+                            case "LIST": // Envoie la liste les dossiers et fichiers
                                 Console.WriteLine("[" + id + "] Envoi de la liste des fichiers");
                                 storage.ListFolders();
                                 break;
 
-                            case "ADDFOLD": // Crée un dossier
-                                Console.WriteLine("[" + id + "] Création d'un dossier");
-                                storage.CreateFolders();
-                                break;
-
-                            case "DEL": // Supprime un fichier de la base
-                                Console.WriteLine("[" + id + "] Suppression du fichier '" + argv[0] + "'...");
-                                storage.Delete(argv[0]);
+                            case "GETFILE": // Envoie le fichier spécifié en argument
+                                Console.WriteLine("[" + id + "] Envoi de '" + argv[0] + "'...");
+                                storage.SendFile(argv[0]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
-                            case "REN": // Renomme un fichier de la base
+                            case "PUTFILE": // Insère un fichier dans la base
+                                Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
+                                storage.ReciveFile();
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "DELFILE": // Supprime un fichier de la base
+                                Console.WriteLine("[" + id + "] Suppression du fichier '" + argv[0] + "'...");
+                                storage.DeleteFile(argv[0]);
+                                Console.WriteLine("[" + id + "] Terminé.");
+                                break;
+
+                            case "RENFILE": // Renomme un fichier de la base
                                 Console.WriteLine("[" + id + "] Renommage du fichier '" + argv[0] + "'");
-                                storage.Rename(argv[0], argv[1]);
+                                storage.RenameFile(argv[0], argv[1]);
+                                break;
+
+                            case "ADDFOLD": // Crée un dossier
+                                Console.WriteLine("[" + id + "] Création du dossier '" + argv[0] + "'");
+                                storage.CreateFolder();
+                                break;
+
+                            case "DELFOLD": // Supprime un dossier
+                                Console.WriteLine("[" + id + "] Suppression du dossier '" + argv[0] + "'");
+                                storage.DeleteFolder(long.Parse(argv[0]));
+                                break;
+
+                            case "RENFOLD": // Renomme un dossier
+                                Console.WriteLine("[" + id + "] Renommage du dossier '" + argv[0] + "'");
+                                storage.RenameFolder(long.Parse(argv[0]), argv[1]);
                                 break;
 
                             default:

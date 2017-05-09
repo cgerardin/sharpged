@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Nœud3");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Nœud5");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Nœud6");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode13});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Nœud1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nœud2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nœud3");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nœud5");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Nœud6");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
@@ -69,6 +69,10 @@
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
+            this.ToolButtonRenameFile = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonFolderRename = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonFolderDelete = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -115,14 +119,18 @@
             this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolButtonNewFile,
-            this.ToolButtonDeleteFile,
+            this.ToolButtonRenameFile,
             this.ToolButtonEditFile,
+            this.ToolButtonDeleteFile,
             this.toolStripSeparator1,
             this.ToolButtonFolderAdd,
+            this.ToolButtonFolderRename,
+            this.ToolButtonFolderDelete,
             this.toolStripSeparator4,
             this.ToolButtonPrint,
             this.ToolButtonScan,
             this.toolStripSeparator2,
+            this.ToolButtonRefresh,
             this.ToolButtonStopServer,
             this.ToolButtonInitDatabase,
             this.toolStripSeparator3,
@@ -304,28 +312,29 @@
             this.TreeViewCategories.Location = new System.Drawing.Point(0, 27);
             this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
             this.TreeViewCategories.Name = "TreeViewCategories";
-            treeNode1.Name = "Nœud1";
-            treeNode1.Text = "Nœud1";
-            treeNode2.Name = "Nœud2";
-            treeNode2.Text = "Nœud2";
-            treeNode3.Name = "Nœud3";
-            treeNode3.Text = "Nœud3";
-            treeNode4.Name = "Nœud0";
-            treeNode4.Text = "Nœud0";
-            treeNode5.Name = "Nœud5";
-            treeNode5.Text = "Nœud5";
-            treeNode6.Name = "Nœud6";
-            treeNode6.Text = "Nœud6";
-            treeNode7.Name = "Nœud4";
-            treeNode7.Text = "Nœud4";
+            treeNode8.Name = "Nœud1";
+            treeNode8.Text = "Nœud1";
+            treeNode9.Name = "Nœud2";
+            treeNode9.Text = "Nœud2";
+            treeNode10.Name = "Nœud3";
+            treeNode10.Text = "Nœud3";
+            treeNode11.Name = "Nœud0";
+            treeNode11.Text = "Nœud0";
+            treeNode12.Name = "Nœud5";
+            treeNode12.Text = "Nœud5";
+            treeNode13.Name = "Nœud6";
+            treeNode13.Text = "Nœud6";
+            treeNode14.Name = "Nœud4";
+            treeNode14.Text = "Nœud4";
             this.TreeViewCategories.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode7});
+            treeNode11,
+            treeNode14});
             this.TreeViewCategories.SelectedImageIndex = 0;
             this.TreeViewCategories.ShowRootLines = false;
             this.TreeViewCategories.Size = new System.Drawing.Size(186, 638);
             this.TreeViewCategories.TabIndex = 21;
             this.TreeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewCategories_AfterSelect);
+            this.TreeViewCategories.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TreeViewCategories_KeyDown);
             // 
             // TreeViewImageList
             // 
@@ -386,6 +395,7 @@
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
+            this.ListBoxFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxFiles_KeyDown);
             // 
             // label1
             // 
@@ -413,6 +423,46 @@
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
+            // ToolButtonRenameFile
+            // 
+            this.ToolButtonRenameFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonRenameFile.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonRenameFile.Image")));
+            this.ToolButtonRenameFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonRenameFile.Name = "ToolButtonRenameFile";
+            this.ToolButtonRenameFile.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonRenameFile.Text = "Renommer le document sélectionné";
+            this.ToolButtonRenameFile.Click += new System.EventHandler(this.ToolButtonRenameFile_Click);
+            // 
+            // ToolButtonFolderRename
+            // 
+            this.ToolButtonFolderRename.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonFolderRename.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonFolderRename.Image")));
+            this.ToolButtonFolderRename.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonFolderRename.Name = "ToolButtonFolderRename";
+            this.ToolButtonFolderRename.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonFolderRename.Text = "Renommer le dossier sélectionné";
+            this.ToolButtonFolderRename.Click += new System.EventHandler(this.ToolButtonFolderRename_Click);
+            // 
+            // ToolButtonFolderDelete
+            // 
+            this.ToolButtonFolderDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonFolderDelete.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonFolderDelete.Image")));
+            this.ToolButtonFolderDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonFolderDelete.Name = "ToolButtonFolderDelete";
+            this.ToolButtonFolderDelete.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonFolderDelete.Text = "Supprimer le dossier sélectionné";
+            this.ToolButtonFolderDelete.Click += new System.EventHandler(this.ToolButtonFolderDelete_Click);
+            // 
+            // ToolButtonRefresh
+            // 
+            this.ToolButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonRefresh.Image")));
+            this.ToolButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonRefresh.Name = "ToolButtonRefresh";
+            this.ToolButtonRefresh.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonRefresh.Text = "Rafraîchir l\'affichage";
+            this.ToolButtonRefresh.Click += new System.EventHandler(this.ToolButtonRefresh_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,7 +477,6 @@
             this.Text = "SharpGED";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.MainToolbar.ResumeLayout(false);
             this.MainToolbar.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
@@ -477,6 +526,10 @@
         private System.Windows.Forms.ToolStripButton ToolButtonFolderAdd;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ImageList TreeViewImageList;
+        private System.Windows.Forms.ToolStripButton ToolButtonRenameFile;
+        private System.Windows.Forms.ToolStripButton ToolButtonFolderRename;
+        private System.Windows.Forms.ToolStripButton ToolButtonFolderDelete;
+        private System.Windows.Forms.ToolStripButton ToolButtonRefresh;
     }
 }
 
