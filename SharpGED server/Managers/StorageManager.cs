@@ -223,12 +223,14 @@ namespace SharpGED_server
 
         public void DeleteFolder(long id)
         {
-            // Rattache tous ses documents à la racine et supprime le dossiers spécifié de la base
+            // Rattache tous ses enfants et documents à la racine et supprime le dossiers spécifié de la base
+            // Nécessite un contrôle de la GUI : La suppression n'est pas récursive
             using (SQLiteConnection db = new DatabaseManager().Connect())
             {
                 db.Open();
 
                 new SQLiteCommand("UPDATE files SET idFolder=1 WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
+                new SQLiteCommand("UPDATE folders SET idParentFolder=1 WHERE idParentFolder=" + id + ";", db).ExecuteNonQuery();
                 new SQLiteCommand("DELETE FROM folders WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
             }
         }

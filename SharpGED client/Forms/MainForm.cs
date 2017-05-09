@@ -195,8 +195,12 @@ namespace SharpGED_client
 
         private void ToolButtonFolderDelete_Click(object sender, EventArgs e)
         {
-            Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
-            RefreshFilesList();
+            // Interdis de supprimer un noeud racine
+            if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
+            {
+                Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                RefreshFilesList();
+            }
         }
 
         private void ToolButtonFolderRename_Click(object sender, EventArgs e)
