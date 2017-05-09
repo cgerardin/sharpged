@@ -14,6 +14,7 @@ namespace SharpGED_client
         private string lastClickedHash = "";
         private string lastClickedNode = "";
         private PdfDocument currentDocument;
+        private string currentDocumentUri;
 
         public MainForm()
         {
@@ -86,7 +87,8 @@ namespace SharpGED_client
                     if (searchResult.Length > 0)
                     {
                         TreeViewCategories.SelectedNode = TreeViewCategories.Nodes.Find(lastClickedNode, true)[0];
-                    } else
+                    }
+                    else
                     {
                         TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
                     }
@@ -160,7 +162,7 @@ namespace SharpGED_client
         {
             if (TreeViewCategories.SelectedNode == null)
             {
-                MessageBox.Show("Merci de sélectionner le dossier où le fichier sera déposé.");
+                MessageBox.Show("Merci de sélectionner le dossier où le fichier sera déposé.", "Précision requise", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -201,6 +203,51 @@ namespace SharpGED_client
 
                 RefreshFilesList();
             }
+        }
+
+        private void ToolButtonEditFile_Click(object sender, EventArgs e)
+        {
+            string originalTitle = LabelPdfName.Text;
+            string originalName = OriginalNameLabel.Text;
+
+            EditPdfForm edit = new EditPdfForm();
+            edit.documentUri = currentDocumentUri;
+            DialogResult = edit.ShowDialog();
+
+            while (edit.Visible)
+            {
+                Application.DoEvents();
+            }
+
+            if (DialogResult != DialogResult.OK)
+            {
+                return;
+            }
+
+            currentDocumentUri = edit.documentUri;
+            Program.tempFiles.Add(currentDocumentUri);
+
+            // Lit le fichier PDF et place son contenu dans un tableau
+            byte[] fileBytes;
+            int size;
+            using (FileStream inStream = File.OpenRead(currentDocumentUri))
+            {
+                size = (int)inStream.Length;
+                fileBytes = new byte[size];
+                inStream.Read(fileBytes, 0, size);
+            }
+
+            // Crée un GedFile et l'envoie au serveur
+            RemoteGedFile file = new RemoteGedFile();
+            file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+            file.size = size;
+            file.title = originalTitle + " (édité)";
+            file.originalname = originalName;
+            file.bytes = fileBytes;
+            Program.ServerSendFile(file);
+
+            edit.Close();
+            RefreshFilesList();
         }
 
         private void ToolButtonFolderAdd_Click(object sender, EventArgs e)
@@ -271,11 +318,12 @@ namespace SharpGED_client
             {
                 printPdf.PrinterSettings = printDialog.PrinterSettings;
                 printPdf.Print();
-            } else
+            }
+            else
             {
                 printPdf = null;
             }
-            
+
         }
 
         private void ToolButtonRefresh_Click(object sender, EventArgs e)
@@ -356,8 +404,9 @@ namespace SharpGED_client
                 PdfViewer.Load(currentDocument);
                 PdfViewer.Visible = true;
 
-                // Mémorise le fichier temporaire
+                // Mémorise le fichier temporaire et son URI
                 Program.tempFiles.Add(localFilename);
+                currentDocumentUri = localFilename;
             }
             else
             {

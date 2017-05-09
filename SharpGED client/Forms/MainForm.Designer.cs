@@ -96,7 +96,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(479, 12);
+            this.LabelNbPages.Location = new System.Drawing.Point(474, 12);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -179,6 +179,7 @@
             this.ToolButtonEditFile.Name = "ToolButtonEditFile";
             this.ToolButtonEditFile.Size = new System.Drawing.Size(33, 36);
             this.ToolButtonEditFile.Text = "Editer le document sélectionné";
+            this.ToolButtonEditFile.Click += new System.EventHandler(this.ToolButtonEditFile_Click);
             // 
             // ToolButtonDeleteFile
             // 
@@ -397,7 +398,7 @@
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 458);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(243, 204);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(244, 204);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -426,7 +427,7 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(246, 507);
+            this.ListBoxFiles.Size = new System.Drawing.Size(247, 507);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -453,7 +454,7 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(530, 638);
+            this.PdfViewer.Size = new System.Drawing.Size(525, 638);
             this.PdfViewer.TabIndex = 20;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;

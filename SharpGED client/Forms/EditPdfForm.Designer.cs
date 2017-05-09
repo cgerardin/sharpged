@@ -28,53 +28,124 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditPdfForm));
             this.ListBoxPages = new System.Windows.Forms.ListBox();
-            this.LabelNbPages = new System.Windows.Forms.Label();
-            this.ButtonEclaterPdf = new System.Windows.Forms.Button();
+            this.MainToolbar = new System.Windows.Forms.ToolStrip();
+            this.ToolButtonUp = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonDown = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonCut = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.PdfViewer = new PdfiumViewer.PdfRenderer();
+            this.MainToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // ListBoxPages
             // 
+            this.ListBoxPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(26, 29);
+            this.ListBoxPages.Location = new System.Drawing.Point(44, 9);
             this.ListBoxPages.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(479, 342);
+            this.ListBoxPages.Size = new System.Drawing.Size(148, 667);
             this.ListBoxPages.TabIndex = 9;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
-            // LabelNbPages
+            // MainToolbar
             // 
-            this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(23, 393);
-            this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
-            this.LabelNbPages.TabIndex = 8;
-            this.LabelNbPages.Text = "(0 pages)";
+            this.MainToolbar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolButtonUp,
+            this.ToolButtonDown,
+            this.ToolButtonCut,
+            this.toolStripSeparator1,
+            this.ToolButtonSave});
+            this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.MainToolbar.Location = new System.Drawing.Point(0, 0);
+            this.MainToolbar.Name = "MainToolbar";
+            this.MainToolbar.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.MainToolbar.Size = new System.Drawing.Size(38, 680);
+            this.MainToolbar.TabIndex = 21;
+            this.MainToolbar.Text = "toolStrip1";
             // 
-            // ButtonEclaterPdf
+            // ToolButtonUp
             // 
-            this.ButtonEclaterPdf.Location = new System.Drawing.Point(345, 393);
-            this.ButtonEclaterPdf.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.ButtonEclaterPdf.Name = "ButtonEclaterPdf";
-            this.ButtonEclaterPdf.Size = new System.Drawing.Size(160, 56);
-            this.ButtonEclaterPdf.TabIndex = 7;
-            this.ButtonEclaterPdf.Text = "Eclater";
-            this.ButtonEclaterPdf.UseVisualStyleBackColor = true;
-            this.ButtonEclaterPdf.Click += new System.EventHandler(this.ButtonEclaterPdf_Click);
+            this.ToolButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonUp.Image")));
+            this.ToolButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonUp.Name = "ToolButtonUp";
+            this.ToolButtonUp.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonUp.Text = "Au dessus";
+            // 
+            // ToolButtonDown
+            // 
+            this.ToolButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonDown.Image")));
+            this.ToolButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonDown.Name = "ToolButtonDown";
+            this.ToolButtonDown.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonDown.Text = "En dessous";
+            // 
+            // ToolButtonCut
+            // 
+            this.ToolButtonCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonCut.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonCut.Image")));
+            this.ToolButtonCut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonCut.Name = "ToolButtonCut";
+            this.ToolButtonCut.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonCut.Text = "Supprimer la page";
+            this.ToolButtonCut.Click += new System.EventHandler(this.ToolButtonCut_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(33, 6);
+            // 
+            // ToolButtonSave
+            // 
+            this.ToolButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonSave.Image")));
+            this.ToolButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonSave.Name = "ToolButtonSave";
+            this.ToolButtonSave.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonSave.Text = "Sauvegarder";
+            this.ToolButtonSave.Click += new System.EventHandler(this.ToolButtonSave_Click);
+            // 
+            // PdfViewer
+            // 
+            this.PdfViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PdfViewer.Location = new System.Drawing.Point(198, 9);
+            this.PdfViewer.Margin = new System.Windows.Forms.Padding(0);
+            this.PdfViewer.Name = "PdfViewer";
+            this.PdfViewer.Page = 0;
+            this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
+            this.PdfViewer.Size = new System.Drawing.Size(545, 665);
+            this.PdfViewer.TabIndex = 22;
+            this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
             // EditPdfForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 474);
+            this.ClientSize = new System.Drawing.Size(752, 680);
+            this.Controls.Add(this.PdfViewer);
+            this.Controls.Add(this.MainToolbar);
             this.Controls.Add(this.ListBoxPages);
-            this.Controls.Add(this.LabelNbPages);
-            this.Controls.Add(this.ButtonEclaterPdf);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.Name = "EditPdfForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Editeur de PDF";
+            this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditPdfForm_FormClosed);
+            this.Load += new System.EventHandler(this.EditPdfForm_Load);
+            this.MainToolbar.ResumeLayout(false);
+            this.MainToolbar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,7 +154,12 @@
         #endregion
 
         private System.Windows.Forms.ListBox ListBoxPages;
-        private System.Windows.Forms.Label LabelNbPages;
-        private System.Windows.Forms.Button ButtonEclaterPdf;
+        private System.Windows.Forms.ToolStrip MainToolbar;
+        private System.Windows.Forms.ToolStripButton ToolButtonUp;
+        private System.Windows.Forms.ToolStripButton ToolButtonDown;
+        private System.Windows.Forms.ToolStripButton ToolButtonCut;
+        private PdfiumViewer.PdfRenderer PdfViewer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton ToolButtonSave;
     }
 }
