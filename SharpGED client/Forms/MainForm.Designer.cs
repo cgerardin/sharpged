@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Nœud1");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Nœud2");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Nœud3");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Nœud5");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Nœud6");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Nœud3");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Nœud0", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9,
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Nœud5");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Nœud6");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Nœud4", new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode13});
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
@@ -65,6 +65,8 @@
             this.ListBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
+            this.ToolButtonFolderAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -96,7 +98,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(604, 12);
+            this.LabelNbPages.Location = new System.Drawing.Point(599, 12);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -114,6 +116,8 @@
             this.ToolButtonDeleteFile,
             this.ToolButtonEditFile,
             this.toolStripSeparator1,
+            this.ToolButtonFolderAdd,
+            this.toolStripSeparator4,
             this.ToolButtonPrint,
             this.ToolButtonScan,
             this.toolStripSeparator2,
@@ -281,23 +285,23 @@
             this.TreeViewCategories.Location = new System.Drawing.Point(0, 27);
             this.TreeViewCategories.Margin = new System.Windows.Forms.Padding(0);
             this.TreeViewCategories.Name = "TreeViewCategories";
-            treeNode15.Name = "Nœud1";
-            treeNode15.Text = "Nœud1";
-            treeNode16.Name = "Nœud2";
-            treeNode16.Text = "Nœud2";
-            treeNode17.Name = "Nœud3";
-            treeNode17.Text = "Nœud3";
-            treeNode18.Name = "Nœud0";
-            treeNode18.Text = "Nœud0";
-            treeNode19.Name = "Nœud5";
-            treeNode19.Text = "Nœud5";
-            treeNode20.Name = "Nœud6";
-            treeNode20.Text = "Nœud6";
-            treeNode21.Name = "Nœud4";
-            treeNode21.Text = "Nœud4";
+            treeNode8.Name = "Nœud1";
+            treeNode8.Text = "Nœud1";
+            treeNode9.Name = "Nœud2";
+            treeNode9.Text = "Nœud2";
+            treeNode10.Name = "Nœud3";
+            treeNode10.Text = "Nœud3";
+            treeNode11.Name = "Nœud0";
+            treeNode11.Text = "Nœud0";
+            treeNode12.Name = "Nœud5";
+            treeNode12.Text = "Nœud5";
+            treeNode13.Name = "Nœud6";
+            treeNode13.Text = "Nœud6";
+            treeNode14.Name = "Nœud4";
+            treeNode14.Text = "Nœud4";
             this.TreeViewCategories.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode21});
+            treeNode11,
+            treeNode14});
             this.TreeViewCategories.Size = new System.Drawing.Size(114, 638);
             this.TreeViewCategories.TabIndex = 21;
             this.TreeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewCategories_AfterSelect);
@@ -321,7 +325,7 @@
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 458);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(218, 204);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(219, 204);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -350,7 +354,7 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(221, 507);
+            this.ListBoxFiles.Size = new System.Drawing.Size(222, 507);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -376,10 +380,25 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(655, 638);
+            this.PdfViewer.Size = new System.Drawing.Size(650, 638);
             this.PdfViewer.TabIndex = 20;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
+            // 
+            // ToolButtonFolderAdd
+            // 
+            this.ToolButtonFolderAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonFolderAdd.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonFolderAdd.Image")));
+            this.ToolButtonFolderAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonFolderAdd.Name = "ToolButtonFolderAdd";
+            this.ToolButtonFolderAdd.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonFolderAdd.Text = "Créer un dossier";
+            this.ToolButtonFolderAdd.Click += new System.EventHandler(this.ToolButtonFolderAdd_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(33, 6);
             // 
             // MainForm
             // 
@@ -442,6 +461,8 @@
         private System.Windows.Forms.ToolStripButton ToolButtonScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private PdfiumViewer.PdfRenderer PdfViewer;
+        private System.Windows.Forms.ToolStripButton ToolButtonFolderAdd;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

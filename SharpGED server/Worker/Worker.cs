@@ -105,6 +105,11 @@ namespace SharpGED_server
                                 storage.ListFolders();
                                 break;
 
+                            case "ADDFOLD": // Crée un dossier
+                                Console.WriteLine("[" + id + "] Création d'un dossier");
+                                storage.CreateFolders();
+                                break;
+
                             case "DEL": // Supprime un fichier de la base
                                 Console.WriteLine("[" + id + "] Suppression du fichier '" + argv[0] + "'...");
                                 storage.Delete(argv[0]);

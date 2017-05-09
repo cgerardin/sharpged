@@ -65,6 +65,8 @@ namespace SharpGED_client
             {
                 TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
+            EmptyViewer();
+            ListBoxFiles.Items.Clear();
         }
 
         private TreeNode BuildNode(GedFolder folder)
@@ -97,7 +99,7 @@ namespace SharpGED_client
 
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
-            if(TreeViewCategories.SelectedNode == null)
+            if (TreeViewCategories.SelectedNode == null)
             {
                 MessageBox.Show("Merci de sélectionner le dossier où le fichier sera déposé.");
                 return;
@@ -118,6 +120,38 @@ namespace SharpGED_client
                 Program.ServerSend("DEL " + ((GedFile)ListBoxFiles.SelectedItem).hash);
                 RefreshFilesList();
             }
+        }
+
+        private void ToolButtonFolderAdd_Click(object sender, EventArgs e)
+        {
+            GedFolder folder = new GedFolder();
+
+            InputForm input = new InputForm();
+            input.title = "Entrez le nom souhaité pour le dossier";
+            input.label = "Nom";
+            input.value = "Nouveau dossier";
+            input.ShowDialog();
+
+            while (input.Visible)
+            {
+                Application.DoEvents();
+            }
+            folder.title = input.value;
+            input.Close();
+
+            if (TreeViewCategories.SelectedNode != null)
+            {
+                folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+            }
+
+            Program.ServerCreateFolders(folder);
+            RefreshFilesList();
+        }
+
+        private void ToolButtonPrint_Click(object sender, EventArgs e)
+        {
+            //AdobeReader.LoadFile(localFilename);
+            //AdobeReader.printWithDialog();
         }
 
         private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
@@ -199,12 +233,6 @@ namespace SharpGED_client
             PropertiesGroupBox.Height = Height - ListBoxFiles.Top - ListBoxFiles.Height - 110;
         }
 
-        private void ToolButtonPrint_Click(object sender, EventArgs e)
-        {
-            //AdobeReader.LoadFile(localFilename);
-            //AdobeReader.printWithDialog();
-        }
-
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -212,9 +240,20 @@ namespace SharpGED_client
                 case Keys.F2:
                     if (ListBoxFiles.SelectedItem != null)
                     {
-                        RenameForm rename = new RenameForm();
-                        rename.file = (GedFile)ListBoxFiles.SelectedItem;
-                        rename.ShowDialog();
+                        InputForm input = new InputForm();
+                        input.title = "Entrez le nom souhaité pour le document";
+                        input.label = "Titre";
+                        input.value = ((GedFile)ListBoxFiles.SelectedItem).title;
+                        input.ShowDialog();
+
+                        while (input.Visible)
+                        {
+                            Application.DoEvents();
+                        }
+
+                        Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), input.value);
+                        input.Close();
+
                         RefreshFilesList();
                     }
                     break;

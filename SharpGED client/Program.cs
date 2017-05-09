@@ -90,6 +90,15 @@ namespace SharpGED_client
             return GedList<GedFolder>.Load(new MemoryStream(TransfertManager.Recive(server)));
         }
 
+        public static void ServerCreateFolders(GedFolder folder)
+        {
+            // Demande la création d'un dossier
+            ServerSend("ADDFOLD");
+
+            // Sérialise et envoie l'objet
+            TransfertManager.Send(folder.Save(), server);
+        }
+
         public static void ServerSendFile(RemoteGedFile file)
         {
             // Annonce l'envoi d'un fichier

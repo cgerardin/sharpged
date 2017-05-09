@@ -68,6 +68,29 @@ namespace SharpGED_server
             TransfertManager.Send(foldersList.Save(), client);
         }
 
+        public void CreateFolders()
+        {
+            // Récupère l'objet et le dé-sérialise
+            GedFolder folder = (GedFolder)GedItem.Load(new MemoryStream(TransfertManager.Recive(client)));
+
+            // Crée un nouveau dossiers dans la base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                Object idParent = folder.idParent;
+                if (idParent == null)
+                {
+                    idParent = "NULL";
+                }
+
+                string sql = "INSERT INTO folders (idParentFolder, title) " +
+                "VALUES (" + idParent + ", '" + folder.title.Replace("'", "''") + "');";
+
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+            }
+        }
+
         public GedList<GedFile> ListFiles(long folderId)
         {
             // Crée une GedList des fichiers contenus dans le dossier spécifié
