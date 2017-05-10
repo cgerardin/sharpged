@@ -414,12 +414,6 @@ namespace SharpGED_client
             }
         }
 
-        private void ChildSplitContainer_Resize(object sender, EventArgs e)
-        {
-            PropertiesGroupBox.Top = ListBoxFiles.Top + ListBoxFiles.Height + 10;
-            PropertiesGroupBox.Height = Height - ListBoxFiles.Top - ListBoxFiles.Height - 10;
-        }
-
         private void ListBoxFiles_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)

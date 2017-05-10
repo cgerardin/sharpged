@@ -96,7 +96,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(1210, 29);
+            this.LabelNbPages.Location = new System.Drawing.Point(1194, 29);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(14, 0, 14, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(115, 29);
@@ -321,7 +321,7 @@
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelNbPages);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelPdfName);
             this.MainSplitContainer.Size = new System.Drawing.Size(2373, 1483);
-            this.MainSplitContainer.SplitterDistance = 998;
+            this.MainSplitContainer.SplitterDistance = 997;
             this.MainSplitContainer.SplitterWidth = 21;
             this.MainSplitContainer.TabIndex = 21;
             // 
@@ -331,7 +331,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ChildSplitContainer.Location = new System.Drawing.Point(0, 0);
-            this.ChildSplitContainer.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.ChildSplitContainer.Margin = new System.Windows.Forms.Padding(7);
             this.ChildSplitContainer.Name = "ChildSplitContainer";
             // 
             // ChildSplitContainer.Panel1
@@ -345,11 +345,10 @@
             this.ChildSplitContainer.Panel2.Controls.Add(this.PropertiesGroupBox);
             this.ChildSplitContainer.Panel2.Controls.Add(this.ListBoxFiles);
             this.ChildSplitContainer.Panel2.Controls.Add(this.label1);
-            this.ChildSplitContainer.Size = new System.Drawing.Size(1012, 1483);
-            this.ChildSplitContainer.SplitterDistance = 433;
+            this.ChildSplitContainer.Size = new System.Drawing.Size(1011, 1483);
+            this.ChildSplitContainer.SplitterDistance = 432;
             this.ChildSplitContainer.SplitterWidth = 7;
             this.ChildSplitContainer.TabIndex = 20;
-            this.ChildSplitContainer.Resize += new System.EventHandler(this.ChildSplitContainer_Resize);
             // 
             // TreeViewCategories
             // 
@@ -367,7 +366,7 @@
             this.TreeViewCategories.SelectedImageIndex = 0;
             this.TreeViewCategories.ShowLines = false;
             this.TreeViewCategories.ShowRootLines = false;
-            this.TreeViewCategories.Size = new System.Drawing.Size(433, 1423);
+            this.TreeViewCategories.Size = new System.Drawing.Size(432, 1423);
             this.TreeViewCategories.TabIndex = 21;
             this.TreeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewCategories_AfterSelect);
             this.TreeViewCategories.Click += new System.EventHandler(this.TreeViewCategories_Click);
@@ -399,10 +398,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 1198);
-            this.PropertiesGroupBox.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.PropertiesGroupBox.Margin = new System.Windows.Forms.Padding(7);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(544, 279);
+            this.PropertiesGroupBox.Padding = new System.Windows.Forms.Padding(7);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(541, 267);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -412,7 +411,7 @@
             this.OriginalNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OriginalNameLabel.AutoSize = true;
-            this.OriginalNameLabel.Location = new System.Drawing.Point(21, 78);
+            this.OriginalNameLabel.Location = new System.Drawing.Point(21, 35);
             this.OriginalNameLabel.Margin = new System.Windows.Forms.Padding(14, 0, 14, 0);
             this.OriginalNameLabel.Name = "OriginalNameLabel";
             this.OriginalNameLabel.Size = new System.Drawing.Size(21, 29);
@@ -432,7 +431,7 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(567, 1131);
+            this.ListBoxFiles.Size = new System.Drawing.Size(564, 1131);
             this.ListBoxFiles.TabIndex = 16;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -459,7 +458,7 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(1343, 1423);
+            this.PdfViewer.Size = new System.Drawing.Size(1327, 1423);
             this.PdfViewer.TabIndex = 20;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
