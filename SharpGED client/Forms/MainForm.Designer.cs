@@ -65,6 +65,7 @@
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -128,12 +129,13 @@
             this.ToolButtonStopServer,
             this.ToolButtonInitDatabase,
             this.toolStripSeparator3,
-            this.ToolButtonDisconnect});
+            this.ToolButtonDisconnect,
+            this.toolStripButton1});
             this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
             this.MainToolbar.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.MainToolbar.Size = new System.Drawing.Size(41, 1483);
+            this.MainToolbar.Size = new System.Drawing.Size(75, 1483);
             this.MainToolbar.TabIndex = 20;
             this.MainToolbar.Text = "toolStrip1";
             // 
@@ -143,7 +145,7 @@
             this.ToolButtonSearch.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonSearch.Image")));
             this.ToolButtonSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonSearch.Name = "ToolButtonSearch";
-            this.ToolButtonSearch.Size = new System.Drawing.Size(30, 36);
+            this.ToolButtonSearch.Size = new System.Drawing.Size(64, 36);
             this.ToolButtonSearch.Text = "Recherche";
             // 
             // toolStripSeparator5
@@ -468,6 +470,15 @@
             this.printDialog.AllowSomePages = true;
             this.printDialog.UseEXDialog = true;
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(64, 36);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
@@ -539,6 +550,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Drawing.Printing.PrintDocument printPdf;
         private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

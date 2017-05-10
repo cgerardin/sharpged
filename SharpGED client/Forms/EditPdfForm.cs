@@ -21,7 +21,7 @@ namespace SharpGED_client.Forms
         {
             // HiDPI trick
             MainToolbar.AutoSize = false;
-            MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96), 32 * ((int)CreateGraphics().DpiY / 96));
+            MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96) + 8, 32 * ((int)CreateGraphics().DpiY / 96));
             MainToolbar.AutoSize = true;
 
             source = PdfReader.Open(documentUri, PdfDocumentOpenMode.Import);
