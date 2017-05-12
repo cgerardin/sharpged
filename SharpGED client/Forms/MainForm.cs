@@ -39,7 +39,10 @@ namespace SharpGED_client
             {
                 try
                 {
-                    File.Delete(tmpFile);
+                    if(File.Exists(tmpFile))
+                    {
+                        File.Delete(tmpFile);
+                    }
                 }
                 catch (IOException ex)
                 {
@@ -213,7 +216,6 @@ namespace SharpGED_client
             if (edit.ShowDialog() == DialogResult.OK)
             {
                 currentDocumentUri = edit.documentUri;
-                Program.tempFiles.Add(currentDocumentUri);
 
                 // Lit le fichier PDF et place son contenu dans un tableau
                 byte[] fileBytes;
