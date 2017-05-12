@@ -100,19 +100,19 @@ namespace SharpGED_server
                                 break;
 
                             case "PUTFILE": // Insère un fichier dans la base
-                                Console.WriteLine("[" + id + "] Réception du fichier '" + argv[0] + "'...");
+                                Console.WriteLine("[" + id + "] Réception de '" + argv[0] + "'...");
                                 storage.ReciveFile();
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "DELFILE": // Supprime un fichier de la base
-                                Console.WriteLine("[" + id + "] Suppression du fichier '" + argv[0] + "'...");
+                                Console.WriteLine("[" + id + "] Suppression de '" + argv[0] + "'...");
                                 storage.DeleteFile(argv[0]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 
                             case "RENFILE": // Renomme un fichier de la base
-                                Console.WriteLine("[" + id + "] Renommage du fichier '" + argv[0] + "'");
+                                Console.WriteLine("[" + id + "] Renommage de '" + argv[0] + "'");
                                 storage.RenameFile(argv[0], argv[1]);
                                 break;
 
