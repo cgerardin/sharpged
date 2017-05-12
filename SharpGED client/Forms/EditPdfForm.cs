@@ -62,6 +62,16 @@ namespace SharpGED_client.Forms
             }
         }
 
+        private void EmptyViewer()
+        {
+            PdfViewer.Visible = false;
+            if (currentDocument != null)
+            {
+                currentDocument.Dispose();
+            }
+            PdfViewer.Load(PdfiumViewer.PdfDocument.Load("BLANK.pdf"));
+        }
+
         private void ToolButtonCut_Click(object sender, EventArgs e)
         {
             EmptyViewer();
@@ -80,42 +90,59 @@ namespace SharpGED_client.Forms
             }
         }
 
-        private void EmptyViewer()
+        private void ToolButtonUp_Click(object sender, EventArgs e)
         {
-            PdfViewer.Visible = false;
-            if (currentDocument != null)
+            int index = ListBoxPages.SelectedIndex;
+
+            if (ListBoxPages.SelectedItem != null && index > 0)
             {
-                currentDocument.Dispose();
+                ListBoxPages.Items.Insert(index - 1, ListBoxPages.SelectedItem);
+                ListBoxPages.Items.RemoveAt(index + 1);
+                ListBoxPages.SelectedIndex = index - 1;
             }
-            PdfViewer.Load(PdfiumViewer.PdfDocument.Load("BLANK.pdf"));
         }
 
-        private void ToolButtonSave_Click(object sender, EventArgs e)
+        private void ToolButtonDown_Click(object sender, EventArgs e)
+        {
+            int index = ListBoxPages.SelectedIndex;
+
+            if (ListBoxPages.SelectedItem != null && index < ListBoxPages.Items.Count - 1)
+            {
+                ListBoxPages.Items.Insert(index + 2, ListBoxPages.SelectedItem);
+                ListBoxPages.Items.RemoveAt(index);
+                ListBoxPages.SelectedIndex = index + 1;
+            }
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             EmptyViewer();
-            PdfDocument merge = new PdfDocument();
-            merge.Info.Title = source.Info.Title;
 
-            if (ListBoxPages.Items.Count > 0)
+            if (source != null)
             {
-                foreach (int currPage in ListBoxPages.Items)
+                PdfDocument merge = new PdfDocument();
+                merge.Info.Title = source.Info.Title;
+
+                if (ListBoxPages.Items.Count > 0)
                 {
-                    if (source.Pages.Count > 0)
+                    foreach (int currPage in ListBoxPages.Items)
                     {
-                        merge.AddPage(source.Pages[currPage - 1]);
+                        if (source.Pages.Count > 0)
+                        {
+                            merge.AddPage(source.Pages[currPage - 1]);
+                        }
+                        File.Delete(documentUri.Substring(0, documentUri.Length - 4) + "[" + currPage.ToString("0000") + "].pdf");
                     }
-                    File.Delete(documentUri.Substring(0, documentUri.Length - 4) + "[" + currPage.ToString("0000") + "].pdf");
+
+                    documentUri = documentUri.Substring(0, documentUri.Length - 4) + "[EDIT].pdf";
+                    merge.Save(documentUri);
+                    merge.Close();
+
+                    DialogResult = DialogResult.OK;
                 }
-
-                documentUri = documentUri.Substring(0, documentUri.Length - 4) + "[EDIT].pdf";
-                merge.Save(documentUri);
-                merge.Close();
-
-                DialogResult = DialogResult.OK;
             }
 
             Close();
         }
-
     }
 }

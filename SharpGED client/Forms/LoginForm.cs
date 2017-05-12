@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Sockets;
 using System.Windows.Forms;
 
@@ -22,7 +21,17 @@ namespace SharpGED_client
             try
             {
                 Cursor = Cursors.WaitCursor;
-                Program.ServerConnect(TextBoxServer.Text, int.Parse(TextBoxPort.Text));
+                int port;
+                if (int.TryParse(TextBoxPort.Text, out port))
+                {
+                    Program.ServerConnect(TextBoxServer.Text, port);
+                }
+                else
+                {
+                    MessageBox.Show("Le numéro de port saisi est incorrect.", "Impossible de se connecter au serveur", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
             }
             catch (SocketException ex)
             {

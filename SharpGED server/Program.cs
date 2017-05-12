@@ -35,7 +35,7 @@ namespace SharpGED_server
             listener.Bind(new IPEndPoint(listenIP, listenPort));
             listener.Listen(10);
 
-            Console.WriteLine("Prêt...");
+            Console.WriteLine("En écoute à l'adresse " + listenIP_string + ":" + listenPort + " ...");
 
             while (!_stopServer)
             {

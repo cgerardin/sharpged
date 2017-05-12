@@ -56,7 +56,7 @@ namespace SharpGED_client
             RefreshFilesList();
             EmptyViewer();
 
-            // Contournement bug de Windows
+            // Contournement d'un bug de Windows
             TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
         }
 

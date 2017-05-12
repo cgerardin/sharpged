@@ -34,9 +34,8 @@
             this.ToolButtonUp = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonDown = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonCut = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolButtonSave = new System.Windows.Forms.ToolStripButton();
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
+            this.ButtonSave = new System.Windows.Forms.Button();
             this.MainToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,9 +60,7 @@
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolButtonUp,
             this.ToolButtonDown,
-            this.ToolButtonCut,
-            this.toolStripSeparator1,
-            this.ToolButtonSave});
+            this.ToolButtonCut});
             this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
@@ -80,6 +77,7 @@
             this.ToolButtonUp.Name = "ToolButtonUp";
             this.ToolButtonUp.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonUp.Text = "Au dessus";
+            this.ToolButtonUp.Click += new System.EventHandler(this.ToolButtonUp_Click);
             // 
             // ToolButtonDown
             // 
@@ -90,6 +88,7 @@
             this.ToolButtonDown.Name = "ToolButtonDown";
             this.ToolButtonDown.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonDown.Text = "En dessous";
+            this.ToolButtonDown.Click += new System.EventHandler(this.ToolButtonDown_Click);
             // 
             // ToolButtonCut
             // 
@@ -102,22 +101,6 @@
             this.ToolButtonCut.Text = "Supprimer la page";
             this.ToolButtonCut.Click += new System.EventHandler(this.ToolButtonCut_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
-            // 
-            // ToolButtonSave
-            // 
-            this.ToolButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonSave.Image")));
-            this.ToolButtonSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonSave.Name = "ToolButtonSave";
-            this.ToolButtonSave.Size = new System.Drawing.Size(40, 36);
-            this.ToolButtonSave.Text = "Sauvegarder";
-            this.ToolButtonSave.Click += new System.EventHandler(this.ToolButtonSave_Click);
-            // 
             // PdfViewer
             // 
             this.PdfViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -128,15 +111,27 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(553, 665);
+            this.PdfViewer.Size = new System.Drawing.Size(553, 618);
             this.PdfViewer.TabIndex = 2;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
+            // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonSave.Location = new System.Drawing.Point(617, 640);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(123, 28);
+            this.ButtonSave.TabIndex = 22;
+            this.ButtonSave.Text = "Enregistrer et fermer";
+            this.ButtonSave.UseVisualStyleBackColor = true;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // EditPdfForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 680);
+            this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.PdfViewer);
             this.Controls.Add(this.MainToolbar);
             this.Controls.Add(this.ListBoxPages);
@@ -145,7 +140,6 @@
             this.Name = "EditPdfForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Editeur de PDF";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditPdfForm_FormClosed);
             this.Load += new System.EventHandler(this.EditPdfForm_Load);
             this.MainToolbar.ResumeLayout(false);
@@ -162,7 +156,6 @@
         private System.Windows.Forms.ToolStripButton ToolButtonDown;
         private System.Windows.Forms.ToolStripButton ToolButtonCut;
         private PdfiumViewer.PdfRenderer PdfViewer;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton ToolButtonSave;
+        private System.Windows.Forms.Button ButtonSave;
     }
 }
