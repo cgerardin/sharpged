@@ -62,6 +62,8 @@ namespace SharpGED_client
 
         private void RefreshFilesList()
         {
+            Cursor = Cursors.WaitCursor;
+
             EmptyViewer();
             ListBoxFiles.Items.Clear();
             TreeViewCategories.Nodes.Clear();
@@ -95,7 +97,7 @@ namespace SharpGED_client
 
             }
 
-
+            Cursor = Cursors.Default;
         }
 
         private TreeNode BuildNode(GedFolder folder)
@@ -247,6 +249,8 @@ namespace SharpGED_client
 
             if (inputDialog.ShowDialog() == DialogResult.OK)
             {
+                Cursor = Cursors.WaitCursor;
+
                 folder.title = inputDialog.value;
 
                 if (TreeViewCategories.SelectedNode != null)
@@ -255,6 +259,8 @@ namespace SharpGED_client
                 }
 
                 Program.ServerCreateFolder(folder);
+
+                Cursor = Cursors.Default;
                 RefreshFilesList();
             }
         }
@@ -266,7 +272,9 @@ namespace SharpGED_client
             {
                 if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce dossier ? (les sous-dossiers et fichiers inclus seront déplacés à la racine)", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    Cursor = Cursors.WaitCursor;
                     Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                    Cursor = Cursors.Default;
                     lastClickedNode = "";
                     RefreshFilesList();
                 }
@@ -284,7 +292,9 @@ namespace SharpGED_client
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
+                    Cursor = Cursors.WaitCursor;
                     Program.ServerRenameFolder((GedFolder)TreeViewCategories.SelectedNode.Tag, inputDialog.value);
+                    Cursor = Cursors.Default;
                     RefreshFilesList();
                 }
             }
@@ -338,6 +348,8 @@ namespace SharpGED_client
 
         private void TreeViewCategories_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
+
             lastClickedHash = "";
             ListBoxFiles.SelectedItem = null;
             ListBoxFiles.Items.Clear();
@@ -346,6 +358,8 @@ namespace SharpGED_client
                 ListBoxFiles.Items.Add(currentGedFile);
             }
             lastClickedNode = TreeViewCategories.SelectedNode.Name;
+
+            Cursor = Cursors.Default;
         }
 
         private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
@@ -362,6 +376,8 @@ namespace SharpGED_client
                 {
                     lastClickedHash = selectedFile.hash;
                 }
+
+                Cursor = Cursors.WaitCursor;
 
                 RemoteGedFile file = Program.ServerReciveFile(selectedFile);
 
@@ -388,6 +404,8 @@ namespace SharpGED_client
                 // Mémorise le fichier temporaire et son URI
                 Program.tempFiles.Add(localFilename);
                 currentDocumentUri = localFilename;
+
+                Cursor = Cursors.Default;
             }
             else
             {

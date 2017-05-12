@@ -49,7 +49,7 @@
             this.ListBoxPages.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ListBoxPages.Name = "ListBoxPages";
             this.ListBoxPages.Size = new System.Drawing.Size(144, 667);
-            this.ListBoxPages.TabIndex = 9;
+            this.ListBoxPages.TabIndex = 1;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
             // MainToolbar
@@ -128,8 +128,8 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(545, 665);
-            this.PdfViewer.TabIndex = 22;
+            this.PdfViewer.Size = new System.Drawing.Size(553, 665);
+            this.PdfViewer.TabIndex = 2;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
             // EditPdfForm

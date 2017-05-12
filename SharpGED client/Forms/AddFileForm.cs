@@ -41,6 +41,8 @@ namespace SharpGED_client
 
         private void ButtonAddPdf_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
+
             // Lit le fichier PDF et place son contenu dans un tableau
             byte[] fileBytes;
             int size;
@@ -59,6 +61,8 @@ namespace SharpGED_client
             file.originalname = pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1);
             file.bytes = fileBytes;
             Program.ServerSendFile(file);
+
+            Cursor = Cursors.Default;
 
             DialogResult = DialogResult.OK;
             Close();

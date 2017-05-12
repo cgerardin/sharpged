@@ -48,7 +48,7 @@
             this.ButtonConnect.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ButtonConnect.Name = "ButtonConnect";
             this.ButtonConnect.Size = new System.Drawing.Size(85, 28);
-            this.ButtonConnect.TabIndex = 11;
+            this.ButtonConnect.TabIndex = 5;
             this.ButtonConnect.Text = "Connexion";
             this.ButtonConnect.UseVisualStyleBackColor = true;
             this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
@@ -59,7 +59,7 @@
             this.TextBoxServer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.TextBoxServer.Name = "TextBoxServer";
             this.TextBoxServer.Size = new System.Drawing.Size(138, 20);
-            this.TextBoxServer.TabIndex = 12;
+            this.TextBoxServer.TabIndex = 1;
             this.TextBoxServer.Text = "localhost";
             // 
             // TextBoxUser
@@ -69,7 +69,7 @@
             this.TextBoxUser.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.TextBoxUser.Name = "TextBoxUser";
             this.TextBoxUser.Size = new System.Drawing.Size(179, 20);
-            this.TextBoxUser.TabIndex = 13;
+            this.TextBoxUser.TabIndex = 3;
             this.TextBoxUser.Text = "root";
             // 
             // TextBoxPassword
@@ -80,7 +80,7 @@
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.PasswordChar = '●';
             this.TextBoxPassword.Size = new System.Drawing.Size(179, 20);
-            this.TextBoxPassword.TabIndex = 14;
+            this.TextBoxPassword.TabIndex = 4;
             // 
             // label1
             // 
@@ -119,7 +119,7 @@
             this.TextBoxPort.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.TextBoxPort.Name = "TextBoxPort";
             this.TextBoxPort.Size = new System.Drawing.Size(38, 20);
-            this.TextBoxPort.TabIndex = 19;
+            this.TextBoxPort.TabIndex = 2;
             this.TextBoxPort.Text = "9090";
             this.TextBoxPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -157,7 +157,6 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SharpGED - Se connecter à un serveur";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

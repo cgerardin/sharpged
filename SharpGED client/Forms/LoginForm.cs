@@ -21,14 +21,19 @@ namespace SharpGED_client
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
                 Program.ServerConnect(TextBoxServer.Text, int.Parse(TextBoxPort.Text));
             }
             catch (SocketException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Impossible de se connecter au serveur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+
             new MainForm().Show();
             Hide();
         }

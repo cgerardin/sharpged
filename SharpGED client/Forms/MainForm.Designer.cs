@@ -41,8 +41,8 @@
             this.ToolButtonEditFile = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonDeleteFile = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolButtonFolderRename = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonFolderAdd = new System.Windows.Forms.ToolStripButton();
+            this.ToolButtonFolderRename = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonFolderDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolButtonScan = new System.Windows.Forms.ToolStripButton();
@@ -96,7 +96,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(799, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(785, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -117,8 +117,8 @@
             this.ToolButtonEditFile,
             this.ToolButtonDeleteFile,
             this.toolStripSeparator1,
-            this.ToolButtonFolderRename,
             this.ToolButtonFolderAdd,
+            this.ToolButtonFolderRename,
             this.ToolButtonFolderDelete,
             this.toolStripSeparator4,
             this.ToolButtonScan,
@@ -200,17 +200,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
             // 
-            // ToolButtonFolderRename
-            // 
-            this.ToolButtonFolderRename.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonFolderRename.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonFolderRename.Image")));
-            this.ToolButtonFolderRename.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolButtonFolderRename.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonFolderRename.Name = "ToolButtonFolderRename";
-            this.ToolButtonFolderRename.Size = new System.Drawing.Size(40, 36);
-            this.ToolButtonFolderRename.Text = "Renommer le dossier sélectionné";
-            this.ToolButtonFolderRename.Click += new System.EventHandler(this.ToolButtonFolderRename_Click);
-            // 
             // ToolButtonFolderAdd
             // 
             this.ToolButtonFolderAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -221,6 +210,17 @@
             this.ToolButtonFolderAdd.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonFolderAdd.Text = "Créer un dossier";
             this.ToolButtonFolderAdd.Click += new System.EventHandler(this.ToolButtonFolderAdd_Click);
+            // 
+            // ToolButtonFolderRename
+            // 
+            this.ToolButtonFolderRename.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolButtonFolderRename.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonFolderRename.Image")));
+            this.ToolButtonFolderRename.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.ToolButtonFolderRename.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolButtonFolderRename.Name = "ToolButtonFolderRename";
+            this.ToolButtonFolderRename.Size = new System.Drawing.Size(40, 36);
+            this.ToolButtonFolderRename.Text = "Renommer le dossier sélectionné";
+            this.ToolButtonFolderRename.Click += new System.EventHandler(this.ToolButtonFolderRename_Click);
             // 
             // ToolButtonFolderDelete
             // 
@@ -332,10 +332,11 @@
             this.MainSplitContainer.Panel2.Controls.Add(this.PdfViewer);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelNbPages);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelPdfName);
-            this.MainSplitContainer.Size = new System.Drawing.Size(1551, 1082);
+            this.MainSplitContainer.Size = new System.Drawing.Size(1552, 886);
             this.MainSplitContainer.SplitterDistance = 651;
             this.MainSplitContainer.SplitterWidth = 9;
             this.MainSplitContainer.TabIndex = 21;
+            this.MainSplitContainer.TabStop = false;
             // 
             // ChildSplitContainer
             // 
@@ -356,10 +357,11 @@
             this.ChildSplitContainer.Panel2.Controls.Add(this.PropertiesGroupBox);
             this.ChildSplitContainer.Panel2.Controls.Add(this.ListBoxFiles);
             this.ChildSplitContainer.Panel2.Controls.Add(this.label1);
-            this.ChildSplitContainer.Size = new System.Drawing.Size(657, 1082);
+            this.ChildSplitContainer.Size = new System.Drawing.Size(657, 886);
             this.ChildSplitContainer.SplitterDistance = 279;
             this.ChildSplitContainer.SplitterWidth = 3;
             this.ChildSplitContainer.TabIndex = 20;
+            this.ChildSplitContainer.TabStop = false;
             // 
             // TreeViewCategories
             // 
@@ -377,8 +379,8 @@
             this.TreeViewCategories.SelectedImageIndex = 0;
             this.TreeViewCategories.ShowLines = false;
             this.TreeViewCategories.ShowRootLines = false;
-            this.TreeViewCategories.Size = new System.Drawing.Size(279, 1055);
-            this.TreeViewCategories.TabIndex = 21;
+            this.TreeViewCategories.Size = new System.Drawing.Size(279, 853);
+            this.TreeViewCategories.TabIndex = 1;
             this.TreeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewCategories_AfterSelect);
             this.TreeViewCategories.Click += new System.EventHandler(this.TreeViewCategories_Click);
             this.TreeViewCategories.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TreeViewCategories_KeyDown);
@@ -408,9 +410,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
-            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 537);
+            this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(364, 537);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(369, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -439,8 +441,8 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(373, 923);
-            this.ListBoxFiles.TabIndex = 16;
+            this.ListBoxFiles.Size = new System.Drawing.Size(369, 702);
+            this.ListBoxFiles.TabIndex = 2;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
             this.ListBoxFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListBoxFiles_KeyDown);
@@ -466,8 +468,8 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(890, 1055);
-            this.PdfViewer.TabIndex = 20;
+            this.PdfViewer.Size = new System.Drawing.Size(880, 855);
+            this.PdfViewer.TabIndex = 3;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
             // 
