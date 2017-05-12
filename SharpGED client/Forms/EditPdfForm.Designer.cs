@@ -45,15 +45,16 @@
             this.ListBoxPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ListBoxPages.FormattingEnabled = true;
-            this.ListBoxPages.Location = new System.Drawing.Point(44, 9);
+            this.ListBoxPages.Location = new System.Drawing.Point(48, 7);
             this.ListBoxPages.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ListBoxPages.Name = "ListBoxPages";
-            this.ListBoxPages.Size = new System.Drawing.Size(148, 667);
+            this.ListBoxPages.Size = new System.Drawing.Size(144, 667);
             this.ListBoxPages.TabIndex = 9;
             this.ListBoxPages.SelectedIndexChanged += new System.EventHandler(this.ListBoxPages_SelectedIndexChanged);
             // 
             // MainToolbar
             // 
+            this.MainToolbar.AutoSize = false;
             this.MainToolbar.Dock = System.Windows.Forms.DockStyle.Left;
             this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -66,8 +67,7 @@
             this.MainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.MainToolbar.Location = new System.Drawing.Point(0, 0);
             this.MainToolbar.Name = "MainToolbar";
-            this.MainToolbar.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.MainToolbar.Size = new System.Drawing.Size(38, 680);
+            this.MainToolbar.Size = new System.Drawing.Size(42, 680);
             this.MainToolbar.TabIndex = 21;
             this.MainToolbar.Text = "toolStrip1";
             // 
@@ -75,42 +75,46 @@
             // 
             this.ToolButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonUp.Image")));
+            this.ToolButtonUp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ToolButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonUp.Name = "ToolButtonUp";
-            this.ToolButtonUp.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonUp.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonUp.Text = "Au dessus";
             // 
             // ToolButtonDown
             // 
             this.ToolButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonDown.Image")));
+            this.ToolButtonDown.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ToolButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonDown.Name = "ToolButtonDown";
-            this.ToolButtonDown.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonDown.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonDown.Text = "En dessous";
             // 
             // ToolButtonCut
             // 
             this.ToolButtonCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolButtonCut.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonCut.Image")));
+            this.ToolButtonCut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ToolButtonCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonCut.Name = "ToolButtonCut";
-            this.ToolButtonCut.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonCut.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonCut.Text = "Supprimer la page";
             this.ToolButtonCut.Click += new System.EventHandler(this.ToolButtonCut_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(33, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(40, 6);
             // 
             // ToolButtonSave
             // 
             this.ToolButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ToolButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonSave.Image")));
+            this.ToolButtonSave.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.ToolButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolButtonSave.Name = "ToolButtonSave";
-            this.ToolButtonSave.Size = new System.Drawing.Size(33, 36);
+            this.ToolButtonSave.Size = new System.Drawing.Size(40, 36);
             this.ToolButtonSave.Text = "Sauvegarder";
             this.ToolButtonSave.Click += new System.EventHandler(this.ToolButtonSave_Click);
             // 
@@ -147,7 +151,6 @@
             this.MainToolbar.ResumeLayout(false);
             this.MainToolbar.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

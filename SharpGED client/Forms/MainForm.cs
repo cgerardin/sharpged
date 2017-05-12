@@ -56,11 +56,6 @@ namespace SharpGED_client
             RefreshFilesList();
             EmptyViewer();
 
-            // HiDPI trick
-            MainToolbar.AutoSize = false;
-            MainToolbar.ImageScalingSize = new System.Drawing.Size(32 * ((int)CreateGraphics().DpiX / 96) + 8, 32 * ((int)CreateGraphics().DpiY / 96));
-            MainToolbar.AutoSize = true;
-
             // Contournement bug de Windows
             TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
         }
