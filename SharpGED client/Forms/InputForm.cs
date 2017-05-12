@@ -41,7 +41,8 @@ namespace SharpGED_client.Forms
         private void ButtonValidate_Click(object sender, EventArgs e)
         {
             value = TextBoxInput.Text;
-            Hide();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
     }

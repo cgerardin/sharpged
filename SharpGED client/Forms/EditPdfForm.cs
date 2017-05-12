@@ -114,7 +114,7 @@ namespace SharpGED_client.Forms
                 DialogResult = DialogResult.OK;
             }
 
-            Hide();
+            Close();
         }
 
     }

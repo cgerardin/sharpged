@@ -29,7 +29,7 @@ namespace SharpGED_client
                 }
                 else
                 {
-                    TextBoxPdfName.Text = addPdfDialog.SafeFileName.Replace(".pdf", "");
+                    TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
                 }
                 LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
             }
@@ -60,6 +60,7 @@ namespace SharpGED_client
             file.bytes = fileBytes;
             Program.ServerSendFile(file);
 
+            DialogResult = DialogResult.OK;
             Close();
         }
     }

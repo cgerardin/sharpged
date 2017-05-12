@@ -161,20 +161,25 @@ namespace SharpGED_client
                 return;
             }
 
-            AddFileForm addFile = new AddFileForm();
-            addFile.folder = (GedFolder)TreeViewCategories.SelectedNode.Tag;
-            addFile.ShowDialog();
+            AddFileForm addFileDialog = new AddFileForm();
+            addFileDialog.folder = (GedFolder)TreeViewCategories.SelectedNode.Tag;
 
-            RefreshFilesList();
+            if (addFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                RefreshFilesList();
+            }
         }
 
         private void ToolButtonDeleteFile_Click(object sender, EventArgs e)
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                EmptyViewer();
-                Program.ServerDeleteFile((GedFile)ListBoxFiles.SelectedItem);
-                RefreshFilesList();
+                if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce document ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    EmptyViewer();
+                    Program.ServerDeleteFile((GedFile)ListBoxFiles.SelectedItem);
+                    RefreshFilesList();
+                }
             }
         }
 
@@ -182,21 +187,16 @@ namespace SharpGED_client
         {
             if (ListBoxFiles.SelectedItem != null)
             {
-                InputForm input = new InputForm();
-                input.title = "Entrez le nom souhaité pour le document";
-                input.label = "Nom";
-                input.value = ((GedFile)ListBoxFiles.SelectedItem).title;
-                input.ShowDialog();
+                InputForm inputDialog = new InputForm();
+                inputDialog.title = "Entrez le nom souhaité pour le document";
+                inputDialog.label = "Nom";
+                inputDialog.value = ((GedFile)ListBoxFiles.SelectedItem).title;
 
-                while (input.Visible)
+                if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Application.DoEvents();
+                    Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), inputDialog.value);
+                    RefreshFilesList();
                 }
-
-                Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), input.value);
-                input.Close();
-
-                RefreshFilesList();
             }
         }
 
@@ -207,68 +207,56 @@ namespace SharpGED_client
 
             EditPdfForm edit = new EditPdfForm();
             edit.documentUri = currentDocumentUri;
-            DialogResult = edit.ShowDialog();
 
-            while (edit.Visible)
+            if (edit.ShowDialog() == DialogResult.OK)
             {
-                Application.DoEvents();
+                currentDocumentUri = edit.documentUri;
+                Program.tempFiles.Add(currentDocumentUri);
+
+                // Lit le fichier PDF et place son contenu dans un tableau
+                byte[] fileBytes;
+                int size;
+                using (FileStream inStream = File.OpenRead(currentDocumentUri))
+                {
+                    size = (int)inStream.Length;
+                    fileBytes = new byte[size];
+                    inStream.Read(fileBytes, 0, size);
+                }
+
+                // Crée un GedFile et l'envoie au serveur
+                RemoteGedFile file = new RemoteGedFile();
+                file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                file.size = size;
+                file.title = originalTitle + " (édité)";
+                file.originalname = originalName;
+                file.bytes = fileBytes;
+                Program.ServerSendFile(file);
+
+                RefreshFilesList();
             }
-
-            if (DialogResult != DialogResult.OK)
-            {
-                return;
-            }
-
-            currentDocumentUri = edit.documentUri;
-            Program.tempFiles.Add(currentDocumentUri);
-
-            // Lit le fichier PDF et place son contenu dans un tableau
-            byte[] fileBytes;
-            int size;
-            using (FileStream inStream = File.OpenRead(currentDocumentUri))
-            {
-                size = (int)inStream.Length;
-                fileBytes = new byte[size];
-                inStream.Read(fileBytes, 0, size);
-            }
-
-            // Crée un GedFile et l'envoie au serveur
-            RemoteGedFile file = new RemoteGedFile();
-            file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
-            file.size = size;
-            file.title = originalTitle + " (édité)";
-            file.originalname = originalName;
-            file.bytes = fileBytes;
-            Program.ServerSendFile(file);
-
-            edit.Close();
-            RefreshFilesList();
         }
 
         private void ToolButtonFolderAdd_Click(object sender, EventArgs e)
         {
             GedFolder folder = new GedFolder();
 
-            InputForm input = new InputForm();
-            input.title = "Entrez le nom souhaité pour le dossier";
-            input.label = "Nom";
-            input.value = "Nouveau dossier";
-            input.ShowDialog();
+            InputForm inputDialog = new InputForm();
+            inputDialog.title = "Entrez le nom souhaité pour le dossier";
+            inputDialog.label = "Nom";
+            inputDialog.value = "Nouveau dossier";
 
-            while (input.Visible)
+            if (inputDialog.ShowDialog() == DialogResult.OK)
             {
-                Application.DoEvents();
-            }
-            folder.title = input.value;
-            input.Close();
+                folder.title = inputDialog.value;
 
-            if (TreeViewCategories.SelectedNode != null)
-            {
-                folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
-            }
+                if (TreeViewCategories.SelectedNode != null)
+                {
+                    folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                }
 
-            Program.ServerCreateFolder(folder);
-            RefreshFilesList();
+                Program.ServerCreateFolder(folder);
+                RefreshFilesList();
+            }
         }
 
         private void ToolButtonFolderDelete_Click(object sender, EventArgs e)
@@ -276,9 +264,12 @@ namespace SharpGED_client
             // Interdis de supprimer un noeud racine
             if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
             {
-                Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
-                lastClickedNode = "";
-                RefreshFilesList();
+                if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce dossier ? (les sous-dossiers et fichiers inclus seront déplacés à la racine)", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                    lastClickedNode = "";
+                    RefreshFilesList();
+                }
             }
         }
 
@@ -286,21 +277,16 @@ namespace SharpGED_client
         {
             if (TreeViewCategories.SelectedNode != null)
             {
-                InputForm input = new InputForm();
-                input.title = "Entrez le nom souhaité pour le dossier";
-                input.label = "Nom";
-                input.value = ((GedFolder)TreeViewCategories.SelectedNode.Tag).title;
-                input.ShowDialog();
+                InputForm inputDialog = new InputForm();
+                inputDialog.title = "Entrez le nom souhaité pour le dossier";
+                inputDialog.label = "Nom";
+                inputDialog.value = ((GedFolder)TreeViewCategories.SelectedNode.Tag).title;
 
-                while (input.Visible)
+                if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Application.DoEvents();
+                    Program.ServerRenameFolder((GedFolder)TreeViewCategories.SelectedNode.Tag, inputDialog.value);
+                    RefreshFilesList();
                 }
-
-                Program.ServerRenameFolder((GedFolder)TreeViewCategories.SelectedNode.Tag, input.value);
-                input.Close();
-
-                RefreshFilesList();
             }
         }
 
