@@ -23,7 +23,14 @@ namespace SharpGED_client
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
                 pdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
-                TextBoxPdfName.Text = pdf.Info.Title;
+                if (!pdf.Info.Title.Equals(""))
+                {
+                    TextBoxPdfName.Text = pdf.Info.Title;
+                }
+                else
+                {
+                    TextBoxPdfName.Text = addPdfDialog.SafeFileName.Replace(".pdf", "");
+                }
                 LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
             }
             else
