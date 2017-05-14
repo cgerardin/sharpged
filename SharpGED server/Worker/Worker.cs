@@ -51,7 +51,7 @@ namespace SharpGED_server
                 {
                     // Récupère l'ordre envoyé par le client, et vide le buffer
                     handler.Receive(buffer);
-                    order = Encoding.Default.GetString(buffer).TrimEnd('\0');
+                    order = Encoding.Unicode.GetString(buffer).TrimEnd('\0');
                     buffer = new byte[1024];
 
                     if (!order.Equals(""))

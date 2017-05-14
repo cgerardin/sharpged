@@ -89,7 +89,7 @@ namespace SharpGED_client
 
         public static void ServerSend(string command)
         {
-            server.Send(Encoding.ASCII.GetBytes(command));
+            server.Send(Encoding.Unicode.GetBytes(command));
         }
 
         public static void ServerDisconnect()

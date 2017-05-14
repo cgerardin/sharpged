@@ -36,7 +36,7 @@ namespace SharpGED_lib
             int objectSize = BitConverter.ToInt32(buffer, 0);
 
             // Envoie la confirmation
-            transmitter.Send(Encoding.ASCII.GetBytes("OK"));
+            transmitter.Send(Encoding.Unicode.GetBytes("OK"));
 
             // Récupère l'objet
             byte[] objectBytes = new byte[objectSize];
@@ -57,7 +57,7 @@ namespace SharpGED_lib
             }
 
             // Envoie la confirmation
-            transmitter.Send(Encoding.ASCII.GetBytes("OK"));
+            transmitter.Send(Encoding.Unicode.GetBytes("OK"));
 
             return objectBytes;
         }

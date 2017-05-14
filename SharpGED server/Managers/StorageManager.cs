@@ -143,7 +143,7 @@ namespace SharpGED_server
             string hash;
             using (SHA256 sha256 = SHA256.Create())
             {
-                hash = BitConverter.ToString(sha256.ComputeHash(Encoding.ASCII.GetBytes(file.originalname + DateTime.Now))).Replace("-", "");
+                hash = BitConverter.ToString(sha256.ComputeHash(Encoding.Unicode.GetBytes(file.originalname + DateTime.Now))).Replace("-", "");
             }
 
             // Ecris le fichier PDF sur le disque
