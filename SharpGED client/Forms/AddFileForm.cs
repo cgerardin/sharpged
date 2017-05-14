@@ -1,4 +1,5 @@
-﻿using PdfSharp.Pdf;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using SharpGED_lib;
 using System;
@@ -10,7 +11,9 @@ namespace SharpGED_client
     public partial class AddFileForm : Form
     {
 
-        private PdfDocument pdf;
+        private PdfDocument newPdf;
+        private String newPdfUri;
+        private bool isPdf;
         public GedFolder folder { get; set; }
 
         public AddFileForm()
@@ -22,16 +25,50 @@ namespace SharpGED_client
         {
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
-                pdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
-                if (!pdf.Info.Title.Equals(""))
+                isPdf = addPdfDialog.SafeFileName.Substring(addPdfDialog.SafeFileName.Length - 4, 4).Equals(".pdf");
+
+                if (isPdf)
                 {
-                    TextBoxPdfName.Text = pdf.Info.Title;
+                    newPdfUri = addPdfDialog.FileName;
+                    newPdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
+
+
+                    if (!newPdf.Info.Title.Equals(""))
+                    {
+                        TextBoxPdfName.Text = newPdf.Info.Title;
+                    }
+                    else
+                    {
+                        TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
+                    }
+
+                    LabelNbPages.Text = "(" + newPdf.PageCount + " pages)";
                 }
                 else
                 {
+                    newPdfUri = Program.NewTempFile();
+                    newPdf = new PdfDocument(newPdfUri);
+
+                    PdfPage page = newPdf.AddPage();
+                    page.Size = PdfSharp.PageSize.A4;
+
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    XImage xImage = XImage.FromFile(addPdfDialog.FileName);
+
+                    double imageWidth = xImage.PointWidth;
+                    double imageHeight = xImage.PointHeight;
+                    double pageWidth = page.Width.Point;
+                    double pageHeight = page.Height.Point;
+                    double marginLeft = (pageWidth - imageWidth) / 2;
+                    double marginTop = (pageHeight - imageHeight) / 2;
+
+                    gfx.DrawImage(xImage, new XRect(marginLeft, marginTop, pageWidth, pageHeight), new XRect(0, 0, imageWidth, imageHeight), XGraphicsUnit.Point);
+
+                    newPdf.Close();
+
                     TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
+                    LabelNbPages.Text = "(1 pages)";
                 }
-                LabelNbPages.Text = "(" + pdf.PageCount + " pages)";
             }
             else
             {
@@ -46,7 +83,7 @@ namespace SharpGED_client
             // Lit le fichier PDF et place son contenu dans un tableau
             byte[] fileBytes;
             int size;
-            using (FileStream inStream = File.OpenRead(pdf.FullPath))
+            using (FileStream inStream = File.OpenRead(newPdfUri))
             {
                 size = (int)inStream.Length;
                 fileBytes = new byte[size];
@@ -58,7 +95,14 @@ namespace SharpGED_client
             file.folderId = folder.id;
             file.size = size;
             file.title = TextBoxPdfName.Text;
-            file.originalname = pdf.FullPath.Substring(pdf.FullPath.LastIndexOf("\\") + 1);
+            if (isPdf)
+            {
+                file.originalname = newPdfUri.Substring(newPdfUri.LastIndexOf("\\") + 1);
+            }
+            else
+            {
+                file.originalname = addPdfDialog.SafeFileName;
+            }
             file.bytes = fileBytes;
             Program.ServerSendFile(file);
 

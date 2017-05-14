@@ -13,7 +13,6 @@ namespace SharpGED_client.Forms
         public PdfDocument source { get; set; }
         public PdfiumViewer.PdfDocument currentDocument { get; set; }
 
-        private bool newFile = false;
         private String newFileUri;
 
         public EditPdfForm()
@@ -23,26 +22,7 @@ namespace SharpGED_client.Forms
 
         private void EditPdfForm_Load(object sender, EventArgs e)
         {
-            if (documentUri == null)
-            {
-                newFile = true;
-                documentUri = Path.GetTempFileName() + ".pdf";
-                newFileUri = Path.GetTempFileName() + ".pdf";
-                Program.tempFiles.Add(documentUri);
-                Program.tempFiles.Add(newFileUri);
-
-                // Crée un document vide
-                source = new PdfDocument(newFileUri);
-                source.AddPage();
-                source.Close();
-
-                source = PdfReader.Open(newFileUri, PdfDocumentOpenMode.Import);
-            }
-            else
-            {
-                source = PdfReader.Open(documentUri, PdfDocumentOpenMode.Import);
-            }
-
+            source = PdfReader.Open(documentUri, PdfDocumentOpenMode.Import);
             int i = 0;
 
             PdfDocument split;
@@ -96,19 +76,20 @@ namespace SharpGED_client.Forms
 
         private void ToolButtonCut_Click(object sender, EventArgs e)
         {
-            EmptyViewer();
-
             if (ListBoxPages.SelectedItem != null)
             {
+                if (ListBoxPages.Items.Count == 1)
+                {
+                    MessageBox.Show("Le document doit comporter au moins une page.", "Impossible d'effectuer l'action", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                EmptyViewer();
+
                 int i = (int)ListBoxPages.SelectedItem;
                 ListBoxPages.SelectedItem = null;
                 File.Delete(documentUri.Substring(0, documentUri.Length - 4) + "[" + i.ToString("0000") + "].pdf");
                 ListBoxPages.Items.Remove(i);
-
-                if (ListBoxPages.Items.Count > 0)
-                {
-                    ListBoxPages.SelectedIndex = 0;
-                }
             }
         }
 
@@ -141,70 +122,21 @@ namespace SharpGED_client.Forms
             EmptyViewer();
 
             PdfDocument merge = new PdfDocument();
-            String title;
+            merge.Info.Title = source.Info.Title; ;
 
-            if (newFile)
+            foreach (int currPage in ListBoxPages.Items)
             {
-                InputForm inputDialog = new InputForm();
-                inputDialog.title = "Entrez le nom souhaité pour le document";
-                inputDialog.label = "Nom";
-                inputDialog.value = "Nouveau document";
-
-                if (inputDialog.ShowDialog() == DialogResult.OK)
-                {
-                    title = inputDialog.value;
-                }
-                else
-                {
-                    return;
-                }
-            }
-            else
-            {
-                title = source.Info.Title;
+                merge.AddPage(source.Pages[currPage - 1]);
+                File.Delete(documentUri.Substring(0, documentUri.Length - 4) + "[" + currPage.ToString("0000") + "].pdf");
             }
 
-            merge.Info.Title = title;
+            documentUri = Program.NewTempFile();
+            merge.Save(documentUri);
+            merge.Close();
 
-            if (ListBoxPages.Items.Count > 0)
-            {
-                foreach (int currPage in ListBoxPages.Items)
-                {
-                    merge.AddPage(source.Pages[currPage - 1]);
-                    File.Delete(documentUri.Substring(0, documentUri.Length - 4) + "[" + currPage.ToString("0000") + "].pdf");
-                }
-
-                documentUri = documentUri.Substring(0, documentUri.Length - 4) + "[EDIT].pdf";
-                merge.Save(documentUri);
-                merge.Close();
-
-                Program.tempFiles.Add(documentUri);
-                DialogResult = DialogResult.OK;
-            }
+            DialogResult = DialogResult.OK;
 
             Close();
-        }
-
-        private void ToolButtonAddPage_Click(object sender, EventArgs e)
-        {
-            int pageNum = ListBoxPages.Items.Count + 1;
-            String pageUri = documentUri.Substring(0, documentUri.Length - 4) + "[" + pageNum.ToString("0000") + "].pdf";
-            Program.tempFiles.Add(documentUri);
-
-            PdfDocument newDocument = new PdfDocument(pageUri);
-            PdfPage page = newDocument.AddPage();
-
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-            XImage xImage = XImage.FromFile("C:\\Users\\GERARDIN\\Pictures\\PPEX.bmp");
-            gfx.DrawImage(xImage, 0, 0, xImage.PixelWidth, xImage.PixelHeight);
-
-            newDocument.Close();
-
-            newDocument = PdfReader.Open(pageUri, PdfDocumentOpenMode.Import);
-            source.AddPage(newDocument.Pages[0]);
-            newDocument.Close();
-
-            ListBoxPages.Items.Add(pageNum);
         }
 
     }

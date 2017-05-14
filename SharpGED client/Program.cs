@@ -14,14 +14,39 @@ namespace SharpGED_client
 
         public const int PACKET_SIZE = 1024;
 
-        public static List<string> tempFiles;
         public static Form loginForm;
-
         public static string serverHostname = "";
         public static int serverPort = 0;
 
         private static Socket server = null;
         private static bool connectionUp = false;
+        public static List<string> tempFiles;
+
+        public static string NewTempFile(string extension = "pdf")
+        {
+            String tempFileUri = Path.GetTempFileName() + "." + extension;
+            tempFiles.Add(tempFileUri);
+
+            return tempFileUri;
+        }
+
+        public static void CleanTempFiles()
+        {
+            foreach (string tmpFile in tempFiles)
+            {
+                try
+                {
+                    if (File.Exists(tmpFile))
+                    {
+                        File.Delete(tmpFile);
+                    }
+                }
+                catch (IOException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+            }
+        }
 
         public static bool IsConnectionUp()
         {

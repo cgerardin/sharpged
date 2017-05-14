@@ -152,10 +152,19 @@ namespace SharpGED_server
             outStream.Close();
 
             // Récupère et met à jour les métadonnées du PDF
-            PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
-            pdf.Info.Title = file.title;
-            pdf.Save(baseFolder + "storage\\" + hash);
-            pdf.Close();
+            PdfDocument pdf;
+            try
+            {
+                pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
+                pdf.Info.Title = file.title;
+                pdf.Save(baseFolder + "storage\\" + hash);
+                pdf.Close();
+            }
+            catch (PdfReaderException)
+            {
+                // Le fichier PDF est protégé en écriture
+                pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.InformationOnly);
+            }
 
             // Insère le tout dans la base
             using (SQLiteConnection db = new DatabaseManager().Connect())

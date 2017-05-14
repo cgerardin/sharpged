@@ -38,7 +38,8 @@
             // 
             // addPdfDialog
             // 
-            this.addPdfDialog.Filter = "Documents PDF|*.pdf";
+            this.addPdfDialog.Filter = "Tous les documents supportés|*.pdf;*.jpeg;*.jpg;*.png|Documents PDF|*.pdf|Fichier" +
+    "s image|*.jpeg;*.jpg;*.png";
             // 
             // TextBoxPdfName
             // 

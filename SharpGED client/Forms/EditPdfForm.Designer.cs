@@ -36,7 +36,6 @@
             this.ToolButtonCut = new System.Windows.Forms.ToolStripButton();
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
             this.ButtonSave = new System.Windows.Forms.Button();
-            this.ToolButtonAddPage = new System.Windows.Forms.ToolStripButton();
             this.MainToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +58,6 @@
             this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolButtonAddPage,
             this.ToolButtonUp,
             this.ToolButtonDown,
             this.ToolButtonCut});
@@ -128,17 +126,6 @@
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
-            // ToolButtonAddPage
-            // 
-            this.ToolButtonAddPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonAddPage.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonAddPage.Image")));
-            this.ToolButtonAddPage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolButtonAddPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonAddPage.Name = "ToolButtonAddPage";
-            this.ToolButtonAddPage.Size = new System.Drawing.Size(40, 36);
-            this.ToolButtonAddPage.Text = "Nouvelle page";
-            this.ToolButtonAddPage.Click += new System.EventHandler(this.ToolButtonAddPage_Click);
-            // 
             // EditPdfForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,6 +157,5 @@
         private System.Windows.Forms.ToolStripButton ToolButtonCut;
         private PdfiumViewer.PdfRenderer PdfViewer;
         private System.Windows.Forms.Button ButtonSave;
-        private System.Windows.Forms.ToolStripButton ToolButtonAddPage;
     }
 }

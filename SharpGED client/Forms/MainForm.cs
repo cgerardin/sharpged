@@ -21,6 +21,15 @@ namespace SharpGED_client
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            RefreshFilesList();
+            EmptyViewer();
+
+            // Contournement d'un bug de Windows
+            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
+        }
+
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Déconnecte du serveur
@@ -34,33 +43,10 @@ namespace SharpGED_client
             {
                 currentDocument.Dispose();
             }
-
-            foreach (string tmpFile in Program.tempFiles)
-            {
-                try
-                {
-                    if(File.Exists(tmpFile))
-                    {
-                        File.Delete(tmpFile);
-                    }
-                }
-                catch (IOException ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
-                }
-            }
+            Program.CleanTempFiles();
 
             // Réaffiche la fenêtre de connexion
             Program.loginForm.Show();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            RefreshFilesList();
-            EmptyViewer();
-
-            // Contournement d'un bug de Windows
-            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
         }
 
         private void RefreshFilesList()
@@ -384,7 +370,7 @@ namespace SharpGED_client
                 RemoteGedFile file = Program.ServerReciveFile(selectedFile);
 
                 // Ecris le fichier dans un fichier temporaire sur le disque
-                string localFilename = Path.GetTempFileName() + ".pdf";
+                string localFilename = Program.NewTempFile();
                 FileStream outStream = new FileStream(localFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1024, FileOptions.None);
                 outStream.Write(file.bytes, 0, file.size);
                 outStream.Close();
@@ -404,7 +390,6 @@ namespace SharpGED_client
                 PdfViewer.Visible = true;
 
                 // Mémorise le fichier temporaire et son URI
-                Program.tempFiles.Add(localFilename);
                 currentDocumentUri = localFilename;
 
                 Cursor = Cursors.Default;
