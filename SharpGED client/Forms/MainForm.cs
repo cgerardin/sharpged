@@ -23,11 +23,13 @@ namespace SharpGED_client
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // Ajoute le nom du serveur
+            Text = Text + "@" + Program.serverHostname;
+
+            // Initialise l'affichage
             RefreshFilesList();
             EmptyViewer();
-
-            // Contournement d'un bug de Windows
-            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold);
+            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -108,8 +110,6 @@ namespace SharpGED_client
                 node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Bold);
                 node.SelectedImageIndex = 0;
                 node.ImageIndex = 0;
-                // Ajoute le nom du serveur
-                node.Text = node.Text + "@" + Program.serverHostname;
                 node.EnsureVisible();
             }
             else
@@ -313,8 +313,12 @@ namespace SharpGED_client
 
         private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
         {
-            Program.ServerSend("INIT");
-            RefreshFilesList();
+            if (MessageBox.Show("Etes-vous sûr(e) de vouloir réinitialiser la base de données ? L'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                EmptyViewer();
+                Program.ServerSend("INIT");
+                RefreshFilesList();
+            }
         }
 
         private void ToolButtonStopServer_Click(object sender, EventArgs e)
