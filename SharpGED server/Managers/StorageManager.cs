@@ -2,7 +2,6 @@
 using PdfSharp.Pdf.IO;
 using SharpGED_lib;
 using System;
-using System.Configuration;
 using System.Data.SQLite;
 using System.IO;
 using System.Net.Sockets;
@@ -13,11 +12,10 @@ namespace SharpGED_server
 {
     class StorageManager
     {
-        private string baseFolder;
-        private Socket client;
-        private DatabaseManager database;
+        public DatabaseManager database { get; set; }
+        public string baseFolder { get; set; }
 
-        public string BaseFolder { get => baseFolder; set => baseFolder = value; }
+        private Socket client;
 
         public StorageManager(Socket handler)
         {

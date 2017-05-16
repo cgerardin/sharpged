@@ -1,6 +1,5 @@
 ﻿using System.Data.SQLite;
 using System.IO;
-using System.Configuration;
 
 namespace SharpGED_server
 {
@@ -17,20 +16,26 @@ namespace SharpGED_server
 
         public bool isInitialized()
         {
-            try
+            if (File.Exists(baseFolder + "database\\" + database + ".sqlite"))
             {
-                using (SQLiteConnection db = Connect())
+                try
                 {
-                    db.Open();
-                    using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files;", db).ExecuteReader()) { }
+                    using (SQLiteConnection db = Connect())
+                    {
+                        db.Open();
+                        using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files;", db).ExecuteReader()) { }
+                        return true;
+                    }
+                }
+                catch (SQLiteException)
+                {
+                    return false;
                 }
             }
-            catch (SQLiteException)
+            else
             {
                 return false;
             }
-
-            return true;
         }
 
         public void Initialize()
@@ -40,11 +45,11 @@ namespace SharpGED_server
 
         public void Initialize(string databaseName)
         {
-            database = databaseName;
             string sql;
+            database = databaseName;
 
             // Crée l'arborescence en la vidant de ses fichiers si elle existe déjà
-            if(Directory.Exists(baseFolder + "\\storage"))
+            if (Directory.Exists(baseFolder + "\\storage"))
             {
                 Directory.Delete(baseFolder + "\\storage", true);
             }
@@ -92,8 +97,8 @@ namespace SharpGED_server
                 sql = "INSERT INTO folders (title) VALUES ('" + databaseName + "');";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
-            
-            Properties.Settings.Default.Database = database;
+
+            Properties.Settings.Default.Database = databaseName;
             Properties.Settings.Default.Save();
         }
 

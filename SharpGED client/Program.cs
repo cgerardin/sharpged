@@ -117,6 +117,7 @@ namespace SharpGED_client
         public static void ServerInitialize(string databaseName)
         {
             ServerSend("INIT " + databaseName);
+            isDatabaseInitialized = true;
         }
 
         public static GedList<GedFolder> ServerListFolders()

@@ -30,6 +30,20 @@ namespace SharpGED_client
             if (Program.isDatabaseInitialized)
             {
                 RefreshFilesList();
+            } else
+            {
+                if (MessageBox.Show("La base de données du serveur n'est pas encore initialisée. Souhaitez-vous le faire maintenant ?", "Base de données manquante", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    InputForm inputDialog = new InputForm();
+                    inputDialog.title = "Entrez le nom souhaité pour la base";
+                    inputDialog.label = "Nom";
+                    inputDialog.value = "default";
+
+                    if (inputDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        InitializeDatabase(inputDialog.value);
+                    }
+                }
             }
             EmptyViewer();
             TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
