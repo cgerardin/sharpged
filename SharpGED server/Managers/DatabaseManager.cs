@@ -68,7 +68,7 @@ namespace SharpGED_server
                 {
                     db.Open();
 
-                    sql = "DROP TABLE 'files'; DROP TABLE 'folders';";
+                    sql = "DROP TABLE IF EXISTS 'files'; DROP TABLE IF EXISTS 'folders';";
                     new SQLiteCommand(sql, db).ExecuteNonQuery();
                 }
             }
