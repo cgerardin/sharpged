@@ -27,7 +27,10 @@ namespace SharpGED_client
             Text = Text + "@" + Program.serverHostname;
 
             // Initialise l'affichage
-            RefreshFilesList();
+            if (Program.isDatabaseInitialized)
+            {
+                RefreshFilesList();
+            }
             EmptyViewer();
             TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
@@ -53,6 +56,11 @@ namespace SharpGED_client
 
         private void RefreshFilesList()
         {
+            if (!Program.isDatabaseInitialized)
+            {
+                return;
+            }
+
             Cursor = Cursors.WaitCursor;
 
             EmptyViewer();
@@ -144,6 +152,16 @@ namespace SharpGED_client
             PdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
         }
 
+        private void InitializeDatabase(string databaseName)
+        {
+            Cursor = Cursors.WaitCursor;
+            EmptyViewer();
+            Program.ServerInitialize(databaseName);
+            RefreshFilesList();
+            TreeViewCategories.Nodes[0].Text = databaseName;
+            Cursor = Cursors.Default;
+        }
+
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
             if (TreeViewCategories.SelectedNode == null)
@@ -193,78 +211,87 @@ namespace SharpGED_client
 
         private void ToolButtonEditFile_Click(object sender, EventArgs e)
         {
-            string originalTitle = LabelPdfName.Text;
-            string originalName = OriginalNameLabel.Text;
-
-            EditPdfForm edit = new EditPdfForm();
-            edit.documentUri = currentDocumentUri;
-
-            if (edit.ShowDialog() == DialogResult.OK)
+            if (Program.isDatabaseInitialized)
             {
-                currentDocumentUri = edit.documentUri;
+                string originalTitle = LabelPdfName.Text;
+                string originalName = OriginalNameLabel.Text;
 
-                // Lit le fichier PDF et place son contenu dans un tableau
-                byte[] fileBytes;
-                int size;
-                using (FileStream inStream = File.OpenRead(currentDocumentUri))
+                EditPdfForm edit = new EditPdfForm();
+                edit.documentUri = currentDocumentUri;
+
+                if (edit.ShowDialog() == DialogResult.OK)
                 {
-                    size = (int)inStream.Length;
-                    fileBytes = new byte[size];
-                    inStream.Read(fileBytes, 0, size);
+                    currentDocumentUri = edit.documentUri;
+
+                    // Lit le fichier PDF et place son contenu dans un tableau
+                    byte[] fileBytes;
+                    int size;
+                    using (FileStream inStream = File.OpenRead(currentDocumentUri))
+                    {
+                        size = (int)inStream.Length;
+                        fileBytes = new byte[size];
+                        inStream.Read(fileBytes, 0, size);
+                    }
+
+                    // Crée un GedFile et l'envoie au serveur
+                    RemoteGedFile file = new RemoteGedFile();
+                    file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                    file.size = size;
+                    file.title = originalTitle + " (édité)";
+                    file.originalname = originalName;
+                    file.bytes = fileBytes;
+                    Program.ServerSendFile(file);
+
+                    RefreshFilesList();
                 }
-
-                // Crée un GedFile et l'envoie au serveur
-                RemoteGedFile file = new RemoteGedFile();
-                file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
-                file.size = size;
-                file.title = originalTitle + " (édité)";
-                file.originalname = originalName;
-                file.bytes = fileBytes;
-                Program.ServerSendFile(file);
-
-                RefreshFilesList();
             }
         }
 
         private void ToolButtonFolderAdd_Click(object sender, EventArgs e)
         {
-            GedFolder folder = new GedFolder();
-
-            InputForm inputDialog = new InputForm();
-            inputDialog.title = "Entrez le nom souhaité pour le dossier";
-            inputDialog.label = "Nom";
-            inputDialog.value = "Nouveau dossier";
-
-            if (inputDialog.ShowDialog() == DialogResult.OK)
+            if (Program.isDatabaseInitialized)
             {
-                Cursor = Cursors.WaitCursor;
+                GedFolder folder = new GedFolder();
 
-                folder.title = inputDialog.value;
+                InputForm inputDialog = new InputForm();
+                inputDialog.title = "Entrez le nom souhaité pour le dossier";
+                inputDialog.label = "Nom";
+                inputDialog.value = "Nouveau dossier";
 
-                if (TreeViewCategories.SelectedNode != null)
+                if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                    Cursor = Cursors.WaitCursor;
+
+                    folder.title = inputDialog.value;
+
+                    if (TreeViewCategories.SelectedNode != null)
+                    {
+                        folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                    }
+
+                    Program.ServerCreateFolder(folder);
+
+                    Cursor = Cursors.Default;
+                    RefreshFilesList();
                 }
-
-                Program.ServerCreateFolder(folder);
-
-                Cursor = Cursors.Default;
-                RefreshFilesList();
             }
         }
 
         private void ToolButtonFolderDelete_Click(object sender, EventArgs e)
         {
-            // Interdis de supprimer un noeud racine
-            if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
+            if (TreeViewCategories.SelectedNode != null)
             {
-                if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce dossier ? (les sous-dossiers et fichiers inclus seront déplacés à la racine)", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                // Interdis de supprimer un noeud racine
+                if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
                 {
-                    Cursor = Cursors.WaitCursor;
-                    Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
-                    Cursor = Cursors.Default;
-                    lastClickedNode = "";
-                    RefreshFilesList();
+                    if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce dossier ? (les sous-dossiers et fichiers inclus seront déplacés à la racine)", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        Cursor = Cursors.WaitCursor;
+                        Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                        Cursor = Cursors.Default;
+                        lastClickedNode = "";
+                        RefreshFilesList();
+                    }
                 }
             }
         }
@@ -322,11 +349,7 @@ namespace SharpGED_client
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Cursor = Cursors.WaitCursor;
-                    EmptyViewer();
-                    Program.ServerSend("INIT " + inputDialog.value);
-                    RefreshFilesList();
-                    Cursor = Cursors.Default;
+                    InitializeDatabase(inputDialog.value);
                 }
             }
         }

@@ -17,6 +17,7 @@ namespace SharpGED_client
         public static Form loginForm;
         public static string serverHostname = "";
         public static int serverPort = 0;
+        public static bool isDatabaseInitialized = false;
 
         private static Socket server = null;
         private static bool connectionUp = false;
@@ -78,6 +79,12 @@ namespace SharpGED_client
             try
             {
                 server.Connect(new IPEndPoint(serverIP, serverPort));
+                
+                // Récupère l'état de la base (initialisée ou non)
+                byte[] buffer = new byte[sizeof(bool)];
+                server.Receive(buffer);
+
+                isDatabaseInitialized = BitConverter.ToBoolean(buffer, 0);
                 connectionUp = true;
             }
             catch (SocketException ex)
@@ -105,6 +112,11 @@ namespace SharpGED_client
             ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
             server.Close();
             connectionUp = false;
+        }
+
+        public static void ServerInitialize(string databaseName)
+        {
+            ServerSend("INIT " + databaseName);
         }
 
         public static GedList<GedFolder> ServerListFolders()

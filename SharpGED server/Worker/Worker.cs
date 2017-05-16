@@ -36,13 +36,19 @@ namespace SharpGED_server
             DatabaseManager database = new DatabaseManager();
             StorageManager storage = new StorageManager(handler);
 
+            // Vérifie et envoie l'état de la base (initialisée ou non)
+            byte[] isInit = new byte[sizeof(bool)];
             if (!database.isInitialized())
             {
                 Console.WriteLine("[" + id + "] Aucune base de données configurée !");
-                Console.WriteLine("[" + id + "] Création de la base de données...");
-                database.Initialize();
-                Console.WriteLine("[" + id + "] Terminé.");
+                isInit[0] = Convert.ToByte(false);
             }
+            else
+            {
+                isInit[0] = Convert.ToByte(true);
+            }
+            handler.Send(isInit);
+            
 
             while (!_shouldStop)
             {

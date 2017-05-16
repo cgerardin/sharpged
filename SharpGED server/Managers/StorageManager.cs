@@ -13,7 +13,6 @@ namespace SharpGED_server
 {
     class StorageManager
     {
-
         private string baseFolder;
         private Socket client;
         private DatabaseManager database;
@@ -22,7 +21,7 @@ namespace SharpGED_server
 
         public StorageManager(Socket handler)
         {
-            baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
+            baseFolder = Properties.Settings.Default.BaseFolder;
             database = new DatabaseManager();
             client = handler;
         }
