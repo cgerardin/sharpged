@@ -18,13 +18,14 @@ namespace SharpGED_client
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
+            int serverPort;
+
             try
             {
                 Cursor = Cursors.WaitCursor;
-                int port;
-                if (int.TryParse(TextBoxPort.Text, out port))
+                if (int.TryParse(TextBoxPort.Text, out serverPort))
                 {
-                    Program.ServerConnect(TextBoxServer.Text, port);
+                    Program.ServerConnect(TextBoxServer.Text, serverPort);
                 }
                 else
                 {
@@ -43,9 +44,21 @@ namespace SharpGED_client
                 Cursor = Cursors.Default;
             }
 
+            // Sauvegarde des informations saisies
+            Properties.Settings.Default.ServerIP = TextBoxServer.Text;
+            Properties.Settings.Default.ServerPort = serverPort;
+            Properties.Settings.Default.User = TextBoxUser.Text;
+            Properties.Settings.Default.Save();
+
             new MainForm().Show();
             Hide();
         }
 
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            TextBoxServer.Text = Properties.Settings.Default.ServerIP;
+            TextBoxPort.Text = Properties.Settings.Default.ServerPort.ToString();
+            TextBoxUser.Text = Properties.Settings.Default.User;
+        }
     }
 }

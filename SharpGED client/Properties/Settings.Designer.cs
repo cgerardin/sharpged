@@ -22,5 +22,41 @@ namespace SharpGED_client.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string ServerIP {
+            get {
+                return ((string)(this["ServerIP"]));
+            }
+            set {
+                this["ServerIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9090")]
+        public int ServerPort {
+            get {
+                return ((int)(this["ServerPort"]));
+            }
+            set {
+                this["ServerPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("root")]
+        public string User {
+            get {
+                return ((string)(this["User"]));
+            }
+            set {
+                this["User"] = value;
+            }
+        }
     }
 }
