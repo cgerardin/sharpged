@@ -84,7 +84,7 @@ namespace SharpGED_server
 
                             case "INIT": // Initialise une nouvelle base de données
                                 Console.WriteLine("[" + id + "] Création de la base de données...");
-                                database.Initialize();
+                                database.Initialize(argv[0]);
                                 Console.WriteLine("[" + id + "] Terminé.");
                                 break;
 

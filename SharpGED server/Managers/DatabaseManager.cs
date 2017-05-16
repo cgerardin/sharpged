@@ -7,12 +7,12 @@ namespace SharpGED_server
     class DatabaseManager
     {
         string baseFolder;
-        private string databaseName;
+        private string database;
 
         public DatabaseManager()
         {
             baseFolder = ConfigurationManager.AppSettings.Get("BaseFolder");
-            databaseName = ConfigurationManager.AppSettings.Get("Database");
+            database = ConfigurationManager.AppSettings.Get("Database");
         }
 
         public bool isInitialized()
@@ -35,6 +35,12 @@ namespace SharpGED_server
 
         public void Initialize()
         {
+            Initialize(database);
+        }
+
+        public void Initialize(string databaseName)
+        {
+            database = databaseName;
             string sql;
 
             // Crée l'arborescence en la vidant de ses fichiers si elle existe déjà
@@ -42,7 +48,7 @@ namespace SharpGED_server
             {
                 Directory.Delete(baseFolder + "\\storage", true);
             }
-            Directory.CreateDirectory(baseFolder + "database\\");
+            Directory.CreateDirectory(baseFolder + "\\database");
             Directory.CreateDirectory(baseFolder + "\\storage");
 
             // Crée la base si elle n'existe pas, la vide sinon
@@ -86,11 +92,13 @@ namespace SharpGED_server
                 sql = "INSERT INTO folders (title) VALUES ('" + databaseName + "');";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
+            
+            ConfigurationManager.AppSettings.Set("Database", database);
         }
 
         public SQLiteConnection Connect()
         {
-            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + databaseName + ".sqlite" + ";Version=3;");
+            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + database + ".sqlite" + ";Version=3;");
         }
 
     }

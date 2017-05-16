@@ -315,9 +315,19 @@ namespace SharpGED_client
         {
             if (MessageBox.Show("Etes-vous sûr(e) de vouloir réinitialiser la base de données ? L'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
-                EmptyViewer();
-                Program.ServerSend("INIT");
-                RefreshFilesList();
+                InputForm inputDialog = new InputForm();
+                inputDialog.title = "Entrez le nom souhaité pour la base";
+                inputDialog.label = "Nom";
+                inputDialog.value = "default";
+
+                if (inputDialog.ShowDialog() == DialogResult.OK)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    EmptyViewer();
+                    Program.ServerSend("INIT " + inputDialog.value);
+                    RefreshFilesList();
+                    Cursor = Cursors.Default;
+                }
             }
         }
 
