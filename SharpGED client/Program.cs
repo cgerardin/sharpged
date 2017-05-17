@@ -61,7 +61,7 @@ namespace SharpGED_client
             ServerConnect();
         }
 
-        public static void ServerConnect()
+        public static void ServerConnect(bool noDatabase = false)
         {
             IPAddress serverIP = null;
 
@@ -79,7 +79,8 @@ namespace SharpGED_client
             try
             {
                 server.Connect(new IPEndPoint(serverIP, serverPort));
-                
+                if (noDatabase) return;
+
                 // Récupère l'état de la base (initialisée ou non)
                 byte[] buffer = new byte[sizeof(bool)];
                 server.Receive(buffer);
@@ -109,7 +110,7 @@ namespace SharpGED_client
         public static void ServerHalt()
         {
             ServerSend("STOP");
-            ServerConnect(); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
+            ServerConnect(true); // Force le serveur à accepter une dernière connexion pour prendre en compte l'état "arrêté"
             server.Close();
             connectionUp = false;
         }
