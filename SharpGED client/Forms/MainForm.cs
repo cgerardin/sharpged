@@ -455,6 +455,13 @@ namespace SharpGED_client
         {
             switch (e.KeyCode)
             {
+                case Keys.N:
+                    if(e.Control)
+                    {
+                        ToolButtonNewFile_Click(null, null);
+                    }
+                    break;
+
                 case Keys.F2:
                     ToolButtonRenameFile_Click(null, null);
                     break;
@@ -473,6 +480,13 @@ namespace SharpGED_client
         {
             switch (e.KeyCode)
             {
+                case Keys.N:
+                    if (e.Control)
+                    {
+                        ToolButtonFolderAdd_Click(null, null);
+                    }
+                    break;
+
                 case Keys.F2:
                     ToolButtonFolderRename_Click(null, null);
                     break;
