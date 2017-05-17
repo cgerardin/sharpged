@@ -25,22 +25,13 @@ namespace SharpGED_client
         {
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
-                isPdf = addPdfDialog.SafeFileName.Substring(addPdfDialog.SafeFileName.Length - 4, 4).Equals(".pdf");
+                TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
 
+                isPdf = addPdfDialog.SafeFileName.Substring(addPdfDialog.SafeFileName.Length - 4, 4).Equals(".pdf");
                 if (isPdf)
                 {
                     newPdfUri = addPdfDialog.FileName;
                     newPdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
-
-
-                    if (!newPdf.Info.Title.Equals(""))
-                    {
-                        TextBoxPdfName.Text = newPdf.Info.Title;
-                    }
-                    else
-                    {
-                        TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
-                    }
 
                     LabelNbPages.Text = "(" + newPdf.PageCount + " pages)";
                 }
@@ -66,7 +57,6 @@ namespace SharpGED_client
 
                     newPdf.Close();
 
-                    TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
                     LabelNbPages.Text = "(1 pages)";
                 }
             }
