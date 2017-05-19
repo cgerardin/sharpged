@@ -189,6 +189,12 @@ namespace SharpGED_client
                     RefreshFilesList(inputDialog.value);
                     toolButtonFilter.Image = imageListToolbar.Images[1];
                 }
+                else
+                {
+                    RefreshFilesList();
+                    toolButtonFilter.Checked = false;
+                    toolButtonFilter.Image = imageListToolbar.Images[0];
+                }
             }
             else
             {
