@@ -94,8 +94,16 @@ namespace SharpGED_server
                                 break;
 
                             case "LIST": // Envoie la liste les dossiers et fichiers
-                                Console.WriteLine("[" + id + "] Envoi de la liste des fichiers");
-                                storage.ListFolders();
+                                if (argv.Length == 0)
+                                {
+                                    Console.WriteLine("[" + id + "] Envoi de la liste des fichiers");
+                                    storage.ListFolders();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("[" + id + "] Envoi de la liste des fichiers avec le filtre '" + argv[0] + "'");
+                                    storage.ListFolders(argv[0]);
+                                }
                                 break;
 
                             case "GETFILE": // Envoie le fichier spécifié en argument

@@ -8,7 +8,6 @@ namespace SharpGED_client.Forms
     {
 
         public string title { get; set; }
-        public string label { get; set; }
         public string value { get; set; }
 
         public InputForm()
@@ -19,7 +18,6 @@ namespace SharpGED_client.Forms
         private void InputForm_Load(object sender, EventArgs e)
         {
             Text = title;
-            LabelTitle.Text = label;
             TextBoxInput.Text = value;
         }
 

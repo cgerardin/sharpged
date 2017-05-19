@@ -24,7 +24,7 @@ namespace SharpGED_server
             client = handler;
         }
 
-        public void ListFolders()
+        public void ListFolders(string filter = "")
         {
             // Crée une GedList des dossiers
             GedList<GedFolder> foldersList = new GedList<GedFolder>();
@@ -42,7 +42,7 @@ namespace SharpGED_server
                         currentFolder = new GedFolder();
                         currentFolder.id = (long)rs["idFolder"];
                         currentFolder.title = rs["title"].ToString();
-                        currentFolder.files = ListFiles(currentFolder.id);
+                        currentFolder.files = ListFiles(currentFolder.id, filter);
 
                         if (rs["idParentFolder"].ToString().Equals(""))
                         {
@@ -66,7 +66,7 @@ namespace SharpGED_server
             TransfertManager.Send(foldersList.Save(), client);
         }
 
-        public GedList<GedFile> ListFiles(long folderId)
+        public GedList<GedFile> ListFiles(long folderId, string filter = "")
         {
             // Crée une GedList des fichiers contenus dans le dossier spécifié
             GedList<GedFile> filesList = new GedList<GedFile>();
@@ -76,7 +76,12 @@ namespace SharpGED_server
                 db.Open();
 
                 // Remplis la liste avec des GedFile
-                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files WHERE idFolder= " + folderId + " ORDER BY title ASC;", db).ExecuteReader())
+                string where = "";
+                if (!filter.Equals(""))
+                {
+                    where = " AND title like '%" + filter + "%'";
+                }
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM files WHERE idFolder= " + folderId + where + " ORDER BY title ASC;", db).ExecuteReader())
                 {
                     GedFile currentGedFile;
                     while (rs.Read())

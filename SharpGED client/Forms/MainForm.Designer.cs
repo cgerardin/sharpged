@@ -34,7 +34,7 @@
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
             this.MainToolbar = new System.Windows.Forms.ToolStrip();
-            this.ToolButtonSearch = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonFilter = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolButtonNewFile = new System.Windows.Forms.ToolStripButton();
             this.ToolButtonRenameFile = new System.Windows.Forms.ToolStripButton();
@@ -65,6 +65,7 @@
             this.PdfViewer = new PdfiumViewer.PdfRenderer();
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
             this.MainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -96,7 +97,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(780, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(775, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -110,7 +111,7 @@
             this.MainToolbar.Dock = System.Windows.Forms.DockStyle.Left;
             this.MainToolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolButtonSearch,
+            this.toolButtonFilter,
             this.toolStripSeparator5,
             this.ToolButtonNewFile,
             this.ToolButtonRenameFile,
@@ -135,15 +136,18 @@
             this.MainToolbar.Size = new System.Drawing.Size(42, 889);
             this.MainToolbar.TabIndex = 20;
             // 
-            // ToolButtonSearch
+            // toolButtonFilter
             // 
-            this.ToolButtonSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ToolButtonSearch.Image = ((System.Drawing.Image)(resources.GetObject("ToolButtonSearch.Image")));
-            this.ToolButtonSearch.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.ToolButtonSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolButtonSearch.Name = "ToolButtonSearch";
-            this.ToolButtonSearch.Size = new System.Drawing.Size(40, 36);
-            this.ToolButtonSearch.Text = "Recherche";
+            this.toolButtonFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolButtonFilter.CheckOnClick = true;
+            this.toolButtonFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolButtonFilter.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonFilter.Image")));
+            this.toolButtonFilter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolButtonFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonFilter.Name = "toolButtonFilter";
+            this.toolButtonFilter.Size = new System.Drawing.Size(40, 36);
+            this.toolButtonFilter.Text = "Recherche";
+            this.toolButtonFilter.Click += new System.EventHandler(this.toolButtonFilter_Click);
             // 
             // toolStripSeparator5
             // 
@@ -412,7 +416,7 @@
             this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(370, 150);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(371, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -441,7 +445,7 @@
             this.ListBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxFiles.Name = "ListBoxFiles";
             this.ListBoxFiles.ScrollAlwaysVisible = true;
-            this.ListBoxFiles.Size = new System.Drawing.Size(370, 702);
+            this.ListBoxFiles.Size = new System.Drawing.Size(371, 702);
             this.ListBoxFiles.TabIndex = 2;
             this.ListBoxFiles.ValueMember = "hash";
             this.ListBoxFiles.SelectedIndexChanged += new System.EventHandler(this.ListBoxFiles_SelectedIndexChanged);
@@ -468,7 +472,7 @@
             this.PdfViewer.Name = "PdfViewer";
             this.PdfViewer.Page = 0;
             this.PdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.PdfViewer.Size = new System.Drawing.Size(875, 855);
+            this.PdfViewer.Size = new System.Drawing.Size(870, 855);
             this.PdfViewer.TabIndex = 3;
             this.PdfViewer.Visible = false;
             this.PdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -477,6 +481,13 @@
             // 
             this.printDialog.AllowSomePages = true;
             this.printDialog.UseEXDialog = true;
+            // 
+            // imageListToolbar
+            // 
+            this.imageListToolbar.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListToolbar.ImageStream")));
+            this.imageListToolbar.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
+            this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
             // 
             // MainForm
             // 
@@ -544,10 +555,11 @@
         private System.Windows.Forms.ToolStripButton ToolButtonFolderRename;
         private System.Windows.Forms.ToolStripButton ToolButtonFolderDelete;
         private System.Windows.Forms.ToolStripButton ToolButtonRefresh;
-        private System.Windows.Forms.ToolStripButton ToolButtonSearch;
+        private System.Windows.Forms.ToolStripButton toolButtonFilter;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Drawing.Printing.PrintDocument printPdf;
         private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.ImageList imageListToolbar;
     }
 }
 

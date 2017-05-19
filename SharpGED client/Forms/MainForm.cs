@@ -30,13 +30,13 @@ namespace SharpGED_client
             if (Program.isDatabaseInitialized)
             {
                 RefreshFilesList();
-            } else
+            }
+            else
             {
                 if (MessageBox.Show("La base de données du serveur n'est pas encore initialisée. Souhaitez-vous le faire maintenant ?", "Base de données manquante", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     InputForm inputDialog = new InputForm();
                     inputDialog.title = "Entrez le nom souhaité pour la base";
-                    inputDialog.label = "Nom";
                     inputDialog.value = "default";
 
                     if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -68,7 +68,7 @@ namespace SharpGED_client
             Program.loginForm.Show();
         }
 
-        private void RefreshFilesList()
+        private void RefreshFilesList(string filter = "")
         {
             if (!Program.isDatabaseInitialized)
             {
@@ -81,7 +81,7 @@ namespace SharpGED_client
             ListBoxFiles.Items.Clear();
             TreeViewCategories.Nodes.Clear();
 
-            foreach (GedFolder currentGedFolder in Program.ServerListFolders())
+            foreach (GedFolder currentGedFolder in Program.ServerListFolders(filter))
             {
                 TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
@@ -121,6 +121,7 @@ namespace SharpGED_client
 
             foreach (GedFolder subFolder in folder.folders)
             {
+                if (subFolder.folders.Count == 0 && subFolder.files.Count == 0 && toolButtonFilter.Checked) continue;
                 TreeNode subNode = BuildNode(subFolder);
                 subNode.Tag = subFolder;
                 node.Nodes.Add(subNode);
@@ -176,6 +177,27 @@ namespace SharpGED_client
             Cursor = Cursors.Default;
         }
 
+        private void toolButtonFilter_Click(object sender, EventArgs e)
+        {
+            if (toolButtonFilter.Checked)
+            {
+                InputForm inputDialog = new InputForm();
+                inputDialog.title = "Filtre de nom de fichier";
+
+                if (inputDialog.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshFilesList(inputDialog.value);
+                    toolButtonFilter.Image = imageListToolbar.Images[1];
+                }
+            }
+            else
+            {
+                RefreshFilesList();
+                toolButtonFilter.Image = imageListToolbar.Images[0];
+            }
+
+        }
+
         private void ToolButtonNewFile_Click(object sender, EventArgs e)
         {
             if (TreeViewCategories.SelectedNode == null)
@@ -212,7 +234,6 @@ namespace SharpGED_client
             {
                 InputForm inputDialog = new InputForm();
                 inputDialog.title = "Entrez le nom souhaité pour le document";
-                inputDialog.label = "Nom";
                 inputDialog.value = ((GedFile)ListBoxFiles.SelectedItem).title;
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -269,7 +290,6 @@ namespace SharpGED_client
 
                 InputForm inputDialog = new InputForm();
                 inputDialog.title = "Entrez le nom souhaité pour le dossier";
-                inputDialog.label = "Nom";
                 inputDialog.value = "Nouveau dossier";
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -316,7 +336,6 @@ namespace SharpGED_client
             {
                 InputForm inputDialog = new InputForm();
                 inputDialog.title = "Entrez le nom souhaité pour le dossier";
-                inputDialog.label = "Nom";
                 inputDialog.value = ((GedFolder)TreeViewCategories.SelectedNode.Tag).title;
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -358,7 +377,6 @@ namespace SharpGED_client
             {
                 InputForm inputDialog = new InputForm();
                 inputDialog.title = "Entrez le nom souhaité pour la base";
-                inputDialog.label = "Nom";
                 inputDialog.value = "default";
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -456,7 +474,7 @@ namespace SharpGED_client
             switch (e.KeyCode)
             {
                 case Keys.N:
-                    if(e.Control)
+                    if (e.Control)
                     {
                         ToolButtonNewFile_Click(null, null);
                     }

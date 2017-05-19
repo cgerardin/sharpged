@@ -121,10 +121,17 @@ namespace SharpGED_client
             isDatabaseInitialized = true;
         }
 
-        public static GedList<GedFolder> ServerListFolders()
+        public static GedList<GedFolder> ServerListFolders(string filter)
         {
             // Demande la liste des fichiers
-            ServerSend("LIST");
+            if (filter.Equals(""))
+            {
+                ServerSend("LIST");
+            }
+            else
+            {
+                ServerSend("LIST " + filter);
+            }
 
             // Récupère l'objet et le dé-sérialise
             return GedList<GedFolder>.Load(new MemoryStream(TransfertManager.Recive(server)));
@@ -139,7 +146,7 @@ namespace SharpGED_client
             TransfertManager.Send(file.Save(), server);
 
             // Attend la confirmation
-            server.Receive(new byte[sizeof(char)*2]);
+            server.Receive(new byte[sizeof(char) * 2]);
         }
 
         public static RemoteGedFile ServerReciveFile(GedFile gedFile)

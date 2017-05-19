@@ -28,35 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LabelTitle = new System.Windows.Forms.Label();
             this.TextBoxInput = new System.Windows.Forms.TextBox();
             this.ButtonValidate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // LabelTitle
-            // 
-            this.LabelTitle.AutoSize = true;
-            this.LabelTitle.Location = new System.Drawing.Point(33, 29);
-            this.LabelTitle.Margin = new System.Windows.Forms.Padding(14, 0, 14, 0);
-            this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(63, 29);
-            this.LabelTitle.TabIndex = 8;
-            this.LabelTitle.Text = "Titre";
-            // 
             // TextBoxInput
             // 
-            this.TextBoxInput.Location = new System.Drawing.Point(131, 22);
-            this.TextBoxInput.Margin = new System.Windows.Forms.Padding(14, 22, 14, 22);
+            this.TextBoxInput.Location = new System.Drawing.Point(15, 10);
+            this.TextBoxInput.Margin = new System.Windows.Forms.Padding(6, 10, 6, 10);
             this.TextBoxInput.Name = "TextBoxInput";
-            this.TextBoxInput.Size = new System.Drawing.Size(622, 35);
+            this.TextBoxInput.Size = new System.Drawing.Size(310, 20);
             this.TextBoxInput.TabIndex = 7;
             // 
             // ButtonValidate
             // 
-            this.ButtonValidate.Location = new System.Drawing.Point(777, 11);
-            this.ButtonValidate.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.ButtonValidate.Location = new System.Drawing.Point(333, 5);
             this.ButtonValidate.Name = "ButtonValidate";
-            this.ButtonValidate.Size = new System.Drawing.Size(198, 62);
+            this.ButtonValidate.Size = new System.Drawing.Size(85, 28);
             this.ButtonValidate.TabIndex = 9;
             this.ButtonValidate.Text = "Valider";
             this.ButtonValidate.UseVisualStyleBackColor = true;
@@ -65,15 +53,13 @@
             // InputForm
             // 
             this.AcceptButton = this.ButtonValidate;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(985, 91);
+            this.ClientSize = new System.Drawing.Size(422, 41);
             this.Controls.Add(this.ButtonValidate);
-            this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.TextBoxInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InputForm";
@@ -88,8 +74,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label LabelTitle;
         private System.Windows.Forms.TextBox TextBoxInput;
         private System.Windows.Forms.Button ButtonValidate;
     }
