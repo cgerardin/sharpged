@@ -137,6 +137,9 @@ namespace SharpGED_client
 
             // Sérialise et envoie l'objet
             TransfertManager.Send(file.Save(), server);
+
+            // Attend la confirmation
+            server.Receive(new byte[sizeof(char)*2]);
         }
 
         public static RemoteGedFile ServerReciveFile(GedFile gedFile)

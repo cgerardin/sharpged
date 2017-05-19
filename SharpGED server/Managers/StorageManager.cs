@@ -173,6 +173,9 @@ namespace SharpGED_server
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
+
+            // Envoie la confirmation
+            client.Send(Encoding.Unicode.GetBytes("OK"));
         }
 
         public void DeleteFile(string hash)
