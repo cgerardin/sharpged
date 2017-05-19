@@ -11,9 +11,9 @@ namespace SharpGED_client
     public partial class AddFileForm : Form
     {
 
-        private PdfDocument newPdf;
-        private String newPdfUri;
-        private bool isPdf;
+        private PdfDocument[] newPdf = new PdfDocument[100];
+        private String[] newPdfUri = new String[100];
+        private bool[] isPdf = new bool[100];
         public GedFolder folder { get; set; }
 
         public AddFileForm()
@@ -23,41 +23,44 @@ namespace SharpGED_client
 
         private void AddFileForm_Load(object sender, EventArgs e)
         {
+            textBoxPdfName.Enabled = false;
+            textBoxPdfName.Text = "";
+            labelNbPages.Text = "(0 pages)";
+
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
-                TextBoxPdfName.Text = addPdfDialog.SafeFileName.Substring(0, addPdfDialog.SafeFileName.LastIndexOf("."));
-
-                isPdf = addPdfDialog.SafeFileName.Substring(addPdfDialog.SafeFileName.Length - 4, 4).Equals(".pdf");
-                if (isPdf)
+                for (int i = 0; i < addPdfDialog.FileNames.Length; i++)
                 {
-                    newPdfUri = addPdfDialog.FileName;
-                    newPdf = PdfReader.Open(addPdfDialog.FileName, PdfDocumentOpenMode.Import);
+                    listBoxFiles.Items.Add(addPdfDialog.SafeFileNames[i].Substring(0, addPdfDialog.SafeFileNames[i].LastIndexOf(".")));
 
-                    LabelNbPages.Text = "(" + newPdf.PageCount + " pages)";
-                }
-                else
-                {
-                    newPdfUri = Program.NewTempFile();
-                    newPdf = new PdfDocument(newPdfUri);
+                    isPdf[i] = addPdfDialog.SafeFileNames[i].Substring(addPdfDialog.SafeFileNames[i].Length - 4, 4).Equals(".pdf");
+                    if (isPdf[i])
+                    {
+                        newPdfUri[i] = addPdfDialog.FileNames[i];
+                        newPdf[i] = PdfReader.Open(addPdfDialog.FileNames[i], PdfDocumentOpenMode.Import);
+                    }
+                    else
+                    {
+                        newPdfUri[i] = Program.NewTempFile();
+                        newPdf[i] = new PdfDocument(newPdfUri[i]);
 
-                    PdfPage page = newPdf.AddPage();
-                    page.Size = PdfSharp.PageSize.A4;
+                        PdfPage page = newPdf[i].AddPage();
+                        page.Size = PdfSharp.PageSize.A4;
 
-                    XGraphics gfx = XGraphics.FromPdfPage(page);
-                    XImage xImage = XImage.FromFile(addPdfDialog.FileName);
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        XImage xImage = XImage.FromFile(addPdfDialog.FileNames[i]);
 
-                    double imageWidth = xImage.PointWidth;
-                    double imageHeight = xImage.PointHeight;
-                    double pageWidth = page.Width.Point;
-                    double pageHeight = page.Height.Point;
-                    double marginLeft = (pageWidth - imageWidth) / 2;
-                    double marginTop = (pageHeight - imageHeight) / 2;
+                        double imageWidth = xImage.PointWidth;
+                        double imageHeight = xImage.PointHeight;
+                        double pageWidth = page.Width.Point;
+                        double pageHeight = page.Height.Point;
+                        double marginLeft = (pageWidth - imageWidth) / 2;
+                        double marginTop = (pageHeight - imageHeight) / 2;
 
-                    gfx.DrawImage(xImage, new XRect(marginLeft, marginTop, pageWidth, pageHeight), new XRect(0, 0, imageWidth, imageHeight), XGraphicsUnit.Point);
+                        gfx.DrawImage(xImage, new XRect(marginLeft, marginTop, pageWidth, pageHeight), new XRect(0, 0, imageWidth, imageHeight), XGraphicsUnit.Point);
 
-                    newPdf.Close();
-
-                    LabelNbPages.Text = "(1 pages)";
+                        newPdf[i].Close();
+                    }
                 }
             }
             else
@@ -70,36 +73,76 @@ namespace SharpGED_client
         {
             Cursor = Cursors.WaitCursor;
 
-            // Lit le fichier PDF et place son contenu dans un tableau
+            RemoteGedFile file;
             byte[] fileBytes;
             int size;
-            using (FileStream inStream = File.OpenRead(newPdfUri))
+            for (int i = 0; i < addPdfDialog.FileNames.Length; i++)
             {
-                size = (int)inStream.Length;
-                fileBytes = new byte[size];
-                inStream.Read(fileBytes, 0, size);
+                // Lit le fichier PDF et place son contenu dans un tableau
+                using (FileStream inStream = File.OpenRead(newPdfUri[i]))
+                {
+                    size = (int)inStream.Length;
+                    fileBytes = new byte[size];
+                    inStream.Read(fileBytes, 0, size);
+                }
+
+                // Crée un GedFile et l'envoie au serveur
+                file = new RemoteGedFile();
+                file.folderId = folder.id;
+                file.size = size;
+                file.title = listBoxFiles.Items[i].ToString();
+                if (isPdf[i])
+                {
+                    file.originalname = newPdfUri[i].Substring(newPdfUri[i].LastIndexOf("\\") + 1);
+                }
+                else
+                {
+                    file.originalname = addPdfDialog.SafeFileNames[i];
+                }
+                file.bytes = fileBytes;
+                Program.ServerSendFile(file);
+
             }
 
-            // Crée un GedFile et l'envoie au serveur
-            RemoteGedFile file = new RemoteGedFile();
-            file.folderId = folder.id;
-            file.size = size;
-            file.title = TextBoxPdfName.Text;
-            if (isPdf)
+            Cursor = Cursors.Default;
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int i = listBoxFiles.SelectedIndex;
+
+            if (i != -1)
             {
-                file.originalname = newPdfUri.Substring(newPdfUri.LastIndexOf("\\") + 1);
+                textBoxPdfName.Enabled = true;
+                textBoxPdfName.Text = listBoxFiles.Items[i].ToString();
+
+                if (isPdf[i])
+                {
+                    labelNbPages.Text = "(" + newPdf[i].PageCount + " pages)";
+                }
+                else
+                {
+                    labelNbPages.Text = "(1 pages)";
+                }
             }
             else
             {
-                file.originalname = addPdfDialog.SafeFileName;
+                textBoxPdfName.Enabled = false;
+                textBoxPdfName.Text = "";
+                labelNbPages.Text = "(0 pages)";
             }
-            file.bytes = fileBytes;
-            Program.ServerSendFile(file);
+        }
 
-            Cursor = Cursors.Default;
+        private void textBoxPdfName_TextChanged(object sender, EventArgs e)
+        {
+            int i = listBoxFiles.SelectedIndex;
 
-            DialogResult = DialogResult.OK;
-            Close();
+            if (i != -1)
+            {
+                listBoxFiles.Items[i] = textBoxPdfName.Text;
+            }
         }
     }
 
