@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SharpGED_client
 {
-    public partial class MainForm : Form
+    public partial class formMain : Form
     {
 
         private string lastClickedHash = "";
@@ -16,7 +16,7 @@ namespace SharpGED_client
         private PdfDocument currentDocument;
         private string currentDocumentUri;
 
-        public MainForm()
+        public formMain()
         {
             InitializeComponent();
         }
@@ -35,7 +35,7 @@ namespace SharpGED_client
             {
                 if (MessageBox.Show("La base de données du serveur n'est pas encore initialisée. Souhaitez-vous le faire maintenant ?", "Base de données manquante", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    InputForm inputDialog = new InputForm();
+                    formInput inputDialog = new formInput();
                     inputDialog.title = "Entrez le nom souhaité pour la base";
                     inputDialog.value = "default";
 
@@ -46,7 +46,7 @@ namespace SharpGED_client
                 }
             }
             EmptyViewer();
-            TreeViewCategories.Font = new Font(TreeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
+            treeViewCategories.Font = new Font(treeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -78,34 +78,34 @@ namespace SharpGED_client
             Cursor = Cursors.WaitCursor;
 
             EmptyViewer();
-            ListBoxFiles.Items.Clear();
-            TreeViewCategories.Nodes.Clear();
+            listBoxFiles.Items.Clear();
+            treeViewCategories.Nodes.Clear();
 
             foreach (GedFolder currentGedFolder in Program.ServerListFolders(filter))
             {
-                TreeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
+                treeViewCategories.Nodes.Add(BuildNode(currentGedFolder));
             }
-            TreeViewCategories.Sort();
-            TreeViewCategories.ExpandAll();
+            treeViewCategories.Sort();
+            treeViewCategories.ExpandAll();
 
             // Re-sélectionne le dernier noeud actif
-            if (TreeViewCategories.Nodes.Count > 0)
+            if (treeViewCategories.Nodes.Count > 0)
             {
                 if (!lastClickedNode.Equals(""))
                 {
-                    TreeNode[] searchResult = TreeViewCategories.Nodes.Find(lastClickedNode, true);
+                    TreeNode[] searchResult = treeViewCategories.Nodes.Find(lastClickedNode, true);
                     if (searchResult.Length > 0)
                     {
-                        TreeViewCategories.SelectedNode = TreeViewCategories.Nodes.Find(lastClickedNode, true)[0];
+                        treeViewCategories.SelectedNode = treeViewCategories.Nodes.Find(lastClickedNode, true)[0];
                     }
                     else
                     {
-                        TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+                        treeViewCategories.SelectedNode = treeViewCategories.Nodes[0];
                     }
                 }
                 else
                 {
-                    TreeViewCategories.SelectedNode = TreeViewCategories.Nodes[0];
+                    treeViewCategories.SelectedNode = treeViewCategories.Nodes[0];
                 }
 
             }
@@ -130,14 +130,14 @@ namespace SharpGED_client
             // Image spéciale pour le(s) noeud(s) racine
             if (folder.idParent == null)
             {
-                node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Bold);
+                node.NodeFont = new Font(treeViewCategories.Font, FontStyle.Bold);
                 node.SelectedImageIndex = 0;
                 node.ImageIndex = 0;
                 node.EnsureVisible();
             }
             else
             {
-                node.NodeFont = new Font(TreeViewCategories.Font, FontStyle.Regular);
+                node.NodeFont = new Font(treeViewCategories.Font, FontStyle.Regular);
                 if (folder.files.Count == 0)
                 {
                     node.SelectedImageIndex = 2;
@@ -159,12 +159,12 @@ namespace SharpGED_client
             LabelPdfName.Text = "-";
             LabelNbPages.Text = "(0 pages)";
             OriginalNameLabel.Text = "-";
-            PdfViewer.Visible = false;
+            pdfViewer.Visible = false;
             if (currentDocument != null)
             {
                 currentDocument.Dispose();
             }
-            PdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
+            pdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
         }
 
         private void InitializeDatabase(string databaseName)
@@ -173,7 +173,7 @@ namespace SharpGED_client
             EmptyViewer();
             Program.ServerInitialize(databaseName);
             RefreshFilesList();
-            TreeViewCategories.Nodes[0].Text = databaseName;
+            treeViewCategories.Nodes[0].Text = databaseName;
             Cursor = Cursors.Default;
         }
 
@@ -181,7 +181,7 @@ namespace SharpGED_client
         {
             if (toolButtonFilter.Checked)
             {
-                InputForm inputDialog = new InputForm();
+                formInput inputDialog = new formInput();
                 inputDialog.title = "Filtre de nom de fichier";
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
@@ -198,16 +198,16 @@ namespace SharpGED_client
 
         }
 
-        private void ToolButtonNewFile_Click(object sender, EventArgs e)
+        private void toolButtonFileNew_Click(object sender, EventArgs e)
         {
-            if (TreeViewCategories.SelectedNode == null)
+            if (treeViewCategories.SelectedNode == null)
             {
                 MessageBox.Show("Merci de sélectionner le dossier où le fichier sera déposé.", "Précision requise", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            AddFileForm addFileDialog = new AddFileForm();
-            addFileDialog.folder = (GedFolder)TreeViewCategories.SelectedNode.Tag;
+            formAddFile addFileDialog = new formAddFile();
+            addFileDialog.folder = (GedFolder)treeViewCategories.SelectedNode.Tag;
 
             if (addFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -215,43 +215,43 @@ namespace SharpGED_client
             }
         }
 
-        private void ToolButtonDeleteFile_Click(object sender, EventArgs e)
+        private void toolButtonFileDelete_Click(object sender, EventArgs e)
         {
-            if (ListBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItem != null)
             {
                 if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce document ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     EmptyViewer();
-                    Program.ServerDeleteFile((GedFile)ListBoxFiles.SelectedItem);
+                    Program.ServerDeleteFile((GedFile)listBoxFiles.SelectedItem);
                     RefreshFilesList();
                 }
             }
         }
 
-        private void ToolButtonRenameFile_Click(object sender, EventArgs e)
+        private void toolButtonFileRename_Click(object sender, EventArgs e)
         {
-            if (ListBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItem != null)
             {
-                InputForm inputDialog = new InputForm();
+                formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour le document";
-                inputDialog.value = ((GedFile)ListBoxFiles.SelectedItem).title;
+                inputDialog.value = ((GedFile)listBoxFiles.SelectedItem).title;
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Program.ServerRenameFile(((GedFile)ListBoxFiles.SelectedItem), inputDialog.value);
+                    Program.ServerRenameFile(((GedFile)listBoxFiles.SelectedItem), inputDialog.value);
                     RefreshFilesList();
                 }
             }
         }
 
-        private void ToolButtonEditFile_Click(object sender, EventArgs e)
+        private void toolButtonFileEdit_Click(object sender, EventArgs e)
         {
             if (Program.isDatabaseInitialized)
             {
                 string originalTitle = LabelPdfName.Text;
                 string originalName = OriginalNameLabel.Text;
 
-                EditPdfForm edit = new EditPdfForm();
+                formEditPdf edit = new formEditPdf();
                 edit.documentUri = currentDocumentUri;
 
                 if (edit.ShowDialog() == DialogResult.OK)
@@ -270,7 +270,7 @@ namespace SharpGED_client
 
                     // Crée un GedFile et l'envoie au serveur
                     RemoteGedFile file = new RemoteGedFile();
-                    file.folderId = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                    file.folderId = ((GedFolder)treeViewCategories.SelectedNode.Tag).id;
                     file.size = size;
                     file.title = originalTitle + " (édité)";
                     file.originalname = originalName;
@@ -282,13 +282,13 @@ namespace SharpGED_client
             }
         }
 
-        private void ToolButtonFolderAdd_Click(object sender, EventArgs e)
+        private void toolButtonFolderAdd_Click(object sender, EventArgs e)
         {
             if (Program.isDatabaseInitialized)
             {
                 GedFolder folder = new GedFolder();
 
-                InputForm inputDialog = new InputForm();
+                formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour le dossier";
                 inputDialog.value = "Nouveau dossier";
 
@@ -298,9 +298,9 @@ namespace SharpGED_client
 
                     folder.title = inputDialog.value;
 
-                    if (TreeViewCategories.SelectedNode != null)
+                    if (treeViewCategories.SelectedNode != null)
                     {
-                        folder.idParent = ((GedFolder)TreeViewCategories.SelectedNode.Tag).id;
+                        folder.idParent = ((GedFolder)treeViewCategories.SelectedNode.Tag).id;
                     }
 
                     Program.ServerCreateFolder(folder);
@@ -311,17 +311,17 @@ namespace SharpGED_client
             }
         }
 
-        private void ToolButtonFolderDelete_Click(object sender, EventArgs e)
+        private void toolButtonFolderDelete_Click(object sender, EventArgs e)
         {
-            if (TreeViewCategories.SelectedNode != null)
+            if (treeViewCategories.SelectedNode != null)
             {
                 // Interdis de supprimer un noeud racine
-                if (((GedFolder)TreeViewCategories.SelectedNode.Tag).idParent != null)
+                if (((GedFolder)treeViewCategories.SelectedNode.Tag).idParent != null)
                 {
                     if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce dossier ? (les sous-dossiers et fichiers inclus seront déplacés à la racine)", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         Cursor = Cursors.WaitCursor;
-                        Program.ServerDeleteFolder((GedFolder)TreeViewCategories.SelectedNode.Tag);
+                        Program.ServerDeleteFolder((GedFolder)treeViewCategories.SelectedNode.Tag);
                         Cursor = Cursors.Default;
                         lastClickedNode = "";
                         RefreshFilesList();
@@ -330,27 +330,27 @@ namespace SharpGED_client
             }
         }
 
-        private void ToolButtonFolderRename_Click(object sender, EventArgs e)
+        private void toolButtonFolderRename_Click(object sender, EventArgs e)
         {
-            if (TreeViewCategories.SelectedNode != null)
+            if (treeViewCategories.SelectedNode != null)
             {
-                InputForm inputDialog = new InputForm();
+                formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour le dossier";
-                inputDialog.value = ((GedFolder)TreeViewCategories.SelectedNode.Tag).title;
+                inputDialog.value = ((GedFolder)treeViewCategories.SelectedNode.Tag).title;
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
                     Cursor = Cursors.WaitCursor;
-                    Program.ServerRenameFolder((GedFolder)TreeViewCategories.SelectedNode.Tag, inputDialog.value);
+                    Program.ServerRenameFolder((GedFolder)treeViewCategories.SelectedNode.Tag, inputDialog.value);
                     Cursor = Cursors.Default;
                     RefreshFilesList();
                 }
             }
         }
 
-        private void ToolButtonPrint_Click(object sender, EventArgs e)
+        private void toolButtonPrint_Click(object sender, EventArgs e)
         {
-            printPdf = PdfViewer.Document.CreatePrintDocument();
+            printPdf = pdfViewer.Document.CreatePrintDocument();
             printDialog.Document = printPdf;
 
             if (printDialog.ShowDialog() == DialogResult.OK)
@@ -365,17 +365,17 @@ namespace SharpGED_client
 
         }
 
-        private void ToolButtonRefresh_Click(object sender, EventArgs e)
+        private void toolButtonRefresh_Click(object sender, EventArgs e)
         {
             RefreshFilesList();
             lastClickedNode = "";
         }
 
-        private void ToolButtonInitDatabase_Click(object sender, EventArgs e)
+        private void toolButtonInitDatabase_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Etes-vous sûr(e) de vouloir réinitialiser la base de données ? L'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
-                InputForm inputDialog = new InputForm();
+                formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour la base";
                 inputDialog.value = "default";
 
@@ -386,44 +386,44 @@ namespace SharpGED_client
             }
         }
 
-        private void ToolButtonStopServer_Click(object sender, EventArgs e)
+        private void toolButtonStopServer_Click(object sender, EventArgs e)
         {
             Program.ServerHalt();
             Close();
         }
 
-        private void ToolButtonDisconnect_Click(object sender, EventArgs e)
+        private void toolButtonDisconnect_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void TreeViewCategories_Click(object sender, EventArgs e)
+        private void treeViewCategories_Click(object sender, EventArgs e)
         {
             // Nécessaire pour rafraichir _AfterSelect si on reclique sur le même élément
-            TreeViewCategories.SelectedNode = null;
+            treeViewCategories.SelectedNode = null;
         }
 
-        private void TreeViewCategories_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeViewCategories_AfterSelect(object sender, TreeViewEventArgs e)
         {
             Cursor = Cursors.WaitCursor;
 
             lastClickedHash = "";
-            ListBoxFiles.SelectedItem = null;
-            ListBoxFiles.Items.Clear();
-            foreach (GedFile currentGedFile in ((GedFolder)TreeViewCategories.SelectedNode.Tag).files)
+            listBoxFiles.SelectedItem = null;
+            listBoxFiles.Items.Clear();
+            foreach (GedFile currentGedFile in ((GedFolder)treeViewCategories.SelectedNode.Tag).files)
             {
-                ListBoxFiles.Items.Add(currentGedFile);
+                listBoxFiles.Items.Add(currentGedFile);
             }
-            lastClickedNode = TreeViewCategories.SelectedNode.Name;
+            lastClickedNode = treeViewCategories.SelectedNode.Name;
 
             Cursor = Cursors.Default;
         }
 
-        private void ListBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ListBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItem != null)
             {
-                GedFile selectedFile = (GedFile)ListBoxFiles.SelectedItem;
+                GedFile selectedFile = (GedFile)listBoxFiles.SelectedItem;
 
                 if (selectedFile.hash.Equals(lastClickedHash))
                 {
@@ -449,14 +449,14 @@ namespace SharpGED_client
                 LabelNbPages.Text = "(" + file.pages + " pages)";
                 OriginalNameLabel.Text = file.originalname;
 
-                PdfViewer.Visible = false;
+                pdfViewer.Visible = false;
                 if (currentDocument != null)
                 {
                     currentDocument.Dispose();
                 }
                 currentDocument = PdfDocument.Load(localFilename);
-                PdfViewer.Load(currentDocument);
-                PdfViewer.Visible = true;
+                pdfViewer.Load(currentDocument);
+                pdfViewer.Visible = true;
 
                 // Mémorise le fichier temporaire et son URI
                 currentDocumentUri = localFilename;
@@ -469,52 +469,52 @@ namespace SharpGED_client
             }
         }
 
-        private void ListBoxFiles_KeyDown(object sender, KeyEventArgs e)
+        private void treeViewCategories_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.N:
                     if (e.Control)
                     {
-                        ToolButtonNewFile_Click(null, null);
+                        toolButtonFolderAdd_Click(null, null);
                     }
                     break;
 
                 case Keys.F2:
-                    ToolButtonRenameFile_Click(null, null);
+                    toolButtonFolderRename_Click(null, null);
                     break;
 
                 case Keys.F5:
-                    ToolButtonRefresh_Click(null, null);
+                    toolButtonRefresh_Click(null, null);
                     break;
 
                 case Keys.Delete:
-                    ToolButtonDeleteFile_Click(null, null);
+                    toolButtonFolderDelete_Click(null, null);
                     break;
             }
         }
 
-        private void TreeViewCategories_KeyDown(object sender, KeyEventArgs e)
+        private void listBoxFiles_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.N:
                     if (e.Control)
                     {
-                        ToolButtonFolderAdd_Click(null, null);
+                        toolButtonFileNew_Click(null, null);
                     }
                     break;
 
                 case Keys.F2:
-                    ToolButtonFolderRename_Click(null, null);
+                    toolButtonFileRename_Click(null, null);
                     break;
 
                 case Keys.F5:
-                    ToolButtonRefresh_Click(null, null);
+                    toolButtonRefresh_Click(null, null);
                     break;
 
                 case Keys.Delete:
-                    ToolButtonFolderDelete_Click(null, null);
+                    toolButtonFileDelete_Click(null, null);
                     break;
             }
         }

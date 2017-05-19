@@ -200,7 +200,7 @@ namespace SharpGED_client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            loginForm = new LoginForm();
+            loginForm = new formLogin();
             loginForm.Show();
             Application.Run();
         }

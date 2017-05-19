@@ -1,6 +1,6 @@
 ﻿namespace SharpGED_client.Forms
 {
-    partial class InputForm
+    partial class formInput
     {
         /// <summary>
         /// Required designer variable.
@@ -50,7 +50,7 @@
             this.ButtonValidate.UseVisualStyleBackColor = true;
             this.ButtonValidate.Click += new System.EventHandler(this.ButtonValidate_Click);
             // 
-            // InputForm
+            // formInput
             // 
             this.AcceptButton = this.ButtonValidate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -62,7 +62,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "InputForm";
+            this.Name = "formInput";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Titre";
             this.TopMost = true;

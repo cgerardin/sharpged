@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace SharpGED_client.Forms
 {
-    public partial class InputForm : Form
+    public partial class formInput : Form
     {
 
         public string title { get; set; }
         public string value { get; set; }
 
-        public InputForm()
+        public formInput()
         {
             InitializeComponent();
         }

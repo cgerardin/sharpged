@@ -84,53 +84,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AddFileForm.cs">
+    <Compile Include="Forms\FormAddFile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddFileForm.Designer.cs">
-      <DependentUpon>AddFileForm.cs</DependentUpon>
+    <Compile Include="Forms\FormAddFile.Designer.cs">
+      <DependentUpon>FormAddFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditPdfForm.cs">
+    <Compile Include="Forms\FormEditPdf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditPdfForm.Designer.cs">
-      <DependentUpon>EditPdfForm.cs</DependentUpon>
+    <Compile Include="Forms\FormEditPdf.Designer.cs">
+      <DependentUpon>FormEditPdf.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoginForm.cs">
+    <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <Compile Include="Forms\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\InputForm.cs">
+    <Compile Include="Forms\FormInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\InputForm.Designer.cs">
-      <DependentUpon>InputForm.cs</DependentUpon>
+    <Compile Include="Forms\FormInput.Designer.cs">
+      <DependentUpon>FormInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AddFileForm.resx">
-      <DependentUpon>AddFileForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormAddFile.resx">
+      <DependentUpon>FormAddFile.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditPdfForm.resx">
-      <DependentUpon>EditPdfForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormEditPdf.resx">
+      <DependentUpon>FormEditPdf.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\InputForm.resx">
-      <DependentUpon>InputForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormInput.resx">
+      <DependentUpon>FormInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

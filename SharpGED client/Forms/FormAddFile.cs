@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SharpGED_client
 {
-    public partial class AddFileForm : Form
+    public partial class formAddFile : Form
     {
 
         private PdfDocument[] newPdf = new PdfDocument[100];
@@ -16,7 +16,7 @@ namespace SharpGED_client
         private bool[] isPdf = new bool[100];
         public GedFolder folder { get; set; }
 
-        public AddFileForm()
+        public formAddFile()
         {
             InitializeComponent();
         }

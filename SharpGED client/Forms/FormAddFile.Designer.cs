@@ -1,6 +1,6 @@
 ﻿namespace SharpGED_client
 {
-    partial class AddFileForm
+    partial class formAddFile
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddFileForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formAddFile));
             this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.ButtonAddPdf = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -93,7 +93,7 @@
             this.listBoxFiles.TabIndex = 7;
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
             // 
-            // AddFileForm
+            // formAddFile
             // 
             this.AcceptButton = this.ButtonAddPdf;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,7 +109,7 @@
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AddFileForm";
+            this.Name = "formAddFile";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ajouter des documents";

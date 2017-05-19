@@ -4,9 +4,9 @@ using System.Windows.Forms;
 
 namespace SharpGED_client
 {
-    public partial class LoginForm : Form
+    public partial class formLogin : Form
     {
-        public LoginForm()
+        public formLogin()
         {
             InitializeComponent();
         }
@@ -50,7 +50,7 @@ namespace SharpGED_client
             Properties.Settings.Default.User = TextBoxUser.Text;
             Properties.Settings.Default.Save();
 
-            new MainForm().Show();
+            new formMain().Show();
             Hide();
         }
 
