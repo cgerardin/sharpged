@@ -440,17 +440,24 @@ namespace SharpGED_client
         {
             if (listBoxFiles.SelectedItem != null)
             {
-                printPdf = pdfViewer.Document.CreatePrintDocument();
-                printDialog.Document = printPdf;
-
-                if (printDialog.ShowDialog() == DialogResult.OK)
+                if (((GedFile)listBoxFiles.SelectedItem).type == GedFileType.PDF)
                 {
-                    printPdf.PrinterSettings = printDialog.PrinterSettings;
-                    printPdf.Print();
+                    printPdf = pdfViewer.Document.CreatePrintDocument();
+                    printDialog.Document = printPdf;
+
+                    if (printDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        printPdf.PrinterSettings = printDialog.PrinterSettings;
+                        printPdf.Print();
+                    }
+                    else
+                    {
+                        printPdf = null;
+                    }
                 }
                 else
                 {
-                    printPdf = null;
+                    MessageBox.Show("Il n'est pas possible d'imprimer directement un document image ou bureautique.", "Opération non supportée", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
