@@ -534,6 +534,7 @@ namespace SharpGED_client
             {
                 toolButtonFileEdit.Enabled = true;
                 toolButtonFileRename.Enabled = true;
+                toolButtonPrint.Enabled = true;
 
                 if (listBoxFiles.SelectedItem != null)
                 {
@@ -548,6 +549,7 @@ namespace SharpGED_client
             {
                 toolButtonFileEdit.Enabled = false;
                 toolButtonFileRename.Enabled = false;
+                toolButtonPrint.Enabled = false;
                 EmptyViewers();
             }
         }
