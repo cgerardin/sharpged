@@ -46,7 +46,8 @@ namespace SharpGED_client
                     }
                 }
             }
-            EmptyViewers();
+            listBoxFiles_SelectedIndexChanged(null, null);
+
             treeViewCategories.Font = new Font(treeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
 
@@ -440,25 +441,20 @@ namespace SharpGED_client
         {
             if (listBoxFiles.SelectedItem != null)
             {
-                if (((GedFile)listBoxFiles.SelectedItem).type == GedFileType.PDF)
-                {
-                    printPdf = pdfViewer.Document.CreatePrintDocument();
-                    printDialog.Document = printPdf;
 
-                    if (printDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        printPdf.PrinterSettings = printDialog.PrinterSettings;
-                        printPdf.Print();
-                    }
-                    else
-                    {
-                        printPdf = null;
-                    }
+                printPdf = pdfViewer.Document.CreatePrintDocument();
+                printDialog.Document = printPdf;
+
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printPdf.PrinterSettings = printDialog.PrinterSettings;
+                    printPdf.Print();
                 }
                 else
                 {
-                    MessageBox.Show("Il n'est pas possible d'imprimer directement un document image ou bureautique.", "Opération non supportée", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    printPdf = null;
                 }
+
             }
         }
 
@@ -537,26 +533,40 @@ namespace SharpGED_client
 
         private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItems.Count <= 1)
+            if (listBoxFiles.SelectedItems.Count == 0)
             {
-                toolButtonFileEdit.Enabled = true;
-                toolButtonFileRename.Enabled = true;
-                toolButtonPrint.Enabled = true;
-
-                if (listBoxFiles.SelectedItem != null)
+                toolButtonFileEdit.Enabled = false;
+                toolButtonFileRename.Enabled = false;
+                toolButtonFileDelete.Enabled = false;
+                toolButtonPrint.Enabled = false;
+                toolButtonFileExtract.Enabled = false;
+                EmptyViewers();
+            }
+            else if (listBoxFiles.SelectedItems.Count == 1)
+            {
+                if (((GedFile)listBoxFiles.SelectedItem).type == GedFileType.PDF)
                 {
-                    FillViewer((GedFile)listBoxFiles.SelectedItem);
+                    toolButtonFileEdit.Enabled = true;
+                    toolButtonPrint.Enabled = true;
                 }
                 else
                 {
-                    EmptyViewers();
+                    toolButtonFileEdit.Enabled = false;
+                    toolButtonPrint.Enabled = false;
                 }
+                toolButtonFileRename.Enabled = true;
+                toolButtonFileDelete.Enabled = true;
+                toolButtonFileExtract.Enabled = true;
+
+                FillViewer((GedFile)listBoxFiles.SelectedItem);
             }
             else
             {
                 toolButtonFileEdit.Enabled = false;
                 toolButtonFileRename.Enabled = false;
+                toolButtonFileDelete.Enabled = true;
                 toolButtonPrint.Enabled = false;
+                toolButtonFileExtract.Enabled = true;
                 EmptyViewers();
             }
         }
