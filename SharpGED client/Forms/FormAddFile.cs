@@ -37,7 +37,7 @@ namespace SharpGED_client
                 {
                     listBoxFiles.Items.Add(addPdfDialog.SafeFileNames[i].Substring(0, addPdfDialog.SafeFileNames[i].LastIndexOf(".")));
 
-                    switch (addPdfDialog.SafeFileNames[i].Substring(addPdfDialog.SafeFileNames[i].Length - 4, 4))
+                    switch (addPdfDialog.SafeFileNames[i].Substring(addPdfDialog.SafeFileNames[i].LastIndexOf(".")))
                     {
                         case ".pdf":
                             fileType[i] = GedFileType.PDF;
