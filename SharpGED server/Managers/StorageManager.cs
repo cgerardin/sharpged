@@ -177,7 +177,7 @@ namespace SharpGED_server
                 db.Open();
 
                 string sql = "INSERT INTO files (idType, idFolder, hash, originalname, size, title, pages) " +
-                "VALUES (" + file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
+                "VALUES (" + (long)file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }

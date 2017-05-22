@@ -35,12 +35,13 @@
             this.textBoxPdfName = new System.Windows.Forms.TextBox();
             this.labelNbPages = new System.Windows.Forms.Label();
             this.listBoxFiles = new System.Windows.Forms.ListBox();
+            this.checkBoxConvertPdf = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // addPdfDialog
             // 
-            this.addPdfDialog.Filter = "Tous les documents supportés|*.pdf;*.jpeg;*.jpg;*.png|Documents PDF|*.pdf|Fichier" +
-    "s image|*.jpeg;*.jpg;*.png";
+            this.addPdfDialog.Filter = "Tous les documents supportés|*.pdf;*.jpeg;*.jpg;*.png;*.docx|Documents PDF|*.pdf|" +
+    "Fichiers image|*.jpeg;*.jpg;*.png|Documents bureautique|*.docx";
             this.addPdfDialog.Multiselect = true;
             // 
             // ButtonAddPdf
@@ -76,7 +77,7 @@
             // labelNbPages
             // 
             this.labelNbPages.AutoSize = true;
-            this.labelNbPages.Location = new System.Drawing.Point(527, 40);
+            this.labelNbPages.Location = new System.Drawing.Point(527, 44);
             this.labelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelNbPages.Name = "labelNbPages";
             this.labelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -93,12 +94,23 @@
             this.listBoxFiles.TabIndex = 7;
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
             // 
+            // checkBoxConvertPdf
+            // 
+            this.checkBoxConvertPdf.AutoSize = true;
+            this.checkBoxConvertPdf.Location = new System.Drawing.Point(270, 43);
+            this.checkBoxConvertPdf.Name = "checkBoxConvertPdf";
+            this.checkBoxConvertPdf.Size = new System.Drawing.Size(139, 17);
+            this.checkBoxConvertPdf.TabIndex = 8;
+            this.checkBoxConvertPdf.Text = "Convertir au format PDF";
+            this.checkBoxConvertPdf.UseVisualStyleBackColor = true;
+            // 
             // formAddFile
             // 
             this.AcceptButton = this.ButtonAddPdf;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 329);
+            this.Controls.Add(this.checkBoxConvertPdf);
             this.Controls.Add(this.listBoxFiles);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelNbPages);
@@ -106,6 +118,7 @@
             this.Controls.Add(this.textBoxPdfName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -113,8 +126,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ajouter des documents";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.AddFileForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.formAddFile_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,5 +141,6 @@
         private System.Windows.Forms.TextBox textBoxPdfName;
         private System.Windows.Forms.Label labelNbPages;
         private System.Windows.Forms.ListBox listBoxFiles;
+        private System.Windows.Forms.CheckBox checkBoxConvertPdf;
     }
 }

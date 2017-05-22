@@ -14,7 +14,7 @@ namespace SharpGED_client
 
         private PdfDocument[] newPdf = new PdfDocument[100];
         private String[] newPdfUri = new String[100];
-        private bool[] isPdf = new bool[100];
+        private GedFileType[] fileType = new GedFileType[100];
         public GedFolder folder { get; set; }
 
         public formAddFile()
@@ -27,6 +27,8 @@ namespace SharpGED_client
             textBoxPdfName.Enabled = false;
             textBoxPdfName.Text = "";
             labelNbPages.Text = "(0 pages)";
+            checkBoxConvertPdf.Enabled = false;
+            checkBoxConvertPdf.Checked = false;
 
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
@@ -34,34 +36,34 @@ namespace SharpGED_client
                 {
                     listBoxFiles.Items.Add(addPdfDialog.SafeFileNames[i].Substring(0, addPdfDialog.SafeFileNames[i].LastIndexOf(".")));
 
-                    isPdf[i] = addPdfDialog.SafeFileNames[i].Substring(addPdfDialog.SafeFileNames[i].Length - 4, 4).Equals(".pdf");
-                    if (isPdf[i])
+                    switch (addPdfDialog.SafeFileNames[i].Substring(addPdfDialog.SafeFileNames[i].Length - 4, 4))
                     {
-                        newPdfUri[i] = addPdfDialog.FileNames[i];
+                        case ".pdf":
+                            fileType[i] = GedFileType.PDF;
+                            break;
+
+                        case ".jpeg":
+                            fileType[i] = GedFileType.Image;
+                            break;
+
+                        case ".jpg":
+                            fileType[i] = GedFileType.Image;
+                            break;
+
+                        case ".png":
+                            fileType[i] = GedFileType.Image;
+                            break;
+
+                        case "docx":
+                            fileType[i] = GedFileType.Office;
+                            break;
+                    }
+
+                    if (fileType[i] == GedFileType.PDF)
+                    {
                         newPdf[i] = PdfReader.Open(addPdfDialog.FileNames[i], PdfDocumentOpenMode.Import);
                     }
-                    else
-                    {
-                        newPdfUri[i] = Program.NewTempFile();
-                        newPdf[i] = new PdfDocument(newPdfUri[i]);
-
-                        PdfPage page = newPdf[i].AddPage();
-                        page.Size = PdfSharp.PageSize.A4;
-
-                        XGraphics gfx = XGraphics.FromPdfPage(page);
-                        XImage xImage = XImage.FromFile(addPdfDialog.FileNames[i]);
-
-                        double imageWidth = xImage.PointWidth;
-                        double imageHeight = xImage.PointHeight;
-                        double pageWidth = page.Width.Point;
-                        double pageHeight = page.Height.Point;
-                        double marginLeft = (pageWidth - imageWidth) / 2;
-                        double marginTop = (pageHeight - imageHeight) / 2;
-
-                        gfx.DrawImage(xImage, new XRect(marginLeft, marginTop, pageWidth, pageHeight), new XRect(0, 0, imageWidth, imageHeight), XGraphicsUnit.Point);
-
-                        newPdf[i].Close();
-                    }
+                    newPdfUri[i] = addPdfDialog.FileNames[i];
                 }
             }
             else
@@ -79,30 +81,57 @@ namespace SharpGED_client
             int size;
             for (int i = 0; i < addPdfDialog.FileNames.Length; i++)
             {
-                // Lit le fichier PDF et place son contenu dans un tableau
-                using (FileStream inStream = File.OpenRead(newPdfUri[i]))
+
+                if (fileType[i] != GedFileType.PDF && checkBoxConvertPdf.Checked)
                 {
-                    size = (int)inStream.Length;
-                    fileBytes = new byte[size];
-                    inStream.Read(fileBytes, 0, size);
+                    newPdfUri[i] = Program.NewTempFile();
+                    newPdf[i] = new PdfDocument(newPdfUri[i]);
+
+                    PdfPage page = newPdf[i].AddPage();
+                    page.Size = PdfSharp.PageSize.A4;
+
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    XImage xImage = XImage.FromFile(addPdfDialog.FileNames[i]);
+
+                    double imageWidth = xImage.PointWidth;
+                    double imageHeight = xImage.PointHeight;
+                    double pageWidth = page.Width.Point;
+                    double pageHeight = page.Height.Point;
+                    double marginLeft = (pageWidth - imageWidth) / 2;
+                    double marginTop = (pageHeight - imageHeight) / 2;
+
+                    gfx.DrawImage(xImage, new XRect(marginLeft, marginTop, pageWidth, pageHeight), new XRect(0, 0, imageWidth, imageHeight), XGraphicsUnit.Point);
+
+                    newPdf[i].Close();
+                    fileType[i] = GedFileType.PDF;
                 }
 
-                // Crée un GedFile et l'envoie au serveur
-                file = new RemoteGedFile();
-                file.type = GedFileType.PDF;
-                file.folderId = folder.id;
-                file.size = size;
-                file.title = listBoxFiles.Items[i].ToString();
-                if (isPdf[i])
+                switch (fileType[i])
                 {
-                    file.originalname = newPdfUri[i].Substring(newPdfUri[i].LastIndexOf("\\") + 1);
+                    case GedFileType.PDF:
+                        // Lit le fichier PDF et place son contenu dans un tableau
+                        using (FileStream inStream = File.OpenRead(newPdfUri[i]))
+                        {
+                            size = (int)inStream.Length;
+                            fileBytes = new byte[size];
+                            inStream.Read(fileBytes, 0, size);
+                        }
+
+                        // Crée un GedFile et l'envoie au serveur
+                        file = new RemoteGedFile();
+                        file.type = GedFileType.PDF;
+                        file.folderId = folder.id;
+                        file.size = size;
+                        file.title = listBoxFiles.Items[i].ToString();
+                        file.originalname = addPdfDialog.SafeFileNames[i];
+                        file.bytes = fileBytes;
+                        Program.ServerSendFile(file);
+                        break;
+
+                    default:
+                        throw new Exception("TODO : Type de document non pris en charge !");
+                        // todo : insérer tel quel en base
                 }
-                else
-                {
-                    file.originalname = addPdfDialog.SafeFileNames[i];
-                }
-                file.bytes = fileBytes;
-                Program.ServerSendFile(file);
 
             }
 
@@ -119,8 +148,10 @@ namespace SharpGED_client
             {
                 textBoxPdfName.Enabled = true;
                 textBoxPdfName.Text = listBoxFiles.Items[i].ToString();
+                checkBoxConvertPdf.Checked = fileType[i] != GedFileType.PDF;
+                checkBoxConvertPdf.Enabled = fileType[i] != GedFileType.PDF;
 
-                if (isPdf[i])
+                if (fileType[i] == GedFileType.PDF)
                 {
                     labelNbPages.Text = "(" + newPdf[i].PageCount + " pages)";
                 }
@@ -144,6 +175,20 @@ namespace SharpGED_client
             if (i != -1)
             {
                 listBoxFiles.Items[i] = textBoxPdfName.Text;
+            }
+        }
+
+        private void formAddFile_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+
+                case Keys.Enter:
+                    ButtonAddPdf_Click(null, null);
+                    break;
             }
         }
     }

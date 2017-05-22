@@ -1,5 +1,4 @@
-﻿using SharpGED_lib;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace SharpGED_client.Forms
@@ -21,11 +20,17 @@ namespace SharpGED_client.Forms
             TextBoxInput.Text = value;
         }
 
+        private void ButtonValidate_Click(object sender, EventArgs e)
+        {
+            value = TextBoxInput.Text;
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
         private void InputForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
-
                 case Keys.Escape:
                     Close();
                     break;
@@ -34,13 +39,6 @@ namespace SharpGED_client.Forms
                     ButtonValidate_Click(null, null);
                     break;
             }
-        }
-
-        private void ButtonValidate_Click(object sender, EventArgs e)
-        {
-            value = TextBoxInput.Text;
-            DialogResult = DialogResult.OK;
-            Close();
         }
 
     }
