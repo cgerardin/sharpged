@@ -46,7 +46,7 @@ namespace SharpGED_client
                     }
                 }
             }
-            EmptyViewer();
+            EmptyViewers();
             treeViewCategories.Font = new Font(treeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
 
@@ -78,7 +78,7 @@ namespace SharpGED_client
 
             Cursor = Cursors.WaitCursor;
 
-            EmptyViewer();
+            EmptyViewers();
             listBoxFiles.Items.Clear();
             treeViewCategories.Nodes.Clear();
 
@@ -155,25 +155,27 @@ namespace SharpGED_client
             return node;
         }
 
-        private void EmptyViewer()
+        private void EmptyViewers()
         {
             LabelPdfName.Text = "-";
             LabelNbPages.Text = "(0 pages)";
             labelOriginalName.Text = "-";
+
             pdfViewer.Visible = false;
+            imageViewer.Visible = false;
+            officeViewer.Visible = false;
+
             if (currentDocument != null)
             {
                 currentDocument.Dispose();
             }
             pdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
-
-            imageViewer.Visible = false;
         }
 
         private void InitializeDatabase(string databaseName)
         {
             Cursor = Cursors.WaitCursor;
-            EmptyViewer();
+            EmptyViewers();
             Program.ServerInitialize(databaseName);
             RefreshFilesList();
             treeViewCategories.Nodes[0].Text = databaseName;
@@ -230,7 +232,7 @@ namespace SharpGED_client
             {
                 if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce document ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    EmptyViewer();
+                    EmptyViewers();
                     Program.ServerDeleteFile((GedFile)listBoxFiles.SelectedItem);
                     RefreshFilesList();
                 }
@@ -462,11 +464,7 @@ namespace SharpGED_client
                 outStream.Close();
 
                 // Masque tous les viewers
-                pdfViewer.Visible = false;
-                if (currentDocument != null)
-                {
-                    currentDocument.Dispose();
-                }
+                EmptyViewers();
 
                 // Affiche le document dans le viewer correspondant à son type
                 switch (file.type)
@@ -483,7 +481,8 @@ namespace SharpGED_client
                         break;
 
                     case GedFileType.Office:
-                        // TODO
+                        officeViewer.URI = localFilename;
+                        officeViewer.Visible = true;
                         break;
                 }
 
@@ -500,7 +499,7 @@ namespace SharpGED_client
             }
             else
             {
-                EmptyViewer();
+                EmptyViewers();
             }
         }
 

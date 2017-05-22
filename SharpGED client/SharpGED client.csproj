@@ -173,6 +173,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharpGED controls\SharpGED controls.csproj">
+      <Project>{afdeb845-0174-4560-abbb-78e7fb7ab6fe}</Project>
+      <Name>SharpGED controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharpGED lib\SharpGED lib.csproj">
       <Project>{06593B4D-C588-45B7-B31D-1531360EE107}</Project>
       <Name>SharpGED lib</Name>
