@@ -192,6 +192,9 @@ namespace SharpGED_server
 
             // Supprime le fichier du disque
             File.Delete(baseFolder + "storage\\" + hash);
+
+            // Envoie la confirmation
+            client.Send(Encoding.Unicode.GetBytes("OK"));
         }
 
         public void RenameFile(string hash, string title)

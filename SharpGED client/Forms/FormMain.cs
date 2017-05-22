@@ -172,6 +172,70 @@ namespace SharpGED_client
             pdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
         }
 
+        private void FillViewer(GedFile selectedFile)
+        {
+            if (selectedFile.hash.Equals(lastClickedHash))
+            {
+                return;
+            }
+            else
+            {
+                lastClickedHash = selectedFile.hash;
+            }
+
+            Cursor = Cursors.WaitCursor;
+
+            RemoteGedFile file = Program.ServerReciveFile(selectedFile);
+
+            // Ecris le fichier dans un fichier temporaire sur le disque
+            string localFilename;
+            if (file.type == GedFileType.PDF)
+            {
+                localFilename = Program.NewTempFile();
+            }
+            else
+            {
+                localFilename = Program.NewTempFile(file.originalname.Substring(file.originalname.LastIndexOf(".") + 1));
+            }
+            FileStream outStream = new FileStream(localFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1024, FileOptions.None);
+            outStream.Write(file.bytes, 0, file.size);
+            outStream.Close();
+
+            // Masque tous les viewers
+            EmptyViewers();
+
+            // Affiche le document dans le viewer correspondant à son type
+            switch (file.type)
+            {
+                case GedFileType.PDF:
+                    currentPdfDocument = PdfDocument.Load(localFilename);
+                    pdfViewer.Load(currentPdfDocument);
+                    pdfViewer.Visible = true;
+                    break;
+
+                case GedFileType.Image:
+                    imageViewer.Image = Image.FromFile(localFilename);
+                    imageViewer.Visible = true;
+                    break;
+
+                case GedFileType.Office:
+                    officeViewer.URI = localFilename;
+                    officeViewer.Visible = true;
+                    break;
+            }
+
+            // Affiche les méta-données
+            LabelPdfName.Text = file.title;
+            LabelNbPages.Text = "(" + file.pages + " pages)";
+            labelOriginalName.Text = file.originalname;
+            labelFileType.Text = file.TypeName();
+
+            // Mémorise le fichier temporaire et son URI
+            currentDocumentUri = localFilename;
+
+            Cursor = Cursors.Default;
+        }
+
         private void InitializeDatabase(string databaseName)
         {
             Cursor = Cursors.WaitCursor;
@@ -228,12 +292,15 @@ namespace SharpGED_client
 
         private void toolButtonFileDelete_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItems != null)
             {
-                if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer ce document ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer les documents sélectionnés ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     EmptyViewers();
-                    Program.ServerDeleteFile((GedFile)listBoxFiles.SelectedItem);
+                    foreach (GedFile currentGedFile in listBoxFiles.SelectedItems)
+                    {
+                        Program.ServerDeleteFile(currentGedFile);
+                    }
                     RefreshFilesList();
                 }
             }
@@ -380,16 +447,20 @@ namespace SharpGED_client
 
         private void toolButtonFileExtract_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItems != null)
             {
-                string ext = currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
-                extractFileDialog.Filter = "Fichier " + ext + "|*" + ext;
-                extractFileDialog.FileName = ((GedFile)listBoxFiles.SelectedItem).title;
-
-                if (extractFileDialog.ShowDialog() == DialogResult.OK)
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    File.Copy(currentDocumentUri, extractFileDialog.FileName);
+                    string currentFilename;
+                    foreach (GedFile currentGedFile in listBoxFiles.SelectedItems)
+                    {
+                        FillViewer(currentGedFile);
+                        currentFilename = currentGedFile.title + "_" + DateTime.Now.ToFileTime() + currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
+                        File.Copy(currentDocumentUri, folderBrowserDialog.SelectedPath + "\\" + currentFilename);
+                    }
                 }
+                EmptyViewers();
+                MessageBox.Show("Les documents sélectionnés ont été extraits dans le dossier " + folderBrowserDialog.SelectedPath, "Terminé avec succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -449,73 +520,24 @@ namespace SharpGED_client
 
         private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItem != null)
+            if (listBoxFiles.SelectedItems.Count <= 1)
             {
-                GedFile selectedFile = (GedFile)listBoxFiles.SelectedItem;
+                toolButtonFileEdit.Enabled = true;
+                toolButtonFileRename.Enabled = true;
 
-                if (selectedFile.hash.Equals(lastClickedHash))
+                if (listBoxFiles.SelectedItem != null)
                 {
-                    return;
+                    FillViewer((GedFile)listBoxFiles.SelectedItem);
                 }
                 else
                 {
-                    lastClickedHash = selectedFile.hash;
+                    EmptyViewers();
                 }
-
-                Cursor = Cursors.WaitCursor;
-
-                RemoteGedFile file = Program.ServerReciveFile(selectedFile);
-
-                // Ecris le fichier dans un fichier temporaire sur le disque
-                string localFilename;
-                if (file.type == GedFileType.PDF)
-                {
-                    localFilename = Program.NewTempFile();
-                }
-                else
-                {
-                    localFilename = Program.NewTempFile(file.originalname.Substring(file.originalname.LastIndexOf(".") + 1));
-                }
-                FileStream outStream = new FileStream(localFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1024, FileOptions.None);
-                outStream.Write(file.bytes, 0, file.size);
-                outStream.Close();
-
-                // Masque tous les viewers
-                EmptyViewers();
-
-                // Affiche le document dans le viewer correspondant à son type
-                switch (file.type)
-                {
-                    case GedFileType.PDF:
-                        currentPdfDocument = PdfDocument.Load(localFilename);
-                        pdfViewer.Load(currentPdfDocument);
-                        pdfViewer.Visible = true;
-                        break;
-
-                    case GedFileType.Image:
-                        imageViewer.Image = Image.FromFile(localFilename);
-                        imageViewer.Visible = true;
-                        break;
-
-                    case GedFileType.Office:
-                        officeViewer.URI = localFilename;
-                        officeViewer.Visible = true;
-                        break;
-                }
-
-                // Affiche les méta-données
-                LabelPdfName.Text = file.title;
-                LabelNbPages.Text = "(" + file.pages + " pages)";
-                labelOriginalName.Text = file.originalname;
-                labelFileType.Text = file.TypeName();
-
-                // Mémorise le fichier temporaire et son URI
-                currentDocumentUri = localFilename;
-
-                Cursor = Cursors.Default;
             }
             else
             {
+                toolButtonFileEdit.Enabled = false;
+                toolButtonFileRename.Enabled = false;
                 EmptyViewers();
             }
         }

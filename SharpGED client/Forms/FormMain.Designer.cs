@@ -71,7 +71,7 @@
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
-            this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -100,7 +100,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(735, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(730, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -436,7 +436,7 @@
             this.PropertiesGroupBox.Controls.Add(this.labelOriginalName);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(379, 150);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(380, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -503,7 +503,8 @@
             this.listBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
-            this.listBoxFiles.Size = new System.Drawing.Size(379, 702);
+            this.listBoxFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBoxFiles.Size = new System.Drawing.Size(380, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -528,7 +529,7 @@
             this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(419, 445);
+            this.officeViewer.Size = new System.Drawing.Size(414, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -540,7 +541,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(872, 855);
+            this.imageViewer.Size = new System.Drawing.Size(867, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -555,7 +556,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(872, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(867, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -648,7 +649,7 @@
         private System.Windows.Forms.PictureBox imageViewer;
         private SharpGED_controls.OfficeViewer officeViewer;
         private System.Windows.Forms.ToolStripButton toolButtonFileExtract;
-        private System.Windows.Forms.SaveFileDialog extractFileDialog;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }
 

@@ -100,6 +100,12 @@ namespace SharpGED_client
             server.Send(Encoding.Unicode.GetBytes(command));
         }
 
+        public static void ServerWaitFor()
+        {
+            // Attend une confirmation "OK"
+            server.Receive(new byte[sizeof(char) * 2]);
+        }
+
         public static void ServerDisconnect()
         {
             ServerSend("BYE");
@@ -145,8 +151,7 @@ namespace SharpGED_client
             // Sérialise et envoie l'objet
             TransfertManager.Send(file.Save(), server);
 
-            // Attend la confirmation
-            server.Receive(new byte[sizeof(char) * 2]);
+            ServerWaitFor();
         }
 
         public static RemoteGedFile ServerReciveFile(GedFile gedFile)
@@ -161,6 +166,8 @@ namespace SharpGED_client
         public static void ServerDeleteFile(GedFile file)
         {
             ServerSend("DELFILE " + file.hash);
+
+            ServerWaitFor();
         }
 
         public static void ServerRenameFile(GedFile file, string title)
