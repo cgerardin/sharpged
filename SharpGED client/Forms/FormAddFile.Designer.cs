@@ -36,6 +36,7 @@
             this.labelNbPages = new System.Windows.Forms.Label();
             this.listBoxFiles = new System.Windows.Forms.ListBox();
             this.checkBoxConvertPdf = new System.Windows.Forms.CheckBox();
+            this.progressBarTransfert = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -103,13 +104,23 @@
             this.checkBoxConvertPdf.TabIndex = 8;
             this.checkBoxConvertPdf.Text = "Convertir au format PDF";
             this.checkBoxConvertPdf.UseVisualStyleBackColor = true;
+            this.checkBoxConvertPdf.CheckedChanged += new System.EventHandler(this.checkBoxConvertPdf_CheckedChanged);
+            // 
+            // progressBarTransfert
+            // 
+            this.progressBarTransfert.Location = new System.Drawing.Point(12, 130);
+            this.progressBarTransfert.Name = "progressBarTransfert";
+            this.progressBarTransfert.Size = new System.Drawing.Size(571, 23);
+            this.progressBarTransfert.TabIndex = 9;
+            this.progressBarTransfert.Visible = false;
             // 
             // formAddFile
             // 
             this.AcceptButton = this.ButtonAddPdf;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 329);
+            this.ClientSize = new System.Drawing.Size(593, 329);
+            this.Controls.Add(this.progressBarTransfert);
             this.Controls.Add(this.checkBoxConvertPdf);
             this.Controls.Add(this.listBoxFiles);
             this.Controls.Add(this.label1);
@@ -142,5 +153,6 @@
         private System.Windows.Forms.Label labelNbPages;
         private System.Windows.Forms.ListBox listBoxFiles;
         private System.Windows.Forms.CheckBox checkBoxConvertPdf;
+        private System.Windows.Forms.ProgressBar progressBarTransfert;
     }
 }
