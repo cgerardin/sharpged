@@ -30,7 +30,6 @@ namespace SharpGED_client
             labelNbPages.Text = "(0 pages)";
             checkBoxConvertPdf.Enabled = false;
             checkBoxConvertPdf.Checked = false;
-            progressBarTransfert.Visible = false;
 
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
@@ -79,13 +78,14 @@ namespace SharpGED_client
             Cursor = Cursors.WaitCursor;
             progressBarTransfert.Minimum = 0;
             progressBarTransfert.Maximum = addPdfDialog.FileNames.Length * 2;
-            progressBarTransfert.Visible = true;
 
             RemoteGedFile file;
             byte[] fileBytes;
             int size;
             for (int i = 0; i < addPdfDialog.FileNames.Length; i++)
             {
+
+                labelCurrentFile.Text = addPdfDialog.SafeFileNames[i] + " ...";
 
                 // Conversion des fichiers image
                 if (fileType[i] == GedFileType.PDF && convertToPdf[i])

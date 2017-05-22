@@ -37,6 +37,7 @@
             this.listBoxFiles = new System.Windows.Forms.ListBox();
             this.checkBoxConvertPdf = new System.Windows.Forms.CheckBox();
             this.progressBarTransfert = new System.Windows.Forms.ProgressBar();
+            this.labelCurrentFile = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -91,7 +92,7 @@
             this.listBoxFiles.FormattingEnabled = true;
             this.listBoxFiles.Location = new System.Drawing.Point(12, 12);
             this.listBoxFiles.Name = "listBoxFiles";
-            this.listBoxFiles.Size = new System.Drawing.Size(239, 303);
+            this.listBoxFiles.Size = new System.Drawing.Size(239, 277);
             this.listBoxFiles.TabIndex = 7;
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
             // 
@@ -108,18 +109,28 @@
             // 
             // progressBarTransfert
             // 
-            this.progressBarTransfert.Location = new System.Drawing.Point(12, 130);
+            this.progressBarTransfert.Location = new System.Drawing.Point(12, 302);
             this.progressBarTransfert.Name = "progressBarTransfert";
-            this.progressBarTransfert.Size = new System.Drawing.Size(571, 23);
+            this.progressBarTransfert.Size = new System.Drawing.Size(472, 13);
+            this.progressBarTransfert.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBarTransfert.TabIndex = 9;
-            this.progressBarTransfert.Visible = false;
+            // 
+            // labelCurrentFile
+            // 
+            this.labelCurrentFile.Location = new System.Drawing.Point(257, 268);
+            this.labelCurrentFile.Name = "labelCurrentFile";
+            this.labelCurrentFile.Size = new System.Drawing.Size(227, 21);
+            this.labelCurrentFile.TabIndex = 10;
+            this.labelCurrentFile.Text = "         ";
+            this.labelCurrentFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // formAddFile
             // 
             this.AcceptButton = this.ButtonAddPdf;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 329);
+            this.ClientSize = new System.Drawing.Size(589, 329);
+            this.Controls.Add(this.labelCurrentFile);
             this.Controls.Add(this.progressBarTransfert);
             this.Controls.Add(this.checkBoxConvertPdf);
             this.Controls.Add(this.listBoxFiles);
@@ -154,5 +165,6 @@
         private System.Windows.Forms.ListBox listBoxFiles;
         private System.Windows.Forms.CheckBox checkBoxConvertPdf;
         private System.Windows.Forms.ProgressBar progressBarTransfert;
+        private System.Windows.Forms.Label labelCurrentFile;
     }
 }
