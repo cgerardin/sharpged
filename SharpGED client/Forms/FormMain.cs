@@ -157,13 +157,15 @@ namespace SharpGED_client
 
         private void EmptyViewers()
         {
-            LabelPdfName.Text = "-";
-            LabelNbPages.Text = "(0 pages)";
-            labelOriginalName.Text = "-";
-
+            groupBoxProperties.Visible = false;
             pdfViewer.Visible = false;
             imageViewer.Visible = false;
             officeViewer.Visible = false;
+
+            LabelPdfName.Text = "";
+            labelFileType.Text = "";
+            LabelNbPages.Text = "";
+            labelOriginalName.Text = "";
 
             if (currentPdfDocument != null)
             {
@@ -226,9 +228,17 @@ namespace SharpGED_client
 
             // Affiche les méta-données
             LabelPdfName.Text = file.title;
-            LabelNbPages.Text = "(" + file.pages + " pages)";
+            if (file.type == GedFileType.PDF)
+            {
+                LabelNbPages.Text = file.pages.ToString();
+            }
+            else
+            {
+                LabelNbPages.Text = "(inconnu)";
+            }
             labelOriginalName.Text = file.originalname;
             labelFileType.Text = file.TypeName();
+            groupBoxProperties.Visible = true;
 
             // Mémorise le fichier temporaire et son URI
             currentDocumentUri = localFilename;

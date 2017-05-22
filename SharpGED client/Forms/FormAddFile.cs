@@ -173,7 +173,7 @@ namespace SharpGED_client
                 }
                 else
                 {
-                    labelNbPages.Text = "(1 pages)";
+                    labelNbPages.Text = "(inconnu)";
                 }
             }
             else

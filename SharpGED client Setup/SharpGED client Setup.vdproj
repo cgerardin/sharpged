@@ -15,6 +15,24 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_07C1E1B2AF268FE8905215BB67BEAD14"
+        "OwnerKey" = "8:_77FF1D4E39F5963CA08A3C0A5908448B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_07C1E1B2AF268FE8905215BB67BEAD14"
+        "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0892066A731B5F1EC17E66C6EEE02AD9"
+        "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_51A41ACFAFFF440FBBEADC9607F6D8BF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -27,37 +45,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_57BC4006A3CAA339BB114CEA2FBBEF27"
+        "MsmKey" = "8:_77FF1D4E39F5963CA08A3C0A5908448B"
         "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8973E3E08E501EB5E8025FD95E80A00B"
+        "MsmKey" = "8:_9FB482ED06E66FD1FC7A8E9D4889B2D9"
         "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8B5DF2A2D034215AD46FAB15483634A9"
-        "OwnerKey" = "8:_9233E496AF577ED9EA1A853D9BF5112F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8B5DF2A2D034215AD46FAB15483634A9"
+        "MsmKey" = "8:_D46063D53F57453301DBFDF554FF4108"
         "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8F356BD4C2B5FFA207784B54D8542F8A"
-        "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9233E496AF577ED9EA1A853D9BF5112F"
+        "MsmKey" = "8:_ECEF25B37AEFE7992539E74C792B7BFF"
         "OwnerKey" = "8:_5297F6AB38E240E79612479FC222D26E"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -70,31 +76,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_57BC4006A3CAA339BB114CEA2FBBEF27"
+        "OwnerKey" = "8:_D46063D53F57453301DBFDF554FF4108"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9233E496AF577ED9EA1A853D9BF5112F"
+        "OwnerKey" = "8:_9FB482ED06E66FD1FC7A8E9D4889B2D9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8B5DF2A2D034215AD46FAB15483634A9"
+        "OwnerKey" = "8:_77FF1D4E39F5963CA08A3C0A5908448B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8973E3E08E501EB5E8025FD95E80A00B"
+        "OwnerKey" = "8:_07C1E1B2AF268FE8905215BB67BEAD14"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8F356BD4C2B5FFA207784B54D8542F8A"
+        "OwnerKey" = "8:_ECEF25B37AEFE7992539E74C792B7BFF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0892066A731B5F1EC17E66C6EEE02AD9"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -192,6 +204,68 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_07C1E1B2AF268FE8905215BB67BEAD14"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_07C1E1B2AF268FE8905215BB67BEAD14"
+                    {
+                    "Name" = "8:PdfSharp.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PdfSharp.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0892066A731B5F1EC17E66C6EEE02AD9"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_0892066A731B5F1EC17E66C6EEE02AD9"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_51A41ACFAFFF440FBBEADC9607F6D8BF"
             {
             "SourcePath" = "8:..\\SharpGED client\\BLANK.pdf"
@@ -212,13 +286,80 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_57BC4006A3CAA339BB114CEA2FBBEF27"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_77FF1D4E39F5963CA08A3C0A5908448B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:PdfSharp.Charting, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_77FF1D4E39F5963CA08A3C0A5908448B"
+                    {
+                    "Name" = "8:PdfSharp.Charting.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:PdfSharp.Charting.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9FB482ED06E66FD1FC7A8E9D4889B2D9"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SharpGED controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_9FB482ED06E66FD1FC7A8E9D4889B2D9"
+                    {
+                    "Name" = "8:SharpGED controls.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SharpGED controls.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D46063D53F57453301DBFDF554FF4108"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:SharpGED lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
+                    "_D46063D53F57453301DBFDF554FF4108"
+                    {
+                    "Name" = "8:SharpGED lib.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:SharpGED lib.dll"
             "TargetName" = "8:"
@@ -238,93 +379,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8973E3E08E501EB5E8025FD95E80A00B"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_ECEF25B37AEFE7992539E74C792B7BFF"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:PdfiumViewer, Version=2.12.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_ECEF25B37AEFE7992539E74C792B7BFF"
+                    {
+                    "Name" = "8:PdfiumViewer.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:PdfiumViewer.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8B5DF2A2D034215AD46FAB15483634A9"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:PdfSharp.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8F356BD4C2B5FFA207784B54D8542F8A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:System.Net.Http.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9233E496AF577ED9EA1A853D9BF5112F"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:PdfSharp.Charting, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:PdfSharp.Charting.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_C20D0D012C214827A5ED58633765215A"
@@ -409,15 +477,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SharpGED client"
-        "ProductCode" = "8:{C2703703-CD1C-4D66-95BB-A4F64A3C8916}"
-        "PackageCode" = "8:{41CDA573-D8DD-4F3B-9E9B-82CC0082AD3C}"
+        "ProductCode" = "8:{3D095CBD-143C-49AE-BB9A-0B5A864A3569}"
+        "PackageCode" = "8:{8509D165-5220-4DCD-BA08-1EBE5D9E1F5C}"
         "UpgradeCode" = "8:{B04F23CE-8725-4396-A801-F9F774383740}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:SharpGED"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
