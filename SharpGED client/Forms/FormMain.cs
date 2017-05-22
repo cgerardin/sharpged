@@ -158,7 +158,7 @@ namespace SharpGED_client
         {
             LabelPdfName.Text = "-";
             LabelNbPages.Text = "(0 pages)";
-            OriginalNameLabel.Text = "-";
+            labelOriginalName.Text = "-";
             pdfViewer.Visible = false;
             if (currentDocument != null)
             {
@@ -255,7 +255,7 @@ namespace SharpGED_client
             if (Program.isDatabaseInitialized)
             {
                 string originalTitle = LabelPdfName.Text;
-                string originalName = OriginalNameLabel.Text;
+                string originalName = labelOriginalName.Text;
 
                 formEditPdf edit = new formEditPdf();
                 edit.documentUri = currentDocumentUri;
@@ -453,7 +453,8 @@ namespace SharpGED_client
                 // Charge et affiche le PDF
                 LabelPdfName.Text = file.title;
                 LabelNbPages.Text = "(" + file.pages + " pages)";
-                OriginalNameLabel.Text = file.originalname;
+                labelOriginalName.Text = file.originalname;
+                labelFileType.Text = file.TypeName();
 
                 pdfViewer.Visible = false;
                 if (currentDocument != null)

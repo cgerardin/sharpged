@@ -5,6 +5,7 @@ using SharpGED_lib;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using static SharpGED_lib.GedFile;
 
 namespace SharpGED_client
 {
@@ -88,6 +89,7 @@ namespace SharpGED_client
 
                 // Crée un GedFile et l'envoie au serveur
                 file = new RemoteGedFile();
+                file.type = GedFileType.PDF;
                 file.folderId = folder.id;
                 file.size = size;
                 file.title = listBoxFiles.Items[i].ToString();

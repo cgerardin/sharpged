@@ -76,9 +76,27 @@ namespace SharpGED_server
             using (SQLiteConnection db = Connect())
             {
                 db.Open();
+
+                // Structure
+
+                sql = "CREATE TABLE folders ( " +
+                    "idFolder INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idParentFolder INTEGER REFERENCES folders(idFolder), " +
+                    "title TEXT NOT NULL " +
+                    ");";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+
+                sql = "CREATE TABLE types ( " +
+                    "idType INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "title STRING  NOT NULL " +
+                    ");";
+
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+
                 sql = "CREATE TABLE files ( " +
                     "idFile INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idFolder INTEGER NOT NULL REFERENCES 'folders'('idFolder'), " +
+                    "idFolder INTEGER NOT NULL REFERENCES folders (idFolder), " +
+                    "idType INTEGER NOT NULL REFERENCES types (idType)," +
                     "hash TEXT NOT NULL, " +
                     "originalname TEXT NOT NULL, " +
                     "size INTEGER NOT NULL, " +
@@ -87,14 +105,12 @@ namespace SharpGED_server
                     ");";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
 
-                sql = "CREATE TABLE folders ( " +
-                    "idFolder INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idParentFolder INTEGER REFERENCES 'folders'('idFolder'), " +
-                    "title TEXT NOT NULL " +
-                    ");";
-                new SQLiteCommand(sql, db).ExecuteNonQuery();
+                // Données
 
                 sql = "INSERT INTO folders (title) VALUES ('" + databaseName + "');";
+                new SQLiteCommand(sql, db).ExecuteNonQuery();
+
+                sql = "INSERT INTO types (title) VALUES  ('PDF'), ('Image'), ('Office');";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
 

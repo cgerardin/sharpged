@@ -7,6 +7,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using static SharpGED_lib.GedFile;
 
 namespace SharpGED_server
 {
@@ -87,6 +88,7 @@ namespace SharpGED_server
                     while (rs.Read())
                     {
                         currentGedFile = new GedFile();
+                        currentGedFile.type = (GedFileType)rs["idType"];
                         currentGedFile.hash = rs["hash"].ToString();
                         currentGedFile.title = rs["title"].ToString();
                         filesList.Add(currentGedFile);
@@ -121,6 +123,7 @@ namespace SharpGED_server
                 {
                     if (rs.Read())
                     {
+                        file.type = (GedFileType)rs["idType"];
                         file.hash = hash;
                         file.originalname = rs["originalname"].ToString();
                         file.size = size;
@@ -173,8 +176,8 @@ namespace SharpGED_server
             {
                 db.Open();
 
-                string sql = "INSERT INTO files (idFolder, hash, originalname, size, title, pages) " +
-                "VALUES (" + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
+                string sql = "INSERT INTO files (idType, idFolder, hash, originalname, size, title, pages) " +
+                "VALUES (" + file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }

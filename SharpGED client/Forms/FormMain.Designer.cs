@@ -59,13 +59,16 @@
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
-            this.OriginalNameLabel = new System.Windows.Forms.Label();
+            this.labelOriginalName = new System.Windows.Forms.Label();
             this.listBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pdfViewer = new PdfiumViewer.PdfRenderer();
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
+            this.labelFileType = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -97,7 +100,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(765, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(760, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -413,25 +416,28 @@
             this.PropertiesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PropertiesGroupBox.Controls.Add(this.OriginalNameLabel);
+            this.PropertiesGroupBox.Controls.Add(this.label4);
+            this.PropertiesGroupBox.Controls.Add(this.label3);
+            this.PropertiesGroupBox.Controls.Add(this.labelFileType);
+            this.PropertiesGroupBox.Controls.Add(this.labelOriginalName);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(373, 150);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(374, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
             // 
-            // OriginalNameLabel
+            // labelOriginalName
             // 
-            this.OriginalNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelOriginalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.OriginalNameLabel.AutoSize = true;
-            this.OriginalNameLabel.Location = new System.Drawing.Point(9, 16);
-            this.OriginalNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.OriginalNameLabel.Name = "OriginalNameLabel";
-            this.OriginalNameLabel.Size = new System.Drawing.Size(10, 13);
-            this.OriginalNameLabel.TabIndex = 19;
-            this.OriginalNameLabel.Text = "-";
+            this.labelOriginalName.AutoSize = true;
+            this.labelOriginalName.Location = new System.Drawing.Point(9, 55);
+            this.labelOriginalName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelOriginalName.Name = "labelOriginalName";
+            this.labelOriginalName.Size = new System.Drawing.Size(10, 13);
+            this.labelOriginalName.TabIndex = 19;
+            this.labelOriginalName.Text = "-";
             // 
             // listBoxFiles
             // 
@@ -445,7 +451,7 @@
             this.listBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
-            this.listBoxFiles.Size = new System.Drawing.Size(373, 702);
+            this.listBoxFiles.Size = new System.Drawing.Size(374, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -472,7 +478,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(860, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(855, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -488,6 +494,44 @@
             this.imageListToolbar.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
+            // 
+            // labelFileType
+            // 
+            this.labelFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFileType.AutoSize = true;
+            this.labelFileType.Location = new System.Drawing.Point(57, 16);
+            this.labelFileType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFileType.Name = "labelFileType";
+            this.labelFileType.Size = new System.Drawing.Size(10, 13);
+            this.labelFileType.TabIndex = 20;
+            this.labelFileType.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Type :";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(9, 42);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(149, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Nom du fichier d\'origine :";
             // 
             // formMain
             // 
@@ -543,7 +587,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TreeView treeViewCategories;
         private System.Windows.Forms.GroupBox PropertiesGroupBox;
-        private System.Windows.Forms.Label OriginalNameLabel;
+        private System.Windows.Forms.Label labelOriginalName;
         private System.Windows.Forms.ToolStripButton toolButtonPrint;
         private System.Windows.Forms.ToolStripButton toolButtonScan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -560,6 +604,9 @@
         private System.Drawing.Printing.PrintDocument printPdf;
         private System.Windows.Forms.PrintDialog printDialog;
         private System.Windows.Forms.ImageList imageListToolbar;
+        private System.Windows.Forms.Label labelFileType;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 
