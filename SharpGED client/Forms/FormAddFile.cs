@@ -88,7 +88,7 @@ namespace SharpGED_client
                 labelCurrentFile.Text = addPdfDialog.SafeFileNames[i] + " ...";
 
                 // Conversion des fichiers image
-                if (fileType[i] == GedFileType.PDF && convertToPdf[i])
+                if (fileType[i] == GedFileType.Image && convertToPdf[i])
                 {
                     newFileUri[i] = Program.NewTempFile();
                     newPdf[i] = new PdfDocument(newFileUri[i]);
