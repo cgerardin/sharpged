@@ -581,6 +581,18 @@ namespace SharpGED_client
         {
             switch (e.KeyCode)
             {
+                case Keys.A:
+                    if (e.Control)
+                    {
+                        listBoxFiles.Visible = false;
+                        for (int i = 0; i < listBoxFiles.Items.Count; i++)
+                        {
+                            listBoxFiles.SetSelected(i, true);
+                        }
+                        listBoxFiles.Visible = true;
+                    }
+                    break;
+
                 case Keys.N:
                     if (e.Control)
                     {
