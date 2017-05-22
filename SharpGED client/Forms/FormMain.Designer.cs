@@ -59,6 +59,9 @@
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.PropertiesGroupBox = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelFileType = new System.Windows.Forms.Label();
             this.labelOriginalName = new System.Windows.Forms.Label();
             this.listBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,9 +69,7 @@
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
-            this.labelFileType = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.imageViewer = new System.Windows.Forms.PictureBox();
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -79,6 +80,7 @@
             this.ChildSplitContainer.Panel2.SuspendLayout();
             this.ChildSplitContainer.SuspendLayout();
             this.PropertiesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -100,7 +102,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(760, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(755, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -336,6 +338,7 @@
             // 
             // MainSplitContainer.Panel2
             // 
+            this.MainSplitContainer.Panel2.Controls.Add(this.imageViewer);
             this.MainSplitContainer.Panel2.Controls.Add(this.pdfViewer);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelNbPages);
             this.MainSplitContainer.Panel2.Controls.Add(this.LabelPdfName);
@@ -422,10 +425,48 @@
             this.PropertiesGroupBox.Controls.Add(this.labelOriginalName);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(374, 150);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(375, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(9, 42);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(149, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Nom du fichier d\'origine :";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(9, 16);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Type :";
+            // 
+            // labelFileType
+            // 
+            this.labelFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFileType.AutoSize = true;
+            this.labelFileType.Location = new System.Drawing.Point(57, 16);
+            this.labelFileType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFileType.Name = "labelFileType";
+            this.labelFileType.Size = new System.Drawing.Size(10, 13);
+            this.labelFileType.TabIndex = 20;
+            this.labelFileType.Text = "-";
             // 
             // labelOriginalName
             // 
@@ -451,7 +492,7 @@
             this.listBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
-            this.listBoxFiles.Size = new System.Drawing.Size(374, 702);
+            this.listBoxFiles.Size = new System.Drawing.Size(375, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -478,7 +519,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(855, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(892, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -495,43 +536,18 @@
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
             // 
-            // labelFileType
+            // imageViewer
             // 
-            this.labelFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.imageViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFileType.AutoSize = true;
-            this.labelFileType.Location = new System.Drawing.Point(57, 16);
-            this.labelFileType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.labelFileType.Name = "labelFileType";
-            this.labelFileType.Size = new System.Drawing.Size(10, 13);
-            this.labelFileType.TabIndex = 20;
-            this.labelFileType.Text = "-";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 16);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Type :";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 42);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(149, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Nom du fichier d\'origine :";
+            this.imageViewer.Location = new System.Drawing.Point(0, 27);
+            this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
+            this.imageViewer.Name = "imageViewer";
+            this.imageViewer.Size = new System.Drawing.Size(892, 855);
+            this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imageViewer.TabIndex = 19;
+            this.imageViewer.TabStop = false;
             // 
             // formMain
             // 
@@ -562,6 +578,7 @@
             this.ChildSplitContainer.ResumeLayout(false);
             this.PropertiesGroupBox.ResumeLayout(false);
             this.PropertiesGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -607,6 +624,7 @@
         private System.Windows.Forms.Label labelFileType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox imageViewer;
     }
 }
 

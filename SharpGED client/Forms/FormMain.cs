@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static SharpGED_lib.GedFile;
 
 namespace SharpGED_client
 {
@@ -165,6 +166,8 @@ namespace SharpGED_client
                 currentDocument.Dispose();
             }
             pdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
+
+            imageViewer.Visible = false;
         }
 
         private void InitializeDatabase(string databaseName)
@@ -445,25 +448,50 @@ namespace SharpGED_client
                 RemoteGedFile file = Program.ServerReciveFile(selectedFile);
 
                 // Ecris le fichier dans un fichier temporaire sur le disque
-                string localFilename = Program.NewTempFile();
+                string localFilename;
+                if (file.type == GedFileType.PDF)
+                {
+                    localFilename = Program.NewTempFile();
+                }
+                else
+                {
+                    localFilename = Program.NewTempFile(file.originalname.Substring(file.originalname.LastIndexOf(".") + 1));
+                }
                 FileStream outStream = new FileStream(localFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None, 1024, FileOptions.None);
                 outStream.Write(file.bytes, 0, file.size);
                 outStream.Close();
 
-                // Charge et affiche le PDF
-                LabelPdfName.Text = file.title;
-                LabelNbPages.Text = "(" + file.pages + " pages)";
-                labelOriginalName.Text = file.originalname;
-                labelFileType.Text = file.TypeName();
-
+                // Masque tous les viewers
                 pdfViewer.Visible = false;
                 if (currentDocument != null)
                 {
                     currentDocument.Dispose();
                 }
-                currentDocument = PdfDocument.Load(localFilename);
-                pdfViewer.Load(currentDocument);
-                pdfViewer.Visible = true;
+
+                // Affiche le document dans le viewer correspondant à son type
+                switch (file.type)
+                {
+                    case GedFileType.PDF:
+                        currentDocument = PdfDocument.Load(localFilename);
+                        pdfViewer.Load(currentDocument);
+                        pdfViewer.Visible = true;
+                        break;
+
+                    case GedFileType.Image:
+                        imageViewer.Image = Image.FromFile(localFilename);
+                        imageViewer.Visible = true;
+                        break;
+
+                    case GedFileType.Office:
+                        // TODO
+                        break;
+                }
+
+                // Affiche les méta-données
+                LabelPdfName.Text = file.title;
+                LabelNbPages.Text = "(" + file.pages + " pages)";
+                labelOriginalName.Text = file.originalname;
+                labelFileType.Text = file.TypeName();
 
                 // Mémorise le fichier temporaire et son URI
                 currentDocumentUri = localFilename;

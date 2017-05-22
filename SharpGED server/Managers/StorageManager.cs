@@ -156,19 +156,14 @@ namespace SharpGED_server
             outStream.Write(file.bytes, 0, file.size);
             outStream.Close();
 
-            // Récupère et met à jour les métadonnées du PDF
-            PdfDocument pdf;
-            try
+            if (file.type == GedFileType.PDF)
             {
-                pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
-                pdf.Info.Title = file.title;
-                pdf.Save(baseFolder + "storage\\" + hash);
-                pdf.Close();
-            }
-            catch (PdfReaderException)
-            {
-                // Le fichier PDF est protégé en écriture
-                pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.InformationOnly);
+                // Récupère et met à jour les métadonnées du PDF
+                using (PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify))
+                {
+                    pdf.Info.Title = file.title;
+                    pdf.Save(baseFolder + "storage\\" + hash);
+                }
             }
 
             // Insère le tout dans la base
@@ -177,7 +172,7 @@ namespace SharpGED_server
                 db.Open();
 
                 string sql = "INSERT INTO files (idType, idFolder, hash, originalname, size, title, pages) " +
-                "VALUES (" + (long)file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + pdf.PageCount + ");";
+                "VALUES (" + (long)file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + file.pages + ");";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }

@@ -106,32 +106,23 @@ namespace SharpGED_client
                     fileType[i] = GedFileType.PDF;
                 }
 
-                switch (fileType[i])
+                // Lit le fichier et place son contenu dans un tableau
+                using (FileStream inStream = File.OpenRead(newPdfUri[i]))
                 {
-                    case GedFileType.PDF:
-                        // Lit le fichier PDF et place son contenu dans un tableau
-                        using (FileStream inStream = File.OpenRead(newPdfUri[i]))
-                        {
-                            size = (int)inStream.Length;
-                            fileBytes = new byte[size];
-                            inStream.Read(fileBytes, 0, size);
-                        }
-
-                        // Crée un GedFile et l'envoie au serveur
-                        file = new RemoteGedFile();
-                        file.type = GedFileType.PDF;
-                        file.folderId = folder.id;
-                        file.size = size;
-                        file.title = listBoxFiles.Items[i].ToString();
-                        file.originalname = addPdfDialog.SafeFileNames[i];
-                        file.bytes = fileBytes;
-                        Program.ServerSendFile(file);
-                        break;
-
-                    default:
-                        throw new Exception("TODO : Type de document non pris en charge !");
-                        // todo : insérer tel quel en base
+                    size = (int)inStream.Length;
+                    fileBytes = new byte[size];
+                    inStream.Read(fileBytes, 0, size);
                 }
+
+                // Crée un GedFile et l'envoie au serveur
+                file = new RemoteGedFile();
+                file.type = fileType[i];
+                file.folderId = folder.id;
+                file.size = size;
+                file.title = listBoxFiles.Items[i].ToString();
+                file.originalname = addPdfDialog.SafeFileNames[i];
+                file.bytes = fileBytes;
+                Program.ServerSendFile(file);
 
             }
 
