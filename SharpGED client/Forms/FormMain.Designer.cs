@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
-            this.addPdfDialog = new System.Windows.Forms.OpenFileDialog();
             this.LabelPdfName = new System.Windows.Forms.Label();
             this.LabelNbPages = new System.Windows.Forms.Label();
             this.mainToolbar = new System.Windows.Forms.ToolStrip();
@@ -47,12 +46,13 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolButtonScan = new System.Windows.Forms.ToolStripButton();
             this.toolButtonPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonFileExtract = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolButtonRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolButtonStopServer = new System.Windows.Forms.ToolStripButton();
             this.toolButtonInitDatabase = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolButtonDisconnect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.ChildSplitContainer = new System.Windows.Forms.SplitContainer();
             this.treeViewCategories = new System.Windows.Forms.TreeView();
@@ -71,6 +71,7 @@
             this.printPdf = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
+            this.extractFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -83,10 +84,6 @@
             this.PropertiesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).BeginInit();
             this.SuspendLayout();
-            // 
-            // addPdfDialog
-            // 
-            this.addPdfDialog.Filter = "Documents PDF|*.pdf";
             // 
             // LabelPdfName
             // 
@@ -103,7 +100,7 @@
             // 
             this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(750, 13);
+            this.LabelNbPages.Location = new System.Drawing.Point(735, 13);
             this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LabelNbPages.Name = "LabelNbPages";
             this.LabelNbPages.Size = new System.Drawing.Size(51, 13);
@@ -130,12 +127,13 @@
             this.toolStripSeparator4,
             this.toolButtonScan,
             this.toolButtonPrint,
+            this.toolButtonFileExtract,
+            this.toolStripSeparator3,
             this.toolButtonRefresh,
             this.toolButtonStopServer,
             this.toolButtonInitDatabase,
             this.toolStripSeparator2,
-            this.toolButtonDisconnect,
-            this.toolStripSeparator3});
+            this.toolButtonDisconnect});
             this.mainToolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.mainToolbar.Location = new System.Drawing.Point(0, 0);
             this.mainToolbar.Name = "mainToolbar";
@@ -269,6 +267,22 @@
             this.toolButtonPrint.Text = "Imprimer le document";
             this.toolButtonPrint.Click += new System.EventHandler(this.toolButtonPrint_Click);
             // 
+            // toolButtonFileExtract
+            // 
+            this.toolButtonFileExtract.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolButtonFileExtract.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonFileExtract.Image")));
+            this.toolButtonFileExtract.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolButtonFileExtract.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonFileExtract.Name = "toolButtonFileExtract";
+            this.toolButtonFileExtract.Size = new System.Drawing.Size(40, 36);
+            this.toolButtonFileExtract.Text = "Extraire le document sélectionné";
+            this.toolButtonFileExtract.Click += new System.EventHandler(this.toolButtonFileExtract_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(40, 6);
+            // 
             // toolButtonRefresh
             // 
             this.toolButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -318,11 +332,6 @@
             this.toolButtonDisconnect.Size = new System.Drawing.Size(40, 36);
             this.toolButtonDisconnect.Text = "Se déconnecter du serveur";
             this.toolButtonDisconnect.Click += new System.EventHandler(this.toolButtonDisconnect_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(40, 6);
             // 
             // MainSplitContainer
             // 
@@ -427,7 +436,7 @@
             this.PropertiesGroupBox.Controls.Add(this.labelOriginalName);
             this.PropertiesGroupBox.Location = new System.Drawing.Point(0, 732);
             this.PropertiesGroupBox.Name = "PropertiesGroupBox";
-            this.PropertiesGroupBox.Size = new System.Drawing.Size(376, 150);
+            this.PropertiesGroupBox.Size = new System.Drawing.Size(379, 150);
             this.PropertiesGroupBox.TabIndex = 21;
             this.PropertiesGroupBox.TabStop = false;
             this.PropertiesGroupBox.Text = "Propriétés du document";
@@ -494,7 +503,7 @@
             this.listBoxFiles.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
-            this.listBoxFiles.Size = new System.Drawing.Size(376, 702);
+            this.listBoxFiles.Size = new System.Drawing.Size(379, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -516,9 +525,10 @@
             this.officeViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(434, 445);
+            this.officeViewer.Size = new System.Drawing.Size(419, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -530,7 +540,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(887, 855);
+            this.imageViewer.Size = new System.Drawing.Size(872, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -545,7 +555,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(887, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(872, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -597,8 +607,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.OpenFileDialog addPdfDialog;
         private System.Windows.Forms.Label LabelPdfName;
         private System.Windows.Forms.Label LabelNbPages;
         private System.Windows.Forms.ToolStrip mainToolbar;
@@ -639,6 +647,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox imageViewer;
         private SharpGED_controls.OfficeViewer officeViewer;
+        private System.Windows.Forms.ToolStripButton toolButtonFileExtract;
+        private System.Windows.Forms.SaveFileDialog extractFileDialog;
     }
 }
 

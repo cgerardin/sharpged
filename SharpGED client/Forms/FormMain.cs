@@ -14,7 +14,7 @@ namespace SharpGED_client
 
         private string lastClickedHash = "";
         private string lastClickedNode = "";
-        private PdfDocument currentDocument;
+        private PdfDocument currentPdfDocument;
         private string currentDocumentUri;
 
         public formMain()
@@ -59,9 +59,9 @@ namespace SharpGED_client
             }
 
             // Purge les fichiers temporaires
-            if (currentDocument != null)
+            if (currentPdfDocument != null)
             {
-                currentDocument.Dispose();
+                currentPdfDocument.Dispose();
             }
             Program.CleanTempFiles();
 
@@ -165,9 +165,9 @@ namespace SharpGED_client
             imageViewer.Visible = false;
             officeViewer.Visible = false;
 
-            if (currentDocument != null)
+            if (currentPdfDocument != null)
             {
-                currentDocument.Dispose();
+                currentPdfDocument.Dispose();
             }
             pdfViewer.Load(PdfDocument.Load("BLANK.pdf"));
         }
@@ -361,19 +361,36 @@ namespace SharpGED_client
 
         private void toolButtonPrint_Click(object sender, EventArgs e)
         {
-            printPdf = pdfViewer.Document.CreatePrintDocument();
-            printDialog.Document = printPdf;
-
-            if (printDialog.ShowDialog() == DialogResult.OK)
+            if (listBoxFiles.SelectedItem != null)
             {
-                printPdf.PrinterSettings = printDialog.PrinterSettings;
-                printPdf.Print();
-            }
-            else
-            {
-                printPdf = null;
-            }
+                printPdf = pdfViewer.Document.CreatePrintDocument();
+                printDialog.Document = printPdf;
 
+                if (printDialog.ShowDialog() == DialogResult.OK)
+                {
+                    printPdf.PrinterSettings = printDialog.PrinterSettings;
+                    printPdf.Print();
+                }
+                else
+                {
+                    printPdf = null;
+                }
+            }
+        }
+
+        private void toolButtonFileExtract_Click(object sender, EventArgs e)
+        {
+            if (listBoxFiles.SelectedItem != null)
+            {
+                string ext = currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
+                extractFileDialog.Filter = "Fichier " + ext + "|*" + ext;
+                extractFileDialog.FileName = ((GedFile)listBoxFiles.SelectedItem).title;
+
+                if (extractFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.Copy(currentDocumentUri, extractFileDialog.FileName);
+                }
+            }
         }
 
         private void toolButtonRefresh_Click(object sender, EventArgs e)
@@ -470,8 +487,8 @@ namespace SharpGED_client
                 switch (file.type)
                 {
                     case GedFileType.PDF:
-                        currentDocument = PdfDocument.Load(localFilename);
-                        pdfViewer.Load(currentDocument);
+                        currentPdfDocument = PdfDocument.Load(localFilename);
+                        pdfViewer.Load(currentPdfDocument);
                         pdfViewer.Visible = true;
                         break;
 
