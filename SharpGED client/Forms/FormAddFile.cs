@@ -31,6 +31,8 @@ namespace SharpGED_client
             labelNbPages.Text = "(0 pages)";
             checkBoxConvertPdf.Enabled = false;
             checkBoxConvertPdf.Checked = false;
+            comboBoxFormat.Enabled = false;
+            comboBoxFormat.Text = "";
 
             if (addPdfDialog.ShowDialog().Equals(DialogResult.OK))
             {
@@ -95,7 +97,28 @@ namespace SharpGED_client
                     newPdf[i] = new PdfDocument(newFileUri[i]);
 
                     PdfPage page = newPdf[i].AddPage();
-                    page.Size = PdfSharp.PageSize.A4;
+                    switch(format[i])
+                    {
+                        case "A4 - Portrait":
+                            page.Size = PdfSharp.PageSize.A4;
+                            page.Orientation = PdfSharp.PageOrientation.Portrait;
+                            break;
+
+                        case "A4 - Paysage":
+                            page.Size = PdfSharp.PageSize.A4;
+                            page.Orientation = PdfSharp.PageOrientation.Landscape;
+                            break;
+
+                        case "A3 - Portrait":
+                            page.Size = PdfSharp.PageSize.A3;
+                            page.Orientation = PdfSharp.PageOrientation.Portrait;
+                            break;
+
+                        case "A3 - Paysage":
+                            page.Size = PdfSharp.PageSize.A3;
+                            page.Orientation = PdfSharp.PageOrientation.Landscape;
+                            break;
+                    }
 
                     XGraphics gfx = XGraphics.FromPdfPage(page);
                     XImage xImage = XImage.FromFile(addPdfDialog.FileNames[i]);
@@ -167,10 +190,16 @@ namespace SharpGED_client
                 textBoxPdfName.Text = listBoxFiles.Items[i].ToString();
                 checkBoxConvertPdf.Checked = convertToPdf[i];
                 checkBoxConvertPdf.Enabled = fileType[i] != GedFileType.PDF;
+                comboBoxFormat.Text = format[i];
+                comboBoxFormat.Enabled = checkBoxConvertPdf.Checked;
 
                 if (fileType[i] == GedFileType.PDF)
                 {
                     labelNbPages.Text = "(" + newPdf[i].PageCount + " pages)";
+                }
+                else if (fileType[i] == GedFileType.Image)
+                {
+                    labelNbPages.Text = "(1 pages)";
                 }
                 else
                 {
@@ -219,6 +248,11 @@ namespace SharpGED_client
             }
 
             comboBoxFormat.Enabled = checkBoxConvertPdf.Checked;
+            if (comboBoxFormat.Enabled && format[i] == null || format[i].Equals(""))
+            {
+                format[i] = "A4 - Portrait"; // Valeur par défaut
+                comboBoxFormat.Text = format[i];
+            }
         }
 
         private void comboBoxFormat_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,7 +261,7 @@ namespace SharpGED_client
 
             if (i != -1)
             {
-                format[i] = comboBoxFormat.SelectedValue.ToString();
+                format[i] = comboBoxFormat.Text;
             }
         }
     }

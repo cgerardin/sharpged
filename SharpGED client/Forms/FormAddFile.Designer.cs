@@ -127,13 +127,16 @@
             // 
             // comboBoxFormat
             // 
+            this.comboBoxFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFormat.FormattingEnabled = true;
             this.comboBoxFormat.Items.AddRange(new object[] {
-            "A4",
-            "A3"});
+            "A4 - Portrait",
+            "A4 - Paysage",
+            "A3 - Portrait",
+            "A3 - Paysage"});
             this.comboBoxFormat.Location = new System.Drawing.Point(415, 41);
             this.comboBoxFormat.Name = "comboBoxFormat";
-            this.comboBoxFormat.Size = new System.Drawing.Size(47, 21);
+            this.comboBoxFormat.Size = new System.Drawing.Size(103, 21);
             this.comboBoxFormat.TabIndex = 11;
             this.comboBoxFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormat_SelectedIndexChanged);
             // 
