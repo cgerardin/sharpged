@@ -74,6 +74,9 @@
     <Reference Include="PdfSharp.Charting, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.4000-beta3b\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
+    <Reference Include="Saraff.Twain, Version=1.0.24.579, Culture=neutral, PublicKeyToken=467d7c56f22cafb6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Saraff.Twain.1.0.24.579\lib\net40\Saraff.Twain.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -188,6 +191,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="COPYING.LESSER.txt" />
+    <Content Include="COPYING.txt" />
     <Content Include="Icon.ico" />
     <Content Include="pdfium.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

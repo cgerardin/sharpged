@@ -59,6 +59,7 @@
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelFileType = new System.Windows.Forms.Label();
@@ -72,7 +73,6 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label5 = new System.Windows.Forms.Label();
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -440,10 +440,23 @@
             this.groupBoxProperties.Controls.Add(this.labelOriginalName);
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 732);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(362, 150);
+            this.groupBoxProperties.Size = new System.Drawing.Size(363, 150);
             this.groupBoxProperties.TabIndex = 21;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Propriétés du document";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 66);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Pages :";
             // 
             // label4
             // 
@@ -508,7 +521,7 @@
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
             this.listBoxFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxFiles.Size = new System.Drawing.Size(365, 702);
+            this.listBoxFiles.Size = new System.Drawing.Size(366, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -533,7 +546,7 @@
             this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(404, 445);
+            this.officeViewer.Size = new System.Drawing.Size(399, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -545,7 +558,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(892, 855);
+            this.imageViewer.Size = new System.Drawing.Size(887, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -560,7 +573,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(892, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(887, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -576,19 +589,6 @@
             this.imageListToolbar.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 66);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Pages :";
             // 
             // formMain
             // 
