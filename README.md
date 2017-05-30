@@ -2,6 +2,8 @@
 
 Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et SQLite.
 
+![SharpGED.jpeg](https://bitbucket.org/repo/Mrgxk5g/images/591466635-SharpGED.jpeg)
+
 ## Téléchargements ##
 
 ### Dernière version stable ###
