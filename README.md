@@ -47,3 +47,10 @@ La version stable est fournie sous forme d'une image ISO prête à l'emploi :
 ## En cas de problème ##
 
 Pour rapporter les bugs : [Créer un ticket](https://bitbucket.org/cgerardin/sharpged/issues/new)
+
+## Remerciements / outils tiers ##
+
+* [PDFsharp](http://www.pdfsharp.net)
+* [PdfiumViewer](https://github.com/pvginkel/PdfiumViewer)
+* [SQLite Development Team](http://sqlite.org/)
+* [Saraff.Twain.NET](https://github.com/saraff-9EB1047A4BEB4cef8506B29BA325BD5A/Saraff.Twain.NET)
