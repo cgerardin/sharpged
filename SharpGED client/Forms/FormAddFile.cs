@@ -194,25 +194,18 @@ namespace SharpGED_client
                 comboBoxFormat.Text = format[i];
                 comboBoxFormat.Enabled = checkBoxConvertPdf.Checked;
 
+                labelFileType.Text = TypeName(fileType[i]);
                 switch (fileType[i])
                 {
                     case GedFileType.PDF:
-                        labelFileType.Text = "Document PDF";
                         labelNbPages.Text = newPdf[i].PageCount.ToString();
                         break;
 
                     case GedFileType.Image:
-                        labelFileType.Text = "Fichier image";
                         labelNbPages.Text = "1";
                         break;
 
-                    case GedFileType.Office:
-                        labelFileType.Text = "Document bureautique";
-                        labelNbPages.Text = "(inconnu)";
-                        break;
-
                     default:
-                        labelFileType.Text = "Inconnu";
                         labelNbPages.Text = "(inconnu)";
                         break;
                 }

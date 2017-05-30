@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
-            this.LabelPdfName = new System.Windows.Forms.Label();
+            this.labelPdfName = new System.Windows.Forms.Label();
             this.labelNbPages = new System.Windows.Forms.Label();
             this.mainToolbar = new System.Windows.Forms.ToolStrip();
             this.toolButtonFilter = new System.Windows.Forms.ToolStripButton();
@@ -88,16 +88,16 @@
             // 
             // LabelPdfName
             // 
-            this.LabelPdfName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelPdfName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelPdfName.AutoSize = true;
-            this.LabelPdfName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPdfName.Location = new System.Drawing.Point(6, 26);
-            this.LabelPdfName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.LabelPdfName.Name = "LabelPdfName";
-            this.LabelPdfName.Size = new System.Drawing.Size(110, 13);
-            this.LabelPdfName.TabIndex = 18;
-            this.LabelPdfName.Text = "Titre du document";
+            this.labelPdfName.AutoSize = true;
+            this.labelPdfName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPdfName.Location = new System.Drawing.Point(6, 26);
+            this.labelPdfName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelPdfName.Name = "LabelPdfName";
+            this.labelPdfName.Size = new System.Drawing.Size(110, 13);
+            this.labelPdfName.TabIndex = 18;
+            this.labelPdfName.Text = "Titre du document";
             // 
             // labelNbPages
             // 
@@ -435,7 +435,7 @@
             this.groupBoxProperties.Controls.Add(this.label4);
             this.groupBoxProperties.Controls.Add(this.label3);
             this.groupBoxProperties.Controls.Add(this.labelFileType);
-            this.groupBoxProperties.Controls.Add(this.LabelPdfName);
+            this.groupBoxProperties.Controls.Add(this.labelPdfName);
             this.groupBoxProperties.Controls.Add(this.labelNbPages);
             this.groupBoxProperties.Controls.Add(this.labelOriginalName);
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 732);
@@ -625,7 +625,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label LabelPdfName;
+        private System.Windows.Forms.Label labelPdfName;
         private System.Windows.Forms.Label labelNbPages;
         private System.Windows.Forms.ToolStrip mainToolbar;
         private System.Windows.Forms.ToolStripButton toolButtonFileAdd;

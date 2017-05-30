@@ -101,7 +101,8 @@ namespace SharpGED_server
                     "originalname TEXT NOT NULL, " +
                     "size INTEGER NOT NULL, " +
                     "title TEXT, " +
-                    "pages INTEGER " +
+                    "pages INTEGER, " +
+                    "version INTEGER NOT NULL DEFAULT 1" +
                     ");";
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
 

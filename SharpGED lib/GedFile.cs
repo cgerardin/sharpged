@@ -16,6 +16,11 @@ namespace SharpGED_lib
 
         public string TypeName()
         {
+            return TypeName(type);
+        }
+
+        public static string TypeName(GedFileType type)
+        {
             switch (type)
             {
                 case GedFileType.PDF:

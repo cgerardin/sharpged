@@ -163,7 +163,7 @@ namespace SharpGED_client
             imageViewer.Visible = false;
             officeViewer.Visible = false;
 
-            LabelPdfName.Text = "";
+            labelPdfName.Text = "";
             labelFileType.Text = "";
             labelNbPages.Text = "";
             labelOriginalName.Text = "";
@@ -207,41 +207,33 @@ namespace SharpGED_client
             // Masque tous les viewers
             EmptyViewers();
 
-            // Affiche le document dans le viewer correspondant à son type
+            // Affiche le document dans le viewer correspondant à son type, avec ses méta-données
             switch (file.type)
             {
                 case GedFileType.PDF:
+                    labelNbPages.Text = file.pages.ToString();
                     currentPdfDocument = PdfDocument.Load(localFilename);
                     pdfViewer.Load(currentPdfDocument);
                     pdfViewer.Visible = true;
                     break;
 
                 case GedFileType.Image:
+                    labelNbPages.Text = "1";
                     imageViewer.Image = Image.FromFile(localFilename);
                     imageViewer.Visible = true;
                     break;
 
                 case GedFileType.Office:
+                    labelNbPages.Text = "(inconnu)";
                     officeViewer.URI = localFilename;
                     officeViewer.Visible = true;
                     break;
-            }
 
-            // Affiche les méta-données
-            LabelPdfName.Text = file.title;
-            if (file.type == GedFileType.PDF)
-            {
-                labelNbPages.Text = file.pages.ToString();
+                default:
+                    labelNbPages.Text = "(inconnu)";
+                    break;
             }
-            else if (file.type == GedFileType.Image)
-            {
-                labelNbPages.Text = "1";
-            }
-            else
-            {
-                labelNbPages.Text = "(inconnu)";
-            }
-
+            labelPdfName.Text = file.title;
             labelOriginalName.Text = file.originalname;
             labelFileType.Text = file.TypeName();
             groupBoxProperties.Visible = true;
@@ -342,7 +334,7 @@ namespace SharpGED_client
         {
             if (Program.isDatabaseInitialized)
             {
-                string originalTitle = LabelPdfName.Text;
+                string originalTitle = labelPdfName.Text;
                 string originalName = labelOriginalName.Text;
 
                 formEditPdf edit = new formEditPdf();
