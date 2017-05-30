@@ -238,7 +238,7 @@ namespace SharpGED_client
             }
             textBoxPdfName.Focus();
             textBoxPdfName.Select(s, l); // Rétablis la sélection
-            
+
         }
 
         private void formAddFile_KeyDown(object sender, KeyEventArgs e)
