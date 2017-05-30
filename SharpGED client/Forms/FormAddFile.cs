@@ -15,6 +15,7 @@ namespace SharpGED_client
         private PdfDocument[] newPdf = new PdfDocument[100];
         private String[] newFileUri = new String[100];
         private bool[] convertToPdf = new bool[100];
+        private string[] format = new string[100];
         private GedFileType[] fileType = new GedFileType[100];
         public GedFolder folder { get; set; }
 
@@ -215,6 +216,18 @@ namespace SharpGED_client
             if (i != -1)
             {
                 convertToPdf[i] = checkBoxConvertPdf.Checked;
+            }
+
+            comboBoxFormat.Enabled = checkBoxConvertPdf.Checked;
+        }
+
+        private void comboBoxFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int i = listBoxFiles.SelectedIndex;
+
+            if (i != -1)
+            {
+                format[i] = comboBoxFormat.SelectedValue.ToString();
             }
         }
     }

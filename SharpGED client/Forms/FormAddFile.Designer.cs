@@ -38,6 +38,7 @@
             this.checkBoxConvertPdf = new System.Windows.Forms.CheckBox();
             this.progressBarTransfert = new System.Windows.Forms.ProgressBar();
             this.labelCurrentFile = new System.Windows.Forms.Label();
+            this.comboBoxFormat = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -124,12 +125,25 @@
             this.labelCurrentFile.Text = "         ";
             this.labelCurrentFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // comboBoxFormat
+            // 
+            this.comboBoxFormat.FormattingEnabled = true;
+            this.comboBoxFormat.Items.AddRange(new object[] {
+            "A4",
+            "A3"});
+            this.comboBoxFormat.Location = new System.Drawing.Point(415, 41);
+            this.comboBoxFormat.Name = "comboBoxFormat";
+            this.comboBoxFormat.Size = new System.Drawing.Size(47, 21);
+            this.comboBoxFormat.TabIndex = 11;
+            this.comboBoxFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormat_SelectedIndexChanged);
+            // 
             // formAddFile
             // 
             this.AcceptButton = this.ButtonAddPdf;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 329);
+            this.Controls.Add(this.comboBoxFormat);
             this.Controls.Add(this.labelCurrentFile);
             this.Controls.Add(this.progressBarTransfert);
             this.Controls.Add(this.checkBoxConvertPdf);
@@ -166,5 +180,6 @@
         private System.Windows.Forms.CheckBox checkBoxConvertPdf;
         private System.Windows.Forms.ProgressBar progressBarTransfert;
         private System.Windows.Forms.Label labelCurrentFile;
+        private System.Windows.Forms.ComboBox comboBoxFormat;
     }
 }
