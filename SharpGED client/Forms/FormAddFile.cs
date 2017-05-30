@@ -229,11 +229,16 @@ namespace SharpGED_client
         private void textBoxPdfName_TextChanged(object sender, EventArgs e)
         {
             int i = listBoxFiles.SelectedIndex;
+            int s = textBoxPdfName.SelectionStart;
+            int l = textBoxPdfName.SelectionLength;
 
             if (i != -1)
             {
                 listBoxFiles.Items[i] = textBoxPdfName.Text;
             }
+            textBoxPdfName.Focus();
+            textBoxPdfName.Select(s, l); // Rétablis la sélection
+            
         }
 
         private void formAddFile_KeyDown(object sender, KeyEventArgs e)
