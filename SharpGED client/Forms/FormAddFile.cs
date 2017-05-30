@@ -55,7 +55,7 @@ namespace SharpGED_client
                             fileType[i] = GedFileType.Image;
                             break;
 
-                        case "docx":
+                        case ".docx":
                             fileType[i] = GedFileType.Office;
                             break;
                     }
