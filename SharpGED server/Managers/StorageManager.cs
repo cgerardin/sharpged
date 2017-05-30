@@ -129,6 +129,7 @@ namespace SharpGED_server
                         file.size = size;
                         file.title = rs["title"].ToString();
                         file.pages = (int)(long)rs["pages"];
+                        file.version = (int)(long)rs["version"];
                         file.bytes = fileBytes;
                     }
                 }
@@ -171,8 +172,9 @@ namespace SharpGED_server
             {
                 db.Open();
 
-                string sql = "INSERT INTO files (idType, idFolder, hash, originalname, size, title, pages) " +
-                "VALUES (" + (long)file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', " + file.size + ", '" + file.title.Replace("'", "''") + "', " + file.pages + ");";
+                string sql = "INSERT INTO files (idType, idFolder, hash, originalname, size, title, pages, version) " +
+                "VALUES (" + (long)file.type + ", " + file.folderId + ", '" + hash + "', '" + file.originalname.Replace("'", "''") + "', "
+                        + file.size + ", '" + file.title.Replace("'", "''") + "', " + file.pages + ", " + file.version + "); ";
 
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
@@ -203,7 +205,7 @@ namespace SharpGED_server
             using (SQLiteConnection db = new DatabaseManager().Connect())
             {
                 db.Open();
-                new SQLiteCommand("UPDATE files SET title='" + title + "' WHERE hash = '" + hash + "';", db).ExecuteNonQuery();
+                new SQLiteCommand("UPDATE files SET title='" + title + "', version=version+1 WHERE hash = '" + hash + "';", db).ExecuteNonQuery();
             }
 
             // Met à jour les métadonnées du PDF
@@ -244,7 +246,7 @@ namespace SharpGED_server
             {
                 db.Open();
 
-                new SQLiteCommand("UPDATE files SET idFolder=1 WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
+                new SQLiteCommand("UPDATE files SET idFolder=1, version=version+1 WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
                 new SQLiteCommand("UPDATE folders SET idParentFolder=1 WHERE idParentFolder=" + id + ";", db).ExecuteNonQuery();
                 new SQLiteCommand("DELETE FROM folders WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
             }

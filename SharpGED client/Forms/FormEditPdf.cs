@@ -12,8 +12,6 @@ namespace SharpGED_client.Forms
         public PdfDocument source { get; set; }
         public PdfiumViewer.PdfDocument currentDocument { get; set; }
 
-        private String newFileUri;
-
         public formEditPdf()
         {
             InitializeComponent();

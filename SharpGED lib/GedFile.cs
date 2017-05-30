@@ -13,6 +13,7 @@ namespace SharpGED_lib
         public int size { get; set; }
         public string title { get; set; }
         public int pages { get; set; }
+        public int version { get; set; } = 1;
 
         public string TypeName()
         {
