@@ -18,6 +18,32 @@ La version stable est fournie sous forme d'une image ISO prête à l'emploi :
 
 * [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/0b3b8ca9ce50.zip)
 
+## Fonctionnalités ##
+
+### Implémentées ###
+
+* Arborescence de dossiers illimitée
+* Import de documents PDF, PNG, JPEG et DOCX.
+* Conversion en PDF
+* Edition basique de PDF (ordre et suppression de pages)
+* Recherche par titre
+* Impression
+* Import et export de masse
+* Support des clients multiples
+
+### A venir ###
+
+* Verrou en modification sur un document
+* Mise en cache côté client
+* Numérisation
+* Fusion de PDF
+* Recherche plein texte / par tags
+* Chiffrement AES
+* Watermarks et annotations
+* OCR des documents (PDF plein texte)
+* Gestion de plusieurs bibliothèques en simultané
+* ...
+
 ## En cas de problème ##
 
 Pour rapporter les bugs : [Créer un ticket](https://bitbucket.org/cgerardin/sharpged/issues/new)
