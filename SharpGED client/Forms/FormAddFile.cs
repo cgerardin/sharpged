@@ -14,10 +14,13 @@ namespace SharpGED_client
 
         private PdfDocument[] newPdf = new PdfDocument[100];
         private String[] newFileUri = new String[100];
-        private bool[] convertToPdf = new bool[100];
-        private string[] format = new string[100];
-        private GedFileType[] fileType = new GedFileType[100];
         public GedFolder folder { get; set; }
+        private GedFileType[] fileType = new GedFileType[100];
+        private string[] format = new string[100];
+        private bool[] convertToPdf = new bool[100];
+        private int[] pages = new int[100];
+
+        private object missing = System.Reflection.Missing.Value;
 
         public formAddFile()
         {
@@ -67,6 +70,15 @@ namespace SharpGED_client
                     if (fileType[i] == GedFileType.PDF)
                     {
                         newPdf[i] = PdfReader.Open(addPdfDialog.FileNames[i], PdfDocumentOpenMode.Import);
+                        pages[i] = newPdf[i].PageCount;
+                    }
+                    else if (fileType[i] == GedFileType.Image)
+                    {
+                        pages[i] = 1;
+                    }
+                    else
+                    {
+                        pages[i] = -1;
                     }
                     newFileUri[i] = addPdfDialog.FileNames[i];
                 }
@@ -138,18 +150,23 @@ namespace SharpGED_client
                 }
 
                 // Conversion des documents bureautique
-                if (fileType[i] == GedFileType.Office && convertToPdf[i])
+                if (fileType[i] == GedFileType.Office)
                 {
-                    newFileUri[i] = Program.NewTempFile();
-
-                    Microsoft.Office.Interop.Word.Document wordDocument;
                     Microsoft.Office.Interop.Word.Application appWord = new Microsoft.Office.Interop.Word.Application();
+                    Microsoft.Office.Interop.Word.Document wordDocument = appWord.Documents.Open(addPdfDialog.FileNames[i]);
 
-                    wordDocument = appWord.Documents.Open(addPdfDialog.FileNames[i]);
-                    wordDocument.ExportAsFixedFormat(newFileUri[i], Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
+                    pages[i] = wordDocument.ComputeStatistics(Microsoft.Office.Interop.Word.WdStatistic.wdStatisticPages, ref missing); // Calcul du nombre de pages
+
+                    if (convertToPdf[i])
+                    {
+                        fileType[i] = GedFileType.PDF;
+                        newFileUri[i] = Program.NewTempFile();
+
+                        wordDocument.ExportAsFixedFormat(newFileUri[i], Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
+                    }
+
                     wordDocument.Close();
-
-                    fileType[i] = GedFileType.PDF;
+                    appWord.Quit();
                 }
 
                 // Lit le fichier et place son contenu dans un tableau
@@ -169,6 +186,7 @@ namespace SharpGED_client
                 file.size = size;
                 file.title = listBoxFiles.Items[i].ToString();
                 file.originalname = addPdfDialog.SafeFileNames[i];
+                file.pages = pages[i];
                 file.bytes = fileBytes;
                 Program.ServerSendFile(file);
 

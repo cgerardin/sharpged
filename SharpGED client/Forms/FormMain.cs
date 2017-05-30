@@ -211,30 +211,24 @@ namespace SharpGED_client
             switch (file.type)
             {
                 case GedFileType.PDF:
-                    labelNbPages.Text = file.pages.ToString();
                     currentPdfDocument = PdfDocument.Load(localFilename);
                     pdfViewer.Load(currentPdfDocument);
                     pdfViewer.Visible = true;
                     break;
 
                 case GedFileType.Image:
-                    labelNbPages.Text = "1";
                     imageViewer.Image = Image.FromFile(localFilename);
                     imageViewer.Visible = true;
                     break;
 
                 case GedFileType.Office:
-                    labelNbPages.Text = "(inconnu)";
                     officeViewer.URI = localFilename;
                     officeViewer.Visible = true;
-                    break;
-
-                default:
-                    labelNbPages.Text = "(inconnu)";
                     break;
             }
             labelPdfName.Text = file.title;
             labelOriginalName.Text = file.originalname;
+            labelNbPages.Text = file.pages.ToString();
             labelFileType.Text = file.TypeName();
             groupBoxProperties.Visible = true;
 

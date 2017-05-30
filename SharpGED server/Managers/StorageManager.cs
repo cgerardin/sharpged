@@ -90,7 +90,11 @@ namespace SharpGED_server
                         currentGedFile = new GedFile();
                         currentGedFile.type = (GedFileType)rs["idType"];
                         currentGedFile.hash = rs["hash"].ToString();
+                        currentGedFile.originalname = rs["originalname"].ToString();
+                        currentGedFile.size = (int)(long)rs["size"];
                         currentGedFile.title = rs["title"].ToString();
+                        currentGedFile.pages = (int)(long)rs["pages"];
+                        currentGedFile.version = (int)(long)rs["version"];
                         filesList.Add(currentGedFile);
                     }
                 }
