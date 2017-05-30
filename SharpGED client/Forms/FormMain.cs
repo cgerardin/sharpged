@@ -165,7 +165,7 @@ namespace SharpGED_client
 
             LabelPdfName.Text = "";
             labelFileType.Text = "";
-            LabelNbPages.Text = "";
+            labelNbPages.Text = "";
             labelOriginalName.Text = "";
 
             if (currentPdfDocument != null)
@@ -231,12 +231,17 @@ namespace SharpGED_client
             LabelPdfName.Text = file.title;
             if (file.type == GedFileType.PDF)
             {
-                LabelNbPages.Text = file.pages.ToString();
+                labelNbPages.Text = file.pages.ToString();
+            }
+            else if (file.type == GedFileType.Image)
+            {
+                labelNbPages.Text = "1";
             }
             else
             {
-                LabelNbPages.Text = "(inconnu)";
+                labelNbPages.Text = "(inconnu)";
             }
+
             labelOriginalName.Text = file.originalname;
             labelFileType.Text = file.TypeName();
             groupBoxProperties.Visible = true;

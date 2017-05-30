@@ -28,7 +28,8 @@ namespace SharpGED_client
         {
             textBoxPdfName.Enabled = false;
             textBoxPdfName.Text = "";
-            labelNbPages.Text = "(0 pages)";
+            labelFileType.Text = "";
+            labelNbPages.Text = "0";
             checkBoxConvertPdf.Enabled = false;
             checkBoxConvertPdf.Checked = false;
             comboBoxFormat.Enabled = false;
@@ -97,7 +98,7 @@ namespace SharpGED_client
                     newPdf[i] = new PdfDocument(newFileUri[i]);
 
                     PdfPage page = newPdf[i].AddPage();
-                    switch(format[i])
+                    switch (format[i])
                     {
                         case "A4 - Portrait":
                             page.Size = PdfSharp.PageSize.A4;
@@ -193,24 +194,35 @@ namespace SharpGED_client
                 comboBoxFormat.Text = format[i];
                 comboBoxFormat.Enabled = checkBoxConvertPdf.Checked;
 
-                if (fileType[i] == GedFileType.PDF)
+                switch (fileType[i])
                 {
-                    labelNbPages.Text = "(" + newPdf[i].PageCount + " pages)";
-                }
-                else if (fileType[i] == GedFileType.Image)
-                {
-                    labelNbPages.Text = "(1 pages)";
-                }
-                else
-                {
-                    labelNbPages.Text = "(inconnu)";
+                    case GedFileType.PDF:
+                        labelFileType.Text = "Document PDF";
+                        labelNbPages.Text = newPdf[i].PageCount.ToString();
+                        break;
+
+                    case GedFileType.Image:
+                        labelFileType.Text = "Fichier image";
+                        labelNbPages.Text = "1";
+                        break;
+
+                    case GedFileType.Office:
+                        labelFileType.Text = "Document bureautique";
+                        labelNbPages.Text = "(inconnu)";
+                        break;
+
+                    default:
+                        labelFileType.Text = "Inconnu";
+                        labelNbPages.Text = "(inconnu)";
+                        break;
                 }
             }
             else
             {
                 textBoxPdfName.Enabled = false;
                 textBoxPdfName.Text = "";
-                labelNbPages.Text = "(0 pages)";
+                labelFileType.Text = "";
+                labelNbPages.Text = "0";
             }
         }
 

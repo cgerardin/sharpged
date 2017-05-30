@@ -39,6 +39,9 @@
             this.progressBarTransfert = new System.Windows.Forms.ProgressBar();
             this.labelCurrentFile = new System.Windows.Forms.Label();
             this.comboBoxFormat = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelFileType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // addPdfDialog
@@ -61,10 +64,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(267, 15);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Titre";
             // 
@@ -80,13 +84,12 @@
             // labelNbPages
             // 
             this.labelNbPages.AutoSize = true;
-            this.labelNbPages.Location = new System.Drawing.Point(527, 44);
+            this.labelNbPages.Location = new System.Drawing.Point(316, 57);
             this.labelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.labelNbPages.Name = "labelNbPages";
-            this.labelNbPages.Size = new System.Drawing.Size(51, 13);
+            this.labelNbPages.Size = new System.Drawing.Size(13, 13);
             this.labelNbPages.TabIndex = 5;
-            this.labelNbPages.Text = "(0 pages)";
-            this.labelNbPages.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.labelNbPages.Text = "0";
             // 
             // listBoxFiles
             // 
@@ -100,7 +103,7 @@
             // checkBoxConvertPdf
             // 
             this.checkBoxConvertPdf.AutoSize = true;
-            this.checkBoxConvertPdf.Location = new System.Drawing.Point(270, 43);
+            this.checkBoxConvertPdf.Location = new System.Drawing.Point(270, 82);
             this.checkBoxConvertPdf.Name = "checkBoxConvertPdf";
             this.checkBoxConvertPdf.Size = new System.Drawing.Size(139, 17);
             this.checkBoxConvertPdf.TabIndex = 8;
@@ -134,11 +137,49 @@
             "A4 - Paysage",
             "A3 - Portrait",
             "A3 - Paysage"});
-            this.comboBoxFormat.Location = new System.Drawing.Point(415, 41);
+            this.comboBoxFormat.Location = new System.Drawing.Point(415, 78);
             this.comboBoxFormat.Name = "comboBoxFormat";
             this.comboBoxFormat.Size = new System.Drawing.Size(103, 21);
             this.comboBoxFormat.TabIndex = 11;
             this.comboBoxFormat.SelectedIndexChanged += new System.EventHandler(this.comboBoxFormat_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(267, 57);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 13);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Pages :";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(267, 40);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "Type :";
+            // 
+            // labelFileType
+            // 
+            this.labelFileType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFileType.AutoSize = true;
+            this.labelFileType.Location = new System.Drawing.Point(306, 40);
+            this.labelFileType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelFileType.Name = "labelFileType";
+            this.labelFileType.Size = new System.Drawing.Size(31, 13);
+            this.labelFileType.TabIndex = 26;
+            this.labelFileType.Text = "Type";
             // 
             // formAddFile
             // 
@@ -146,6 +187,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 329);
+            this.Controls.Add(this.labelFileType);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBoxFormat);
             this.Controls.Add(this.labelCurrentFile);
             this.Controls.Add(this.progressBarTransfert);
@@ -184,5 +228,8 @@
         private System.Windows.Forms.ProgressBar progressBarTransfert;
         private System.Windows.Forms.Label labelCurrentFile;
         private System.Windows.Forms.ComboBox comboBoxFormat;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelFileType;
     }
 }

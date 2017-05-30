@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
             this.LabelPdfName = new System.Windows.Forms.Label();
-            this.LabelNbPages = new System.Windows.Forms.Label();
+            this.labelNbPages = new System.Windows.Forms.Label();
             this.mainToolbar = new System.Windows.Forms.ToolStrip();
             this.toolButtonFilter = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -99,17 +99,17 @@
             this.LabelPdfName.TabIndex = 18;
             this.LabelPdfName.Text = "Titre du document";
             // 
-            // LabelNbPages
+            // labelNbPages
             // 
-            this.LabelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelNbPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LabelNbPages.AutoSize = true;
-            this.LabelNbPages.Location = new System.Drawing.Point(54, 66);
-            this.LabelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.LabelNbPages.Name = "LabelNbPages";
-            this.LabelNbPages.Size = new System.Drawing.Size(13, 13);
-            this.LabelNbPages.TabIndex = 17;
-            this.LabelNbPages.Text = "0";
+            this.labelNbPages.AutoSize = true;
+            this.labelNbPages.Location = new System.Drawing.Point(54, 66);
+            this.labelNbPages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelNbPages.Name = "labelNbPages";
+            this.labelNbPages.Size = new System.Drawing.Size(13, 13);
+            this.labelNbPages.TabIndex = 17;
+            this.labelNbPages.Text = "0";
             // 
             // mainToolbar
             // 
@@ -436,11 +436,11 @@
             this.groupBoxProperties.Controls.Add(this.label3);
             this.groupBoxProperties.Controls.Add(this.labelFileType);
             this.groupBoxProperties.Controls.Add(this.LabelPdfName);
-            this.groupBoxProperties.Controls.Add(this.LabelNbPages);
+            this.groupBoxProperties.Controls.Add(this.labelNbPages);
             this.groupBoxProperties.Controls.Add(this.labelOriginalName);
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 732);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(363, 150);
+            this.groupBoxProperties.Size = new System.Drawing.Size(364, 150);
             this.groupBoxProperties.TabIndex = 21;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Propriétés du document";
@@ -521,7 +521,7 @@
             this.listBoxFiles.Name = "listBoxFiles";
             this.listBoxFiles.ScrollAlwaysVisible = true;
             this.listBoxFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxFiles.Size = new System.Drawing.Size(366, 702);
+            this.listBoxFiles.Size = new System.Drawing.Size(367, 702);
             this.listBoxFiles.TabIndex = 2;
             this.listBoxFiles.ValueMember = "hash";
             this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
@@ -546,7 +546,7 @@
             this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(399, 445);
+            this.officeViewer.Size = new System.Drawing.Size(394, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -558,7 +558,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(887, 855);
+            this.imageViewer.Size = new System.Drawing.Size(882, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -573,7 +573,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(887, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(882, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -626,7 +626,7 @@
 
         #endregion
         private System.Windows.Forms.Label LabelPdfName;
-        private System.Windows.Forms.Label LabelNbPages;
+        private System.Windows.Forms.Label labelNbPages;
         private System.Windows.Forms.ToolStrip mainToolbar;
         private System.Windows.Forms.ToolStripButton toolButtonFileAdd;
         private System.Windows.Forms.ToolStripButton toolButtonFileDelete;
