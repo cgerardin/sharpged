@@ -462,9 +462,9 @@ namespace SharpGED_client
                         currentFilename = currentGedFile.title + "_" + DateTime.Now.ToFileTime() + currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
                         File.Copy(currentDocumentUri, folderBrowserDialog.SelectedPath + "\\" + currentFilename);
                     }
+                    EmptyViewers();
+                    MessageBox.Show("Les documents sélectionnés ont été extraits dans le dossier " + folderBrowserDialog.SelectedPath, "Terminé avec succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                EmptyViewers();
-                MessageBox.Show("Les documents sélectionnés ont été extraits dans le dossier " + folderBrowserDialog.SelectedPath, "Terminé avec succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
