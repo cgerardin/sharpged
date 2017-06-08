@@ -6,7 +6,12 @@ Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et
 
 ## Téléchargements ##
 
-### Dernières versions stables ###
+### Dernières versions ###
+
+#### Version 1.1.4 alpha ####
+
+* [Image ISO prête à l'emploi](https://bitbucket.org/cgerardin/sharpged/downloads/SharpGED_1.1.4.iso)
+* [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/1.1.4a.zip)
 
 #### Version 1.1.3 alpha ####
 
@@ -16,10 +21,6 @@ Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et
 ### Pré-requis ###
 
 * [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/fr-FR/download/details.aspx?id=49982)
-
-### Version de développement ###
-
-* [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/0b3b8ca9ce50.zip)
 
 ## Fonctionnalités ##
 
