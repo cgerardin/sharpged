@@ -10,8 +10,8 @@ namespace SharpGED_server
 
         public DatabaseManager()
         {
-            baseFolder = Properties.Settings.Default.BaseFolder;
-            database = Properties.Settings.Default.Database;
+            baseFolder = Program.configuration.values.baseFolder;
+            database = Program.configuration.values.database;
         }
 
         public bool isInitialized()
@@ -115,8 +115,8 @@ namespace SharpGED_server
                 new SQLiteCommand(sql, db).ExecuteNonQuery();
             }
 
-            Properties.Settings.Default.Database = databaseName;
-            Properties.Settings.Default.Save();
+            Program.configuration.values.database = databaseName;
+            Program.configuration.Save();
         }
 
         public SQLiteConnection Connect()

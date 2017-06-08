@@ -1,7 +1,6 @@
-﻿using System;
+﻿using SharpGED_server.Managers;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.Net;
 using System.Net.Sockets;
 
@@ -11,32 +10,43 @@ namespace SharpGED_server
     {
 
         public static volatile bool _stopServer = false;
+        public static ConfigurationManager configuration { get; set; }
 
         static void Main(string[] args)
         {
+
+            configuration = new ConfigurationManager();
+            configuration.Load();
+
+            if(!configuration.exist)
+            {
+                FormConfiguration formConf = new FormConfiguration();
+                if (formConf.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                {
+                    return;
+                }
+            }
 
             List<WorkerThread> workers = new List<WorkerThread>();
             long currentWorkerId = 0;
 
             Console.WriteLine("*** SharpGED server ***");
-            
-            string listenIP_string = Properties.Settings.Default.ListenIP;
-            int listenPort = Properties.Settings.Default.ListenPort;
 
-            IPAddress listenIP = null;
-            if(listenIP_string.Equals("localhost") || listenIP_string.Equals("127.0.0.1") )
+            IPAddress listenIpAddress = null;
+            if (configuration.values.listenIP.Equals("localhost") || configuration.values.listenIP.Equals("127.0.0.1"))
             {
-                listenIP = IPAddress.Loopback;
-            } else if(!IPAddress.TryParse(listenIP_string, out listenIP))
+                listenIpAddress = IPAddress.Loopback;
+            }
+            else if (!IPAddress.TryParse(configuration.values.listenIP, out listenIpAddress))
             {
-                listenIP = Dns.GetHostAddresses(listenIP_string)[0];
+                listenIpAddress = Dns.GetHostAddresses(configuration.values.listenIP)[0];
             }
 
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            listener.Bind(new IPEndPoint(listenIP, listenPort));
+            listener.Bind(new IPEndPoint(listenIpAddress, configuration.values.listenPort));
             listener.Listen(10);
 
-            Console.WriteLine("En écoute à l'adresse " + listenIP_string + ":" + listenPort + " ...");
+            Console.WriteLine("En écoute à l'adresse " + configuration.values.listenIP + ":" + configuration.values.listenPort + " ...");
 
             while (!_stopServer)
             {

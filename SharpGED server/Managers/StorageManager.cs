@@ -20,7 +20,7 @@ namespace SharpGED_server
 
         public StorageManager(Socket handler)
         {
-            baseFolder = Properties.Settings.Default.BaseFolder;
+            baseFolder = Program.configuration.values.baseFolder;
             database = new DatabaseManager();
             client = handler;
         }
