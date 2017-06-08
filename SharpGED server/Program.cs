@@ -30,7 +30,11 @@ namespace SharpGED_server
             List<WorkerThread> workers = new List<WorkerThread>();
             long currentWorkerId = 0;
 
-            Console.WriteLine("*** SharpGED server " + "v" + System.Windows.Forms.Application.ProductVersion.Substring(0, System.Windows.Forms.Application.ProductVersion.Length - 2) + " ***");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("SharpGED server " + "v" + System.Windows.Forms.Application.ProductVersion.Substring(0, System.Windows.Forms.Application.ProductVersion.Length - 2) + "");
+            Console.ForegroundColor = ConsoleColor.White;
 
             IPAddress listenIpAddress = null;
             if (configuration.values.listenIP.Equals("localhost") || configuration.values.listenIP.Equals("127.0.0.1"))
