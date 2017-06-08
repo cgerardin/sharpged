@@ -6,17 +6,17 @@ namespace SharpGED_server
     class DatabaseManager
     {
         private string baseFolder;
-        private string database;
+        public string name { get; set; }
 
         public DatabaseManager()
         {
             baseFolder = Program.configuration.values.baseFolder;
-            database = Program.configuration.values.database;
+            name = Program.configuration.values.database;
         }
 
         public bool isInitialized()
         {
-            if (File.Exists(baseFolder + "database\\" + database + ".sqlite"))
+            if (File.Exists(baseFolder + "database\\" + name + ".sqlite"))
             {
                 try
                 {
@@ -40,21 +40,21 @@ namespace SharpGED_server
 
         public void Initialize()
         {
-            Initialize(database);
+            Initialize(name);
         }
 
         public void Initialize(string databaseName)
         {
             string sql;
-            database = databaseName;
+            name = databaseName;
 
             // Crée l'arborescence en la vidant de ses fichiers si elle existe déjà
-            if (Directory.Exists(baseFolder + "\\storage"))
+            if (Directory.Exists(baseFolder + "\\storage\\" + name))
             {
-                Directory.Delete(baseFolder + "\\storage", true);
+                Directory.Delete(baseFolder + "\\storage\\" + name, true);
             }
             Directory.CreateDirectory(baseFolder + "\\database");
-            Directory.CreateDirectory(baseFolder + "\\storage");
+            Directory.CreateDirectory(baseFolder + "\\storage\\" + name);
 
             // Crée la base si elle n'existe pas, la vide sinon
             string databaseFullPath = baseFolder + "database\\" + databaseName + ".sqlite";
@@ -68,7 +68,7 @@ namespace SharpGED_server
                 {
                     db.Open();
 
-                    sql = "DROP TABLE IF EXISTS 'files'; DROP TABLE IF EXISTS 'folders';";
+                    sql = "DROP TABLE IF EXISTS 'files'; DROP TABLE IF EXISTS 'folders'; DROP TABLE IF EXISTS 'types';";
                     new SQLiteCommand(sql, db).ExecuteNonQuery();
                 }
             }
@@ -121,7 +121,7 @@ namespace SharpGED_server
 
         public SQLiteConnection Connect()
         {
-            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + database + ".sqlite" + ";Version=3;");
+            return new SQLiteConnection("Data Source=" + baseFolder + "database\\" + name + ".sqlite" + ";Version=3;");
         }
 
     }

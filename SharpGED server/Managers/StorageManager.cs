@@ -20,8 +20,8 @@ namespace SharpGED_server
 
         public StorageManager(Socket handler)
         {
-            baseFolder = Program.configuration.values.baseFolder;
             database = new DatabaseManager();
+            baseFolder = Program.configuration.values.baseFolder + "storage\\" + database.name + "\\";
             client = handler;
         }
 
@@ -108,7 +108,7 @@ namespace SharpGED_server
             // Lit le fichier PDF et place son contenu dans un tableau
             byte[] fileBytes;
             int size;
-            using (FileStream inStream = File.OpenRead(baseFolder + "storage\\" + hash))
+            using (FileStream inStream = File.OpenRead(baseFolder + hash))
             {
                 size = (int)inStream.Length;
                 fileBytes = new byte[size];
@@ -157,17 +157,17 @@ namespace SharpGED_server
             }
 
             // Ecris le fichier PDF sur le disque
-            FileStream outStream = File.OpenWrite(baseFolder + "storage\\" + hash);
+            FileStream outStream = File.OpenWrite(baseFolder + hash);
             outStream.Write(file.bytes, 0, file.size);
             outStream.Close();
 
             if (file.type == GedFileType.PDF)
             {
                 // Récupère et met à jour les métadonnées du PDF
-                using (PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify))
+                using (PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify))
                 {
                     pdf.Info.Title = file.title;
-                    pdf.Save(baseFolder + "storage\\" + hash);
+                    pdf.Save(baseFolder + hash);
                 }
             }
 
@@ -197,7 +197,7 @@ namespace SharpGED_server
             }
 
             // Supprime le fichier du disque
-            File.Delete(baseFolder + "storage\\" + hash);
+            File.Delete(baseFolder + hash);
 
             // Envoie la confirmation
             client.Send(Encoding.Unicode.GetBytes("OK"));
@@ -213,9 +213,9 @@ namespace SharpGED_server
             }
 
             // Met à jour les métadonnées du PDF
-            PdfDocument pdf = PdfReader.Open(baseFolder + "storage\\" + hash, PdfDocumentOpenMode.Modify);
+            PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify);
             pdf.Info.Title = title;
-            pdf.Save(baseFolder + "storage\\" + hash);
+            pdf.Save(baseFolder + hash);
             pdf.Close();
         }
 

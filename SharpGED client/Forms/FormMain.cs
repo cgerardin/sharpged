@@ -38,7 +38,7 @@ namespace SharpGED_client
                 {
                     formInput inputDialog = new formInput();
                     inputDialog.title = "Entrez le nom souhaité pour la base";
-                    inputDialog.value = "default";
+                    inputDialog.value = "Base par défaut";
 
                     if (inputDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -476,11 +476,11 @@ namespace SharpGED_client
 
         private void toolButtonInitDatabase_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Etes-vous sûr(e) de vouloir réinitialiser la base de données ? L'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show("Etes-vous sûr(e) de vouloir (ré-)initialiser la base de données ? Si cette dernière existe déjà, l'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour la base";
-                inputDialog.value = "default";
+                inputDialog.value = "Base par défaut";
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {

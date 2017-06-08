@@ -29,58 +29,58 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formLogin));
-            this.ButtonConnect = new System.Windows.Forms.Button();
-            this.TextBoxServer = new System.Windows.Forms.TextBox();
-            this.TextBoxUser = new System.Windows.Forms.TextBox();
-            this.TextBoxPassword = new System.Windows.Forms.TextBox();
+            this.buttonConnect = new System.Windows.Forms.Button();
+            this.textBoxServer = new System.Windows.Forms.TextBox();
+            this.textBoxUser = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.TextBoxPort = new System.Windows.Forms.TextBox();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // ButtonConnect
+            // buttonConnect
             // 
-            this.ButtonConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ButtonConnect.Location = new System.Drawing.Point(181, 201);
-            this.ButtonConnect.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.ButtonConnect.Name = "ButtonConnect";
-            this.ButtonConnect.Size = new System.Drawing.Size(85, 28);
-            this.ButtonConnect.TabIndex = 5;
-            this.ButtonConnect.Text = "Connexion";
-            this.ButtonConnect.UseVisualStyleBackColor = true;
-            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
+            this.buttonConnect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonConnect.Location = new System.Drawing.Point(181, 196);
+            this.buttonConnect.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(85, 28);
+            this.buttonConnect.TabIndex = 6;
+            this.buttonConnect.Text = "Connexion";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
-            // TextBoxServer
+            // textBoxServer
             // 
-            this.TextBoxServer.Location = new System.Drawing.Point(87, 90);
-            this.TextBoxServer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TextBoxServer.Name = "TextBoxServer";
-            this.TextBoxServer.Size = new System.Drawing.Size(138, 20);
-            this.TextBoxServer.TabIndex = 1;
-            this.TextBoxServer.Text = "localhost";
+            this.textBoxServer.Location = new System.Drawing.Point(87, 90);
+            this.textBoxServer.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxServer.Name = "textBoxServer";
+            this.textBoxServer.Size = new System.Drawing.Size(138, 20);
+            this.textBoxServer.TabIndex = 1;
+            this.textBoxServer.Text = "localhost";
             // 
-            // TextBoxUser
+            // textBoxUser
             // 
-            this.TextBoxUser.Enabled = false;
-            this.TextBoxUser.Location = new System.Drawing.Point(87, 134);
-            this.TextBoxUser.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TextBoxUser.Name = "TextBoxUser";
-            this.TextBoxUser.Size = new System.Drawing.Size(179, 20);
-            this.TextBoxUser.TabIndex = 3;
-            this.TextBoxUser.Text = "root";
+            this.textBoxUser.Enabled = false;
+            this.textBoxUser.Location = new System.Drawing.Point(87, 129);
+            this.textBoxUser.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxUser.Name = "textBoxUser";
+            this.textBoxUser.Size = new System.Drawing.Size(179, 20);
+            this.textBoxUser.TabIndex = 4;
+            this.textBoxUser.Text = "root";
             // 
-            // TextBoxPassword
+            // textBoxPassword
             // 
-            this.TextBoxPassword.Enabled = false;
-            this.TextBoxPassword.Location = new System.Drawing.Point(87, 164);
-            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TextBoxPassword.Name = "TextBoxPassword";
-            this.TextBoxPassword.PasswordChar = '●';
-            this.TextBoxPassword.Size = new System.Drawing.Size(179, 20);
-            this.TextBoxPassword.TabIndex = 4;
+            this.textBoxPassword.Enabled = false;
+            this.textBoxPassword.Location = new System.Drawing.Point(87, 159);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '●';
+            this.textBoxPassword.Size = new System.Drawing.Size(179, 20);
+            this.textBoxPassword.TabIndex = 5;
             // 
             // label1
             // 
@@ -96,7 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 137);
+            this.label2.Location = new System.Drawing.Point(11, 132);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
@@ -106,22 +106,22 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 167);
+            this.label3.Location = new System.Drawing.Point(11, 162);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Mot de passe";
             // 
-            // TextBoxPort
+            // textBoxPort
             // 
-            this.TextBoxPort.Location = new System.Drawing.Point(228, 90);
-            this.TextBoxPort.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.TextBoxPort.Name = "TextBoxPort";
-            this.TextBoxPort.Size = new System.Drawing.Size(38, 20);
-            this.TextBoxPort.TabIndex = 2;
-            this.TextBoxPort.Text = "9090";
-            this.TextBoxPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxPort.Location = new System.Drawing.Point(228, 90);
+            this.textBoxPort.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.Size = new System.Drawing.Size(38, 20);
+            this.textBoxPort.TabIndex = 2;
+            this.textBoxPort.Text = "9090";
+            this.textBoxPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pictureBox1
             // 
@@ -136,19 +136,19 @@
             // 
             // formLogin
             // 
-            this.AcceptButton = this.ButtonConnect;
+            this.AcceptButton = this.buttonConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 236);
+            this.ClientSize = new System.Drawing.Size(273, 232);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.TextBoxPort);
+            this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.TextBoxPassword);
-            this.Controls.Add(this.TextBoxUser);
-            this.Controls.Add(this.TextBoxServer);
-            this.Controls.Add(this.ButtonConnect);
+            this.Controls.Add(this.textBoxPassword);
+            this.Controls.Add(this.textBoxUser);
+            this.Controls.Add(this.textBoxServer);
+            this.Controls.Add(this.buttonConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -167,14 +167,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button ButtonConnect;
-        private System.Windows.Forms.TextBox TextBoxServer;
-        private System.Windows.Forms.TextBox TextBoxUser;
-        private System.Windows.Forms.TextBox TextBoxPassword;
+        private System.Windows.Forms.Button buttonConnect;
+        private System.Windows.Forms.TextBox textBoxServer;
+        private System.Windows.Forms.TextBox textBoxUser;
+        private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox TextBoxPort;
+        private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
