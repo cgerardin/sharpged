@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,12 +135,23 @@
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
+            // labelVersion
+            // 
+            this.labelVersion.AutoSize = true;
+            this.labelVersion.ForeColor = System.Drawing.Color.Gray;
+            this.labelVersion.Location = new System.Drawing.Point(11, 211);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(37, 13);
+            this.labelVersion.TabIndex = 21;
+            this.labelVersion.Text = "v0.0.0";
+            // 
             // formLogin
             // 
             this.AcceptButton = this.buttonConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(273, 232);
+            this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBoxPort);
             this.Controls.Add(this.label3);
@@ -176,5 +188,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelVersion;
     }
 }

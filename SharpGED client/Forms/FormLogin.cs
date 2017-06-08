@@ -56,6 +56,7 @@ namespace SharpGED_client
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            labelVersion.Text = "v" + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2);
             textBoxServer.Text = Properties.Settings.Default.ServerIP;
             textBoxPort.Text = Properties.Settings.Default.ServerPort.ToString();
             textBoxUser.Text = Properties.Settings.Default.User;

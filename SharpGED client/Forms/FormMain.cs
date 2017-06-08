@@ -476,7 +476,7 @@ namespace SharpGED_client
 
         private void toolButtonInitDatabase_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Etes-vous sûr(e) de vouloir (ré-)initialiser la base de données ? Si cette dernière existe déjà, l'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show("Etes-vous sûr(e) de vouloir (ré-)initialiser la base de données ?\nSi cette dernière existe déjà, l'ensemble des documents sera supprimé du serveur.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour la base";
