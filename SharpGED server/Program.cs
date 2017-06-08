@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace SharpGED_server
 {
@@ -12,16 +13,20 @@ namespace SharpGED_server
         public static volatile bool _stopServer = false;
         public static ConfigurationManager configuration { get; set; }
 
+        [STAThread]
         static void Main(string[] args)
         {
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             configuration = new ConfigurationManager();
             configuration.Load();
 
-            if(!configuration.exist)
+            if (!configuration.exist)
             {
                 FormConfiguration formConf = new FormConfiguration();
-                if (formConf.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                if (formConf.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
@@ -33,7 +38,7 @@ namespace SharpGED_server
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("SharpGED server " + "v" + System.Windows.Forms.Application.ProductVersion.Substring(0, System.Windows.Forms.Application.ProductVersion.Length - 2) + "");
+            Console.WriteLine("SharpGED server " + "v" + Application.ProductVersion.Substring(0, Application.ProductVersion.Length - 2) + "");
             Console.ForegroundColor = ConsoleColor.White;
 
             IPAddress listenIpAddress = null;

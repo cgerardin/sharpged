@@ -9,11 +9,22 @@ namespace SharpGED_server
         public FormConfiguration()
         {
             InitializeComponent();
+        }
 
+        private void FormConfiguration_Load(object sender, EventArgs e)
+        {
             textBoxHost.Text = Program.configuration.values.listenIP;
             textBoxPort.Text = Program.configuration.values.listenPort.ToString();
             textBoxFolder.Text = Program.configuration.values.baseFolder;
             textBoxDatabase.Text = Program.configuration.values.database;
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxFolder.Text = folderBrowserDialog.SelectedPath + "\\";
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -26,11 +37,6 @@ namespace SharpGED_server
 
             DialogResult = DialogResult.OK;
             Close();
-        }
-
-        private void FormConfiguration_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

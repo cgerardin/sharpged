@@ -163,12 +163,13 @@
             this.buttonBrowse.TabIndex = 29;
             this.buttonBrowse.Text = "...";
             this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 256);
+            this.ClientSize = new System.Drawing.Size(469, 251);
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
