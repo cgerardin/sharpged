@@ -683,7 +683,11 @@ namespace SharpGED_client
             {
                 sourceFolder = (GedFolder)e.Data.GetData(typeof(GedFolder));
 
-                Program.ServerMoveFolder(sourceFolder, targetFolder);
+                // Interdis de déplacer un dossier racine, de déplacer un dossier sur lui-même, ou de déplacer un parent sur son enfant
+                if (sourceFolder.idParent != null && sourceFolder.id != targetFolder.id && sourceFolder.id != long.Parse(targetFolder.idParent.ToString()))
+                {
+                    Program.ServerMoveFolder(sourceFolder, targetFolder);
+                }
             }
 
             RefreshFilesList();

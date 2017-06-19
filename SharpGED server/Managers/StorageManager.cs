@@ -28,14 +28,25 @@ namespace SharpGED_server
         public void ListFolders(string filter = "")
         {
             // Crée une GedList des dossiers
+            GedList<GedFolder> foldersList = FillFolder(null, filter);
+
+            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
+            TransfertManager.Send(foldersList.Save(), client);
+        }
+
+        private GedList<GedFolder> FillFolder(GedFolder folder, string filter = "")
+        {
+            // Crée une GedList de dossiers
             GedList<GedFolder> foldersList = new GedList<GedFolder>();
 
             using (SQLiteConnection db = database.Connect())
             {
                 db.Open();
 
-                // Très important de sélectionner par ordre d'ID, sinon certains parents pourraient être ajoutés après leur enfant
-                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM folders ORDER BY idFolder ASC;", db).ExecuteReader())
+                string where = "idParentFolder IS NULL";
+                if (folder != null) where = "idParentFolder=" + folder.id;
+
+                using (SQLiteDataReader rs = new SQLiteCommand("SELECT * FROM folders WHERE " + where + ";", db).ExecuteReader())
                 {
                     GedFolder currentFolder;
                     while (rs.Read())
@@ -48,23 +59,19 @@ namespace SharpGED_server
                         if (rs["idParentFolder"].ToString().Equals(""))
                         {
                             currentFolder.idParent = null;
-                            foldersList.Add(currentFolder);
                         }
                         else
                         {
                             currentFolder.idParent = rs["idParentFolder"];
-                            foreach (GedFolder existingFolder in foldersList)
-                            {
-                                GedFolder.AddChild(existingFolder, currentFolder);
-                            }
                         }
+                        currentFolder.folders = FillFolder(currentFolder, filter);
 
+                        foldersList.Add(currentFolder);
                     }
                 }
             }
 
-            // Sérialise l'objet et envoie sa taille puis l'objet lui-même
-            TransfertManager.Send(foldersList.Save(), client);
+            return foldersList;
         }
 
         public GedList<GedFile> ListFiles(long folderId, string filter = "")
