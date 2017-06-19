@@ -630,6 +630,17 @@ namespace SharpGED_client
             }
         }
 
+        private void treeViewCategories_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            if (treeViewCategories.SelectedNode != null)
+            {
+                DataObject data = new DataObject();
+                data.SetData(typeof(GedFolder), (GedFolder)treeViewCategories.SelectedNode.Tag);
+
+                listViewFiles.DoDragDrop(data, DragDropEffects.Move);
+            }
+        }
+
         private void listViewFiles_ItemDrag(object sender, ItemDragEventArgs e)
         {
             DataObject data = new DataObject();
@@ -670,16 +681,7 @@ namespace SharpGED_client
 
             EmptyViewers();
 
-            if (e.Data.GetDataPresent(typeof(GedList<GedFile>)))
-            {
-                sourceFolder = (GedFolder)treeViewCategories.SelectedNode.Tag;
-
-                foreach (GedFile currentGedFile in (GedList<GedFile>)e.Data.GetData(typeof(GedList<GedFile>)))
-                {
-                    Program.ServerMoveFile(currentGedFile, targetFolder);
-                }
-            }
-            else if (e.Data.GetDataPresent(typeof(GedFolder)))
+            if (e.Data.GetDataPresent(typeof(GedFolder)))
             {
                 sourceFolder = (GedFolder)e.Data.GetData(typeof(GedFolder));
 
@@ -689,21 +691,20 @@ namespace SharpGED_client
                     Program.ServerMoveFolder(sourceFolder, targetFolder);
                 }
             }
+            else if (e.Data.GetDataPresent(typeof(GedList<GedFile>)))
+            {
+                sourceFolder = (GedFolder)treeViewCategories.SelectedNode.Tag;
+
+                foreach (GedFile currentGedFile in (GedList<GedFile>)e.Data.GetData(typeof(GedList<GedFile>)))
+                {
+                    Program.ServerMoveFile(currentGedFile, targetFolder);
+                }
+            }
 
             RefreshFilesList();
             treeViewCategories.SelectedNode = targetNode;
             treeViewCategories.Select();
         }
 
-        private void treeViewCategories_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            if (treeViewCategories.SelectedNode != null)
-            {
-                DataObject data = new DataObject();
-                data.SetData(typeof(GedFolder), (GedFolder)treeViewCategories.SelectedNode.Tag);
-
-                listViewFiles.DoDragDrop(data, DragDropEffects.Move);
-            }
-        }
     }
 }
