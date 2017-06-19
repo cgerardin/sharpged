@@ -176,6 +176,14 @@ namespace SharpGED_client
             ServerSend("RENFILE " + file.hash + ";" + title);
         }
 
+        public static void ServerMoveFile(GedFile file, GedFolder folder)
+        {
+            // Déplace le fichier passé en argument
+            ServerSend("MOVFILE " + file.hash + ";" + folder.id);
+
+            ServerWaitFor();
+        }
+
         public static void ServerCreateFolder(GedFolder folder)
         {
             // Demande la création d'un dossier

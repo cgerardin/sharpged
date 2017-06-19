@@ -630,5 +630,55 @@ namespace SharpGED_client
             }
         }
 
+        private void listViewFiles_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            DataObject data = new DataObject();
+            GedList<GedFile> moveableGedList = new GedList<GedFile>();
+
+            foreach (ListViewItem currentGedFile in listViewFiles.SelectedItems)
+            {
+                moveableGedList.Add((GedFile)currentGedFile.Tag);
+            }
+            data.SetData("(GedList<GedFile>", moveableGedList);
+
+            listViewFiles.DoDragDrop(data, DragDropEffects.Move);
+        }
+
+        private void treeViewCategories_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("(GedList<GedFile>"))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void treeViewCategories_DragOver(object sender, DragEventArgs e)
+        {
+            treeViewCategories.SelectedNode = treeViewCategories.GetNodeAt(treeViewCategories.PointToClient(new Point(e.X, e.Y)));
+        }
+
+        private void treeViewCategories_DragDrop(object sender, DragEventArgs e)
+        {
+            GedFolder sourceFolder = (GedFolder)treeViewCategories.SelectedNode.Tag;
+            TreeNode targetNode = treeViewCategories.GetNodeAt(treeViewCategories.PointToClient(new Point(e.X, e.Y)));
+            GedFolder targetFolder = (GedFolder)targetNode.Tag;
+
+            EmptyViewers();
+
+            foreach (GedFile currentGedFile in (GedList<GedFile>)e.Data.GetData("(GedList<GedFile>"))
+            {
+                Program.ServerMoveFile(currentGedFile, targetFolder);
+                sourceFolder.files.Remove(currentGedFile);
+                targetFolder.files.Add(currentGedFile);
+            }
+            RefreshFilesList();
+            treeViewCategories.SelectedNode = targetNode;
+            treeViewCategories.Select();
+        }
+
     }
 }

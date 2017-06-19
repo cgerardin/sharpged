@@ -59,6 +59,7 @@
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.listViewFiles = new System.Windows.Forms.ListView();
+            this.imageListListView = new System.Windows.Forms.ImageList(this.components);
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,7 +74,6 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.imageListListView = new System.Windows.Forms.ImageList(this.components);
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -388,6 +388,7 @@
             // 
             // treeViewCategories
             // 
+            this.treeViewCategories.AllowDrop = true;
             this.treeViewCategories.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -406,6 +407,9 @@
             this.treeViewCategories.TabIndex = 1;
             this.treeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewCategories_AfterSelect);
             this.treeViewCategories.Click += new System.EventHandler(this.treeViewCategories_Click);
+            this.treeViewCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewCategories_DragDrop);
+            this.treeViewCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeViewCategories_DragEnter);
+            this.treeViewCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.treeViewCategories_DragOver);
             this.treeViewCategories.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewCategories_KeyDown);
             // 
             // imageListTreeView
@@ -436,13 +440,23 @@
             this.listViewFiles.HideSelection = false;
             this.listViewFiles.Location = new System.Drawing.Point(0, 27);
             this.listViewFiles.Name = "listViewFiles";
-            this.listViewFiles.Size = new System.Drawing.Size(369, 702);
+            this.listViewFiles.Size = new System.Drawing.Size(370, 702);
             this.listViewFiles.SmallImageList = this.imageListListView;
             this.listViewFiles.TabIndex = 2;
             this.listViewFiles.UseCompatibleStateImageBehavior = false;
             this.listViewFiles.View = System.Windows.Forms.View.List;
+            this.listViewFiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewFiles_ItemDrag);
             this.listViewFiles.SelectedIndexChanged += new System.EventHandler(this.listViewFiles_SelectedIndexChanged);
             this.listViewFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewFiles_KeyDown);
+            // 
+            // imageListListView
+            // 
+            this.imageListListView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListListView.ImageStream")));
+            this.imageListListView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListListView.Images.SetKeyName(0, "File_Default_Small.png");
+            this.imageListListView.Images.SetKeyName(1, "File_PDF_Small.png");
+            this.imageListListView.Images.SetKeyName(2, "File_Image_Small.png");
+            this.imageListListView.Images.SetKeyName(3, "File_Office_Small.png");
             // 
             // groupBoxProperties
             // 
@@ -458,7 +472,7 @@
             this.groupBoxProperties.Controls.Add(this.labelOriginalName);
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 732);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(366, 150);
+            this.groupBoxProperties.Size = new System.Drawing.Size(367, 150);
             this.groupBoxProperties.TabIndex = 21;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Propriétés du document";
@@ -545,7 +559,7 @@
             this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(384, 445);
+            this.officeViewer.Size = new System.Drawing.Size(379, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -557,7 +571,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(872, 855);
+            this.imageViewer.Size = new System.Drawing.Size(867, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -572,7 +586,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(872, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(867, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -588,15 +602,6 @@
             this.imageListToolbar.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
-            // 
-            // imageListListView
-            // 
-            this.imageListListView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListListView.ImageStream")));
-            this.imageListListView.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListListView.Images.SetKeyName(0, "File_Default_Small.png");
-            this.imageListListView.Images.SetKeyName(1, "File_PDF_Small.png");
-            this.imageListListView.Images.SetKeyName(2, "File_Image_Small.png");
-            this.imageListListView.Images.SetKeyName(3, "File_Office_Small.png");
             // 
             // formMain
             // 

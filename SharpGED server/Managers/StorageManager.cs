@@ -219,6 +219,20 @@ namespace SharpGED_server
             pdf.Close();
         }
 
+        public void MoveFile(string hash, long id)
+        {
+            // Change le dossier du fichier en base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                new SQLiteCommand("UPDATE files SET idFolder=" + id + " WHERE hash='" + hash + "';", db).ExecuteNonQuery();
+            }
+
+            // Envoie la confirmation
+            client.Send(Encoding.Unicode.GetBytes("OK"));
+        }
+
         public void CreateFolder()
         {
             // Récupère l'objet et le dé-sérialise
@@ -266,5 +280,6 @@ namespace SharpGED_server
                 new SQLiteCommand("UPDATE folders SET title='" + title.Replace("'", "''") + "' WHERE idFolder=" + id + ";", db).ExecuteNonQuery();
             }
         }
+
     }
 }
