@@ -46,7 +46,7 @@ namespace SharpGED_client
                     }
                 }
             }
-            listBoxFiles_SelectedIndexChanged(null, null);
+            listViewFiles_SelectedIndexChanged(null, null);
 
             treeViewCategories.Font = new Font(treeViewCategories.Font, FontStyle.Bold); // Contournement d'un bug de Windows
         }
@@ -80,7 +80,7 @@ namespace SharpGED_client
             Cursor = Cursors.WaitCursor;
 
             EmptyViewers();
-            listBoxFiles.Items.Clear();
+            listViewFiles.Items.Clear();
             treeViewCategories.Nodes.Clear();
 
             foreach (GedFolder currentGedFolder in Program.ServerListFolders(filter))
@@ -294,14 +294,14 @@ namespace SharpGED_client
 
         private void toolButtonFileDelete_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItems != null)
+            if (listViewFiles.SelectedItems.Count > 0)
             {
                 if (MessageBox.Show("Etes-vous sûr(e) de vouloir supprimer les documents sélectionnés ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     EmptyViewers();
-                    foreach (GedFile currentGedFile in listBoxFiles.SelectedItems)
+                    foreach (ListViewItem currentGedFile in listViewFiles.SelectedItems)
                     {
-                        Program.ServerDeleteFile(currentGedFile);
+                        Program.ServerDeleteFile((GedFile)currentGedFile.Tag);
                     }
                     RefreshFilesList();
                 }
@@ -310,15 +310,15 @@ namespace SharpGED_client
 
         private void toolButtonFileRename_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItem != null)
+            if (listViewFiles.SelectedItems.Count > 0)
             {
                 formInput inputDialog = new formInput();
                 inputDialog.title = "Entrez le nom souhaité pour le document";
-                inputDialog.value = ((GedFile)listBoxFiles.SelectedItem).title;
+                inputDialog.value = ((GedFile)listViewFiles.SelectedItems[0].Tag).title;
 
                 if (inputDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Program.ServerRenameFile(((GedFile)listBoxFiles.SelectedItem), inputDialog.value);
+                    Program.ServerRenameFile(((GedFile)listViewFiles.SelectedItems[0].Tag), inputDialog.value);
                     RefreshFilesList();
                 }
             }
@@ -430,7 +430,7 @@ namespace SharpGED_client
 
         private void toolButtonPrint_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItem != null)
+            if (listViewFiles.SelectedItems.Count > 0)
             {
 
                 printPdf = pdfViewer.Document.CreatePrintDocument();
@@ -451,15 +451,15 @@ namespace SharpGED_client
 
         private void toolButtonFileExtract_Click(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItems != null)
+            if (listViewFiles.SelectedItems != null)
             {
                 if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     string currentFilename;
-                    foreach (GedFile currentGedFile in listBoxFiles.SelectedItems)
+                    foreach (ListViewItem currentGedFile in listViewFiles.SelectedItems)
                     {
-                        FillViewer(currentGedFile);
-                        currentFilename = currentGedFile.title + "_" + DateTime.Now.ToFileTime() + currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
+                        FillViewer((GedFile)currentGedFile.Tag);
+                        currentFilename = ((GedFile)currentGedFile.Tag).title + "_" + DateTime.Now.ToFileTime() + currentDocumentUri.Substring(currentDocumentUri.LastIndexOf("."));
                         File.Copy(currentDocumentUri, folderBrowserDialog.SelectedPath + "\\" + currentFilename);
                     }
                     EmptyViewers();
@@ -511,20 +511,25 @@ namespace SharpGED_client
             Cursor = Cursors.WaitCursor;
 
             lastClickedHash = "";
-            listBoxFiles.SelectedItem = null;
-            listBoxFiles.Items.Clear();
+            listViewFiles.SelectedItems.Clear();
+            listViewFiles.Items.Clear();
+            ListViewItem currentItem;
             foreach (GedFile currentGedFile in ((GedFolder)treeViewCategories.SelectedNode.Tag).files)
             {
-                listBoxFiles.Items.Add(currentGedFile);
+                currentItem = new ListViewItem();
+                currentItem.Text = currentGedFile.title;
+                currentItem.Tag = currentGedFile;
+                currentItem.ImageIndex = (int)currentGedFile.type;
+                listViewFiles.Items.Add(currentItem);
             }
             lastClickedNode = treeViewCategories.SelectedNode.Name;
 
             Cursor = Cursors.Default;
         }
 
-        private void listBoxFiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxFiles.SelectedItems.Count == 0)
+            if (listViewFiles.SelectedItems.Count == 0)
             {
                 toolButtonFileEdit.Enabled = false;
                 toolButtonFileRename.Enabled = false;
@@ -533,9 +538,9 @@ namespace SharpGED_client
                 toolButtonFileExtract.Enabled = false;
                 EmptyViewers();
             }
-            else if (listBoxFiles.SelectedItems.Count == 1)
+            else if (listViewFiles.SelectedItems.Count == 1)
             {
-                if (((GedFile)listBoxFiles.SelectedItem).type == GedFileType.PDF)
+                if (((GedFile)listViewFiles.SelectedItems[0].Tag).type == GedFileType.PDF)
                 {
                     toolButtonFileEdit.Enabled = true;
                     toolButtonPrint.Enabled = true;
@@ -549,7 +554,7 @@ namespace SharpGED_client
                 toolButtonFileDelete.Enabled = true;
                 toolButtonFileExtract.Enabled = true;
 
-                FillViewer((GedFile)listBoxFiles.SelectedItem);
+                FillViewer((GedFile)listViewFiles.SelectedItems[0].Tag);
             }
             else
             {
@@ -587,20 +592,21 @@ namespace SharpGED_client
             }
         }
 
-        private void listBoxFiles_KeyDown(object sender, KeyEventArgs e)
+        private void listViewFiles_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.A:
                     if (e.Control)
                     {
-                        listBoxFiles.Visible = false;
-                        for (int i = 0; i < listBoxFiles.Items.Count; i++)
+                        listViewFiles.Visible = false;
+                        for (int i = 0; i < listViewFiles.Items.Count; i++)
                         {
-                            listBoxFiles.SetSelected(i, true);
+                            listViewFiles.Items[i].Selected = true;
                         }
-                        listBoxFiles.Visible = true;
+                        listViewFiles.Visible = true;
                     }
+                    listViewFiles.Select();
                     break;
 
                 case Keys.N:

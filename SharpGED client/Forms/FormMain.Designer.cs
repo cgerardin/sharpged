@@ -58,13 +58,13 @@
             this.treeViewCategories = new System.Windows.Forms.TreeView();
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.listViewFiles = new System.Windows.Forms.ListView();
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.labelFileType = new System.Windows.Forms.Label();
             this.labelOriginalName = new System.Windows.Forms.Label();
-            this.listBoxFiles = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.officeViewer = new SharpGED_controls.OfficeViewer();
             this.imageViewer = new System.Windows.Forms.PictureBox();
@@ -73,6 +73,7 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.imageListListView = new System.Windows.Forms.ImageList(this.components);
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -86,7 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageViewer)).BeginInit();
             this.SuspendLayout();
             // 
-            // LabelPdfName
+            // labelPdfName
             // 
             this.labelPdfName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -94,7 +95,7 @@
             this.labelPdfName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPdfName.Location = new System.Drawing.Point(6, 26);
             this.labelPdfName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.labelPdfName.Name = "LabelPdfName";
+            this.labelPdfName.Name = "labelPdfName";
             this.labelPdfName.Size = new System.Drawing.Size(110, 13);
             this.labelPdfName.TabIndex = 18;
             this.labelPdfName.Text = "Titre du document";
@@ -376,8 +377,8 @@
             // 
             // ChildSplitContainer.Panel2
             // 
+            this.ChildSplitContainer.Panel2.Controls.Add(this.listViewFiles);
             this.ChildSplitContainer.Panel2.Controls.Add(this.groupBoxProperties);
-            this.ChildSplitContainer.Panel2.Controls.Add(this.listBoxFiles);
             this.ChildSplitContainer.Panel2.Controls.Add(this.label1);
             this.ChildSplitContainer.Size = new System.Drawing.Size(662, 886);
             this.ChildSplitContainer.SplitterDistance = 283;
@@ -426,6 +427,23 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Dossiers";
             // 
+            // listViewFiles
+            // 
+            this.listViewFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewFiles.HideSelection = false;
+            this.listViewFiles.Location = new System.Drawing.Point(0, 27);
+            this.listViewFiles.Name = "listViewFiles";
+            this.listViewFiles.Size = new System.Drawing.Size(369, 702);
+            this.listViewFiles.SmallImageList = this.imageListListView;
+            this.listViewFiles.TabIndex = 2;
+            this.listViewFiles.UseCompatibleStateImageBehavior = false;
+            this.listViewFiles.View = System.Windows.Forms.View.List;
+            this.listViewFiles.SelectedIndexChanged += new System.EventHandler(this.listViewFiles_SelectedIndexChanged);
+            this.listViewFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewFiles_KeyDown);
+            // 
             // groupBoxProperties
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -440,7 +458,7 @@
             this.groupBoxProperties.Controls.Add(this.labelOriginalName);
             this.groupBoxProperties.Location = new System.Drawing.Point(0, 732);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(364, 150);
+            this.groupBoxProperties.Size = new System.Drawing.Size(366, 150);
             this.groupBoxProperties.TabIndex = 21;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Propriétés du document";
@@ -508,25 +526,6 @@
             this.labelOriginalName.TabIndex = 19;
             this.labelOriginalName.Text = "fichier.ext";
             // 
-            // listBoxFiles
-            // 
-            this.listBoxFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxFiles.DisplayMember = "title";
-            this.listBoxFiles.FormattingEnabled = true;
-            this.listBoxFiles.Location = new System.Drawing.Point(0, 27);
-            this.listBoxFiles.Margin = new System.Windows.Forms.Padding(0);
-            this.listBoxFiles.Name = "listBoxFiles";
-            this.listBoxFiles.ScrollAlwaysVisible = true;
-            this.listBoxFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.listBoxFiles.Size = new System.Drawing.Size(367, 702);
-            this.listBoxFiles.TabIndex = 2;
-            this.listBoxFiles.ValueMember = "hash";
-            this.listBoxFiles.SelectedIndexChanged += new System.EventHandler(this.listBoxFiles_SelectedIndexChanged);
-            this.listBoxFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFiles_KeyDown);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -546,7 +545,7 @@
             this.officeViewer.AutoSize = true;
             this.officeViewer.Location = new System.Drawing.Point(0, 27);
             this.officeViewer.Name = "officeViewer";
-            this.officeViewer.Size = new System.Drawing.Size(394, 445);
+            this.officeViewer.Size = new System.Drawing.Size(384, 445);
             this.officeViewer.TabIndex = 20;
             this.officeViewer.URI = null;
             // 
@@ -558,7 +557,7 @@
             this.imageViewer.Location = new System.Drawing.Point(0, 27);
             this.imageViewer.Margin = new System.Windows.Forms.Padding(0);
             this.imageViewer.Name = "imageViewer";
-            this.imageViewer.Size = new System.Drawing.Size(882, 855);
+            this.imageViewer.Size = new System.Drawing.Size(872, 855);
             this.imageViewer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imageViewer.TabIndex = 19;
             this.imageViewer.TabStop = false;
@@ -573,7 +572,7 @@
             this.pdfViewer.Name = "pdfViewer";
             this.pdfViewer.Page = 0;
             this.pdfViewer.Rotation = PdfiumViewer.PdfRotation.Rotate0;
-            this.pdfViewer.Size = new System.Drawing.Size(882, 855);
+            this.pdfViewer.Size = new System.Drawing.Size(872, 855);
             this.pdfViewer.TabIndex = 3;
             this.pdfViewer.Visible = false;
             this.pdfViewer.ZoomMode = PdfiumViewer.PdfViewerZoomMode.FitWidth;
@@ -589,6 +588,15 @@
             this.imageListToolbar.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
+            // 
+            // imageListListView
+            // 
+            this.imageListListView.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListListView.ImageStream")));
+            this.imageListListView.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListListView.Images.SetKeyName(0, "File_Default_Small.png");
+            this.imageListListView.Images.SetKeyName(1, "File_PDF_Small.png");
+            this.imageListListView.Images.SetKeyName(2, "File_Image_Small.png");
+            this.imageListListView.Images.SetKeyName(3, "File_Office_Small.png");
             // 
             // formMain
             // 
@@ -637,7 +645,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.SplitContainer MainSplitContainer;
-        private System.Windows.Forms.ListBox listBoxFiles;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.SplitContainer ChildSplitContainer;
         private System.Windows.Forms.Label label2;
@@ -668,6 +675,8 @@
         private System.Windows.Forms.ToolStripButton toolButtonFileExtract;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListView listViewFiles;
+        private System.Windows.Forms.ImageList imageListListView;
     }
 }
 
