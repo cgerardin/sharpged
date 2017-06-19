@@ -29,6 +29,7 @@ Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et
 ### Implémentées ###
 
 * Arborescence de dossiers illimitée
+* Déplacement de dossier et de fichiers par glisser-déposer
 * Import de documents PDF, PNG, JPEG et DOCX.
 * Conversion en PDF
 * Edition basique de PDF (ordre et suppression de pages)
