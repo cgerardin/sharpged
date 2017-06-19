@@ -82,31 +82,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D46063D53F57453301DBFDF554FF4108"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9FB482ED06E66FD1FC7A8E9D4889B2D9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E9DA537DEE6D5FF125A46AFD954E6EB2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_77FF1D4E39F5963CA08A3C0A5908448B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_07C1E1B2AF268FE8905215BB67BEAD14"
+        "OwnerKey" = "8:_0892066A731B5F1EC17E66C6EEE02AD9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,7 +94,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0892066A731B5F1EC17E66C6EEE02AD9"
+        "OwnerKey" = "8:_07C1E1B2AF268FE8905215BB67BEAD14"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_77FF1D4E39F5963CA08A3C0A5908448B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E9DA537DEE6D5FF125A46AFD954E6EB2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9FB482ED06E66FD1FC7A8E9D4889B2D9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D46063D53F57453301DBFDF554FF4108"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -223,11 +223,6 @@
             "AssemblyAsmDisplayName" = "8:PdfSharp, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_07C1E1B2AF268FE8905215BB67BEAD14"
-                    {
-                    "Name" = "8:PdfSharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:PdfSharp.dll"
             "TargetName" = "8:"
@@ -254,11 +249,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_0892066A731B5F1EC17E66C6EEE02AD9"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -305,11 +295,6 @@
             "AssemblyAsmDisplayName" = "8:PdfSharp.Charting, Version=1.50.4000.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_77FF1D4E39F5963CA08A3C0A5908448B"
-                    {
-                    "Name" = "8:PdfSharp.Charting.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:PdfSharp.Charting.dll"
             "TargetName" = "8:"
@@ -336,11 +321,6 @@
             "AssemblyAsmDisplayName" = "8:SharpGED controls, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9FB482ED06E66FD1FC7A8E9D4889B2D9"
-                    {
-                    "Name" = "8:SharpGED controls.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpGED controls.dll"
             "TargetName" = "8:"
@@ -367,11 +347,6 @@
             "AssemblyAsmDisplayName" = "8:SharpGED lib, Version=1.1.3.0, Culture=neutral, processorArchitecture=AMD64"
                 "ScatterAssemblies"
                 {
-                    "_D46063D53F57453301DBFDF554FF4108"
-                    {
-                    "Name" = "8:SharpGED lib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:SharpGED lib.dll"
             "TargetName" = "8:"
@@ -398,11 +373,6 @@
             "AssemblyAsmDisplayName" = "8:Saraff.Twain, Version=1.0.24.579, Culture=neutral, PublicKeyToken=467d7c56f22cafb6, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E9DA537DEE6D5FF125A46AFD954E6EB2"
-                    {
-                    "Name" = "8:Saraff.Twain.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Saraff.Twain.dll"
             "TargetName" = "8:"
@@ -429,11 +399,6 @@
             "AssemblyAsmDisplayName" = "8:PdfiumViewer, Version=2.12.0.0, Culture=neutral, PublicKeyToken=91e4789cfb0609e0, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_ECEF25B37AEFE7992539E74C792B7BFF"
-                    {
-                    "Name" = "8:PdfiumViewer.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:PdfiumViewer.dll"
             "TargetName" = "8:"
@@ -520,15 +485,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SharpGED client"
-        "ProductCode" = "8:{21094772-0CBB-4EFE-8B49-559B4317E43F}"
-        "PackageCode" = "8:{C4469D01-D2FC-485B-A3B3-19E0B497C30F}"
+        "ProductCode" = "8:{1D6B424D-181C-4EE8-919E-57F264A7E309}"
+        "PackageCode" = "8:{ED866802-4676-42DD-A054-4AA9C76F254D}"
         "UpgradeCode" = "8:{B04F23CE-8725-4396-A801-F9F774383740}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.4"
+        "ProductVersion" = "8:1.1.5"
         "Manufacturer" = "8:SharpGED"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
