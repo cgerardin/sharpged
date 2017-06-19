@@ -74,6 +74,7 @@
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.imageListToolbar = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mainToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -437,6 +438,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listViewFiles.FullRowSelect = true;
+            this.listViewFiles.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listViewFiles.HideSelection = false;
             this.listViewFiles.Location = new System.Drawing.Point(0, 27);
             this.listViewFiles.Name = "listViewFiles";
@@ -444,7 +449,7 @@
             this.listViewFiles.SmallImageList = this.imageListListView;
             this.listViewFiles.TabIndex = 2;
             this.listViewFiles.UseCompatibleStateImageBehavior = false;
-            this.listViewFiles.View = System.Windows.Forms.View.List;
+            this.listViewFiles.View = System.Windows.Forms.View.Details;
             this.listViewFiles.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewFiles_ItemDrag);
             this.listViewFiles.SelectedIndexChanged += new System.EventHandler(this.listViewFiles_SelectedIndexChanged);
             this.listViewFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewFiles_KeyDown);
@@ -603,6 +608,11 @@
             this.imageListToolbar.Images.SetKeyName(0, "Filter_Add.png");
             this.imageListToolbar.Images.SetKeyName(1, "Filter_Delete.png");
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Titre";
+            this.columnHeader1.Width = 370;
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -682,6 +692,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView listViewFiles;
         private System.Windows.Forms.ImageList imageListListView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 
