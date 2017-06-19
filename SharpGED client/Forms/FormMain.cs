@@ -635,7 +635,7 @@ namespace SharpGED_client
             if (treeViewCategories.SelectedNode != null)
             {
                 DataObject data = new DataObject();
-                data.SetData(typeof(GedFolder), (GedFolder)treeViewCategories.SelectedNode.Tag);
+                data.SetData(typeof(TreeNode), treeViewCategories.SelectedNode);
 
                 listViewFiles.DoDragDrop(data, DragDropEffects.Move);
             }
@@ -657,7 +657,7 @@ namespace SharpGED_client
 
         private void treeViewCategories_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(GedList<GedFile>)) || e.Data.GetDataPresent(typeof(GedFolder)))
+            if (e.Data.GetDataPresent(typeof(TreeNode)) || e.Data.GetDataPresent(typeof(GedList<GedFile>)))
             {
                 e.Effect = DragDropEffects.Move;
             }
@@ -674,36 +674,51 @@ namespace SharpGED_client
 
         private void treeViewCategories_DragDrop(object sender, DragEventArgs e)
         {
-            GedFolder sourceFolder;
-            TreeNode targetNode = treeViewCategories.GetNodeAt(treeViewCategories.PointToClient(new Point(e.X, e.Y)));
-            if (targetNode == null) return;
-            GedFolder targetFolder = (GedFolder)targetNode.Tag;
-
             EmptyViewers();
 
-            if (e.Data.GetDataPresent(typeof(GedFolder)))
+            TreeNode sourceNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+            TreeNode targetNode = treeViewCategories.GetNodeAt(treeViewCategories.PointToClient(new Point(e.X, e.Y)));
+            if (targetNode != null)
             {
-                sourceFolder = (GedFolder)e.Data.GetData(typeof(GedFolder));
+                GedFolder sourceFolder;
+                GedFolder targetFolder = (GedFolder)targetNode.Tag;
 
-                // Interdis de déplacer un dossier racine, de déplacer un dossier sur lui-même, ou de déplacer un parent sur son enfant
-                if (sourceFolder.idParent != null && sourceFolder.id != targetFolder.id && sourceFolder.id != long.Parse(targetFolder.idParent.ToString()))
+                if (e.Data.GetDataPresent(typeof(TreeNode)))
                 {
-                    Program.ServerMoveFolder(sourceFolder, targetFolder);
-                }
-            }
-            else if (e.Data.GetDataPresent(typeof(GedList<GedFile>)))
-            {
-                sourceFolder = (GedFolder)treeViewCategories.SelectedNode.Tag;
+                    sourceFolder = (GedFolder)((TreeNode)e.Data.GetData(typeof(TreeNode))).Tag;
 
-                foreach (GedFile currentGedFile in (GedList<GedFile>)e.Data.GetData(typeof(GedList<GedFile>)))
+                    // Interdis de déplacer dossier racine, un dossier sur lui-même ou un parent sur son enfant
+                    if (!sourceNode.Equals(targetNode) && !ContainsNode(sourceNode, targetNode))
+                    {
+                        if (sourceFolder.idParent != null)
+                        {
+                            Program.ServerMoveFolder(sourceFolder, targetFolder);
+                        }
+                    }
+                }
+                else if (e.Data.GetDataPresent(typeof(GedList<GedFile>)))
                 {
-                    Program.ServerMoveFile(currentGedFile, targetFolder);
-                }
-            }
+                    sourceFolder = (GedFolder)treeViewCategories.SelectedNode.Tag;
 
-            RefreshFilesList();
-            treeViewCategories.SelectedNode = targetNode;
-            treeViewCategories.Select();
+                    foreach (GedFile currentGedFile in (GedList<GedFile>)e.Data.GetData(typeof(GedList<GedFile>)))
+                    {
+                        Program.ServerMoveFile(currentGedFile, targetFolder);
+                    }
+                }
+
+                RefreshFilesList();
+                treeViewCategories.SelectedNode = targetNode;
+                treeViewCategories.Select();
+            }
+        }
+
+        // Determine whether one node is a parent or ancestor of a second node.
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            if (node2.Parent == null) return false;
+            if (node2.Parent.Equals(node1)) return true;
+
+            return ContainsNode(node1, node2.Parent);
         }
 
     }
