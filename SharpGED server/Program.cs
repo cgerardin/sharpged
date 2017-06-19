@@ -23,7 +23,13 @@ namespace SharpGED_server
             configuration = new ConfigurationManager();
             configuration.Load();
 
-            if (!configuration.exist)
+            bool forceConfig = false;
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                forceConfig = Environment.GetCommandLineArgs()[1].Equals("--config");
+            }
+
+            if (!configuration.exist || forceConfig)
             {
                 FormConfiguration formConf = new FormConfiguration();
                 if (formConf.ShowDialog() != DialogResult.OK)
