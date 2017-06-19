@@ -129,6 +129,11 @@ namespace SharpGED_server
                                 storage.RenameFile(argv[0], argv[1]);
                                 break;
 
+                            case "MOVFILE": // Déplace un fichier vers un autre dossier
+                                Console.WriteLine("[" + id + "] Déplacement du fichier '" + argv[0] + "' vers le dossier '" + argv[1] + "'");
+                                storage.MoveFile(argv[0], long.Parse(argv[1]));
+                                break;
+
                             case "ADDFOLD": // Crée un dossier
                                 Console.WriteLine("[" + id + "] Création du dossier '" + argv[0] + "'");
                                 storage.CreateFolder();
@@ -144,9 +149,9 @@ namespace SharpGED_server
                                 storage.RenameFolder(long.Parse(argv[0]), argv[1]);
                                 break;
 
-                            case "MOVFILE": // Déplace un fichier vers un autre dossier
-                                Console.WriteLine("[" + id + "] Déplacement du fichier '" + argv[0] + "' vers le dossier '" + argv[1] + "'");
-                                storage.MoveFile(argv[0], long.Parse(argv[1]));
+                            case "MOVFOLD": // Déplace un dossier vers un autre dossier
+                                Console.WriteLine("[" + id + "] Déplacement du dossier '" + argv[0] + "' vers le dossier '" + argv[1] + "'");
+                                storage.MoveFolder(long.Parse(argv[0]), long.Parse(argv[1]));
                                 break;
 
                             default:

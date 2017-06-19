@@ -205,6 +205,14 @@ namespace SharpGED_client
             ServerSend("RENFOLD " + folder.id + ";" + title);
         }
 
+        public static void ServerMoveFolder(GedFolder source, GedFolder target)
+        {
+            // Déplace le dossiers passé en argument
+            ServerSend("MOVFOLD " + source.id + ";" + target.id);
+
+            ServerWaitFor();
+        }
+
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>

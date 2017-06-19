@@ -281,5 +281,19 @@ namespace SharpGED_server
             }
         }
 
+        public void MoveFolder(long source, long target)
+        {
+            // Change le dossier du fichier en base
+            using (SQLiteConnection db = new DatabaseManager().Connect())
+            {
+                db.Open();
+
+                new SQLiteCommand("UPDATE folders SET idParentFolder=" + target + " WHERE idFolder='" + source + "';", db).ExecuteNonQuery();
+            }
+
+            // Envoie la confirmation
+            client.Send(Encoding.Unicode.GetBytes("OK"));
+        }
+
     }
 }

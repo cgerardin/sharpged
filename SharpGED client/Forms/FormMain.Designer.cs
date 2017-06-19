@@ -406,6 +406,7 @@
             this.treeViewCategories.ShowRootLines = false;
             this.treeViewCategories.Size = new System.Drawing.Size(286, 853);
             this.treeViewCategories.TabIndex = 1;
+            this.treeViewCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeViewCategories_ItemDrag);
             this.treeViewCategories.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewCategories_AfterSelect);
             this.treeViewCategories.Click += new System.EventHandler(this.treeViewCategories_Click);
             this.treeViewCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeViewCategories_DragDrop);
