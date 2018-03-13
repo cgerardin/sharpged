@@ -18,6 +18,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SharpGED server Setup", "Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED controls", "SharpGED controls\SharpGED controls.csproj", "{AFDEB845-0174-4560-ABBB-78E7FB7AB6FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED server core", "SharpGED server core\SharpGED server core.csproj", "{A641DAB4-A2F2-4442-B80F-AC13C467B94D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED lib core", "SharpGED lib core\SharpGED lib core.csproj", "{2CD13975-72B4-44BC-9612-746E0ACA71B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,8 +70,27 @@ Global
 		{AFDEB845-0174-4560-ABBB-78E7FB7AB6FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AFDEB845-0174-4560-ABBB-78E7FB7AB6FE}.Release|x64.ActiveCfg = Release|Any CPU
 		{AFDEB845-0174-4560-ABBB-78E7FB7AB6FE}.Release|x64.Build.0 = Release|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Debug|x64.Build.0 = Debug|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|x64.ActiveCfg = Release|Any CPU
+		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|x64.Build.0 = Release|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|x64.Build.0 = Debug|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|x64.ActiveCfg = Release|Any CPU
+		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {568F095F-256E-47BA-9AE9-A88176C8CE29}
 	EndGlobalSection
 EndGlobal
