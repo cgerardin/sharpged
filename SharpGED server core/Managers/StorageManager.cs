@@ -1,5 +1,6 @@
-﻿using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
+﻿//using PdfSharp.Pdf;
+//using PdfSharp.Pdf.IO;
+//@STUB
 using SharpGED_lib_core;
 using System;
 using Microsoft.Data.Sqlite;
@@ -171,11 +172,12 @@ namespace SharpGED_server_core
             if (file.type == GedFileType.PDF)
             {
                 // Récupère et met à jour les métadonnées du PDF
-                using (PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify))
+                //@STUB
+                /*using (PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify))
                 {
                     pdf.Info.Title = file.title;
                     pdf.Save(baseFolder + hash);
-                }
+                }*/
             }
 
             // Insère le tout dans la base
@@ -220,10 +222,11 @@ namespace SharpGED_server_core
             }
 
             // Met à jour les métadonnées du PDF
-            PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify);
+            //@STUB
+            /*PdfDocument pdf = PdfReader.Open(baseFolder + hash, PdfDocumentOpenMode.Modify);
             pdf.Info.Title = title;
             pdf.Save(baseFolder + hash);
-            pdf.Close();
+            pdf.Close();*/
         }
 
         public void MoveFile(string hash, long id)

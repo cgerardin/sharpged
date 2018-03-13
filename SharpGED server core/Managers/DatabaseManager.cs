@@ -60,7 +60,8 @@ namespace SharpGED_server_core
             string databaseFullPath = baseFolder + "database\\" + databaseName + ".sqlite";
             if (!File.Exists(databaseFullPath))
             {
-                SqliteConnection.CreateFile(databaseFullPath);
+                FileStream fs = File.Create(databaseFullPath);
+                fs.Close();
             }
             else
             {
