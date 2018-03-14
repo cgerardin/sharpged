@@ -70,7 +70,7 @@ namespace SharpGED_server_core
                     configuration.values.database = "Défaut";
                 }
 
-                Console.Write("Dossier racine [C:\\SharpGED] : ");
+                Console.Write("Dossier racine [C:\\SharpGED\\] : ");
                 read = Console.ReadLine();
                 if (read != "")
                 {
@@ -78,7 +78,7 @@ namespace SharpGED_server_core
                 }
                 else
                 {
-                    configuration.values.baseFolder = "C:\\SharpGED";
+                    configuration.values.baseFolder = "C:\\SharpGED\\";
                 }
 
                 configuration.Save();
