@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 
 namespace SharpGED_server_core
 {
@@ -13,17 +14,24 @@ namespace SharpGED_server_core
 
         static void Main(string[] args)
         {
+            string assemblyVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("SharpGED server core v0.0.1\n");
+            Console.WriteLine("SharpGED server core " + "v" + assemblyVersion.Substring(0, assemblyVersion.Length - 2) + "\n");
             Console.ForegroundColor = ConsoleColor.White;
 
             configuration = new ConfigurationManager();
             configuration.Load();
 
-            if (!configuration.exist)
+            bool forceConfig = false;
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                forceConfig = Environment.GetCommandLineArgs()[1].Equals("--config");
+            }
+
+            if (!configuration.exist || forceConfig)
             {
                 Console.WriteLine("Premier démarrage. Création d'un nouveau fichier de configuration...");
 
@@ -34,7 +42,8 @@ namespace SharpGED_server_core
                 if (read != "")
                 {
                     configuration.values.listenIP = read;
-                } else
+                }
+                else
                 {
                     configuration.values.listenIP = "localhost";
                 }
