@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpGED_lib_core
+namespace SharpGED_lib
 {
     [Serializable]
     public class GedFile : GedItem

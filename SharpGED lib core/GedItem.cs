@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace SharpGED_lib_core
+namespace SharpGED_lib
 {
     [Serializable]
     public class GedItem

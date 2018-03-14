@@ -1,14 +1,14 @@
 ﻿//using PdfSharp.Pdf;
 //using PdfSharp.Pdf.IO;
 //@STUB
-using SharpGED_lib_core;
+using SharpGED_lib;
 using System;
 using Microsoft.Data.Sqlite;
 using System.IO;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
-using static SharpGED_lib_core.GedFile;
+using static SharpGED_lib.GedFile;
 
 namespace SharpGED_server_core
 {

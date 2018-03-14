@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SharpGED_lib_core
+namespace SharpGED_lib
 {
     public static class TransfertManager
     {
