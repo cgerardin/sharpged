@@ -14,23 +14,70 @@ namespace SharpGED_server_core
         static void Main(string[] args)
         {
 
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("SharpGED server core v0.0.1\n");
+            Console.ForegroundColor = ConsoleColor.White;
+
             configuration = new ConfigurationManager();
             configuration.Load();
 
             if (!configuration.exist)
             {
-                Console.WriteLine("Fichier de configuration non trouvé !");
-                return;
+                Console.WriteLine("Premier démarrage. Création d'un nouveau fichier de configuration...");
+
+                string read;
+
+                Console.Write("Nom d'hôte / adresse IP [localhost] : ");
+                read = Console.ReadLine();
+                if (read != "")
+                {
+                    configuration.values.listenIP = read;
+                } else
+                {
+                    configuration.values.listenIP = "localhost";
+                }
+
+                Console.Write("N° de port [9090] : ");
+                read = Console.ReadLine();
+                if (read != "")
+                {
+                    configuration.values.listenPort = int.Parse(read);
+                }
+                else
+                {
+                    configuration.values.listenPort = 9090;
+                }
+
+                Console.Write("Nom de la base [Défaut] : ");
+                read = Console.ReadLine();
+                if (read != "")
+                {
+                    configuration.values.database = read;
+                }
+                else
+                {
+                    configuration.values.database = "Défaut";
+                }
+
+                Console.Write("Dossier racine [C:\\SharpGED] : ");
+                read = Console.ReadLine();
+                if (read != "")
+                {
+                    configuration.values.baseFolder = read;
+                }
+                else
+                {
+                    configuration.values.baseFolder = "C:\\SharpGED";
+                }
+
+                configuration.Save();
+                Console.WriteLine();
             }
 
             List<WorkerThread> workers = new List<WorkerThread>();
             long currentWorkerId = 0;
-
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("SharpGED server core v0.0.1");
-            Console.ForegroundColor = ConsoleColor.White;
 
             IPAddress listenIpAddress = null;
             if (configuration.values.listenIP.Equals("localhost") || configuration.values.listenIP.Equals("127.0.0.1"))
