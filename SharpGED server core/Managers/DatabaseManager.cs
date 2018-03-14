@@ -122,7 +122,7 @@ namespace SharpGED_server_core
 
         public SqliteConnection Connect()
         {
-            return new SqliteConnection("Data Source=" + baseFolder + "database\\" + name + ".sqlite" + ";Version=3;");
+            return new SqliteConnection("Data Source=" + baseFolder + "database\\" + name + ".sqlite");
         }
 
     }
