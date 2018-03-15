@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>SharpGED lib</RootNamespace>
     <AssemblyName>SharpGED lib</AssemblyName>
+    <AssemblyVersion>1.1.5.0</AssemblyVersion>
+    <FileVersion>1.1.5.0</FileVersion>
   </PropertyGroup>
 
 </Project>
