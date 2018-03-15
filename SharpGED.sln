@@ -7,20 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED client", "SharpGED
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED server", "SharpGED server\SharpGED server.csproj", "{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED lib", "SharpGED lib\SharpGED lib.csproj", "{06593B4D-C588-45B7-B31D-1531360EE107}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SharpGED client Setup", "SharpGED client Setup\SharpGED client Setup.vdproj", "{040D8B41-8CAE-4F7D-A5D7-0944B94F218B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{06593B4D-C588-45B7-B31D-1531360EE107} = {06593B4D-C588-45B7-B31D-1531360EE107}
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SharpGED server Setup", "SharpGED server Setup\SharpGED server Setup.vdproj", "{D38F3DB7-FCD5-4BE6-8843-86FEE5F34DF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED controls", "SharpGED controls\SharpGED controls.csproj", "{AFDEB845-0174-4560-ABBB-78E7FB7AB6FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED server core", "SharpGED server core\SharpGED server core.csproj", "{A641DAB4-A2F2-4442-B80F-AC13C467B94D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpGED server core", "SharpGED server core\SharpGED server core.csproj", "{A641DAB4-A2F2-4442-B80F-AC13C467B94D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED lib core", "SharpGED lib core\SharpGED lib core.csproj", "{2CD13975-72B4-44BC-9612-746E0ACA71B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED lib", "SharpGED lib\SharpGED lib.csproj", "{948AAD10-1015-445F-A749-5F1BA1EABE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,13 +40,6 @@ Global
 		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Release|Any CPU.ActiveCfg = Release|x64
 		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Release|x64.ActiveCfg = Release|x64
 		{E59F4914-7D7C-4E15-8533-EB81C1ED3A5D}.Release|x64.Build.0 = Release|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Debug|Any CPU.Build.0 = Debug|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Debug|x64.ActiveCfg = Debug|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Debug|x64.Build.0 = Debug|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Release|Any CPU.ActiveCfg = Release|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Release|x64.ActiveCfg = Release|x64
-		{06593B4D-C588-45B7-B31D-1531360EE107}.Release|x64.Build.0 = Release|x64
 		{040D8B41-8CAE-4F7D-A5D7-0944B94F218B}.Debug|Any CPU.ActiveCfg = Debug
 		{040D8B41-8CAE-4F7D-A5D7-0944B94F218B}.Debug|x64.ActiveCfg = Debug
 		{040D8B41-8CAE-4F7D-A5D7-0944B94F218B}.Release|Any CPU.ActiveCfg = Release
@@ -78,14 +66,14 @@ Global
 		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|x64.ActiveCfg = Release|Any CPU
 		{A641DAB4-A2F2-4442-B80F-AC13C467B94D}.Release|x64.Build.0 = Release|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Debug|x64.Build.0 = Debug|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|x64.ActiveCfg = Release|Any CPU
-		{2CD13975-72B4-44BC-9612-746E0ACA71B2}.Release|x64.Build.0 = Release|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Debug|x64.Build.0 = Debug|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Release|x64.ActiveCfg = Release|Any CPU
+		{948AAD10-1015-445F-A749-5F1BA1EABE85}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

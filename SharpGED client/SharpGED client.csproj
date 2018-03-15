@@ -186,7 +186,7 @@
       <Name>SharpGED controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpGED lib\SharpGED lib.csproj">
-      <Project>{06593B4D-C588-45B7-B31D-1531360EE107}</Project>
+      <Project>{948aad10-1015-445f-a749-5f1ba1eabe85}</Project>
       <Name>SharpGED lib</Name>
     </ProjectReference>
   </ItemGroup>
