@@ -31,7 +31,7 @@ namespace SharpGED_server_core
                 forceConfig = Environment.GetCommandLineArgs()[1].Equals("--config");
             }
 
-            if (!configuration.exist || forceConfig)
+            if (!configuration.exist || configuration.values == null || forceConfig)
             {
                 Console.WriteLine("Premier démarrage. Création d'un nouveau fichier de configuration...");
 
