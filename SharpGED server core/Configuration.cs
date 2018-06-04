@@ -11,5 +11,13 @@ namespace SharpGED_server_core
         public string baseFolder { get; set; }
         public string database { get; set; }
 
+        public Configuration()
+        {
+            listenIP = "localhost";
+            listenPort = 9090;
+            baseFolder = "C:\\SharpGED\\";
+            database = "Base par défaut";
+        }
+
     }
 }

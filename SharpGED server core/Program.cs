@@ -31,46 +31,34 @@ namespace SharpGED_server_core
                 forceConfig = Environment.GetCommandLineArgs()[1].Equals("--config");
             }
 
-            if (!configuration.exist || configuration.values == null || forceConfig)
+            if (!configuration.exist || forceConfig)
             {
                 Console.WriteLine("Premier démarrage. Création d'un nouveau fichier de configuration...");
 
                 string read;
 
-                Console.Write("Nom d'hôte / adresse IP [localhost] : ");
+                Console.Write("Nom d'hôte / adresse IP [" + configuration.values.listenIP + "] : ");
                 read = Console.ReadLine();
                 if (read != "")
                 {
                     configuration.values.listenIP = read;
                 }
-                else
-                {
-                    configuration.values.listenIP = "localhost";
-                }
 
-                Console.Write("N° de port [9090] : ");
+                Console.Write("N° de port [" + configuration.values.listenPort + "] : ");
                 read = Console.ReadLine();
                 if (read != "")
                 {
                     configuration.values.listenPort = int.Parse(read);
                 }
-                else
-                {
-                    configuration.values.listenPort = 9090;
-                }
 
-                Console.Write("Nom de la base [Défaut] : ");
+                Console.Write("Nom de la base [" + configuration.values.database + "] : ");
                 read = Console.ReadLine();
                 if (read != "")
                 {
                     configuration.values.database = read;
                 }
-                else
-                {
-                    configuration.values.database = "Défaut";
-                }
 
-                Console.Write("Dossier racine [C:\\SharpGED\\] : ");
+                Console.Write("Dossier racine [" + configuration.values.baseFolder + "] : ");
                 read = Console.ReadLine();
                 if (read != "")
                 {
@@ -83,6 +71,15 @@ namespace SharpGED_server_core
 
                 configuration.Save();
                 Console.WriteLine();
+            }
+
+            // Is an error occurred during deserialization ?
+            if (configuration.values == null)
+            {
+                Console.WriteLine("Erreur critique : le fichier de configuration est corrompu. ");
+                Console.WriteLine("Serveur arrêté.");
+                Console.ReadLine();
+                Environment.Exit(-1);
             }
 
             List<WorkerThread> workers = new List<WorkerThread>();

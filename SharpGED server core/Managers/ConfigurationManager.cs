@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace SharpGED_server_core
 {
@@ -15,13 +15,12 @@ namespace SharpGED_server_core
 
         public ConfigurationManager()
         {
-            configurationFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\SharpGED\\config.dat";
+            configurationFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\SharpGED\\config.json";
             exist = File.Exists(configurationFile);
         }
 
         public void Save()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
             if (exist)
             {
                 File.Delete(configurationFile);
@@ -33,12 +32,14 @@ namespace SharpGED_server_core
             FileStream stream = new FileStream(configurationFile, FileMode.Create, FileAccess.Write);
             try
             {
-                formatter.Serialize(stream, values);
+                byte[] json = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(values));
+                stream.Write(json, 0, json.Length);
                 stream.Flush();
             }
-            catch (SerializationException ex)
+            catch (JsonSerializationException ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+                //@TODO : Throws new ConfigurationManagerException...
             }
             finally
             {
@@ -51,15 +52,16 @@ namespace SharpGED_server_core
         {
             if (exist)
             {
-                BinaryFormatter formatter = new BinaryFormatter();
                 FileStream stream = new FileStream(configurationFile, FileMode.Open, FileAccess.Read);
                 try
                 {
-                    values = (Configuration)formatter.Deserialize(stream);
+                    string json = new StreamReader(stream).ReadToEnd();
+                    values = JsonConvert.DeserializeObject<Configuration>(json);
                 }
-                catch (SerializationException ex)
+                catch (JsonSerializationException ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.Message);
+                    //@TODO : Throws new ConfigurationManagerException...
                     values = default(Configuration);
                 }
                 finally
@@ -69,13 +71,7 @@ namespace SharpGED_server_core
             }
             else
             {
-                values = new Configuration()
-                {
-                    listenIP = "localhost",
-                    listenPort = 9090,
-                    baseFolder = "C:\\SharpGED\\",
-                    database = "Base par défaut"
-                };
+                values = new Configuration();
             }
         }
 

@@ -1,6 +1,6 @@
 # SharpGED #
 
-Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et SQLite.
+Une GED légère en mode client-serveur, écrite en C# (.NET Core / .NET Framework)
 
 ![SharpGED.jpeg](https://bitbucket.org/repo/Mrgxk5g/images/591466635-SharpGED.jpeg)
 
@@ -8,16 +8,27 @@ Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et
 
 ### Dernière version ###
 
+#### Version 1.1.6 alpha ####
+
+* [Image ISO prête à l'emploi](https://bitbucket.org/cgerardin/sharpged/downloads/SharpGED_1.1.6.iso)
+* [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/1.1.6a.zip)
+
+
+### Pré-requis ###
+
+#### SharpGED client ####
+* [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/fr-FR/download/details.aspx?id=49982)
+
+#### SharpGED server (core) ####
+* [Microsoft .NET Core 2.0](https://www.microsoft.com/net/download)
+
+
+### Archives ###
+
 #### Version 1.1.5 alpha ####
 
 * [Image ISO prête à l'emploi](https://bitbucket.org/cgerardin/sharpged/downloads/SharpGED_1.1.5.iso)
 * [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/1.1.5a.zip)
-
-### Pré-requis ###
-
-* [Microsoft .NET Framework 4.6.1](https://www.microsoft.com/fr-FR/download/details.aspx?id=49982)
-
-### Archives ###
 
 #### Version 1.1.4 alpha ####
 
@@ -28,6 +39,7 @@ Une GED légère en mode client-serveur, écrite en C# (.NET Framework 4.6.1) et
 
 * [Image ISO prête à l'emploi](https://bitbucket.org/cgerardin/sharpged/downloads/SharpGED_1.1.3.iso)
 * [Solution Visual Studio 2017](https://bitbucket.org/cgerardin/sharpged/get/1.1.3a.zip)
+
 
 ## Fonctionnalités ##
 
@@ -62,6 +74,7 @@ Pour rapporter les bugs : [Créer un ticket](https://bitbucket.org/cgerardin/sha
 
 ## Remerciements / outils tiers ##
 
+* [Newtonsoft Json.NET](https://www.newtonsoft.com/json)
 * [PDFsharp](http://www.pdfsharp.net)
 * [PdfiumViewer](https://github.com/pvginkel/PdfiumViewer)
 * [SQLite Development Team](http://sqlite.org/)
