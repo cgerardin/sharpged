@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED controls", "SharpG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpGED server core", "SharpGED server core\SharpGED server core.csproj", "{A641DAB4-A2F2-4442-B80F-AC13C467B94D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpGED lib", "SharpGED lib\SharpGED lib.csproj", "{948AAD10-1015-445F-A749-5F1BA1EABE85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpGED lib", "SharpGED lib\SharpGED lib.csproj", "{948AAD10-1015-445F-A749-5F1BA1EABE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
